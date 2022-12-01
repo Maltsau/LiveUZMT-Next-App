@@ -1,12 +1,12 @@
 import { ReactNode } from "react";
 import styled from "styled-components";
 
+import HeaderButton from "./buttons/HeaderButton";
+
 const Rectangle = styled.div`
   display: flex;
   background-color: red;
   width: 100%;
-  padding: 1px;
-  margin: 0 -5px;
 `;
 
 const UserLabel = styled.label`
@@ -18,5 +18,10 @@ export default function Footer({
 }: {
   children?: ReactNode | string;
 }) {
-  return <Rectangle>{children}</Rectangle>;
+  return (
+    <Rectangle>
+      <HeaderButton>Footer</HeaderButton>
+      {children}
+    </Rectangle>
+  );
 }

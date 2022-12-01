@@ -1,39 +1,39 @@
 import styled from "styled-components";
 
-import db from "../services/db";
 import CustomLink from "./buttons/CustomLink";
 
 const Container = styled.div`
   display: flex;
   margin-top: 2px;
-  padding: 2px 2px 0px 2px;
 `;
 
 const Rectangle = styled.div`
-  height: 28px;
+  height: 30px;
   border-bottom: solid red 2px;
   width: 100%;
-  margin-left: -1px;
+  margin-left: 0px;
 `;
 
 const SmallRectangle = styled.div`
-  height: 28px;
+  height: 30px;
   border-bottom: solid red 2px;
   width: 30px;
-  margin-right: -1px;
+  margin-right: 0px;
 `;
 
 export default function YearPannel({
   year,
   onChange,
+  db,
 }: {
   year: number;
   onChange: any;
+  db: any;
 }) {
   return (
     <Container>
       <SmallRectangle />
-      {db.map((yearItem) => {
+      {db.map((yearItem: any) => {
         return (
           <CustomLink
             text={yearItem.year}

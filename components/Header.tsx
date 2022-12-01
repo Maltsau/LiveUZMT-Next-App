@@ -7,8 +7,6 @@ const Rectangle = styled.div`
   display: flex;
   background-color: red;
   width: 100%;
-  padding: 1px;
-  margin: 0 -5px;
 `;
 
 const UserLabel = styled.label`
@@ -22,7 +20,7 @@ export default function Header({
 }) {
   return (
     <Rectangle>
-      <HeaderButton>u</HeaderButton>
+      <HeaderButton>Header</HeaderButton>
       {children}
     </Rectangle>
   );
