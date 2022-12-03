@@ -12,7 +12,6 @@ const UpperTrapezoid = styled.div<{
   border-bottom: 20px solid ${({ isCurrent }) =>
     isCurrent ? "red" : "#c0c0c0"}};
   border-right: 10px solid transparent;
-  margin-top: -2px;
 `;
 
 const LowerTrapezoid = styled.div<{
@@ -37,7 +36,8 @@ const ButtonStyledActive = styled.span<{
 }>`
   position: relative;
   background-color: transparent;
-  top: 17px;
+  top: 19px;
+  font-size: 0.9em;
   padding-left: 5px;
   color: ${({ isCurrent }) => (isCurrent ? "white" : "black")}};
 `;
