@@ -1,11 +1,11 @@
 import { ReactNode, useState, useEffect } from "react";
+import { useRouter } from "next/router";
 import styled from "styled-components";
 
 import Header from "./Header";
 import Footer from "./Footer";
-import SignInModal from "./modalWindows/signInModal";
-import FooterButton from "./buttons/FooterButton";
-import handler from "../pages/api/logIn";
+import SignInModal from "./modalWindows/SignInModal";
+import AreYouSureModal from "./modalWindows/AreYouSureModal";
 
 const Wraper = styled.div`
   border: 1px solid red;
@@ -24,8 +24,11 @@ export default function Layout({
   children: ReactNode;
   userBase: any;
 }) {
+  const router = useRouter();
   const [user, setUser] = useState("");
   const [isSignInModalVisible, setIsSignInModalVisible] = useState(false);
+  const [isAreYouSureModalVisible, setIsAreYouSureModalVisible] =
+    useState(false);
 
   useEffect(() => {
     setUser(localStorage.user);
@@ -33,7 +36,7 @@ export default function Layout({
 
   return (
     <Wraper>
-      <Header>{user}</Header>
+      <Header user={user}></Header>
       <Container>
         {children}
         <SignInModal
@@ -47,6 +50,16 @@ export default function Layout({
             setUser(user);
           }}
         ></SignInModal>
+        <AreYouSureModal
+          onClose={() => {
+            setIsAreYouSureModalVisible(false);
+          }}
+          isVisible={isAreYouSureModalVisible}
+          onFormSubmit={() => {
+            setIsAreYouSureModalVisible(false);
+            setUser("");
+          }}
+        ></AreYouSureModal>
       </Container>
       <Footer
         user={user}
@@ -54,8 +67,7 @@ export default function Layout({
           setIsSignInModalVisible(true);
         }}
         onSignOut={() => {
-          setUser("");
-          localStorage.removeItem("user");
+          setIsAreYouSureModalVisible(true);
         }}
       ></Footer>
     </Wraper>

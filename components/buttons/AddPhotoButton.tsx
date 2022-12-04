@@ -1,5 +1,6 @@
 import AddButton from "./AddButton";
-import AddIcon from "../../assets/add-photo.png";
+import Image from "next/image";
+import AddIcon from "../../public/add-photo.png";
 import styled from "styled-components";
 
 const ImageStyled = styled.img`
@@ -12,7 +13,7 @@ const ImageStyled = styled.img`
 export default function AddPhotoButton() {
   return (
     <AddButton>
-      <ImageStyled src={AddIcon} alt="PHOTO" />
+      <Image src="/add-photo.png" height={50} width={50} alt="PHOTO" />
     </AddButton>
   );
 }

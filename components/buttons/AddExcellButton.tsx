@@ -1,5 +1,6 @@
 import AddButton from "./AddButton";
-import AddIcon from "../../assets/excell.svg";
+import Image from "next/image";
+import AddIcon from "../../public/excell.svg";
 import styled from "styled-components";
 
 const ImageStyled = styled.img`
@@ -12,7 +13,7 @@ const ImageStyled = styled.img`
 export default function AddExcellButton() {
   return (
     <AddButton>
-      <ImageStyled src={AddIcon} alt="PHOTO" />
+      <Image src="/excell.svg" height={50} width={50} alt="EXSELL" />
     </AddButton>
   );
 }

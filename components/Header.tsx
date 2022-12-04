@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import styled from "styled-components";
+import Link from "next/link";
 
 import HeaderButton from "./buttons/HeaderButton";
 
@@ -16,12 +17,19 @@ const UserLabel = styled.label`
 `;
 export default function Header({
   children,
+  user,
+  onAllReset,
 }: {
   children?: ReactNode | string;
+  user: string;
+  onAllReset?: any;
 }) {
   return (
     <Rectangle>
-      <HeaderButton>Header</HeaderButton>
+      <HeaderButton>
+        <Link href={"/"}>X</Link>
+      </HeaderButton>
+      <UserLabel>{user}</UserLabel>
       {children}
     </Rectangle>
   );
