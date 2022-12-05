@@ -14,6 +14,7 @@ const Container = styled.div`
   flex-direction: column;
   width: 100%;
   margin: 2px;
+  padding: 1px;
 `;
 
 const Table = styled.table`

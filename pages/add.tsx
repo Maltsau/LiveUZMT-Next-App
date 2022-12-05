@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useUserContext } from "./context/UserContext";
 import styled from "styled-components";
 
 import AddPhotoButton from "../components/buttons/AddPhotoButton";
@@ -84,19 +85,18 @@ const ButtonStyled = styled.button`
 `;
 
 export default function AddPage({
-  user,
   onSignOut,
   onAllReset,
 }: {
-  user: string;
   onSignOut: any;
   onAllReset: any;
 }) {
   const [isLengthInputVisible, setIsLengthInputVisible] = useState(false);
-  const [isAreYouSureModalVisible, setIsAreYouSureModalVisible] =
-    useState(false);
+  const { user, setUser } = useUserContext();
+
   return (
     <Wraper>
+      <div>{user}</div>
       <FieldNumberContainer>
         <LabelStyled>Номер скважины</LabelStyled>
         <LabelStyled>Месторождение</LabelStyled>

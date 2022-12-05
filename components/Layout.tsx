@@ -1,5 +1,6 @@
 import { ReactNode, useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import { useUserContext } from "../pages/context/UserContext";
 import styled from "styled-components";
 
 import Header from "./Header";
@@ -25,7 +26,7 @@ export default function Layout({
   userBase: any;
 }) {
   const router = useRouter();
-  const [user, setUser] = useState("");
+  const { user, setUser } = useUserContext();
   const [isSignInModalVisible, setIsSignInModalVisible] = useState(false);
   const [isAreYouSureModalVisible, setIsAreYouSureModalVisible] =
     useState(false);

@@ -1,6 +1,7 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import { useEffect, useState } from "react";
+import UserContextProvider from "./context/UserContext";
 import Layout from "../components/Layout";
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -13,8 +14,10 @@ export default function App({ Component, pageProps }: AppProps) {
     })();
   }, []);
   return (
-    <Layout userBase={userBase}>
-      <Component {...pageProps} />
-    </Layout>
+    <UserContextProvider>
+      <Layout userBase={userBase}>
+        <Component {...pageProps} />
+      </Layout>
+    </UserContextProvider>
   );
 }
