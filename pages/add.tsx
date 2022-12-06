@@ -93,10 +93,9 @@ export default function AddPage({
 }) {
   const [isLengthInputVisible, setIsLengthInputVisible] = useState(false);
   const { user, setUser } = useUserContext();
-
+  console.log(user);
   return (
     <Wraper>
-      <div>{user}</div>
       <FieldNumberContainer>
         <LabelStyled>Номер скважины</LabelStyled>
         <LabelStyled>Месторождение</LabelStyled>

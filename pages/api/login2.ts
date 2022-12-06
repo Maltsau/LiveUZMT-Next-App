@@ -1,13 +1,16 @@
 import type { NextApiRequest, NextApiResponse } from "next";
+import { postSecret } from "./cookie";
 
-const DATA = [
+const USER_DATA = [
   { username: "d.maltsev", password: "8604", role: "ADMIN" },
   { username: "p.chayka", password: "8424", role: "EDITOR" },
   { username: "v.fedyushko", password: "8425", role: "EDITOR" },
 ];
 
+const SecretBase = [];
+
 type UserDataType = {
-  user: string;
+  login: string;
   password: string;
 };
 
@@ -18,12 +21,21 @@ export default function handler(
   res: NextApiResponse<ResponseType>
 ) {
   if (req.method === "POST") {
-    const newUser: UserDataType = JSON.parse(req.body);
-    const authorisedUser = DATA.find((userObj) => {
-      newUser.user === userObj.username &&
-        newUser.password === userObj.password;
-    });
+    const newUser: UserDataType = req.body;
+    console.log(newUser);
+    console.log(newUser.login);
+    console.log(newUser.password);
+    USER_DATA.forEach((e) => console.log(e.username, e.password));
+    const authorisedUser = USER_DATA.find(
+      (userObj) =>
+        newUser.login === userObj.username &&
+        newUser.password === userObj.password
+    );
+    console.log(authorisedUser);
     if (authorisedUser) {
+      const secret = String(new Date().getDate() * Math.random());
+      res.setHeader("Set-Cookie", `secret=${secret}`);
+      postSecret(secret);
       return res
         .status(200)
         .json({ user: authorisedUser.username, role: authorisedUser.role });

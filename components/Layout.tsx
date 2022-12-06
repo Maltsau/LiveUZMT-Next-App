@@ -20,35 +20,34 @@ const Container = styled.div`
 
 export default function Layout({
   children,
-  userBase,
+  onLogIn,
+  onSignOut,
+  user,
 }: {
   children: ReactNode;
-  userBase: any;
+  onLogIn: any;
+  onSignOut: any;
+  user: any;
 }) {
   const router = useRouter();
-  const { user, setUser } = useUserContext();
   const [isSignInModalVisible, setIsSignInModalVisible] = useState(false);
   const [isAreYouSureModalVisible, setIsAreYouSureModalVisible] =
     useState(false);
 
-  useEffect(() => {
-    setUser(localStorage.user);
-  }, []);
-
   return (
     <Wraper>
-      <Header user={user}></Header>
+      <Header user={JSON.stringify(user)}></Header>
       <Container>
         {children}
         <SignInModal
-          userBase={userBase}
           isVisible={isSignInModalVisible}
           onClose={() => {
             setIsSignInModalVisible(false);
           }}
-          onFormSubmit={(user: string) => {
+          onFormSubmit={(login: string, password: string) => {
             setIsSignInModalVisible(false);
-            setUser(user);
+            onLogIn(login, password);
+            console.log("Layout", login, password);
           }}
         ></SignInModal>
         <AreYouSureModal
@@ -58,7 +57,7 @@ export default function Layout({
           isVisible={isAreYouSureModalVisible}
           onFormSubmit={() => {
             setIsAreYouSureModalVisible(false);
-            setUser("");
+            onSignOut();
           }}
         ></AreYouSureModal>
       </Container>

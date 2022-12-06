@@ -22,16 +22,17 @@ export default function Footer({
   onSignOut,
 }: {
   children?: ReactNode | string;
-  user: string | undefined;
+  user: string | any;
   onSignIn: any;
   onSignOut: any;
 }) {
   const router = useRouter();
 
   let content: ReactNode | string = "";
-  if (!user) {
+  if (!user?.user) {
     content = (
       <ButtonBar>
+        {JSON.stringify(user)}
         <FooterButton onClick={onSignIn}>Вoйти</FooterButton>
       </ButtonBar>
     );
@@ -53,10 +54,7 @@ export default function Footer({
       );
     }
   }
-  // const bar = document.getElementById("bar");
-  // if (user === "d.maltsev") {
-  //   bar?.appendChild(<div></div>);
-  // }
+
   return (
     <Rectangle>
       {content}

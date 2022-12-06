@@ -1,8 +1,10 @@
 import { useContext, useState, useMemo, createContext, ReactNode } from "react";
 
+type UserType = { userName?: string; role?: string };
+
 const UserContextObject = createContext<{
-  user?: string;
-  setUser: (user: string) => void;
+  user?: UserType;
+  setUser: (user: UserType) => void;
 }>({
   setUser: () => {},
 });
@@ -14,7 +16,7 @@ export function useUserContext() {
 const UserContextProvider: React.FC<{ children?: ReactNode | undefined }> = ({
   children,
 }) => {
-  const [user, setUser] = useState<string>("");
+  const [user, setUser] = useState<UserType>({});
   const values = useMemo(() => ({ user, setUser }), [user, setUser]);
   return (
     <UserContextObject.Provider value={values}>

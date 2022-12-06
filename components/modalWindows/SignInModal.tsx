@@ -31,25 +31,20 @@ export default function SignInModal({
   isVisible,
   onClose,
   onFormSubmit,
-  userBase,
 }: {
   isVisible: boolean;
   onClose: any;
   onFormSubmit: any;
-  userBase: any;
 }) {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    userBase.map((item: any) => {
-      if (item[0] === login && item[1] === password) {
-        onFormSubmit(login);
-        localStorage.setItem("user", login);
-      }
-    });
+    onFormSubmit(login, password);
+    console.log("sign in", login, password);
   };
+
   return (
     <ModalWindow isVisible={isVisible} onClose={onClose}>
       <Container>
