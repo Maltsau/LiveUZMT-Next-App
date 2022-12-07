@@ -84,15 +84,9 @@ const ButtonStyled = styled.button`
   border-radius: 5px;
 `;
 
-export default function AddPage({
-  onSignOut,
-  onAllReset,
-}: {
-  onSignOut: any;
-  onAllReset: any;
-}) {
+export default function AddPage() {
   const [isLengthInputVisible, setIsLengthInputVisible] = useState(false);
-  const { user, setUser } = useUserContext();
+  const { user } = useUserContext();
   console.log(user);
   return (
     <Wraper>

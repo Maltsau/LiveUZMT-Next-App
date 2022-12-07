@@ -1,4 +1,4 @@
-import { ReactNode, useState, useEffect } from "react";
+import { ReactNode, useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/router";
 import { useUserContext } from "../pages/context/UserContext";
 import styled from "styled-components";
@@ -18,25 +18,36 @@ const Container = styled.div`
   min-height: 200px;
 `;
 
-export default function Layout({
-  children,
-  onLogIn,
-  onSignOut,
-  user,
-}: {
-  children: ReactNode;
-  onLogIn: any;
-  onSignOut: any;
-  user: any;
-}) {
+export default function Layout({ children }: { children: ReactNode }) {
   const router = useRouter();
   const [isSignInModalVisible, setIsSignInModalVisible] = useState(false);
   const [isAreYouSureModalVisible, setIsAreYouSureModalVisible] =
     useState(false);
+  const { user, setUser } = useUserContext();
+
+  const getUser = useCallback(async (login: string, password: string) => {
+    const response = await fetch("/api/login2", {
+      method: "POST",
+      body: JSON.stringify({ login, password }),
+      headers: { "Content-Type": "application/json" },
+    });
+    const responseData = await response.json();
+    setUser(responseData);
+  }, []);
+
+  const handleSignIn = (login: string, password: string) => {
+    setIsSignInModalVisible(false);
+    getUser(login, password);
+  };
+
+  const handleSignOut = () => {
+    setIsAreYouSureModalVisible(false);
+    getUser("", "");
+  };
 
   return (
     <Wraper>
-      <Header user={JSON.stringify(user)}></Header>
+      <Header></Header>
       <Container>
         {children}
         <SignInModal
@@ -45,9 +56,8 @@ export default function Layout({
             setIsSignInModalVisible(false);
           }}
           onFormSubmit={(login: string, password: string) => {
-            setIsSignInModalVisible(false);
-            onLogIn(login, password);
-            console.log("Layout", login, password);
+            handleSignIn(login, password);
+            console.log("Layout", login, password, user);
           }}
         ></SignInModal>
         <AreYouSureModal
@@ -55,14 +65,10 @@ export default function Layout({
             setIsAreYouSureModalVisible(false);
           }}
           isVisible={isAreYouSureModalVisible}
-          onFormSubmit={() => {
-            setIsAreYouSureModalVisible(false);
-            onSignOut();
-          }}
+          onFormSubmit={handleSignOut}
         ></AreYouSureModal>
       </Container>
       <Footer
-        user={user}
         onSignIn={() => {
           setIsSignInModalVisible(true);
         }}

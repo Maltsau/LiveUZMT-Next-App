@@ -27,7 +27,7 @@ export default function Header({
   onAllReset,
 }: {
   children?: ReactNode | string;
-  user: string | undefined;
+  user?: string | undefined;
   onAllReset?: any;
 }) {
   const router = useRouter();

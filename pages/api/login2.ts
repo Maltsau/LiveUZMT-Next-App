@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { postSecret } from "./cookie";
+import { postSecret, deleteSecret } from "./cookie";
 
 const USER_DATA = [
   { username: "d.maltsev", password: "8604", role: "ADMIN" },
@@ -7,14 +7,12 @@ const USER_DATA = [
   { username: "v.fedyushko", password: "8425", role: "EDITOR" },
 ];
 
-const SecretBase = [];
-
 type UserDataType = {
   login: string;
   password: string;
 };
 
-type ResponseType = { user: string; role: string } | { message: string };
+type ResponseType = { userName: string; role: string } | { message: string };
 
 export default function handler(
   req: NextApiRequest,
@@ -35,11 +33,13 @@ export default function handler(
     if (authorisedUser) {
       const secret = String(new Date().getDate() * Math.random());
       res.setHeader("Set-Cookie", `secret=${secret}`);
-      postSecret(secret);
+      postSecret(secret, authorisedUser.role);
       return res
         .status(200)
-        .json({ user: authorisedUser.username, role: authorisedUser.role });
+        .json({ userName: authorisedUser.username, role: authorisedUser.role });
     } else {
+      console.log(req.cookies.secret);
+      deleteSecret(req.cookies.secret);
       return res.status(401).json({ message: "Not logged in" });
     }
   }

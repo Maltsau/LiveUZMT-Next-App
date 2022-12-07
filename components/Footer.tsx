@@ -2,6 +2,7 @@ import { ReactNode } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import styled from "styled-components";
+import { useUserContext } from "./../pages/context/UserContext";
 
 import FooterButton from "./buttons/FooterButton";
 
@@ -17,37 +18,46 @@ const ButtonBar = styled.div`
 
 export default function Footer({
   children,
-  user,
   onSignIn,
   onSignOut,
 }: {
   children?: ReactNode | string;
-  user: string | any;
   onSignIn: any;
   onSignOut: any;
 }) {
   const router = useRouter();
+  const { user } = useUserContext();
 
-  let content: ReactNode | string = "";
-  if (!user?.user) {
+  const handleAdd = async () => {
+    const response = await fetch("/api/dataBase", {
+      method: "POST",
+      body: "Request",
+    });
+    const responseData = await response.json();
+    console.log("DataBase response", responseData);
+  };
+
+  let content: ReactNode | string;
+  console.log("Footer", user);
+  if (!user?.userName) {
     content = (
       <ButtonBar>
-        {JSON.stringify(user)}
         <FooterButton onClick={onSignIn}>Вoйти</FooterButton>
       </ButtonBar>
     );
   } else {
     if (router.asPath === "/add") {
       content = (
-        <ButtonBar id="bar">
+        <ButtonBar>
           <FooterButton onClick={onSignOut}>Выйти</FooterButton>
         </ButtonBar>
       );
     } else {
       content = (
-        <ButtonBar id="bar">
+        <ButtonBar>
+          {JSON.stringify(user?.userName)}
           <FooterButton onClick={onSignOut}>Выйти</FooterButton>
-          <FooterButton>
+          <FooterButton onClick={handleAdd}>
             <Link href={"/add"}>Добавить запись</Link>
           </FooterButton>
         </ButtonBar>

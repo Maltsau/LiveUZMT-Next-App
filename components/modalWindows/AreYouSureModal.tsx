@@ -41,6 +41,7 @@ export default function AreYouSureModal({
   onFormSubmit: any;
 }) {
   const router = useRouter();
+
   const handleSubmit = () => {
     localStorage.removeItem("user");
     onFormSubmit();
