@@ -49,6 +49,7 @@ export default function Footer({
     if (router.asPath === "/add") {
       content = (
         <ButtonBar>
+          {JSON.stringify(user?.userName)}
           <FooterButton onClick={onSignOut}>Выйти</FooterButton>
         </ButtonBar>
       );

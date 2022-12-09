@@ -42,20 +42,6 @@ export default function AreYouSureModal({
 }) {
   const router = useRouter();
 
-  const handleSubmit = () => {
-    localStorage.removeItem("user");
-    onFormSubmit();
-  };
-
-  if (router.asPath === "/add") {
-    var button = (
-      <ButtonStyled onClick={handleSubmit}>
-        <Link href={"/"}>Да</Link>
-      </ButtonStyled>
-    );
-  } else {
-    var button = <ButtonStyled onClick={handleSubmit}>Да</ButtonStyled>;
-  }
   return (
     <ModalWindow onClose={onClose} isVisible={isVisible}>
       <Container>
@@ -63,7 +49,7 @@ export default function AreYouSureModal({
           Неавторизованные пользователи не могут добавлять данные
         </Warning>
         <Question>Хотоите выйти?</Question>
-        {button}
+        <ButtonStyled onClick={onFormSubmit}>Да</ButtonStyled>
       </Container>
     </ModalWindow>
   );

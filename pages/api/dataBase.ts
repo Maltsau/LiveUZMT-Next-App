@@ -2238,7 +2238,7 @@ export default function handler(
     if (!checkUser(req.cookies.secret)) {
       res.status(403).json({ message: "Not allowed" });
     } else {
-      res.status(200).json({ message: "Allowed" });
+      res.status(200).json({ message: `${checkUser(req.cookies.secret)}` });
     }
   }
 }

@@ -7,6 +7,8 @@ import Header from "./Header";
 import Footer from "./Footer";
 import SignInModal from "./modalWindows/SignInModal";
 import AreYouSureModal from "./modalWindows/AreYouSureModal";
+import AddPage from "../pages/add";
+import SearchPage from "../pages/search";
 
 const Wraper = styled.div`
   border: 1px solid red;
@@ -44,6 +46,25 @@ export default function Layout({ children }: { children: ReactNode }) {
     setIsAreYouSureModalVisible(false);
     getUser("", "");
   };
+
+  useEffect(() => {
+    (async () => {
+      const response = await fetch("/api/cookie", { method: "GET" });
+      if (response.status === 200) {
+        console.log(JSON.stringify(response.body));
+        const responseData = await response.json();
+        const responseObject = JSON.parse(responseData.message);
+        setUser({
+          userName: responseObject.userName,
+          role: responseObject.role,
+        });
+        console.log(responseObject.userName, responseObject.password);
+      } else {
+        router.push("/");
+        console.log("Redirected");
+      }
+    })();
+  }, []);
 
   return (
     <Wraper>
