@@ -1,0 +1,2548 @@
+[
+  {
+    "year": 2022,
+    "months": [
+      {
+        "month": "январь",
+        "wishfullAverageLength": 19,
+        "planOps": 23,
+        "ops": [
+          {
+            "date": "01.01.2022",
+            "department": 1,
+            "number": "8",
+            "field": "Днепровская",
+            "duration": 17,
+            "result": [
+              {
+                "isFinal": false,
+                "dateTime": "01.01.2022 23:40",
+                "debitMass": 18.7,
+                "density": 0.85,
+                "watterRate": 12
+              },
+              {
+                "isFinal": true,
+                "dateTime": "02.01.2022 8:40",
+                "debitMass": 18.5,
+                "density": 0.85,
+                "watterRate": 11.8
+              }
+            ]
+          },
+          {
+            "date": "02.01.2022",
+            "department": 1,
+            "number": "534n",
+            "field": "Речицкая",
+            "duration": 18,
+            "result": [
+              {
+                "isFinal": false,
+                "dateTime": "02.01.2022 23:40",
+                "debitMass": 81,
+                "density": 1.09,
+                "watterRate": 70.4
+              },
+              {
+                "isFinal": false,
+                "dateTime": "03.01.2022 07:40",
+                "debitMass": 87,
+                "density": 1.09,
+                "watterRate": 72
+              },
+              {
+                "isFinal": true,
+                "dateTime": "03.01.2022 09:00",
+                "debitMass": 85,
+                "density": 1.09,
+                "watterRate": 72.7
+              }
+            ]
+          },
+          {
+            "date": "03.01.2022",
+            "department": 2,
+            "number": "114n",
+            "field": "Давыдовская",
+            "duration": 12,
+            "result": [
+              {
+                "isFinal": false,
+                "dateTime": "03.01.2022 19:00",
+                "debitMass": 12.6,
+                "density": 0.86,
+                "watterRate": 0
+              },
+              {
+                "isFinal": false,
+                "dateTime": "04.01.2022 07:40",
+                "debitMass": 11.8,
+                "density": 0.96,
+                "watterRate": 8.7
+              },
+              {
+                "isFinal": true,
+                "dateTime": "04.01.2022 12:00",
+                "debitMass": 11.6,
+                "density": 0.94,
+                "watterRate": 7.9
+              }
+            ]
+          },
+          {
+            "date": "04.01.2022",
+            "department": 2,
+            "number": "8",
+            "field": "Вишанская",
+            "duration": 17,
+            "result": [
+              {
+                "isFinal": false,
+                "dateTime": "04.01.2022 19:00",
+                "debitMass": 18.9,
+                "density": 0.86,
+                "watterRate": 0
+              },
+              {
+                "isFinal": false,
+                "dateTime": "05.01.2022 12:00",
+                "debitMass": 19,
+                "density": 0.86,
+                "watterRate": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "month": "февраль",
+        "wishfullAverageLength": 19,
+        "planOps": 23,
+        "ops": [
+          {
+            "date": "01.02.2022",
+            "department": 1,
+            "number": "23",
+            "field": "Бескопыльновская",
+            "duration": 17,
+            "result": [
+              {
+                "isFinal": false,
+                "dateTime": "01.02.2022 23:40",
+                "debitMass": 18.7,
+                "density": 0.85,
+                "watterRate": 12
+              },
+              {
+                "isFinal": true,
+                "dateTime": "02.02.2022 8:40",
+                "debitMass": 18.5,
+                "density": 0.85,
+                "watterRate": 11.8
+              }
+            ]
+          },
+          {
+            "date": "02.02.2022",
+            "department": 2,
+            "number": "269",
+            "field": "Осташковичская",
+            "duration": 18,
+            "result": [
+              {
+                "isFinal": false,
+                "dateTime": "02.02.2022 23:40",
+                "debitMass": 81,
+                "density": 1.09,
+                "watterRate": 70.4
+              },
+              {
+                "isFinal": false,
+                "dateTime": "03.02.2022 07:40",
+                "debitMass": 87,
+                "density": 1.09,
+                "watterRate": 72
+              },
+              {
+                "isFinal": true,
+                "dateTime": "03.02.2022 09:00",
+                "debitMass": 85,
+                "density": 1.09,
+                "watterRate": 72.7
+              }
+            ]
+          },
+          {
+            "date": "03.02.2022",
+            "department": 2,
+            "number": "114n",
+            "field": "Давыдовская",
+            "duration": 12,
+            "result": [
+              {
+                "isFinal": false,
+                "dateTime": "03.02.2022 19:00",
+                "debitMass": 12.6,
+                "density": 0.86,
+                "watterRate": 0
+              },
+              {
+                "isFinal": false,
+                "dateTime": "04.02.2022 07:40",
+                "debitMass": 11.8,
+                "density": 0.96,
+                "watterRate": 8.7
+              },
+              {
+                "isFinal": true,
+                "dateTime": "04.02.2022 12:00",
+                "debitMass": 11.6,
+                "density": 0.94,
+                "watterRate": 7.9
+              }
+            ]
+          },
+          {
+            "date": "04.02.2022",
+            "department": 2,
+            "number": "234",
+            "field": "Ю.-Сосновская",
+            "duration": 17,
+            "result": [
+              {
+                "isFinal": false,
+                "dateTime": "04.02.2022 19:00",
+                "debitMass": 87.7,
+                "density": 1.09,
+                "watterRate": 93
+              },
+              {
+                "isFinal": true,
+                "dateTime": "05.02.2022 12:00",
+                "debitMass": 90.1,
+                "density": 1.1,
+                "watterRate": 95
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "month": "март",
+        "wishfullAverageLength": 19,
+        "planOps": 25,
+        "ops": [
+          {
+            "date": "01.03.2022",
+            "department": 1,
+            "number": "23",
+            "field": "Бескопыльновская",
+            "duration": 17,
+            "result": [
+              {
+                "isFinal": false,
+                "dateTime": "01.03.2022 23:40",
+                "debitMass": 18.7,
+                "density": 0.85,
+                "watterRate": 12
+              },
+              {
+                "isFinal": true,
+                "dateTime": "02.03.2022 8:40",
+                "debitMass": 18.5,
+                "density": 0.85,
+                "watterRate": 11.8
+              }
+            ]
+          },
+          {
+            "date": "02.03.2022",
+            "department": 2,
+            "number": "269",
+            "field": "Осташковичская",
+            "duration": 18,
+            "result": [
+              {
+                "isFinal": false,
+                "dateTime": "02.03.2022 23:40",
+                "debitMass": 81,
+                "density": 1.09,
+                "watterRate": 70.4
+              },
+              {
+                "isFinal": false,
+                "dateTime": "03.03.2022 07:40",
+                "debitMass": 87,
+                "density": 1.09,
+                "watterRate": 72
+              },
+              {
+                "isFinal": true,
+                "dateTime": "03.03.2022 09:00",
+                "debitMass": 85,
+                "density": 1.09,
+                "watterRate": 72.7
+              }
+            ]
+          },
+          {
+            "date": "03.03.2022",
+            "department": 2,
+            "number": "114n",
+            "field": "Давыдовская",
+            "duration": 12,
+            "result": [
+              {
+                "isFinal": false,
+                "dateTime": "03.03.2022 19:00",
+                "debitMass": 12.6,
+                "density": 0.86,
+                "watterRate": 0
+              },
+              {
+                "isFinal": false,
+                "dateTime": "04.03.2022 07:40",
+                "debitMass": 11.8,
+                "density": 0.96,
+                "watterRate": 8.7
+              },
+              {
+                "isFinal": true,
+                "dateTime": "04.03.2022 12:00",
+                "debitMass": 11.6,
+                "density": 0.94,
+                "watterRate": 7.9
+              }
+            ]
+          },
+          {
+            "date": "04.03.2022",
+            "department": 2,
+            "number": "234",
+            "field": "Ю.-Сосновская",
+            "duration": 17,
+            "result": [
+              {
+                "isFinal": false,
+                "dateTime": "04.03.2022 19:00",
+                "debitMass": 87.7,
+                "density": 1.09,
+                "watterRate": 93
+              },
+              {
+                "isFinal": true,
+                "dateTime": "05.03.2022 12:00",
+                "debitMass": 90.1,
+                "density": 1.1,
+                "watterRate": 95
+              }
+            ]
+          },
+          {
+            "date": "06.03.2022",
+            "department": 1,
+            "number": "2",
+            "field": "Ю.-Сосновская",
+            "duration": 17,
+            "result": [
+              {
+                "isFinal": false,
+                "dateTime": "06.03.2022 19:00",
+                "debitMass": 87.7,
+                "density": 1.09,
+                "watterRate": 93
+              },
+              {
+                "isFinal": false,
+                "dateTime": "07.03.2022 08:00",
+                "debitMass": 87.7,
+                "density": 1.09,
+                "watterRate": 93
+              },
+              {
+                "isFinal": true,
+                "dateTime": "07.03.2022 12:00",
+                "debitMass": 90.1,
+                "density": 1.1,
+                "watterRate": 95
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "month": "апрель",
+        "wishfullAverageLength": 19,
+        "planOps": 23,
+        "ops": [
+          {
+            "date": "01.04.2022",
+            "department": 1,
+            "number": "23",
+            "field": "Бескопыльновская",
+            "duration": 17,
+            "result": [
+              {
+                "isFinal": false,
+                "dateTime": "01.04.2022 23:40",
+                "debitMass": 18.7,
+                "density": 0.85,
+                "watterRate": 12
+              },
+              {
+                "isFinal": true,
+                "dateTime": "02.04.2022 8:40",
+                "debitMass": 18.5,
+                "density": 0.85,
+                "watterRate": 11.8
+              }
+            ]
+          },
+          {
+            "date": "02.04.2022",
+            "department": 2,
+            "number": "269",
+            "field": "Осташковичская",
+            "duration": 18,
+            "result": [
+              {
+                "isFinal": false,
+                "dateTime": "02.04.2022 23:40",
+                "debitMass": 81,
+                "density": 1.09,
+                "watterRate": 70.4
+              },
+              {
+                "isFinal": false,
+                "dateTime": "03.04.2022 07:40",
+                "debitMass": 87,
+                "density": 1.09,
+                "watterRate": 72
+              },
+              {
+                "isFinal": true,
+                "dateTime": "03.04.2022 09:00",
+                "debitMass": 85,
+                "density": 1.09,
+                "watterRate": 72.7
+              }
+            ]
+          },
+          {
+            "date": "03.04.2022",
+            "department": 2,
+            "number": "114n",
+            "field": "Давыдовская",
+            "duration": 12,
+            "result": [
+              {
+                "isFinal": false,
+                "dateTime": "03.04.2022 19:00",
+                "debitMass": 12.6,
+                "density": 0.86,
+                "watterRate": 0
+              },
+              {
+                "isFinal": true,
+                "dateTime": "04.04.2022 12:00",
+                "debitMass": 11.6,
+                "density": 0.94,
+                "watterRate": 7.9
+              }
+            ]
+          },
+          {
+            "date": "04.04.2022",
+            "department": 2,
+            "number": "234",
+            "field": "Ю.-Сосновская",
+            "duration": 17,
+            "result": [
+              {
+                "isFinal": false,
+                "dateTime": "04.04.2022 19:00",
+                "debitMass": 87.7,
+                "density": 1.09,
+                "watterRate": 93
+              },
+              {
+                "isFinal": true,
+                "dateTime": "05.04.2022 12:00",
+                "debitMass": 90.1,
+                "density": 1.1,
+                "watterRate": 95
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "month": "май",
+        "wishfullAverageLength": 19,
+        "planOps": 23,
+        "ops": [
+          {
+            "date": "01.05.2022",
+            "department": 1,
+            "number": "23",
+            "field": "Бескопыльновская",
+            "duration": 17,
+            "result": [
+              {
+                "isFinal": false,
+                "dateTime": "01.05.2022 23:40",
+                "debitMass": 18.7,
+                "density": 0.85,
+                "watterRate": 12
+              },
+              {
+                "isFinal": true,
+                "dateTime": "02.05.2022 8:40",
+                "debitMass": 18.5,
+                "density": 0.85,
+                "watterRate": 11.8
+              }
+            ]
+          },
+          {
+            "date": "02.05.2022",
+            "department": 2,
+            "number": "269",
+            "field": "Осташковичская",
+            "duration": 18,
+            "result": [
+              {
+                "isFinal": false,
+                "dateTime": "02.05.2022 23:40",
+                "debitMass": 81,
+                "density": 1.09,
+                "watterRate": 70.4
+              },
+              {
+                "isFinal": false,
+                "dateTime": "03.05.2022 07:40",
+                "debitMass": 87,
+                "density": 1.09,
+                "watterRate": 72
+              },
+              {
+                "isFinal": true,
+                "dateTime": "03.05.2022 09:00",
+                "debitMass": 85,
+                "density": 1.09,
+                "watterRate": 72.7
+              }
+            ]
+          },
+          {
+            "date": "03.05.2022",
+            "department": 2,
+            "number": "114n",
+            "field": "Давыдовская",
+            "duration": 12,
+            "result": [
+              {
+                "isFinal": false,
+                "dateTime": "03.05.2022 19:00",
+                "debitMass": 12.6,
+                "density": 0.86,
+                "watterRate": 0
+              },
+              {
+                "isFinal": false,
+                "dateTime": "04.05.2022 07:40",
+                "debitMass": 11.8,
+                "density": 0.96,
+                "watterRate": 8.7
+              },
+              {
+                "isFinal": true,
+                "dateTime": "04.05.2022 12:00",
+                "debitMass": 11.6,
+                "density": 0.94,
+                "watterRate": 7.9
+              }
+            ]
+          },
+          {
+            "date": "04.05.2022",
+            "department": 2,
+            "number": "234",
+            "field": "Ю.-Сосновская",
+            "duration": 17,
+            "result": [
+              {
+                "isFinal": false,
+                "dateTime": "04.05.2022 19:00",
+                "debitMass": 87.7,
+                "density": 1.09,
+                "watterRate": 93
+              },
+              {
+                "isFinal": true,
+                "dateTime": "05.05.2022 12:00",
+                "debitMass": 90.1,
+                "density": 1.1,
+                "watterRate": 95
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "month": "июнь",
+        "wishfullAverageLength": 19,
+        "planOps": 23,
+        "ops": [
+          {
+            "date": "01.06.2022",
+            "department": 1,
+            "number": "23",
+            "field": "Бескопыльновская",
+            "duration": 17,
+            "result": [
+              {
+                "isFinal": false,
+                "dateTime": "01.06.2022 23:40",
+                "debitMass": 18.7,
+                "density": 0.85,
+                "watterRate": 12
+              },
+              {
+                "isFinal": true,
+                "dateTime": "02.06.2022 8:40",
+                "debitMass": 18.5,
+                "density": 0.85,
+                "watterRate": 11.8
+              }
+            ]
+          },
+          {
+            "date": "02.06.2022",
+            "department": 2,
+            "number": "269",
+            "field": "Осташковичская",
+            "duration": 18,
+            "result": [
+              {
+                "isFinal": false,
+                "dateTime": "02.06.2022 23:40",
+                "debitMass": 81,
+                "density": 1.09,
+                "watterRate": 70.4
+              },
+              {
+                "isFinal": false,
+                "dateTime": "03.06.2022 07:40",
+                "debitMass": 87,
+                "density": 1.09,
+                "watterRate": 72
+              },
+              {
+                "isFinal": true,
+                "dateTime": "03.06.2022 09:00",
+                "debitMass": 85,
+                "density": 1.09,
+                "watterRate": 72.7
+              }
+            ]
+          },
+          {
+            "date": "03.06.2022",
+            "department": 2,
+            "number": "114n",
+            "field": "Давыдовская",
+            "duration": 12,
+            "result": [
+              {
+                "isFinal": false,
+                "dateTime": "03.06.2022 19:00",
+                "debitMass": 12.6,
+                "density": 0.86,
+                "watterRate": 0
+              },
+              {
+                "isFinal": false,
+                "dateTime": "04.06.2022 07:40",
+                "debitMass": 11.8,
+                "density": 0.96,
+                "watterRate": 8.7
+              },
+              {
+                "isFinal": true,
+                "dateTime": "04.06.2022 12:00",
+                "debitMass": 11.6,
+                "density": 0.94,
+                "watterRate": 7.9
+              }
+            ]
+          },
+          {
+            "date": "04.06.2022",
+            "department": 2,
+            "number": "234",
+            "field": "Ю.-Сосновская",
+            "duration": 17,
+            "result": [
+              {
+                "isFinal": false,
+                "dateTime": "04.06.2022 19:00",
+                "debitMass": 87.7,
+                "density": 1.09,
+                "watterRate": 93
+              },
+              {
+                "isFinal": true,
+                "dateTime": "05.06.2022 12:00",
+                "debitMass": 90.1,
+                "density": 1.1,
+                "watterRate": 95
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "month": "июль",
+        "wishfullAverageLength": 19,
+        "planOps": 23,
+        "ops": [
+          {
+            "date": "01.07.2022",
+            "department": 1,
+            "number": "23",
+            "field": "Бескопыльновская",
+            "duration": 17,
+            "result": [
+              {
+                "isFinal": false,
+                "dateTime": "01.07.2022 23:40",
+                "debitMass": 18.7,
+                "density": 0.85,
+                "watterRate": 12
+              },
+              {
+                "isFinal": true,
+                "dateTime": "02.07.2022 8:40",
+                "debitMass": 18.5,
+                "density": 0.85,
+                "watterRate": 11.8
+              }
+            ]
+          },
+          {
+            "date": "02.07.2022",
+            "department": 2,
+            "number": "269",
+            "field": "Осташковичская",
+            "duration": 18,
+            "result": [
+              {
+                "isFinal": false,
+                "dateTime": "02.07.2022 23:40",
+                "debitMass": 81,
+                "density": 1.09,
+                "watterRate": 70.4
+              },
+              {
+                "isFinal": false,
+                "dateTime": "03.07.2022 07:40",
+                "debitMass": 87,
+                "density": 1.09,
+                "watterRate": 72
+              },
+              {
+                "isFinal": true,
+                "dateTime": "03.07.2022 09:00",
+                "debitMass": 85,
+                "density": 1.09,
+                "watterRate": 72.7
+              }
+            ]
+          },
+          {
+            "date": "03.07.2022",
+            "department": 2,
+            "number": "114n",
+            "field": "Давыдовская",
+            "duration": 12,
+            "result": [
+              {
+                "isFinal": false,
+                "dateTime": "03.07.2022 19:00",
+                "debitMass": 12.6,
+                "density": 0.86,
+                "watterRate": 0
+              },
+              {
+                "isFinal": false,
+                "dateTime": "04.07.2022 07:40",
+                "debitMass": 11.8,
+                "density": 0.96,
+                "watterRate": 8.7
+              },
+              {
+                "isFinal": true,
+                "dateTime": "04.07.2022 12:00",
+                "debitMass": 11.6,
+                "density": 0.94,
+                "watterRate": 7.9
+              }
+            ]
+          },
+          {
+            "date": "04.07.2022",
+            "department": 2,
+            "number": "234",
+            "field": "Ю.-Сосновская",
+            "duration": 17,
+            "result": [
+              {
+                "isFinal": false,
+                "dateTime": "04.07.2022 19:00",
+                "debitMass": 87.7,
+                "density": 1.09,
+                "watterRate": 93
+              },
+              {
+                "isFinal": true,
+                "dateTime": "05.07.2022 12:00",
+                "debitMass": 90.1,
+                "density": 1.1,
+                "watterRate": 95
+              }
+            ]
+          },
+          {
+            "date": "05.07.2022",
+            "department": 2,
+            "number": "1",
+            "field": "С.-Полевая",
+            "duration": 12,
+            "result": [
+              {
+                "isFinal": false,
+                "dateTime": "05.07.2022 19:40",
+                "debitMass": 11.6,
+                "density": 0.79,
+                "watterRate": 0
+              },
+              {
+                "isFinal": false,
+                "dateTime": "06.07.2022 07:40",
+                "debitMass": 12.8,
+                "density": 0.79,
+                "watterRate": 0
+              },
+              {
+                "isFinal": true,
+                "dateTime": "03.07.2022 09:00",
+                "debitMass": 12.7,
+                "density": 0.79,
+                "watterRate": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "month": "август",
+        "wishfullAverageLength": 19,
+        "planOps": 23,
+        "ops": [
+          {
+            "date": "01.08.2022",
+            "department": 1,
+            "number": "23",
+            "field": "Бескопыльновская",
+            "duration": 17,
+            "result": [
+              {
+                "isFinal": false,
+                "dateTime": "01.08.2022 23:40",
+                "debitMass": 18.7,
+                "density": 0.85,
+                "watterRate": 12
+              },
+              {
+                "isFinal": true,
+                "dateTime": "02.08.2022 8:40",
+                "debitMass": 18.5,
+                "density": 0.85,
+                "watterRate": 11.8
+              }
+            ]
+          },
+          {
+            "date": "02.08.2022",
+            "department": 2,
+            "number": "269",
+            "field": "Осташковичская",
+            "duration": 18,
+            "result": [
+              {
+                "isFinal": false,
+                "dateTime": "02.08.2022 23:40",
+                "debitMass": 81,
+                "density": 1.09,
+                "watterRate": 70.4
+              },
+              {
+                "isFinal": false,
+                "dateTime": "03.08.2022 07:40",
+                "debitMass": 87,
+                "density": 1.09,
+                "watterRate": 72
+              },
+              {
+                "isFinal": true,
+                "dateTime": "03.08.2022 09:00",
+                "debitMass": 85,
+                "density": 1.09,
+                "watterRate": 72.7
+              }
+            ]
+          },
+          {
+            "date": "03.08.2022",
+            "department": 2,
+            "number": "114n",
+            "field": "Давыдовская",
+            "duration": 12,
+            "result": [
+              {
+                "isFinal": false,
+                "dateTime": "03.08.2022 19:00",
+                "debitMass": 12.6,
+                "density": 0.86,
+                "watterRate": 0
+              },
+              {
+                "isFinal": false,
+                "dateTime": "04.08.2022 07:40",
+                "debitMass": 11.8,
+                "density": 0.96,
+                "watterRate": 8.7
+              },
+              {
+                "isFinal": true,
+                "dateTime": "04.08.2022 12:00",
+                "debitMass": 11.6,
+                "density": 0.94,
+                "watterRate": 7.9
+              }
+            ]
+          },
+          {
+            "date": "04.08.2022",
+            "department": 2,
+            "number": "234",
+            "field": "Ю.-Сосновская",
+            "duration": 17,
+            "result": [
+              {
+                "isFinal": false,
+                "dateTime": "04.08.2022 19:00",
+                "debitMass": 87.7,
+                "density": 1.09,
+                "watterRate": 93
+              },
+              {
+                "isFinal": true,
+                "dateTime": "05.08.2022 09:00",
+                "debitMass": 90.1,
+                "density": 1.1,
+                "watterRate": 95
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "month": "сентябрь",
+        "wishfullAverageLength": 19,
+        "planOps": 23,
+        "ops": [
+          {
+            "date": "01.09.2022",
+            "department": 1,
+            "number": "23",
+            "field": "Бескопыльновская",
+            "duration": 17,
+            "result": [
+              {
+                "isFinal": false,
+                "dateTime": "01.09.2022 23:40",
+                "debitMass": 18.7,
+                "density": 0.85,
+                "watterRate": 12
+              },
+              {
+                "isFinal": true,
+                "dateTime": "02.09.2022 8:40",
+                "debitMass": 18.5,
+                "density": 0.85,
+                "watterRate": 11.8
+              }
+            ]
+          },
+          {
+            "date": "02.09.2022",
+            "department": 2,
+            "number": "269",
+            "field": "Осташковичская",
+            "duration": 18,
+            "result": [
+              {
+                "isFinal": false,
+                "dateTime": "02.09.2022 23:40",
+                "debitMass": 81,
+                "density": 1.09,
+                "watterRate": 70.4
+              },
+              {
+                "isFinal": false,
+                "dateTime": "03.09.2022 07:40",
+                "debitMass": 87,
+                "density": 1.09,
+                "watterRate": 72
+              },
+              {
+                "isFinal": true,
+                "dateTime": "03.09.2022 09:00",
+                "debitMass": 85,
+                "density": 1.09,
+                "watterRate": 72.7
+              }
+            ]
+          },
+          {
+            "date": "03.09.2022",
+            "department": 2,
+            "number": "114n",
+            "field": "Давыдовская",
+            "duration": 12,
+            "result": [
+              {
+                "isFinal": false,
+                "dateTime": "03.09.2022 19:00",
+                "debitMass": 12.6,
+                "density": 0.86,
+                "watterRate": 0
+              },
+              {
+                "isFinal": false,
+                "dateTime": "04.09.2022 07:40",
+                "debitMass": 11.8,
+                "density": 0.96,
+                "watterRate": 8.7
+              },
+              {
+                "isFinal": true,
+                "dateTime": "04.09.2022 12:00",
+                "debitMass": 11.6,
+                "density": 0.94,
+                "watterRate": 7.9
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "month": "октябрь",
+        "wishfullAverageLength": 19,
+        "planOps": 23,
+        "ops": [
+          {
+            "date": "01.10.2022",
+            "department": 1,
+            "number": "416",
+            "field": "Речицкая",
+            "duration": 17,
+            "result": [
+              {
+                "isFinal": false,
+                "dateTime": "01.10.2022 23:40",
+                "debitMass": 18.7,
+                "density": 0.85,
+                "watterRate": 12
+              },
+              {
+                "isFinal": true,
+                "dateTime": "02.10.2022 8:40",
+                "debitMass": 18.5,
+                "density": 0.85,
+                "watterRate": 11.8
+              }
+            ]
+          },
+          {
+            "date": "02.10.2022",
+            "department": 2,
+            "number": "269",
+            "field": "Осташковичская",
+            "duration": 18,
+            "result": [
+              {
+                "isFinal": false,
+                "dateTime": "02.10.2022 23:40",
+                "debitMass": 81,
+                "density": 1.09,
+                "watterRate": 70.4
+              },
+              {
+                "isFinal": false,
+                "dateTime": "03.10.2022 07:40",
+                "debitMass": 87,
+                "density": 1.09,
+                "watterRate": 72
+              },
+              {
+                "isFinal": true,
+                "dateTime": "03.10.2022 09:00",
+                "debitMass": 85,
+                "density": 1.09,
+                "watterRate": 72.7
+              }
+            ]
+          },
+          {
+            "date": "03.10.2022",
+            "department": 2,
+            "number": "114n",
+            "field": "Давыдовская",
+            "duration": 12,
+            "result": [
+              {
+                "isFinal": false,
+                "dateTime": "03.10.2022 19:00",
+                "debitMass": 12.6,
+                "density": 0.86,
+                "watterRate": 0
+              },
+              {
+                "isFinal": false,
+                "dateTime": "04.10.2022 07:40",
+                "debitMass": 11.8,
+                "density": 0.96,
+                "watterRate": 8.7
+              },
+              {
+                "isFinal": true,
+                "dateTime": "04.10.2022 12:00",
+                "debitMass": 11.6,
+                "density": 0.94,
+                "watterRate": 7.9
+              }
+            ]
+          },
+          {
+            "date": "04.10.2022",
+            "department": 2,
+            "number": "234",
+            "field": "Ю.-Сосновская",
+            "duration": 17,
+            "result": [
+              {
+                "isFinal": false,
+                "dateTime": "04.10.2022 19:00",
+                "debitMass": 87.7,
+                "density": 1.09,
+                "watterRate": 93
+              },
+              {
+                "isFinal": true,
+                "dateTime": "05.10.2022 09:00",
+                "debitMass": 90.1,
+                "density": 1.1,
+                "watterRate": 95
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "month": "ноябрь",
+        "wishfullAverageLength": 19,
+        "planOps": 23,
+        "ops": [
+          {
+            "date": "01.11.2022",
+            "department": 1,
+            "number": "23",
+            "field": "Бескопыльновская",
+            "duration": 17,
+            "result": [
+              {
+                "isFinal": false,
+                "dateTime": "01.11.2022 23:40",
+                "debitMass": 18.7,
+                "density": 0.85,
+                "watterRate": 12
+              },
+              {
+                "isFinal": true,
+                "dateTime": "02.11.2022 8:40",
+                "debitMass": 18.5,
+                "density": 0.85,
+                "watterRate": 11.8
+              }
+            ]
+          },
+          {
+            "date": "02.09.2022",
+            "department": 2,
+            "number": "269",
+            "field": "Осташковичская",
+            "duration": 18,
+            "result": [
+              {
+                "isFinal": false,
+                "dateTime": "02.11.2022 23:40",
+                "debitMass": 81,
+                "density": 1.09,
+                "watterRate": 70.4
+              },
+              {
+                "isFinal": false,
+                "dateTime": "03.11.2022 07:40",
+                "debitMass": 87,
+                "density": 1.09,
+                "watterRate": 72
+              },
+              {
+                "isFinal": true,
+                "dateTime": "03.11.2022 09:00",
+                "debitMass": 85,
+                "density": 1.09,
+                "watterRate": 72.7
+              }
+            ]
+          },
+          {
+            "date": "03.11.2022",
+            "department": 2,
+            "number": "114n",
+            "field": "Давыдовская",
+            "duration": 12,
+            "result": [
+              {
+                "isFinal": false,
+                "dateTime": "03.11.2022 19:00",
+                "debitMass": 12.6,
+                "density": 0.86,
+                "watterRate": 0
+              },
+              {
+                "isFinal": false,
+                "dateTime": "04.11.2022 07:40",
+                "debitMass": 11.8,
+                "density": 0.96,
+                "watterRate": 8.7
+              },
+              {
+                "isFinal": true,
+                "dateTime": "04.11.2022 12:00",
+                "debitMass": 11.6,
+                "density": 0.94,
+                "watterRate": 7.9
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "month": "декабрь",
+        "wishfullAverageLength": 19,
+        "planOps": 23,
+        "ops": [
+          {
+            "date": "01.12.2022",
+            "department": 1,
+            "number": "23",
+            "field": "Бескопыльновская",
+            "duration": 17,
+            "result": [
+              {
+                "isFinal": false,
+                "dateTime": "01.12.2022 23:40",
+                "debitMass": 18.7,
+                "density": 0.85,
+                "watterRate": 12
+              },
+              {
+                "isFinal": true,
+                "dateTime": "02.12.2022 8:40",
+                "debitMass": 18.5,
+                "density": 0.85,
+                "watterRate": 11.8
+              }
+            ]
+          },
+          {
+            "date": "02.12.2022",
+            "department": 2,
+            "number": "269",
+            "field": "Осташковичская",
+            "duration": 18,
+            "result": [
+              {
+                "isFinal": false,
+                "dateTime": "02.12.2022 23:40",
+                "debitMass": 81,
+                "density": 1.09,
+                "watterRate": 70.4
+              },
+              {
+                "isFinal": false,
+                "dateTime": "03.12.2022 07:40",
+                "debitMass": 87,
+                "density": 1.09,
+                "watterRate": 72
+              },
+              {
+                "isFinal": true,
+                "dateTime": "03.12.2022 09:00",
+                "debitMass": 85,
+                "density": 1.09,
+                "watterRate": 72.7
+              }
+            ]
+          },
+          {
+            "date": "03.12.2022",
+            "department": 2,
+            "number": "114n",
+            "field": "Давыдовская",
+            "duration": 12,
+            "result": [
+              {
+                "isFinal": false,
+                "dateTime": "03.12.2022 19:00",
+                "debitMass": 12.6,
+                "density": 0.86,
+                "watterRate": 0
+              },
+              {
+                "isFinal": false,
+                "dateTime": "04.12.2022 07:40",
+                "debitMass": 11.8,
+                "density": 0.96,
+                "watterRate": 8.7
+              },
+              {
+                "isFinal": true,
+                "dateTime": "04.12.2022 12:00",
+                "debitMass": 11.6,
+                "density": 0.94,
+                "watterRate": 7.9
+              }
+            ]
+          },
+          {
+            "date": "04.12.2022",
+            "department": 2,
+            "number": "234",
+            "field": "Ю.-Сосновская",
+            "duration": 17,
+            "result": [
+              {
+                "isFinal": false,
+                "dateTime": "04.12.2022 19:00",
+                "debitMass": 87.7,
+                "density": 1.09,
+                "watterRate": 93
+              },
+              {
+                "isFinal": true,
+                "dateTime": "05.12.2022 12:00",
+                "debitMass": 90.1,
+                "density": 1.1,
+                "watterRate": 95
+              }
+            ]
+          },
+          {
+            "date": "06.12.2022",
+            "department": 1,
+            "number": "2",
+            "field": "Ю.-Сосновская",
+            "duration": 17,
+            "result": [
+              {
+                "isFinal": false,
+                "dateTime": "06.12.2022 19:00",
+                "debitMass": 87.7,
+                "density": 1.09,
+                "watterRate": 93
+              },
+              {
+                "isFinal": false,
+                "dateTime": "07.12.2022 08:00",
+                "debitMass": 87.7,
+                "density": 1.09,
+                "watterRate": 93
+              },
+              {
+                "isFinal": true,
+                "dateTime": "07.12.2022 12:00",
+                "debitMass": 90.1,
+                "density": 1.1,
+                "watterRate": 95
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "year": 2023,
+    "months": [
+      {
+        "month": "январь",
+        "wishfullAverageLength": 19,
+        "planOps": 23,
+        "ops": [
+          {
+            "date": "01.01.2023",
+            "department": 1,
+            "number": "8",
+            "field": "Днепровская",
+            "duration": 17,
+            "result": [
+              {
+                "isFinal": false,
+                "dateTime": "01.01.2023 23:40",
+                "debitMass": 18.7,
+                "density": 0.85,
+                "watterRate": 12
+              },
+              {
+                "isFinal": true,
+                "dateTime": "02.01.2023 8:40",
+                "debitMass": 18.7,
+                "density": 0.85,
+                "watterRate": 12
+              }
+            ]
+          },
+          {
+            "date": "02.01.2023",
+            "department": 1,
+            "number": "534n",
+            "field": "Речицкая",
+            "duration": 18,
+            "result": [
+              {
+                "debitMass": 87,
+                "density": 1.09,
+                "watterRate": 70
+              }
+            ]
+          },
+          {
+            "date": "03.01.2023",
+            "department": 2,
+            "number": "114n",
+            "field": "Давыдовская",
+            "duration": 12,
+            "result": [
+              {
+                "debitMass": 8,
+                "density": 0.84,
+                "watterRate": 0
+              }
+            ]
+          },
+          {
+            "date": "04.01.2023",
+            "department": 2,
+            "number": "8",
+            "field": "Вишанская",
+            "duration": 17,
+            "result": [
+              {
+                "debitMass": 18.7,
+                "density": 0.85,
+                "watterRate": 12
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "month": "февраль",
+        "wishfullAverageLength": 18,
+        "planOps": 22,
+        "ops": [
+          {
+            "date": "01.02.2023",
+            "department": 2,
+            "number": "168",
+            "field": "Ю.-Сосновская",
+            "duration": 19,
+            "result": [
+              {
+                "debitMass": 18.7,
+                "density": 0.85,
+                "watterRate": 12
+              }
+            ]
+          },
+          {
+            "date": "02.02.2023",
+            "department": 1,
+            "number": "534n",
+            "field": "Речицкая",
+            "duration": 14,
+            "result": [
+              {
+                "debitMass": 87,
+                "density": 1.09,
+                "watterRate": 70
+              }
+            ]
+          },
+          {
+            "date": "03.02.2023",
+            "department": 2,
+            "number": "114n",
+            "field": "Давыдовская",
+            "duration": 12,
+            "result": [
+              {
+                "debitMass": 87,
+                "density": 1.09,
+                "watterRate": 70
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "month": "март",
+        "wishfullAverageLength": 19,
+        "planOps": 25,
+        "ops": [
+          {
+            "date": "01.03.2023",
+            "department": 2,
+            "number": "168",
+            "field": "Ю.-Сосновская",
+            "duration": 19,
+            "result": [
+              {
+                "debitMass": 138.7,
+                "density": 1.09,
+                "watterRate": 96
+              }
+            ]
+          },
+          {
+            "date": "02.03.2023",
+            "department": 1,
+            "number": "534n",
+            "field": "Речицкая",
+            "duration": 14,
+            "result": [
+              {
+                "debitMass": 78,
+                "density": 0.9,
+                "watterRate": 5
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "month": "апрель",
+        "wishfullAverageLength": 19,
+        "planOps": 23,
+        "ops": [
+          {
+            "date": "01.04.2023",
+            "department": 1,
+            "number": "4",
+            "field": "Карташовская",
+            "duration": 19,
+            "result": [
+              {
+                "debitMass": 37.6,
+                "density": 0.87,
+                "watterRate": 0
+              }
+            ]
+          },
+          {
+            "date": "02.04.2023",
+            "department": 1,
+            "number": "534n",
+            "field": "Речицкая",
+            "duration": 14,
+            "result": [
+              {
+                "debitMass": 78,
+                "density": 0.9,
+                "watterRate": 5
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "month": "май",
+        "wishfullAverageLength": 19,
+        "planOps": 23,
+        "ops": [
+          {
+            "date": "01.05.2023",
+            "department": 2,
+            "number": "168",
+            "field": "Ю.-Сосновская",
+            "duration": 17,
+            "result": [
+              {
+                "debitMass": 138.7,
+                "density": 1.09,
+                "watterRate": 96
+              }
+            ]
+          },
+          {
+            "date": "02.05.2023",
+            "department": 1,
+            "number": "534n",
+            "field": "Речицкая",
+            "duration": 18,
+            "result": [
+              {
+                "debitMass": 78,
+                "density": 0.9,
+                "watterRate": 5
+              }
+            ]
+          },
+          {
+            "date": "03.05.2023",
+            "department": 2,
+            "number": "114n",
+            "field": "Давыдовская",
+            "duration": 12,
+            "result": [
+              {
+                "debitMass": 10.9,
+                "density": 0.87,
+                "watterRate": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "month": "июнь",
+        "wishfullAverageLength": 19,
+        "planOps": 23,
+        "ops": [
+          {
+            "date": "01.06.2023",
+            "department": 2,
+            "number": "108",
+            "field": "Маррмовичская",
+            "duration": 17,
+            "result": [
+              {
+                "debitMass": 24.6,
+                "density": 0.88,
+                "watterRate": 0
+              }
+            ]
+          },
+          {
+            "date": "02.06.2023",
+            "department": 2,
+            "number": "269",
+            "field": "Осташковичская",
+            "duration": 18,
+            "result": [
+              {
+                "debitMass": 203.8,
+                "density": 1.12,
+                "watterRate": 98
+              }
+            ]
+          },
+          {
+            "date": "03.06.2023",
+            "department": 2,
+            "number": "114n",
+            "field": "Давыдовская",
+            "duration": 12,
+            "result": [
+              {
+                "debitMass": 10.9,
+                "density": 0.87,
+                "watterRate": 0
+              }
+            ]
+          },
+          {
+            "date": "04.06.2023",
+            "department": 1,
+            "number": "513",
+            "field": "Речицкая",
+            "duration": 19,
+            "result": [
+              {
+                "debitMass": 43.5,
+                "density": 0.98,
+                "watterRate": 23
+              }
+            ]
+          },
+          {
+            "date": "05.06.2023",
+            "department": 1,
+            "number": "145",
+            "field": "Речицкая",
+            "duration": 15,
+            "result": [
+              {
+                "debitMass": 23.5,
+                "density": 0.86,
+                "watterRate": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "month": "июль",
+        "wishfullAverageLength": 19,
+        "planOps": 23,
+        "ops": [
+          {
+            "date": "01.07.2023",
+            "department": 2,
+            "number": "168",
+            "field": "Ю.-Сосновская",
+            "duration": 19,
+            "result": [
+              {
+                "debitMass": 138.7,
+                "density": 1.12,
+                "watterRate": 96
+              }
+            ]
+          },
+          {
+            "date": "02.07.2023",
+            "department": 1,
+            "number": "534n",
+            "field": "Речицкая",
+            "duration": 14,
+            "result": [
+              {
+                "debitMass": 87.5,
+                "density": 1.01,
+                "watterRate": 23
+              }
+            ]
+          },
+          {
+            "date": "03.07.2023",
+            "department": 2,
+            "number": "114n",
+            "field": "Давыдовская",
+            "duration": 12,
+            "result": [
+              {
+                "debitMass": 10.9,
+                "density": 0.87,
+                "watterRate": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "month": "август",
+        "wishfullAverageLength": 19,
+        "planOps": 23,
+        "ops": [
+          {
+            "date": "01.08.2023",
+            "department": 2,
+            "number": "168",
+            "field": "Ю.-Сосновская",
+            "duration": 19,
+            "result": [
+              {
+                "debitMass": 138.7,
+                "density": 1.12,
+                "watterRate": 96
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "month": "сентябрь",
+        "wishfullAverageLength": 19,
+        "planOps": 23,
+        "ops": [
+          {
+            "date": "01.09.2023",
+            "department": 2,
+            "number": "168",
+            "field": "Ю.-Сосновская",
+            "duration": 19,
+            "result": [
+              {
+                "debitMass": 138.7,
+                "density": 1.12,
+                "watterRate": 96
+              }
+            ]
+          },
+          {
+            "date": "02.09.2023",
+            "department": 1,
+            "number": "534n",
+            "field": "Речицкая",
+            "duration": 14,
+            "result": [
+              {
+                "debitMass": 87.5,
+                "density": 1.01,
+                "watterRate": 23
+              }
+            ]
+          },
+          {
+            "date": "03.09.2023",
+            "department": 2,
+            "number": "114n",
+            "field": "Давыдовская",
+            "duration": 12,
+            "result": [
+              {
+                "debitMass": 10.9,
+                "density": 0.87,
+                "watterRate": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "month": "октябрь",
+        "wishfullAverageLength": 19,
+        "planOps": 23,
+        "ops": [
+          {
+            "date": "01.10.2023",
+            "department": 2,
+            "number": "168",
+            "field": "Ю.-Сосновская",
+            "duration": 19,
+            "result": [
+              {
+                "debitMass": 138.7,
+                "density": 1.12,
+                "watterRate": 96
+              }
+            ]
+          },
+          {
+            "date": "02.10.2023",
+            "department": 1,
+            "number": "534n",
+            "field": "Речицкая",
+            "duration": 14,
+            "result": [
+              {
+                "debitMass": 87.5,
+                "density": 1.01,
+                "watterRate": 23
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "month": "ноябрь",
+        "wishfullAverageLength": 19,
+        "planOps": 23,
+        "ops": [
+          {
+            "date": "01.11.2023",
+            "department": 2,
+            "number": "225",
+            "field": "Ю.-Сосновская",
+            "duration": 19,
+            "result": [
+              {
+                "debitMass": 150.4,
+                "density": 1.15,
+                "watterRate": 98
+              }
+            ]
+          },
+          {
+            "date": "02.11.2023",
+            "department": 1,
+            "number": "534n",
+            "field": "Речицкая",
+            "duration": 14,
+            "result": [
+              {
+                "debitMass": 87.5,
+                "density": 1.01,
+                "watterRate": 23
+              }
+            ]
+          },
+          {
+            "date": "03.11.2023",
+            "department": 2,
+            "number": "97r",
+            "field": "Давыдовская",
+            "duration": 12,
+            "result": [
+              {
+                "debitMass": 21.5,
+                "density": 0.98,
+                "watterRate": 47
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "month": "декабрь",
+        "wishfullAverageLength": 19,
+        "planOps": 23,
+        "ops": [
+          {
+            "date": "01.02.2023",
+            "department": 2,
+            "number": "168",
+            "field": "Ю.-Сосновская",
+            "duration": 19,
+            "result": [
+              {
+                "debitMass": 138.7,
+                "density": 1.12,
+                "watterRate": 96
+              }
+            ]
+          },
+          {
+            "date": "02.02.2023",
+            "department": 1,
+            "number": "9005",
+            "field": "Карташовская",
+            "duration": 14,
+            "result": [
+              {
+                "debitMass": 34.6,
+                "density": 0.83,
+                "watterRate": 0
+              }
+            ]
+          },
+          {
+            "date": "03.02.2023",
+            "department": 2,
+            "number": "114n",
+            "field": "Давыдовская",
+            "duration": 12,
+            "result": [
+              {
+                "debitMass": 10.9,
+                "density": 0.87,
+                "watterRate": 0
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "year": 2024,
+    "months": [
+      {
+        "month": "январь",
+        "wishfullAverageLength": 19,
+        "planOps": 23,
+        "ops": [
+          {
+            "date": "01.01.2022",
+            "department": 1,
+            "number": "8",
+            "field": "Днепровская",
+            "duration": 17,
+            "result": [
+              {
+                "isFinal": false,
+                "dateTime": "01.01.01 23:40",
+                "debitMass": 18.7,
+                "density": 0.85,
+                "watterRate": 12
+              },
+              {
+                "isFinal": true,
+                "dateTime": "02.01.01 8:40",
+                "debitMass": 18.7,
+                "density": 0.85,
+                "watterRate": 12
+              }
+            ]
+          },
+          {
+            "date": "02.01.2022",
+            "department": 1,
+            "number": "534n",
+            "field": "Речицкая",
+            "duration": 18,
+            "result": [
+              {
+                "debitMass": 87,
+                "density": 1.09,
+                "watterRate": 70
+              }
+            ]
+          },
+          {
+            "date": "03.01.2022",
+            "department": 2,
+            "number": "114n",
+            "field": "Давыдовская",
+            "duration": 12,
+            "result": [
+              {
+                "ebitMass": 8,
+                "density": 0.84,
+                "watterRate": 0
+              }
+            ]
+          },
+          {
+            "date": "04.01.2022",
+            "department": 2,
+            "number": "8",
+            "field": "Вишанская",
+            "duration": 17,
+            "result": [
+              {
+                "debitMass": 18.7,
+                "density": 0.85,
+                "watterRate": 12
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "month": "февраль",
+        "wishfullAverageLength": 18,
+        "planOps": 22,
+        "ops": [
+          {
+            "date": "01.02.2022",
+            "department": 2,
+            "number": "168",
+            "field": "Ю.-Сосновская",
+            "duration": 19,
+            "result": [
+              {
+                "debitMass": 18.7,
+                "density": 0.85,
+                "watterRate": 12
+              }
+            ]
+          },
+          {
+            "date": "02.02.2022",
+            "department": 1,
+            "number": "534n",
+            "field": "Речицкая",
+            "duration": 14,
+            "result": [
+              {
+                "debitMass": 87,
+                "density": 1.09,
+                "watterRate": 70
+              }
+            ]
+          },
+          {
+            "date": "03.02.2022",
+            "department": 2,
+            "number": "114n",
+            "field": "Давыдовская",
+            "duration": 12,
+            "result": [
+              {
+                "debitMass": 87,
+                "density": 1.09,
+                "watterRate": 70
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "month": "март",
+        "wishfullAverageLength": 19,
+        "planOps": 25,
+        "ops": [
+          {
+            "date": "01.03.2022",
+            "department": 2,
+            "number": "168",
+            "field": "Ю.-Сосновская",
+            "duration": 19,
+            "result": [
+              {
+                "debitMass": 138.7,
+                "density": 1.09,
+                "watterRate": 96
+              }
+            ]
+          },
+          {
+            "date": "02.03.2022",
+            "department": 1,
+            "number": "534n",
+            "field": "Речицкая",
+            "duration": 14,
+            "result": [
+              {
+                "debitMass": 78,
+                "density": 0.9,
+                "watterRate": 5
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "month": "апрель",
+        "wishfullAverageLength": 19,
+        "planOps": 23,
+        "ops": [
+          {
+            "date": "01.04.2022",
+            "department": 1,
+            "number": "4",
+            "field": "Карташовская",
+            "duration": 19,
+            "result": [
+              {
+                "debitMass": 37.6,
+                "density": 0.87,
+                "watterRate": 0
+              }
+            ]
+          },
+          {
+            "date": "02.04.2022",
+            "department": 1,
+            "number": "534n",
+            "field": "Речицкая",
+            "duration": 14,
+            "result": [
+              {
+                "debitMass": 78,
+                "density": 0.9,
+                "watterRate": 5
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "month": "май",
+        "wishfullAverageLength": 19,
+        "planOps": 23,
+        "ops": [
+          {
+            "date": "01.05.2022",
+            "department": 2,
+            "number": "168",
+            "field": "Ю.-Сосновская",
+            "duration": 17,
+            "result": [
+              {
+                "debitMass": 138.7,
+                "density": 1.09,
+                "watterRate": 96
+              }
+            ]
+          },
+          {
+            "date": "02.05.2022",
+            "department": 1,
+            "number": "534n",
+            "field": "Речицкая",
+            "duration": 18,
+            "result": [
+              {
+                "debitMass": 78,
+                "density": 0.9,
+                "watterRate": 5
+              }
+            ]
+          },
+          {
+            "date": "03.05.2022",
+            "department": 2,
+            "number": "114n",
+            "field": "Давыдовская",
+            "duration": 12,
+            "result": [
+              {
+                "debitMass": 10.9,
+                "density": 0.87,
+                "watterRate": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "month": "июнь",
+        "wishfullAverageLength": 19,
+        "planOps": 23,
+        "ops": [
+          {
+            "date": "01.06.2022",
+            "department": 2,
+            "number": "108",
+            "field": "Маррмовичская",
+            "duration": 17,
+            "result": [
+              {
+                "debitMass": 24.6,
+                "density": 0.88,
+                "watterRate": 0
+              }
+            ]
+          },
+          {
+            "date": "02.06.2022",
+            "department": 2,
+            "number": "269",
+            "field": "Осташковичская",
+            "duration": 18,
+            "result": [
+              {
+                "debitMass": 203.8,
+                "density": 1.12,
+                "watterRate": 98
+              }
+            ]
+          },
+          {
+            "date": "03.06.2022",
+            "department": 2,
+            "number": "114n",
+            "field": "Давыдовская",
+            "duration": 12,
+            "result": [
+              {
+                "debitMass": 10.9,
+                "density": 0.87,
+                "watterRate": 0
+              }
+            ]
+          },
+          {
+            "date": "04.06.2022",
+            "department": 1,
+            "number": "513",
+            "field": "Речицкая",
+            "duration": 19,
+            "result": [
+              {
+                "debitMass": 43.5,
+                "density": 0.98,
+                "watterRate": 23
+              }
+            ]
+          },
+          {
+            "date": "05.06.2022",
+            "department": 1,
+            "number": "145",
+            "field": "Речицкая",
+            "duration": 15,
+            "result": [
+              {
+                "debitMass": 23.5,
+                "density": 0.86,
+                "watterRate": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "month": "июль",
+        "wishfullAverageLength": 19,
+        "planOps": 23,
+        "ops": [
+          {
+            "date": "01.07.2022",
+            "department": 2,
+            "number": "168",
+            "field": "Ю.-Сосновская",
+            "duration": 19,
+            "result": [
+              {
+                "debitMass": 138.7,
+                "density": 1.12,
+                "watterRate": 96
+              }
+            ]
+          },
+          {
+            "date": "02.07.2022",
+            "department": 1,
+            "number": "534n",
+            "field": "Речицкая",
+            "duration": 14,
+            "result": [
+              {
+                "debitMass": 87.5,
+                "density": 1.01,
+                "watterRate": 23
+              }
+            ]
+          },
+          {
+            "date": "03.07.2022",
+            "department": 2,
+            "number": "114n",
+            "field": "Давыдовская",
+            "duration": 12,
+            "result": [
+              {
+                "debitMass": 10.9,
+                "density": 0.87,
+                "watterRate": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "month": "август",
+        "wishfullAverageLength": 19,
+        "planOps": 23,
+        "ops": [
+          {
+            "date": "01.08.2022",
+            "department": 2,
+            "number": "168",
+            "field": "Ю.-Сосновская",
+            "duration": 19,
+            "result": [
+              {
+                "debitMass": 138.7,
+                "density": 1.12,
+                "watterRate": 96
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "month": "сентябрь",
+        "wishfullAverageLength": 19,
+        "planOps": 23,
+        "ops": [
+          {
+            "date": "01.09.2022",
+            "department": 2,
+            "number": "168",
+            "field": "Ю.-Сосновская",
+            "duration": 19,
+            "result": [
+              {
+                "debitMass": 138.7,
+                "density": 1.12,
+                "watterRate": 96
+              }
+            ]
+          },
+          {
+            "date": "02.09.2022",
+            "department": 1,
+            "number": "534n",
+            "field": "Речицкая",
+            "duration": 14,
+            "result": [
+              {
+                "debitMass": 87.5,
+                "density": 1.01,
+                "watterRate": 23
+              }
+            ]
+          },
+          {
+            "date": "03.09.2022",
+            "department": 2,
+            "number": "114n",
+            "field": "Давыдовская",
+            "duration": 12,
+            "result": [
+              {
+                "debitMass": 10.9,
+                "density": 0.87,
+                "watterRate": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "month": "октябрь",
+        "wishfullAverageLength": 19,
+        "planOps": 23,
+        "ops": [
+          {
+            "date": "01.10.2022",
+            "department": 2,
+            "number": "168",
+            "field": "Ю.-Сосновская",
+            "duration": 19,
+            "result": [
+              {
+                "debitMass": 138.7,
+                "density": 1.12,
+                "watterRate": 96
+              }
+            ]
+          },
+          {
+            "date": "02.10.2022",
+            "department": 1,
+            "number": "534n",
+            "field": "Речицкая",
+            "duration": 14,
+            "result": [
+              {
+                "debitMass": 87.5,
+                "density": 1.01,
+                "watterRate": 23
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "month": "ноябрь",
+        "wishfullAverageLength": 19,
+        "planOps": 23,
+        "ops": [
+          {
+            "date": "01.11.2022",
+            "department": 2,
+            "number": "225",
+            "field": "Ю.-Сосновская",
+            "duration": 19,
+            "result": [
+              {
+                "debitMass": 150.4,
+                "density": 1.15,
+                "watterRate": 98
+              }
+            ]
+          },
+          {
+            "date": "02.11.2022",
+            "department": 1,
+            "number": "534n",
+            "field": "Речицкая",
+            "duration": 14,
+            "result": [
+              {
+                "debitMass": 87.5,
+                "density": 1.01,
+                "watterRate": 23
+              }
+            ]
+          },
+          {
+            "date": "03.11.2022",
+            "department": 2,
+            "number": "97r",
+            "field": "Давыдовская",
+            "duration": 12,
+            "result": [
+              {
+                "debitMass": 21.5,
+                "density": 0.98,
+                "watterRate": 47
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "month": "декабрь",
+        "wishfullAverageLength": 19,
+        "planOps": 23,
+        "ops": [
+          {
+            "date": "01.02.2022",
+            "department": 2,
+            "number": "168",
+            "field": "Ю.-Сосновская",
+            "duration": 19,
+            "result": [
+              {
+                "debitMass": 138.7,
+                "density": 1.12,
+                "watterRate": 96
+              }
+            ]
+          },
+          {
+            "date": "02.02.2022",
+            "department": 1,
+            "number": "9005",
+            "field": "Карташовская",
+            "duration": 14,
+            "result": [
+              {
+                "debitMass": 34.6,
+                "density": 0.83,
+                "watterRate": 0
+              }
+            ]
+          },
+          {
+            "date": "03.02.2022",
+            "department": 2,
+            "number": "114n",
+            "field": "Давыдовская",
+            "duration": 12,
+            "result": [
+              {
+                "debitMass": 10.9,
+                "density": 0.87,
+                "watterRate": 0
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

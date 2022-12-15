@@ -1,11 +1,14 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { postSecret, deleteSecret } from "./cookie";
+import { addSecret, deleteSecret } from "../../dataBase/cookieBase";
+import getUserBase from "../../dataBase/UserBase";
 
-const USER_DATA = [
-  { userName: "d.maltsev", password: "8604", role: "ADMIN" },
-  { userName: "p.chayka", password: "8424", role: "EDITOR" },
-  { userName: "v.fedyushko", password: "8425", role: "EDITOR" },
-];
+// const USER_DATA = [
+//   { userName: "d.maltsev", password: "8604", role: "ADMIN" },
+//   { userName: "p.chayka", password: "8424", role: "EDITOR" },
+//   { userName: "v.fedyushko", password: "8425", role: "EDITOR" },
+// ];
+
+const USER_DATA = getUserBase();
 
 type UserDataType = {
   login: string;
@@ -24,16 +27,22 @@ export default function handler(
     // console.log(newUser.login);
     // console.log(newUser.password);
     // USER_DATA.forEach((e) => console.log(e.username, e.password));
-    const authorisedUser = USER_DATA.find(
+    const authorisedUser = USER_DATA?.find(
       (userObj) =>
         newUser.login === userObj.userName &&
         newUser.password === userObj.password
     );
-    console.log(authorisedUser);
+    console.log("Authorised", authorisedUser);
     if (authorisedUser) {
       const secret = String(new Date().getDate() * Math.random());
       res.setHeader("Set-Cookie", `secret=${secret}`);
-      postSecret(secret, authorisedUser.userName, authorisedUser.role);
+      console.log(
+        "To add",
+        secret,
+        authorisedUser.userName,
+        authorisedUser.role
+      );
+      addSecret(secret, authorisedUser.userName, authorisedUser.role);
       return res
         .status(200)
         .json({ userName: authorisedUser.userName, role: authorisedUser.role });

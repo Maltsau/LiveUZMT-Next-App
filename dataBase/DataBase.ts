@@ -1,16 +1,48 @@
-import { join, dirname } from "node:path";
-import { fileURLToPath } from "node:url";
+import { LowSync } from "lowdb";
+import { JSONFileSync } from "lowdb/node";
 
-// import { Low } from "lowdb";
-// import { JSONFile } from "lowdb/node";
+type DataBaseType = [
+  {
+    year: number;
+    months: [
+      {
+        month: string;
+        wishfullAverageLength: number;
+        planOps: number;
+        ops: [
+          {
+            date: string;
+            department: number;
+            number: string;
+            field: string;
+            duration: number;
+            result: [
+              {
+                isFinal: boolean;
+                dateTime: string;
+                debitMass: number;
+                density: number;
+                watterRate: number;
+                files?: [string];
+              }
+            ];
+          }
+        ];
+      }
+    ];
+  }
+];
 
-// // File path
-// const __dirname = dirname(fileURLToPath(import.meta.url));
-// const file = join(__dirname, "db.json");
+const db = new LowSync(
+  new JSONFileSync<DataBaseType>(
+    "/home/dzmitry/Documents/Work/New/my-app/dataBase/dataBase.json"
+  )
+);
 
-// // Configure lowdb to write to JSONFile
-// type DBData = {
-//     hosts: string[]
-//   }
-//   const adapter = new JSONFile<DBData>(path.join(USER_DATA_PATH, 'db.json')) as JSONFileType<DBData>
-// const db = new Low(adapter);
+db.read();
+// db.data!.items.push({ name: "Test" });
+db.write();
+
+export function getDataBase() {
+  return db.data;
+}

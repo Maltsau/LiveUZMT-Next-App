@@ -50,18 +50,18 @@ export default function Layout({ children }: { children: ReactNode }) {
   useEffect(() => {
     (async () => {
       const response = await fetch("/api/cookie", { method: "GET" });
-      if (response.status === 200) {
-        console.log(JSON.stringify(response.body));
+      if (response.status !== 200) {
+        router.push("/");
+        console.log("Redirected");
+      } else {
         const responseData = await response.json();
-        const responseObject = JSON.parse(responseData.message);
+        const responseObject = JSON.parse(responseData);
         setUser({
           userName: responseObject.userName,
           role: responseObject.role,
         });
-        console.log(responseObject.userName, responseObject.password);
-      } else {
-        router.push("/");
-        console.log("Redirected");
+        console.log(JSON.stringify(responseData));
+        console.log(responseObject.userName, responseObject.role);
       }
     })();
   }, []);

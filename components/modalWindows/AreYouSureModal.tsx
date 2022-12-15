@@ -49,7 +49,9 @@ export default function AreYouSureModal({
           Неавторизованные пользователи не могут добавлять данные
         </Warning>
         <Question>Хотоите выйти?</Question>
-        <ButtonStyled onClick={onFormSubmit}>Да</ButtonStyled>
+        <Link href={"/"}>
+          <ButtonStyled onClick={onFormSubmit}>Да</ButtonStyled>
+        </Link>
       </Container>
     </ModalWindow>
   );

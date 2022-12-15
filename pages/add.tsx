@@ -175,8 +175,6 @@ export default function AddPage() {
     yearIterator.push(i);
   }
 
-  // const monthAddForm =
-
   return (
     <WrapperAllContent>
       <PannelContainer isAdmin={user?.role === "ADMIN"}>
@@ -254,8 +252,8 @@ export default function AddPage() {
             <InputStyled></InputStyled>
             <InputStyled></InputStyled>
             <SelectStyled>
-              <option value={1}>{1}</option>
-              <option value={2}>{2}</option>
+              <option value={1}>{"ЦДНГ-1"}</option>
+              <option value={2}>{"ЦДНГ-2"}</option>
             </SelectStyled>
           </FieldNumberContainer>
           <ResultContainer>

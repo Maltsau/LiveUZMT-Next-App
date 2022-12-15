@@ -1,10 +1,11 @@
-import { ReactNode } from "react";
+import { ReactNode, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import styled from "styled-components";
 import { useUserContext } from "./../pages/context/UserContext";
 
 import FooterButton from "./buttons/FooterButton";
+import Layout from "./Layout";
 
 const Rectangle = styled.div`
   display: flex;
@@ -29,7 +30,7 @@ export default function Footer({
   const { user } = useUserContext();
 
   const handleAdd = async () => {
-    const response = await fetch("/api/dataBase", {
+    const response = await fetch("/api/dataBaseApi", {
       method: "POST",
       body: "Request",
     });
@@ -38,38 +39,83 @@ export default function Footer({
   };
 
   let content: ReactNode | string;
-  console.log("Footer", user);
-  if (!user?.userName) {
+
+  type ContentType = ReactNode[];
+  const contentArray: ContentType = [];
+
+  switch (user?.role) {
+    case undefined: {
+      contentArray.push(<FooterButton onClick={onSignIn}>Вoйти</FooterButton>);
+      break;
+    }
+    case "EDITOR": {
+      contentArray.push(<FooterButton onClick={onSignOut}>Выйти</FooterButton>);
+      break;
+    }
+    case "ADMIN": {
+      contentArray.push(
+        <FooterButton onClick={onSignOut}>Выйти</FooterButton>,
+        <FooterButton>Редактировать записи</FooterButton>
+      );
+      break;
+    }
+  }
+
+  if (router.asPath !== "/add" && user?.role) {
+    contentArray.push(
+      <FooterButton onClick={handleAdd}>
+        <Link href={"/add"}>Добавить запись</Link>
+      </FooterButton>
+    );
+  }
+  // useEffect(() => {
+  //   if (router.asPath !== "/add") {
+  //     contentArray.push(
+  //       <FooterButton onClick={handleAdd}>
+  //         <Link href={"/add"}>Добавить запись</Link>
+  //       </FooterButton>
+  //     );
+  //     console.log("Button added");
+  //   }
+  // }, [router.asPath, user]);
+
+  if (!user?.role) {
     content = (
-      <ButtonBar>
-        <FooterButton onClick={onSignIn}>Вoйти</FooterButton>
-      </ButtonBar>
+      <>
+        <FooterButton onClick={onSignIn} key={"SignIn"}>
+          Вoйти
+        </FooterButton>
+      </>
     );
   } else {
     if (router.asPath === "/add") {
       content = (
-        <ButtonBar>
+        <>
           {JSON.stringify(user?.userName)}
-          <FooterButton onClick={onSignOut}>Выйти</FooterButton>
-        </ButtonBar>
+          <FooterButton onClick={onSignOut} key={"SignOut"}>
+            Выйти
+          </FooterButton>
+        </>
       );
     } else {
       content = (
-        <ButtonBar>
-          {JSON.stringify(user?.userName)}
-          <FooterButton onClick={onSignOut}>Выйти</FooterButton>
-          <FooterButton onClick={handleAdd}>
+        <>
+          <FooterButton onClick={onSignOut} key={"SignOut"}>
+            Выйти
+          </FooterButton>
+          <FooterButton onClick={handleAdd} key={"Add"}>
             <Link href={"/add"}>Добавить запись</Link>
           </FooterButton>
-        </ButtonBar>
+        </>
       );
     }
   }
 
   return (
     <Rectangle>
-      {content}
+      <ButtonBar>{contentArray}</ButtonBar>
       {children}
+      {user?.userName}
     </Rectangle>
   );
 }
