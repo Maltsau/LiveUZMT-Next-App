@@ -1,7 +1,11 @@
 import styled from "styled-components";
 import { useState, useEffect } from "react";
+import { useQuery } from "react-query";
+
+import { useDataBase } from "../hooks/useDataBase";
 
 import OperationButton from "../components/buttons/OperationButton";
+import ModalWindow from "../components/modalWindows/ModalWindow";
 
 type DataBaseType = [
   {
@@ -71,18 +75,21 @@ const Cell = styled.td`
 
 export default function SearchPage() {
   const [search, setSearch] = useState<string>("");
-  const [dataBase, setDataBase] = useState<DataBaseType | []>([]);
+  // const [dataBase, setDataBase] = useState<DataBaseType | []>([]);
   const [operation, setOperation] = useState<string | undefined>("");
 
-  useEffect(() => {
-    (async function () {
-      const response = await fetch("/api/dataBaseApi");
-      const responseData = await response.json();
-      setDataBase(responseData);
-    })();
-  }, []);
+  // useEffect(() => {
+  //   (async function () {
+  //     const response = await fetch("/api/dataBaseApi");
+  //     const responseData = await response.json();
+  //     setDataBase(responseData);
+  //   })();
+  // }, []);
 
-  const searchBase = dataBase.flatMap((yearItem: any) => {
+  const { isLoading, data, isError, error } = useDataBase({});
+  console.log(data);
+
+  const searchBase = data?.flatMap((yearItem: any) => {
     return yearItem.months.flatMap((monthItem: any) => {
       return monthItem.ops.flatMap((opsItem: any) => {
         return {
@@ -96,8 +103,8 @@ export default function SearchPage() {
   });
 
   const result = searchBase
-    .filter((item) => item.index.includes(search) && search.length > 0)
-    .map((operation) => {
+    ?.filter((item: any) => item.index.includes(search) && search.length > 0)
+    .map((operation: any) => {
       return {
         year: operation.year,
         month: operation.month,
@@ -105,37 +112,53 @@ export default function SearchPage() {
       };
     });
 
-  const outputArray = result.flatMap((resultItem) => {
-    return dataBase
-      .filter((yearItem) => {
+  const outputArray = result?.flatMap((resultItem: any) => {
+    return data
+      ?.filter((yearItem: any) => {
         return yearItem.year === resultItem.year;
       })
-      .flatMap((monthItem) => {
+      ?.flatMap((monthItem: any) => {
         return monthItem.months;
       })
-      .filter((monthItem) => {
+      ?.filter((monthItem: any) => {
         return monthItem.month === resultItem.month;
       })
-      .flatMap((monthItem) => {
+      ?.flatMap((monthItem: any) => {
         return monthItem.ops;
       })
-      .find((opsItem) => {
+      ?.find((opsItem: any) => {
         return opsItem.date === resultItem.date;
       });
   });
 
+  if (isLoading)
+    return (
+      <ModalWindow isVisible={true} onClose={() => {}}>
+        <h1>Loading...</h1>
+      </ModalWindow>
+    );
+
+  if (isError)
+    return (
+      <ModalWindow isVisible={true} onClose={() => {}}>
+        <h1>{`error`}</h1>
+      </ModalWindow>
+    );
+
   return (
     <WrapperAllContent>
       <InputStyled
+        placeholder="Введите номер скважины и/или месторождение"
         value={search}
         onChange={(e) => {
           setSearch(e.target.value);
         }}
       ></InputStyled>
       <ResultContainer>
-        {outputArray.map((item, index) => {
+        {outputArray.map((item: any, index: number) => {
           return (
             <OperationButton
+              isDeleteble={false}
               onClick={() => {
                 setOperation(item?.date);
               }}

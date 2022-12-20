@@ -4,9 +4,13 @@ import styles from "../styles/Home.module.css";
 import { useState, useEffect, useCallback } from "react";
 import styled from "styled-components";
 import { useUserContext } from "./context/UserContext";
+import { useQuery } from "react-query";
+import ky from "ky";
 // import { getDataBase } from "../dataBase/DataBase";
 // import getUserBase from "../dataBase/UserBase";
 // import { data } from "../dataBase/DataBase";
+
+import { useDataBase } from "../hooks/useDataBase";
 
 import now from "../services/now";
 import MONTH_MAP from "../services/monthMap";
@@ -14,6 +18,8 @@ import MONTH_MAP from "../services/monthMap";
 import YearPannel from "../components/YearPannel";
 import MonthPannel from "../components/MonthPannel";
 import MonthTable from "../components/MonthTable";
+import ModalWindow from "../components/modalWindows/ModalWindow";
+import LoaderModal from "../components/modalWindows/LoaderModal";
 
 const Wraper = styled.div`
   width: 100%;
@@ -48,26 +54,29 @@ export default function Home({ userBase }: { userBase: any }) {
   const [year, setYear] = useState(now.getFullYear());
   const [month, setMonth] = useState([...MONTH_MAP.values()][now.getMonth()]);
 
-  useEffect(() => {
-    (async function () {
-      const response = await fetch("/api/dataBaseApi", { method: "GET" });
-      const responseData = await response.json();
-      setDataBase(responseData);
-    })();
-  }, []);
-
   // useEffect(() => {
-  //   (function () {
-  //     setUserDataBase(getUserBase());
+  //   (async function () {
+  //     const response = await fetch("/api/dataBaseApi", { method: "GET" });
+  //     const responseData = await response.json();
+  //     setDataBase(responseData);
   //   })();
   // }, []);
 
-  // useEffect(() => {
-  //   (function () {
-  //     const base = getDataBase();
-  //     setDataBase(base);
-  //   })();
-  // }, []);
+  const onError = (error: any) => {
+    console.log(error);
+  };
+
+  const onSuccess = (data: any) => {
+    console.log(data);
+  };
+
+  const { isLoading, data, isError, error } = useDataBase({
+    onError,
+    onSuccess,
+  });
+
+  // console.log(JSON.stringify(data));
+  // console.dir(error);
 
   const handleYearChange = useCallback(
     (year: number) => {
@@ -83,21 +92,30 @@ export default function Home({ userBase }: { userBase: any }) {
     [setMonth]
   );
 
+  if (isLoading) return <LoaderModal />;
+
+  if (isError)
+    return (
+      <ModalWindow isVisible={true} onClose={() => {}}>
+        <h1>{`error`}</h1>
+      </ModalWindow>
+    );
+
   return (
     <Wraper>
       <InnerWraper>
         <YearPannel
-          db={dataBase}
+          db={data}
           year={year}
           onChange={handleYearChange}
         ></YearPannel>
         <MonthPannel
-          db={dataBase}
+          db={data}
           year={year}
           month={month}
           onChange={handleMonthChange}
         ></MonthPannel>
-        <MonthTable db={dataBase} year={year} month={month}></MonthTable>
+        <MonthTable db={data} year={year} month={month}></MonthTable>
       </InnerWraper>
     </Wraper>
   );

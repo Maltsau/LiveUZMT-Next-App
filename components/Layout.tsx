@@ -1,14 +1,19 @@
 import { ReactNode, useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/router";
 import { useUserContext } from "../pages/context/UserContext";
+import {
+  useQuery,
+  useMutation,
+  UseQueryResult,
+  MutationFunction,
+} from "react-query";
 import styled from "styled-components";
+import ky from "ky";
 
 import Header from "./Header";
 import Footer from "./Footer";
 import SignInModal from "./modalWindows/SignInModal";
 import AreYouSureModal from "./modalWindows/AreYouSureModal";
-import AddPage from "../pages/add";
-import SearchPage from "../pages/search";
 
 const Wraper = styled.div`
   border: 1px solid red;
@@ -27,24 +32,42 @@ export default function Layout({ children }: { children: ReactNode }) {
     useState(false);
   const { user, setUser } = useUserContext();
 
-  const getUser = useCallback(async (login: string, password: string) => {
-    const response = await fetch("/api/login2", {
-      method: "POST",
-      body: JSON.stringify({ login, password }),
-      headers: { "Content-Type": "application/json" },
-    });
-    const responseData = await response.json();
-    setUser(responseData);
-  }, []);
+  const { mutateAsync, mutate, data } = useMutation(
+    "LOG_IN_REQUEST",
+    async ({ login, password }: { login: string; password: string }) => {
+      const res = await ky
+        .post("/api/login2", {
+          json: { login, password },
+        })
+        .json<{ login: string; role: string }>();
+      return res;
+    }
+  );
 
-  const handleSignIn = (login: string, password: string) => {
+  console.log(mutate);
+  // const getUser = () => {
+  //   setUser(data);
+  // };
+  // const getUser = useCallback(async (login: string, password: string) => {
+  //   const response = await fetch("/api/login2", {
+  //     method: "POST",
+  //     body: JSON.stringify({ login, password }),
+  //     headers: { "Content-Type": "application/json" },
+  //   });
+  //   const responseData = await response.json();
+  //   setUser(responseData);
+  // }, []);
+
+  const handleSignIn = async (login: string, password: string) => {
     setIsSignInModalVisible(false);
-    getUser(login, password);
+    await mutateAsync({ login, password });
+    setUser(data);
   };
 
   const handleSignOut = () => {
     setIsAreYouSureModalVisible(false);
-    getUser("", "");
+    mutate({ login: "", password: "" });
+    setUser(undefined);
   };
 
   useEffect(() => {

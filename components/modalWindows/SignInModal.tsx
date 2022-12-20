@@ -23,6 +23,7 @@ const InputStyled = styled.input`
   min-height: 50px;
   font-size: 1.2em;
   margin: 5px;
+  padding: 10px;
   border: solid red 1px;
   border-radius: 5px;
 `;

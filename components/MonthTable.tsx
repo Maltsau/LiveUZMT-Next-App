@@ -1,5 +1,9 @@
 import { useState } from "react";
 import styled from "styled-components";
+import Image from "next/image";
+
+import { useUserContext } from "../pages/context/UserContext";
+import { useEditModeContext } from "../pages/context/EditModeContext";
 
 import OperationButton from "./buttons/OperationButton";
 
@@ -31,6 +35,11 @@ const Cell = styled.td`
   border: solid black 1px;
 `;
 
+const DeleteButton = styled.button`
+  border: 0;
+  background-color: transparent;
+`;
+
 export default function MonthTable({
   db,
   year,
@@ -42,6 +51,8 @@ export default function MonthTable({
 }) {
   const [operation, setOperation] = useState("");
   const [statisticVisible, setStatisticVisible] = useState(false);
+  const { user } = useUserContext();
+  const { isEditMode } = useEditModeContext();
 
   const currentMonth =
     db
@@ -77,6 +88,7 @@ export default function MonthTable({
   const buttons = currentMonthOps?.map((element: any, index: number) => {
     return (
       <OperationButton
+        isDeleteble={user?.role === "ADMIN" && isEditMode}
         onClick={() => {
           setOperation(element.date);
         }}
@@ -111,7 +123,19 @@ export default function MonthTable({
                     <Cell>{result.dateTime}</Cell>
                     <Cell>{result.debitMass}</Cell>
                     <Cell>{result.density}</Cell>
-                    <Cell>{result.watterRate}</Cell>
+                    <Cell>
+                      {result.watterRate}
+                      {user?.role === "ADMIN" && isEditMode ? (
+                        <DeleteButton>
+                          <Image
+                            src="/delete.png"
+                            height={20}
+                            width={20}
+                            alt="DELETE"
+                          />
+                        </DeleteButton>
+                      ) : null}
+                    </Cell>
                   </TableRow>
                 );
               })}
@@ -132,6 +156,7 @@ export default function MonthTable({
       <Container>{buttons}</Container>
       <Container>
         <OperationButton
+          isDeleteble={false}
           isCurrent={false}
           onClick={() => {
             setStatisticVisible(true);

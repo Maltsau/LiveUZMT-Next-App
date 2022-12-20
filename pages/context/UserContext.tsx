@@ -1,6 +1,6 @@
 import { useContext, useState, useMemo, createContext, ReactNode } from "react";
 
-type UserType = { userName?: string; role?: string };
+type UserType = { userName?: string; role?: string } | undefined;
 
 const UserContextObject = createContext<{
   user?: UserType;

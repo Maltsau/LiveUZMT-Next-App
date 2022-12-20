@@ -1,6 +1,81 @@
 [
   {
-    "secret": "6.6793167565078",
+    "secret": "5.449843429254431",
+    "userName": "d.maltsev",
+    "role": "ADMIN"
+  },
+  {
+    "secret": "15.802800703350934",
+    "userName": "d.maltsev",
+    "role": "ADMIN"
+  },
+  {
+    "secret": "7.002586532193602",
+    "userName": "d.maltsev",
+    "role": "ADMIN"
+  },
+  {
+    "secret": "13.559676714325715",
+    "userName": "d.maltsev",
+    "role": "ADMIN"
+  },
+  {
+    "secret": "17.72023039865903",
+    "userName": "d.maltsev",
+    "role": "ADMIN"
+  },
+  {
+    "secret": "10.556579393441572",
+    "userName": "d.maltsev",
+    "role": "ADMIN"
+  },
+  {
+    "secret": "1.1207252534638013",
+    "userName": "d.maltsev",
+    "role": "ADMIN"
+  },
+  {
+    "secret": "8.787358854382559",
+    "userName": "p.chayka",
+    "role": "EDITOR"
+  },
+  {
+    "secret": "14.482055413057822",
+    "userName": "d.maltsev",
+    "role": "ADMIN"
+  },
+  {
+    "secret": "7.916698564646376",
+    "userName": "d.maltsev",
+    "role": "ADMIN"
+  },
+  {
+    "secret": "10.63267509396097",
+    "userName": "d.maltsev",
+    "role": "ADMIN"
+  },
+  {
+    "secret": "18.58044809304339",
+    "userName": "d.maltsev",
+    "role": "ADMIN"
+  },
+  {
+    "secret": "8.312787904555051",
+    "userName": "p.chayka",
+    "role": "EDITOR"
+  },
+  {
+    "secret": "12.506089270200285",
+    "userName": "p.chayka",
+    "role": "EDITOR"
+  },
+  {
+    "secret": "4.472245328054174",
+    "userName": "d.maltsev",
+    "role": "ADMIN"
+  },
+  {
+    "secret": "8.3428893918537",
     "userName": "d.maltsev",
     "role": "ADMIN"
   }

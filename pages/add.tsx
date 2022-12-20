@@ -93,6 +93,7 @@ const InputStyled = styled.input`
   font-size: 1.2em;
   overflow: auto;
   margin: 5px;
+  padding: 10px;
   border: solid red 1px;
   border-radius: 5px;
 `;
@@ -115,6 +116,7 @@ const LengthInput = styled.input<{
   font-size: 1.2em;
   overflow: auto;
   margin: 5px;
+  padding: 10px;
   border: solid red 1px;
   border-radius: 5px;
 `;
@@ -153,6 +155,17 @@ export default function AddPage() {
   const [hours, setHours] = useState(String(now.getHours()));
   const [minutes, setMinutes] = useState(String(now.getMinutes()));
   const [adminPannel, setAdminPannel] = useState(false);
+  const [number, setNumber] = useState("");
+  const [field, setField] = useState("");
+  const [department, setDepartment] = useState(1);
+  const [debitMass, setDebitMass] = useState("");
+  const [density, setDensity] = useState(0);
+  const [watterRate, setWatterRate] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const [newYear, setNewYear] = useState(now.getFullYear());
+  const [newMonth, setNewMonth] = useState(MONTH_MAP.get(now.getMonth()));
+  const [planOps, setPlanOps] = useState(0);
+  const [wishfullAverageLength, setWishfullAveregeLength] = useState(0);
 
   // console.log("Add Page", user);
 
@@ -164,7 +177,7 @@ export default function AddPage() {
         now.getMonth(),
       32
     ).getDate();
-  console.log(daysInMonth);
+  console.log(daysInMonth, department, debitMass);
 
   const dayIterator = new Array();
   const yearIterator = new Array();
@@ -201,7 +214,7 @@ export default function AddPage() {
             <LabelStyled>Время</LabelStyled>
             <LabelStyled></LabelStyled>
             <SelectStyled
-              defaultValue={day}
+              value={day}
               onChange={(e) => {
                 setDay(Number(e.target.value));
               }}
@@ -211,7 +224,7 @@ export default function AddPage() {
               })}
             </SelectStyled>
             <SelectStyled
-              defaultValue={month}
+              value={month}
               onChange={(e) => {
                 setMonth(e.target.value);
               }}
@@ -221,7 +234,7 @@ export default function AddPage() {
               })}
             </SelectStyled>
             <SelectStyled
-              defaultValue={year}
+              value={year}
               onChange={(e) => {
                 setYear(Number(e.target.value));
               }}
@@ -234,7 +247,6 @@ export default function AddPage() {
               onChange={(e) => {
                 setHours(e.target.value);
               }}
-              placeholder={hours}
               value={hours}
             ></InputStyled>
             <InputStyled
@@ -242,16 +254,28 @@ export default function AddPage() {
                 setMinutes(e.target.value);
               }}
               value={minutes}
-              placeholder={minutes}
             ></InputStyled>
           </DateTimeContainer>
           <FieldNumberContainer>
             <LabelStyled>Номер скважины</LabelStyled>
             <LabelStyled>Месторождение</LabelStyled>
             <LabelStyled>Промысел</LabelStyled>
-            <InputStyled></InputStyled>
-            <InputStyled></InputStyled>
-            <SelectStyled>
+            <InputStyled
+              value={number}
+              onChange={(e) => {
+                setNumber(e.target.value);
+              }}
+            ></InputStyled>
+            <InputStyled
+              value={field}
+              onChange={(e) => {
+                setField(e.target.value);
+              }}
+            ></InputStyled>
+            <SelectStyled
+              value={department}
+              onChange={(e) => setDepartment(Number(e.target.value))}
+            >
               <option value={1}>{"ЦДНГ-1"}</option>
               <option value={2}>{"ЦДНГ-2"}</option>
             </SelectStyled>
@@ -271,12 +295,23 @@ export default function AddPage() {
                 }}
               ></CheckboxStyled>
             </CheckboxContainer>
-            <InputStyled></InputStyled>
-            <InputStyled></InputStyled>
-            <InputStyled></InputStyled>
+            <InputStyled
+              value={debitMass}
+              onChange={(e) => setDebitMass(e.target.value)}
+            ></InputStyled>
+            <InputStyled
+              value={density}
+              onChange={(e) => setDensity(Number(e.target.value))}
+            ></InputStyled>
+            <InputStyled
+              value={watterRate}
+              onChange={(e) => setWatterRate(Number(e.target.value))}
+            ></InputStyled>
             <LengthInput
               isVisible={isLengthInputVisible}
               placeholder="Введите продолжительность"
+              value={duration}
+              onChange={(e) => setDuration(Number(e.target.value))}
             ></LengthInput>
           </ResultContainer>
           <AddButtonsContainer>
@@ -293,13 +328,34 @@ export default function AddPage() {
             <LabelStyled>
               Средняя планируемая продолжительность операции, час
             </LabelStyled>
-            <InputStyled></InputStyled>
-            <InputStyled></InputStyled>
-            <InputStyled></InputStyled>
-            <InputStyled></InputStyled>
+            <SelectStyled
+              onChange={(e) => {
+                setNewYear(Number(e.target.value));
+              }}
+            >
+              {yearIterator.map((yearItem) => {
+                return <option value={yearItem}>{yearItem}</option>;
+              })}
+            </SelectStyled>
+            <SelectStyled
+              onChange={(e) => {
+                setNewMonth(e.target.value);
+              }}
+            >
+              {[...MONTH_MAP.values()].map((mnth) => {
+                return <option value={mnth}>{mnth}</option>;
+              })}
+            </SelectStyled>
+            <InputStyled
+              value={String(planOps)}
+              onChange={(e) => setPlanOps(Number(e.target.value))}
+            ></InputStyled>
+            <InputStyled
+              value={String(wishfullAverageLength)}
+              onChange={(e) => setWishfullAveregeLength(Number(e.target.value))}
+            ></InputStyled>
           </AddContainer>
           <ButtonStyled>Добавить месяц</ButtonStyled>
-          <ButtonStyled>Редактировать записи</ButtonStyled>
         </AdminContainer>
       </Wraper>
     </WrapperAllContent>

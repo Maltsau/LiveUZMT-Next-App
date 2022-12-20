@@ -3,9 +3,9 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import styled from "styled-components";
 import { useUserContext } from "./../pages/context/UserContext";
+import { useEditModeContext } from "../pages/context/EditModeContext";
 
 import FooterButton from "./buttons/FooterButton";
-import Layout from "./Layout";
 
 const Rectangle = styled.div`
   display: flex;
@@ -28,15 +28,16 @@ export default function Footer({
 }) {
   const router = useRouter();
   const { user } = useUserContext();
+  const { isEditMode, setIsEditMode } = useEditModeContext();
 
-  const handleAdd = async () => {
-    const response = await fetch("/api/dataBaseApi", {
-      method: "POST",
-      body: "Request",
-    });
-    const responseData = await response.json();
-    console.log("DataBase response", responseData);
-  };
+  // const handleAdd = async () => {
+  //   const response = await fetch("/api/dataBaseApi", {
+  //     method: "POST",
+  //     body: "Request",
+  //   });
+  //   const responseData = await response.json();
+  //   console.log("DataBase response", responseData);
+  // };
 
   let content: ReactNode | string;
 
@@ -53,17 +54,36 @@ export default function Footer({
       break;
     }
     case "ADMIN": {
-      contentArray.push(
-        <FooterButton onClick={onSignOut}>Выйти</FooterButton>,
-        <FooterButton>Редактировать записи</FooterButton>
-      );
+      if (isEditMode) {
+        contentArray.push(
+          <FooterButton onClick={onSignOut}>Выйти</FooterButton>,
+          <FooterButton
+            onClick={() => {
+              setIsEditMode(false);
+            }}
+          >
+            <Link href={"/"}>Закончить редактирование</Link>
+          </FooterButton>
+        );
+      } else {
+        contentArray.push(
+          <FooterButton onClick={onSignOut}>Выйти</FooterButton>,
+          <FooterButton
+            onClick={() => {
+              setIsEditMode(true);
+            }}
+          >
+            <Link href={"/"}>Редактировать записи</Link>
+          </FooterButton>
+        );
+      }
       break;
     }
   }
 
   if (router.asPath !== "/add" && user?.role) {
     contentArray.push(
-      <FooterButton onClick={handleAdd}>
+      <FooterButton onClick={() => {}}>
         <Link href={"/add"}>Добавить запись</Link>
       </FooterButton>
     );
@@ -79,37 +99,37 @@ export default function Footer({
   //   }
   // }, [router.asPath, user]);
 
-  if (!user?.role) {
-    content = (
-      <>
-        <FooterButton onClick={onSignIn} key={"SignIn"}>
-          Вoйти
-        </FooterButton>
-      </>
-    );
-  } else {
-    if (router.asPath === "/add") {
-      content = (
-        <>
-          {JSON.stringify(user?.userName)}
-          <FooterButton onClick={onSignOut} key={"SignOut"}>
-            Выйти
-          </FooterButton>
-        </>
-      );
-    } else {
-      content = (
-        <>
-          <FooterButton onClick={onSignOut} key={"SignOut"}>
-            Выйти
-          </FooterButton>
-          <FooterButton onClick={handleAdd} key={"Add"}>
-            <Link href={"/add"}>Добавить запись</Link>
-          </FooterButton>
-        </>
-      );
-    }
-  }
+  // if (!user?.role) {
+  //   content = (
+  //     <>
+  //       <FooterButton onClick={onSignIn} key={"SignIn"}>
+  //         Вoйти
+  //       </FooterButton>
+  //     </>
+  //   );
+  // } else {
+  //   if (router.asPath === "/add") {
+  //     content = (
+  //       <>
+  //         {JSON.stringify(user?.userName)}
+  //         <FooterButton onClick={onSignOut} key={"SignOut"}>
+  //           Выйти
+  //         </FooterButton>
+  //       </>
+  //     );
+  //   } else {
+  //     content = (
+  //       <>
+  //         <FooterButton onClick={onSignOut} key={"SignOut"}>
+  //           Выйти
+  //         </FooterButton>
+  //         <FooterButton onClick={()=>{}} key={"Add"}>
+  //           <Link href={"/add"}>Добавить запись</Link>
+  //         </FooterButton>
+  //       </>
+  //     );
+  //   }
+  // }
 
   return (
     <Rectangle>
