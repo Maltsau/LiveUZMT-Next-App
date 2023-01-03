@@ -28,17 +28,25 @@ export default function YearPannel({
   year: number;
   onChange: any;
 }) {
+  const yearList = db
+    .map((yearItem: any) => {
+      return yearItem.year;
+    })
+    .sort((a: number, b: number) => {
+      return a - b;
+    });
+  console.log(yearList);
   return (
     <Container>
       <SmallRectangle />
-      {db.map((yearItem: any) => {
+      {yearList.map((yearItem: any) => {
         return (
           <CustomLink
-            text={yearItem.year}
-            isHighlighted={yearItem.year === year}
-            key={yearItem.year}
+            text={yearItem}
+            isHighlighted={yearItem === year}
+            key={yearItem}
             onClick={() => {
-              onChange(yearItem.year);
+              onChange(yearItem);
             }}
           ></CustomLink>
         );

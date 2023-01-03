@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useMutation, useQuery } from "react-query";
 import { useUserContext } from "./context/UserContext";
 import styled from "styled-components";
 
@@ -7,7 +8,7 @@ import MONTH_MAP from "../services/monthMap";
 import AddPhotoButton from "../components/buttons/AddPhotoButton";
 import AddExcellButton from "../components/buttons/AddExcellButton";
 import CustomLink from "../components/buttons/CustomLink";
-import OperationButton from "../components/buttons/OperationButton";
+import ky from "ky";
 
 const WrapperAllContent = styled.div`
   width: 100%;
@@ -159,15 +160,91 @@ export default function AddPage() {
   const [field, setField] = useState("");
   const [department, setDepartment] = useState(1);
   const [debitMass, setDebitMass] = useState("");
-  const [density, setDensity] = useState(0);
-  const [watterRate, setWatterRate] = useState(0);
-  const [duration, setDuration] = useState(0);
+  const [density, setDensity] = useState("");
+  const [watterRate, setWatterRate] = useState("");
+  const [duration, setDuration] = useState("");
   const [newYear, setNewYear] = useState(now.getFullYear());
   const [newMonth, setNewMonth] = useState(MONTH_MAP.get(now.getMonth()));
-  const [planOps, setPlanOps] = useState(0);
-  const [wishfullAverageLength, setWishfullAveregeLength] = useState(0);
+  const [planOps, setPlanOps] = useState("");
+  const [wishfullAverageLength, setWishfullAveregeLength] = useState("");
 
   // console.log("Add Page", user);
+
+  const {
+    data: addResponse,
+    mutate: addRecord,
+    mutateAsync: addRecordAsync,
+  } = useMutation(
+    "ADD_RECORD",
+    async ({
+      day,
+      month,
+      year,
+      hours,
+      minutes,
+      number,
+      field,
+      department,
+      debitMass,
+      density,
+      watterRate,
+      isFinal,
+      duration,
+    }: {
+      day: number;
+      month: string | undefined;
+      year: number;
+      hours: string;
+      minutes: string;
+      number: string;
+      field: string;
+      department: number;
+      debitMass: string;
+      density: string;
+      watterRate: string;
+      isFinal: boolean;
+      duration?: string | undefined;
+    }) => {
+      const res = await ky
+        .post("/api/dataBaseApi", {
+          json: {
+            day,
+            month,
+            year,
+            hours,
+            minutes,
+            number,
+            field,
+            department,
+            debitMass,
+            density,
+            watterRate,
+            isFinal,
+            duration,
+          },
+        })
+        .json<{ message: string }>();
+      return res;
+    }
+  );
+
+  const onEditorFormSubmit = () => {
+    addRecord({
+      day,
+      month,
+      year,
+      hours,
+      minutes,
+      number,
+      field,
+      department,
+      debitMass,
+      density,
+      watterRate,
+      isFinal: isLengthInputVisible,
+      duration,
+    });
+  };
 
   const daysInMonth =
     32 -
@@ -301,24 +378,24 @@ export default function AddPage() {
             ></InputStyled>
             <InputStyled
               value={density}
-              onChange={(e) => setDensity(Number(e.target.value))}
+              onChange={(e) => setDensity(e.target.value)}
             ></InputStyled>
             <InputStyled
               value={watterRate}
-              onChange={(e) => setWatterRate(Number(e.target.value))}
+              onChange={(e) => setWatterRate(e.target.value)}
             ></InputStyled>
             <LengthInput
               isVisible={isLengthInputVisible}
               placeholder="Введите продолжительность"
               value={duration}
-              onChange={(e) => setDuration(Number(e.target.value))}
+              onChange={(e) => setDuration(e.target.value)}
             ></LengthInput>
           </ResultContainer>
           <AddButtonsContainer>
             <AddPhotoButton></AddPhotoButton>
             <AddExcellButton></AddExcellButton>
           </AddButtonsContainer>
-          <ButtonStyled>Добавить</ButtonStyled>
+          <ButtonStyled onClick={onEditorFormSubmit}>Добавить</ButtonStyled>
         </EditorContainer>
         <AdminContainer isVisible={adminPannel}>
           <AddContainer>
@@ -348,11 +425,11 @@ export default function AddPage() {
             </SelectStyled>
             <InputStyled
               value={String(planOps)}
-              onChange={(e) => setPlanOps(Number(e.target.value))}
+              onChange={(e) => setPlanOps(e.target.value)}
             ></InputStyled>
             <InputStyled
               value={String(wishfullAverageLength)}
-              onChange={(e) => setWishfullAveregeLength(Number(e.target.value))}
+              onChange={(e) => setWishfullAveregeLength(e.target.value)}
             ></InputStyled>
           </AddContainer>
           <ButtonStyled>Добавить месяц</ButtonStyled>

@@ -1,81 +1,156 @@
 [
   {
-    "secret": "5.449843429254431",
+    "secret": "29.453651640725266",
     "userName": "d.maltsev",
     "role": "ADMIN"
   },
   {
-    "secret": "15.802800703350934",
+    "secret": "0.5640022921758341",
     "userName": "d.maltsev",
     "role": "ADMIN"
   },
   {
-    "secret": "7.002586532193602",
+    "secret": "1.629639241841184",
     "userName": "d.maltsev",
     "role": "ADMIN"
   },
   {
-    "secret": "13.559676714325715",
+    "secret": "1.9562729325201111",
     "userName": "d.maltsev",
     "role": "ADMIN"
   },
   {
-    "secret": "17.72023039865903",
+    "secret": "1.7840666311221418",
     "userName": "d.maltsev",
     "role": "ADMIN"
   },
   {
-    "secret": "10.556579393441572",
+    "secret": "0.7012820914132893",
     "userName": "d.maltsev",
     "role": "ADMIN"
   },
   {
-    "secret": "1.1207252534638013",
+    "secret": "1.7994397541461278",
     "userName": "d.maltsev",
     "role": "ADMIN"
   },
   {
-    "secret": "8.787358854382559",
-    "userName": "p.chayka",
-    "role": "EDITOR"
-  },
-  {
-    "secret": "14.482055413057822",
+    "secret": "0.9104699595975254",
     "userName": "d.maltsev",
     "role": "ADMIN"
   },
   {
-    "secret": "7.916698564646376",
+    "secret": "0.20205075935959327",
     "userName": "d.maltsev",
     "role": "ADMIN"
   },
   {
-    "secret": "10.63267509396097",
+    "secret": "0.3311932236385773",
     "userName": "d.maltsev",
     "role": "ADMIN"
   },
   {
-    "secret": "18.58044809304339",
+    "secret": "1.504529941056497",
     "userName": "d.maltsev",
     "role": "ADMIN"
   },
   {
-    "secret": "8.312787904555051",
-    "userName": "p.chayka",
-    "role": "EDITOR"
-  },
-  {
-    "secret": "12.506089270200285",
-    "userName": "p.chayka",
-    "role": "EDITOR"
-  },
-  {
-    "secret": "4.472245328054174",
+    "secret": "1.2978516340392625",
     "userName": "d.maltsev",
     "role": "ADMIN"
   },
   {
-    "secret": "8.3428893918537",
+    "secret": "1.3726043189131416",
+    "userName": "d.maltsev",
+    "role": "ADMIN"
+  },
+  {
+    "secret": "1.7460438822714401",
+    "userName": "d.maltsev",
+    "role": "ADMIN"
+  },
+  {
+    "secret": "0.3457348787081642",
+    "userName": "d.maltsev",
+    "role": "ADMIN"
+  },
+  {
+    "secret": "1.865905845427521",
+    "userName": "d.maltsev",
+    "role": "ADMIN"
+  },
+  {
+    "secret": "1.678012509181497",
+    "userName": "d.maltsev",
+    "role": "ADMIN"
+  },
+  {
+    "secret": "2.2472143244819165",
+    "userName": "d.maltsev",
+    "role": "ADMIN"
+  },
+  {
+    "secret": "1.3288075648146722",
+    "userName": "d.maltsev",
+    "role": "ADMIN"
+  },
+  {
+    "secret": "1.8169049029398299",
+    "userName": "d.maltsev",
+    "role": "ADMIN"
+  },
+  {
+    "secret": "2.493614761141357",
+    "userName": "d.maltsev",
+    "role": "ADMIN"
+  },
+  {
+    "secret": "1.9022512178362272",
+    "userName": "d.maltsev",
+    "role": "ADMIN"
+  },
+  {
+    "secret": "0.960334952093828",
+    "userName": "d.maltsev",
+    "role": "ADMIN"
+  },
+  {
+    "secret": "0.2409213773301595",
+    "userName": "d.maltsev",
+    "role": "ADMIN"
+  },
+  {
+    "secret": "0.8401561656787906",
+    "userName": "d.maltsev",
+    "role": "ADMIN"
+  },
+  {
+    "secret": "1.7329951834957056",
+    "userName": "d.maltsev",
+    "role": "ADMIN"
+  },
+  {
+    "secret": "0.8334283502387934",
+    "userName": "d.maltsev",
+    "role": "ADMIN"
+  },
+  {
+    "secret": "2.5007164252372553",
+    "userName": "d.maltsev",
+    "role": "ADMIN"
+  },
+  {
+    "secret": "2.819598393831527",
+    "userName": "d.maltsev",
+    "role": "ADMIN"
+  },
+  {
+    "secret": "1.9626780187498483",
+    "userName": "d.maltsev",
+    "role": "ADMIN"
+  },
+  {
+    "secret": "0.9063756839193631",
     "userName": "d.maltsev",
     "role": "ADMIN"
   }

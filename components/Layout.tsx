@@ -14,6 +14,8 @@ import Header from "./Header";
 import Footer from "./Footer";
 import SignInModal from "./modalWindows/SignInModal";
 import AreYouSureModal from "./modalWindows/AreYouSureModal";
+import ModalWindow from "./modalWindows/ModalWindow";
+import LoaderModal from "./modalWindows/LoaderModal";
 
 const Wraper = styled.div`
   border: 1px solid red;
@@ -32,19 +34,6 @@ export default function Layout({ children }: { children: ReactNode }) {
     useState(false);
   const { user, setUser } = useUserContext();
 
-  const { mutateAsync, mutate, data } = useMutation(
-    "LOG_IN_REQUEST",
-    async ({ login, password }: { login: string; password: string }) => {
-      const res = await ky
-        .post("/api/login2", {
-          json: { login, password },
-        })
-        .json<{ login: string; role: string }>();
-      return res;
-    }
-  );
-
-  console.log(mutate);
   // const getUser = () => {
   //   setUser(data);
   // };
@@ -58,36 +47,76 @@ export default function Layout({ children }: { children: ReactNode }) {
   //   setUser(responseData);
   // }, []);
 
+  const { mutateAsync, mutate, data } = useMutation(
+    "LOG_IN_REQUEST",
+    async ({ login, password }: { login: string; password: string }) => {
+      const res = await ky
+        .post("/api/login2", {
+          json: { login, password },
+        })
+        .json<{ login: string; role: string }>();
+      return res;
+    }
+  );
+
   const handleSignIn = async (login: string, password: string) => {
-    setIsSignInModalVisible(false);
     await mutateAsync({ login, password });
     setUser(data);
+    setIsSignInModalVisible(false);
   };
 
   const handleSignOut = () => {
-    setIsAreYouSureModalVisible(false);
     mutate({ login: "", password: "" });
     setUser(undefined);
+    setIsAreYouSureModalVisible(false);
   };
 
-  useEffect(() => {
-    (async () => {
-      const response = await fetch("/api/cookie", { method: "GET" });
-      if (response.status !== 200) {
-        router.push("/");
-        console.log("Redirected");
-      } else {
-        const responseData = await response.json();
-        const responseObject = JSON.parse(responseData);
-        setUser({
-          userName: responseObject.userName,
-          role: responseObject.role,
-        });
-        console.log(JSON.stringify(responseData));
-        console.log(responseObject.userName, responseObject.role);
-      }
-    })();
-  }, []);
+  // useEffect(() => {
+  //   (async () => {
+  //     const response = await fetch("/api/cookie", { method: "GET" });
+  //     if (response.status !== 200) {
+  //       router.push("/");
+  //       console.log("Redirected");
+  //     } else {
+  //       const responseData = await response.json();
+  //       const responseObject = JSON.parse(responseData);
+  //       setUser({
+  //         userName: responseObject.userName,
+  //         role: responseObject.role,
+  //       });
+  //       console.log(JSON.stringify(responseData));
+  //       console.log(responseObject.userName, responseObject.role);
+  //     }
+  //   })();
+  // }, []);
+
+  const {
+    data: secretResponse,
+    isLoading,
+    isError,
+    error,
+  } = useQuery("CHECK_SECRET", async () => {
+    return await ky
+      .get("/api/cookie")
+      .json<{ secret: string; userName: string; role: string }>();
+  });
+  console.log(secretResponse);
+
+  // if (isLoading) return <LoaderModal />;
+
+  // if (isError)
+  //   return (
+  //     <ModalWindow isVisible={true} onClose={() => {}}>
+  //       <h1>{`error`}</h1>
+  //     </ModalWindow>
+  //   );
+
+  // if (secretResponse?.role) {
+  //   setUser({ userName: secretResponse.userName, role: secretResponse.role });
+  // } else {
+  //   setUser(undefined);
+  // }
+  console.log("User", user);
 
   return (
     <Wraper>

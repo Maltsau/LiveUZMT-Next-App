@@ -57,7 +57,7 @@ export default function MonthTable({
   const currentMonth =
     db
       .find((yearItem: any) => yearItem.year === year)
-      ?.months.find((monthItem: any) => monthItem.month === month) ??
+      ?.months?.find((monthItem: any) => monthItem.month === month) ??
     ({} as any);
 
   const {
@@ -119,7 +119,9 @@ export default function MonthTable({
             <tbody>
               {element.result.map((result: any) => {
                 return (
-                  <TableRow key={result.dateTime}>
+                  <TableRow
+                    key={result.dateTime + result.number + result.field}
+                  >
                     <Cell>{result.dateTime}</Cell>
                     <Cell>{result.debitMass}</Cell>
                     <Cell>{result.density}</Cell>

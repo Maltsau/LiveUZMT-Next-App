@@ -90,8 +90,8 @@ export default function SearchPage() {
   console.log(data);
 
   const searchBase = data?.flatMap((yearItem: any) => {
-    return yearItem.months.flatMap((monthItem: any) => {
-      return monthItem.ops.flatMap((opsItem: any) => {
+    return yearItem.months?.flatMap((monthItem: any) => {
+      return monthItem.ops?.flatMap((opsItem: any) => {
         return {
           year: Number(yearItem.year),
           month: monthItem.month,
@@ -103,7 +103,7 @@ export default function SearchPage() {
   });
 
   const result = searchBase
-    ?.filter((item: any) => item.index.includes(search) && search.length > 0)
+    ?.filter((item: any) => item?.index.includes(search) && search.length > 0)
     .map((operation: any) => {
       return {
         year: operation.year,

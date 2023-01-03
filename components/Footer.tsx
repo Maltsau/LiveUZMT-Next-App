@@ -46,17 +46,27 @@ export default function Footer({
 
   switch (user?.role) {
     case undefined: {
-      contentArray.push(<FooterButton onClick={onSignIn}>Вoйти</FooterButton>);
+      contentArray.push(
+        <FooterButton onClick={onSignIn} key={"Sign_In"}>
+          Вoйти
+        </FooterButton>
+      );
       break;
     }
     case "EDITOR": {
-      contentArray.push(<FooterButton onClick={onSignOut}>Выйти</FooterButton>);
+      contentArray.push(
+        <FooterButton onClick={onSignOut} key={"Sign_Out"}>
+          Выйти
+        </FooterButton>
+      );
       break;
     }
     case "ADMIN": {
       if (isEditMode) {
         contentArray.push(
-          <FooterButton onClick={onSignOut}>Выйти</FooterButton>,
+          <FooterButton onClick={onSignOut} key={"Sign_Out"}>
+            Выйти
+          </FooterButton>,
           <FooterButton
             onClick={() => {
               setIsEditMode(false);
@@ -67,8 +77,11 @@ export default function Footer({
         );
       } else {
         contentArray.push(
-          <FooterButton onClick={onSignOut}>Выйти</FooterButton>,
+          <FooterButton onClick={onSignOut} key={"Sign_Out"}>
+            Выйти
+          </FooterButton>,
           <FooterButton
+            key={"EDIT"}
             onClick={() => {
               setIsEditMode(true);
             }}
@@ -83,7 +96,7 @@ export default function Footer({
 
   if (router.asPath !== "/add" && user?.role) {
     contentArray.push(
-      <FooterButton onClick={() => {}}>
+      <FooterButton onClick={() => {}} key={"ADD"}>
         <Link href={"/add"}>Добавить запись</Link>
       </FooterButton>
     );

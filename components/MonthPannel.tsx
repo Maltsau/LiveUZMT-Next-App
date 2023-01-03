@@ -50,7 +50,7 @@ export default function MonthPannel({
 }) {
   const currentYear = db
     .find((yearItem: any) => yearItem.year === year)
-    ?.months.map((monthItem: any) => {
+    ?.months?.map((monthItem: any) => {
       return monthItem.month;
     });
   const yearHalf: Array<string> = [];

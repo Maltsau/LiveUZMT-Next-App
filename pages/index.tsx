@@ -6,9 +6,6 @@ import styled from "styled-components";
 import { useUserContext } from "./context/UserContext";
 import { useQuery } from "react-query";
 import ky from "ky";
-// import { getDataBase } from "../dataBase/DataBase";
-// import getUserBase from "../dataBase/UserBase";
-// import { data } from "../dataBase/DataBase";
 
 import { useDataBase } from "../hooks/useDataBase";
 
