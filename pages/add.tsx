@@ -89,7 +89,9 @@ const AddButtonsContainer = styled.div`
   display: flex;
 `;
 
-const InputStyled = styled.input`
+const InputStyled = styled.input<{
+  isNotValid: boolean;
+}>`
   min-height: 50px;
   font-size: 1.2em;
   overflow: auto;
@@ -97,6 +99,7 @@ const InputStyled = styled.input`
   padding: 10px;
   border: solid red 1px;
   border-radius: 5px;
+  background-color: ${({ isNotValid }) => (isNotValid ? "pink" : "white")};
 `;
 
 const SelectStyled = styled.select`
@@ -111,6 +114,7 @@ const SelectStyled = styled.select`
 
 const LengthInput = styled.input<{
   isVisible: boolean;
+  isNotValid: boolean;
 }>`
   display: ${({ isVisible }) => (isVisible ? "block" : "none")};
   min-height: 50px;
@@ -120,6 +124,7 @@ const LengthInput = styled.input<{
   padding: 10px;
   border: solid red 1px;
   border-radius: 5px;
+  background-color: ${({ isNotValid }) => (isNotValid ? "pink" : "white")};
 `;
 
 const CheckboxStyled = styled.input`
@@ -167,6 +172,7 @@ export default function AddPage() {
   const [newMonth, setNewMonth] = useState(MONTH_MAP.get(now.getMonth()));
   const [planOps, setPlanOps] = useState("");
   const [wishfullAverageLength, setWishfullAveregeLength] = useState("");
+  const [notValidInput, setNotValidInput] = useState("");
 
   // console.log("Add Page", user);
 
@@ -265,6 +271,25 @@ export default function AddPage() {
     yearIterator.push(i);
   }
 
+  const validateNumber = (
+    number: string,
+    cb: (number: string) => void,
+    inputName: string
+  ) => {
+    if (isNaN(Number(number))) {
+      setNotValidInput(inputName);
+      cb(number.slice(0, -1));
+      setTimeout(() => {
+        setNotValidInput("");
+      }, 300);
+      return number.slice(0, -1);
+    } else {
+      setNotValidInput("");
+      cb(number);
+      return number;
+    }
+  };
+  console.log(notValidInput);
   return (
     <WrapperAllContent>
       <PannelContainer isAdmin={user?.role === "ADMIN"}>
@@ -321,12 +346,14 @@ export default function AddPage() {
               })}
             </SelectStyled>
             <InputStyled
+              isNotValid={false}
               onChange={(e) => {
                 setHours(e.target.value);
               }}
               value={hours}
             ></InputStyled>
             <InputStyled
+              isNotValid={false}
               onChange={(e) => {
                 setMinutes(e.target.value);
               }}
@@ -338,12 +365,14 @@ export default function AddPage() {
             <LabelStyled>Месторождение</LabelStyled>
             <LabelStyled>Промысел</LabelStyled>
             <InputStyled
+              isNotValid={false}
               value={number}
               onChange={(e) => {
                 setNumber(e.target.value);
               }}
             ></InputStyled>
             <InputStyled
+              isNotValid={false}
               value={field}
               onChange={(e) => {
                 setField(e.target.value);
@@ -373,22 +402,36 @@ export default function AddPage() {
               ></CheckboxStyled>
             </CheckboxContainer>
             <InputStyled
+              isNotValid={notValidInput === "debitMass"}
               value={debitMass}
-              onChange={(e) => setDebitMass(e.target.value)}
+              onChange={(e) =>
+                validateNumber(e.target.value, setDebitMass, "debitMass")
+              }
+              pattern="[0-9]"
+              title="Numbers only"
             ></InputStyled>
             <InputStyled
+              isNotValid={notValidInput === "density"}
               value={density}
-              onChange={(e) => setDensity(e.target.value)}
+              onChange={(e) =>
+                validateNumber(e.target.value, setDensity, "density")
+              }
             ></InputStyled>
             <InputStyled
+              isNotValid={notValidInput === "watterRate"}
               value={watterRate}
-              onChange={(e) => setWatterRate(e.target.value)}
+              onChange={(e) =>
+                validateNumber(e.target.value, setWatterRate, "watterRate")
+              }
             ></InputStyled>
             <LengthInput
+              isNotValid={notValidInput === "duration"}
               isVisible={isLengthInputVisible}
               placeholder="Введите продолжительность"
               value={duration}
-              onChange={(e) => setDuration(e.target.value)}
+              onChange={(e) =>
+                validateNumber(e.target.value, setDuration, "duration")
+              }
             ></LengthInput>
           </ResultContainer>
           <AddButtonsContainer>
@@ -424,12 +467,22 @@ export default function AddPage() {
               })}
             </SelectStyled>
             <InputStyled
+              isNotValid={notValidInput === "planOps"}
               value={String(planOps)}
-              onChange={(e) => setPlanOps(e.target.value)}
+              onChange={(e) =>
+                validateNumber(e.target.value, setPlanOps, "planOps")
+              }
             ></InputStyled>
             <InputStyled
+              isNotValid={notValidInput === "wishfullAverageLength"}
               value={String(wishfullAverageLength)}
-              onChange={(e) => setWishfullAveregeLength(e.target.value)}
+              onChange={(e) =>
+                validateNumber(
+                  e.target.value,
+                  setWishfullAveregeLength,
+                  "wishfullAverageLength"
+                )
+              }
             ></InputStyled>
           </AddContainer>
           <ButtonStyled>Добавить месяц</ButtonStyled>

@@ -77,12 +77,16 @@ export default function MonthTable({
   const factHrs1: number = currentMonthOps
     ?.filter((elem: any) => elem.department === 1)
     .reduce((sum: number, elem: any) => {
-      return sum + elem.duration;
+      if (elem.duration) {
+        return sum + elem.duration;
+      } else return sum;
     }, 0);
   const factHrs2: number = currentMonthOps
     ?.filter((elem: any) => elem.department === 2)
     .reduce((sum: number, elem: any) => {
-      return sum + elem.duration;
+      if (elem.duration) {
+        return sum + elem.duration;
+      } else return sum;
     }, 0);
 
   const buttons = currentMonthOps?.map((element: any, index: number) => {
@@ -90,7 +94,7 @@ export default function MonthTable({
       <OperationButton
         isDeleteble={user?.role === "ADMIN" && isEditMode}
         onClick={() => {
-          setOperation(element.date);
+          setOperation(element.id);
         }}
         onSecondClick={() => {
           setOperation("");
@@ -144,8 +148,8 @@ export default function MonthTable({
             </tbody>
           </Table>
         }
-        key={element.date}
-        isHighlighted={element.date === operation}
+        key={element.id}
+        isHighlighted={element.id === operation}
         text={`${index + 1}.  ${element.date}  ${element.number}  ${
           element.field
         } `}
