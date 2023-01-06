@@ -123,5 +123,15 @@
     "secret": "2.468678544861684",
     "userName": "d.maltsev",
     "role": "ADMIN"
+  },
+  {
+    "secret": "0.666019195208484",
+    "userName": "d.maltsev",
+    "role": "ADMIN"
+  },
+  {
+    "secret": "0.5828529754401184",
+    "userName": "d.maltsev",
+    "role": "ADMIN"
   }
 ]

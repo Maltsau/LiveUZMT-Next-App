@@ -8,17 +8,39 @@
         "planOps": 23,
         "ops": [
           {
-            "id": "6.01.2023 45 44",
+            "id": "6.01.2023 45 rf",
             "date": "6.01.2023",
             "department": 1,
             "number": "45",
-            "field": "44",
-            "duration": 2,
+            "field": "rf",
             "result": [
               {
-                "isFinal": true,
-                "dateTime": "6.01.2023 11:28",
-                "debitMass": 44,
+                "isFinal": false,
+                "dateTime": "6.01.2023 16:46",
+                "debitMass": 3,
+                "density": 1,
+                "watterRate": 22
+              },
+              {
+                "isFinal": false,
+                "dateTime": "6.01.2023 16:47",
+                "debitMass": 3,
+                "density": 1,
+                "watterRate": 22
+              }
+            ]
+          },
+          {
+            "id": "6.01.2023 45 rfdd",
+            "date": "6.01.2023",
+            "department": 1,
+            "number": "45",
+            "field": "rfdd",
+            "result": [
+              {
+                "isFinal": false,
+                "dateTime": "6.01.2023 16:47",
+                "debitMass": 3,
                 "density": 1,
                 "watterRate": 22
               }

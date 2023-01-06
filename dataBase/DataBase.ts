@@ -190,6 +190,9 @@ export function deleteRecord(
     const requiredOperation = requiredMonth?.find(
       (operationItem) => operationItem.id === id
     )?.result;
+    var requiredOperationIndex = requiredMonth?.findIndex(
+      (operationItem) => operationItem.id === id
+    );
     console.log("Data Base requiredOperation", requiredOperation);
     const requiredResultIndex = requiredOperation?.findIndex(
       (resultItem) => resultItem.dateTime === dateTime
@@ -197,10 +200,10 @@ export function deleteRecord(
     console.log("Data Base requiredResultIndex", requiredResultIndex);
     console.log(requiredOperation![requiredResultIndex!]);
     requiredOperation?.splice(requiredResultIndex!, 1);
+    if (!requiredOperation?.length) {
+      requiredMonth?.splice(requiredOperationIndex!, 1);
+    }
   } else {
-    const requiredOperationIndex = requiredMonth?.findIndex(
-      (operationItem) => operationItem.id === id
-    );
     console.log("DataBase", requiredMonth, requiredOperationIndex);
     requiredMonth?.splice(requiredOperationIndex!, 1);
   }
