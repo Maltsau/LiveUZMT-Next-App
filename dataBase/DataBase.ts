@@ -183,6 +183,7 @@ export function deleteRecord(id: string, year: number, month: string) {
   const requiredOperationIndex = requiredMonth?.findIndex(
     (operationItem) => operationItem.id === id
   );
-  requiredMonth?.splice(requiredOperationIndex!);
+  console.log("DataBase", requiredMonth, requiredOperationIndex);
+  requiredMonth?.splice(requiredOperationIndex!, 1);
   db.write();
 }

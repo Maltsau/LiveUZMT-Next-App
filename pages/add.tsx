@@ -303,16 +303,6 @@ export default function AddPage() {
     });
   };
 
-  // const daysInMonth =
-  //   32 -
-  //   new Date(
-  //     year,
-  //     [...MONTH_MAP.keys()].find((e) => MONTH_MAP.get(e) === month) ||
-  //       now.getMonth(),
-  //     32
-  //   ).getDate();
-  // console.log(daysInMonth, department, debitMass);
-
   const getDaysInMonth = (month: string | undefined, year: number) => {
     return (
       32 -

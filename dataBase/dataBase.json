@@ -8,25 +8,48 @@
         "planOps": 23,
         "ops": [
           {
-            "id": "6.01.2023 45 343",
+            "id": "6.01.2023 566 авпкауц",
             "date": "6.01.2023",
             "department": 1,
-            "number": "45",
-            "field": "343",
+            "number": "566",
+            "field": "авпкауц",
             "result": [
               {
                 "isFinal": false,
-                "dateTime": "6.01.2023 09:53",
-                "debitMass": 334,
-                "density": 4,
-                "watterRate": 45
+                "dateTime": "6.01.2023 10:58",
+                "debitMass": 45,
+                "density": 1,
+                "watterRate": 34
               },
               {
+                "isFinal": true,
+                "dateTime": "6.01.2023 10:58",
+                "debitMass": 45,
+                "density": 1,
+                "watterRate": 34
+              }
+            ]
+          },
+          {
+            "id": "6.01.2023 677 tfdgfgf",
+            "date": "6.01.2023",
+            "department": 1,
+            "number": "677",
+            "field": "tfdgfgf",
+            "result": [
+              {
                 "isFinal": false,
-                "dateTime": "6.01.2023 09:54",
-                "debitMass": 334,
-                "density": 4,
-                "watterRate": 45
+                "dateTime": "6.01.2023 11:01",
+                "debitMass": 34,
+                "density": 1,
+                "watterRate": 2
+              },
+              {
+                "isFinal": true,
+                "dateTime": "6.01.2023 11:01",
+                "debitMass": 34,
+                "density": 1,
+                "watterRate": 2
               }
             ]
           }
