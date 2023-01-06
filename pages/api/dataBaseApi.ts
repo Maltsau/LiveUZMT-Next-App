@@ -45,8 +45,8 @@ export default function handler(
       });
     }
   } else if (req.method === "DELETE") {
-    console.log("DataBaseApi", req.body.id);
-    deleteRecord(req.body.id, req.body.year, req.body.month);
+    console.log("DataBaseApi", req.body.dateTime);
+    deleteRecord(req.body.id, req.body.year, req.body.month, req.body.dateTime);
     res.status(200).json({ message: "Deleted" });
   }
 }

@@ -9,6 +9,8 @@ import { useEditModeContext } from "../pages/context/EditModeContext";
 
 import OperationButton from "./buttons/OperationButton";
 
+import { DataBaseType } from "../types/types";
+
 const Wraper = styled.div`
   display: grid;
   margin: 1px;
@@ -47,7 +49,7 @@ export default function MonthTable({
   year,
   month,
 }: {
-  db: any;
+  db: DataBaseType;
   year: number;
   month: string;
 }) {
@@ -63,14 +65,16 @@ export default function MonthTable({
         id,
         year,
         month,
+        dateTime,
       }: {
         id: string;
         year: number;
         month: string;
+        dateTime?: string;
       }) => {
         const res = await ky
           .delete("/api/dataBaseApi", {
-            json: { id, year, month },
+            json: { id, year, month, dateTime },
           })
           .json<{ message: string }>();
         return res;
@@ -158,7 +162,18 @@ export default function MonthTable({
                     <Cell>
                       {result.watterRate}
                       {user?.role === "ADMIN" && isEditMode ? (
-                        <DeleteButton onClick={() => {}}>
+                        <DeleteButton
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            deleteOperation({
+                              id: element.id,
+                              year,
+                              month,
+                              dateTime: result.dateTime,
+                            });
+                            console.log(result.dateTime);
+                          }}
+                        >
                           <Image
                             src="/delete.png"
                             height={20}

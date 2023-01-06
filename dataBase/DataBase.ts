@@ -175,15 +175,34 @@ export function addRecord(
   }
 }
 
-export function deleteRecord(id: string, year: number, month: string) {
+export function deleteRecord(
+  id: string,
+  year: number,
+  month: string,
+  dateTime: string
+) {
   db.read();
   const requiredMonth = db
     .data!.find((yearItem) => yearItem.year === year)
     ?.months.find((monthItem) => monthItem.month === month)?.ops;
-  const requiredOperationIndex = requiredMonth?.findIndex(
-    (operationItem) => operationItem.id === id
-  );
-  console.log("DataBase", requiredMonth, requiredOperationIndex);
-  requiredMonth?.splice(requiredOperationIndex!, 1);
+  console.log("Data Base requiredMonth", requiredMonth);
+  if (dateTime) {
+    const requiredOperation = requiredMonth?.find(
+      (operationItem) => operationItem.id === id
+    )?.result;
+    console.log("Data Base requiredOperation", requiredOperation);
+    const requiredResultIndex = requiredOperation?.findIndex(
+      (resultItem) => resultItem.dateTime === dateTime
+    );
+    console.log("Data Base requiredResultIndex", requiredResultIndex);
+    console.log(requiredOperation![requiredResultIndex!]);
+    requiredOperation?.splice(requiredResultIndex!, 1);
+  } else {
+    const requiredOperationIndex = requiredMonth?.findIndex(
+      (operationItem) => operationItem.id === id
+    );
+    console.log("DataBase", requiredMonth, requiredOperationIndex);
+    requiredMonth?.splice(requiredOperationIndex!, 1);
+  }
   db.write();
 }
