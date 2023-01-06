@@ -58,10 +58,25 @@ const AdminContainer = styled.div<{
   display: ${({ isVisible }) => (isVisible ? "block" : "none")};
 `;
 
+const StartDateContainer = styled.div`
+  display: grid;
+  grid-template-columns: 150px 1fr 150px;
+  border: 1px red solid;
+  border-radius: 5px;
+  margin-bottom: 3px;
+`;
+
 const DateTimeContainer = styled.div`
   display: grid;
   grid-template-columns: 150px 1fr 150px 70px 70px;
+  border: 1px red solid;
+  border-radius: 5px;
 `;
+// const OperationResultContainer = styled.div`
+//   margin: 5px 0px;
+//   border: 2px red solid;
+//   border-radius: 5px;
+// `;
 
 const ResultContainer = styled.div`
   display: grid;
@@ -79,6 +94,7 @@ const FieldNumberContainer = styled.div`
   width: 100%;
   grid-template-columns: 200px 1fr 200px;
   padding: 2px;
+  margin: 2px 0px;
 `;
 
 const CheckboxContainer = styled.div`
@@ -136,6 +152,26 @@ const LabelStyled = styled.label`
   margin: auto 10px;
 `;
 
+const CurrentTimeTitleLabelStyled = styled.label`
+  margin: auto 10px;
+  grid-column-start: 1;
+  grid-column-end: 6;
+  padding: 5px 3px;
+  text-align: center;
+  color: red;
+  font-size: 1.2em;
+`;
+
+const StartDateTitleLabelStyled = styled.label`
+  margin: auto 10px;
+  grid-column-start: 1;
+  grid-column-end: 4;
+  padding: 5px 3px;
+  text-align: center;
+  color: red;
+  font-size: 1.2em;
+`;
+
 const ButtonStyled = styled.button`
   font-size: 1.2em;
   background-color: red;
@@ -155,6 +191,9 @@ export default function AddPage() {
   const now = new Date();
   const [isLengthInputVisible, setIsLengthInputVisible] = useState(false);
   const { user } = useUserContext();
+  const [startDay, setStartDay] = useState(now.getDate());
+  const [startMonth, setStartMonth] = useState(MONTH_MAP.get(now.getMonth()));
+  const [startYear, setStartYear] = useState(now.getFullYear());
   const [day, setDay] = useState(now.getDate());
   const [month, setMonth] = useState(MONTH_MAP.get(now.getMonth()));
   const [year, setYear] = useState(now.getFullYear());
@@ -183,6 +222,9 @@ export default function AddPage() {
   } = useMutation(
     "ADD_RECORD",
     async ({
+      startDay,
+      startMonth,
+      startYear,
       day,
       month,
       year,
@@ -197,6 +239,9 @@ export default function AddPage() {
       isFinal,
       duration,
     }: {
+      startDay: number;
+      startMonth: string | undefined;
+      startYear: number;
       day: number;
       month: string | undefined;
       year: number;
@@ -214,6 +259,9 @@ export default function AddPage() {
       const res = await ky
         .post("/api/dataBaseApi", {
           json: {
+            startDay,
+            startMonth,
+            startYear,
             day,
             month,
             year,
@@ -236,6 +284,9 @@ export default function AddPage() {
 
   const onEditorFormSubmit = () => {
     addRecord({
+      startDay,
+      startMonth,
+      startYear,
       day,
       month,
       year,
@@ -252,31 +303,57 @@ export default function AddPage() {
     });
   };
 
-  const daysInMonth =
-    32 -
-    new Date(
-      year,
-      [...MONTH_MAP.keys()].find((e) => MONTH_MAP.get(e) === month) ||
-        now.getMonth(),
-      32
-    ).getDate();
-  console.log(daysInMonth, department, debitMass);
+  // const daysInMonth =
+  //   32 -
+  //   new Date(
+  //     year,
+  //     [...MONTH_MAP.keys()].find((e) => MONTH_MAP.get(e) === month) ||
+  //       now.getMonth(),
+  //     32
+  //   ).getDate();
+  // console.log(daysInMonth, department, debitMass);
 
+  const getDaysInMonth = (month: string | undefined, year: number) => {
+    return (
+      32 -
+      new Date(
+        year,
+        [...MONTH_MAP.keys()].find((e) => MONTH_MAP.get(e) === month) ||
+          now.getMonth(),
+        32
+      ).getDate()
+    );
+  };
+
+  const startDayIterator = new Array();
   const dayIterator = new Array();
+  const startYearIterator = new Array();
   const yearIterator = new Array();
-  for (let i = 1; i < daysInMonth + 1; i++) {
+
+  for (let i = 1; i < getDaysInMonth(startMonth, startYear) + 1; i++) {
+    startDayIterator.push(i);
+  }
+  for (let i = 1; i < getDaysInMonth(month, year) + 1; i++) {
     dayIterator.push(i);
   }
   for (let i = 2007; i < now.getFullYear() + 10; i++) {
+    startYearIterator.push(i);
+  }
+  for (let i = startYear; i < now.getFullYear() + 10; i++) {
     yearIterator.push(i);
   }
 
   const validateNumber = (
     number: string,
     cb: (number: string) => void,
-    inputName: string
+    inputName: string,
+    condition?: number
   ) => {
-    if (isNaN(Number(number))) {
+    if (
+      isNaN(Number(number)) ||
+      number.includes(" ") ||
+      Number(number) > condition!
+    ) {
       setNotValidInput(inputName);
       cb(number.slice(0, -1));
       setTimeout(() => {
@@ -309,7 +386,48 @@ export default function AddPage() {
 
       <Wraper isAdmin={user?.role === "ADMIN"}>
         <EditorContainer isVisible={!adminPannel}>
+          <StartDateContainer>
+            <StartDateTitleLabelStyled>
+              Дата начала исследований
+            </StartDateTitleLabelStyled>
+            <LabelStyled>Число</LabelStyled>
+            <LabelStyled>Месяц</LabelStyled>
+            <LabelStyled>Год</LabelStyled>
+            <SelectStyled
+              value={startDay}
+              onChange={(e) => {
+                setStartDay(Number(e.target.value));
+              }}
+            >
+              {startDayIterator.map((dayItem) => {
+                return <option value={dayItem}>{dayItem}</option>;
+              })}
+            </SelectStyled>
+            <SelectStyled
+              value={startMonth}
+              onChange={(e) => {
+                setStartMonth(e.target.value);
+              }}
+            >
+              {[...MONTH_MAP.values()].map((mnth) => {
+                return <option value={mnth}>{mnth}</option>;
+              })}
+            </SelectStyled>
+            <SelectStyled
+              value={startYear}
+              onChange={(e) => {
+                setStartYear(Number(e.target.value));
+              }}
+            >
+              {startYearIterator.map((yearItem) => {
+                return <option value={yearItem}>{yearItem}</option>;
+              })}
+            </SelectStyled>
+          </StartDateContainer>
           <DateTimeContainer>
+            <CurrentTimeTitleLabelStyled>
+              Текущее время
+            </CurrentTimeTitleLabelStyled>
             <LabelStyled>Число</LabelStyled>
             <LabelStyled>Месяц</LabelStyled>
             <LabelStyled>Год</LabelStyled>
@@ -346,94 +464,101 @@ export default function AddPage() {
               })}
             </SelectStyled>
             <InputStyled
-              isNotValid={false}
+              isNotValid={notValidInput === "hours"}
               onChange={(e) => {
-                setHours(e.target.value);
+                validateNumber(e.target.value, setHours, "hours", 24);
               }}
               value={hours}
             ></InputStyled>
             <InputStyled
-              isNotValid={false}
+              isNotValid={notValidInput === "minutes"}
               onChange={(e) => {
-                setMinutes(e.target.value);
+                validateNumber(e.target.value, setMinutes, "minutes", 59);
               }}
               value={minutes}
             ></InputStyled>
           </DateTimeContainer>
-          <FieldNumberContainer>
-            <LabelStyled>Номер скважины</LabelStyled>
-            <LabelStyled>Месторождение</LabelStyled>
-            <LabelStyled>Промысел</LabelStyled>
-            <InputStyled
-              isNotValid={false}
-              value={number}
-              onChange={(e) => {
-                setNumber(e.target.value);
-              }}
-            ></InputStyled>
-            <InputStyled
-              isNotValid={false}
-              value={field}
-              onChange={(e) => {
-                setField(e.target.value);
-              }}
-            ></InputStyled>
-            <SelectStyled
-              value={department}
-              onChange={(e) => setDepartment(Number(e.target.value))}
-            >
-              <option value={1}>{"ЦДНГ-1"}</option>
-              <option value={2}>{"ЦДНГ-2"}</option>
-            </SelectStyled>
-          </FieldNumberContainer>
-          <ResultContainer>
-            <LabelStyled>Дебит в т/сут</LabelStyled>
-            <LabelStyled>
-              Удельный вес <br></br>жидкости в г/см<sup>3</sup>
-            </LabelStyled>
-            <LabelStyled>Обводнённость в %</LabelStyled>
-            <CheckboxContainer>
-              <LabelStyled>Замер окончен?</LabelStyled>
-              <CheckboxStyled
-                type={"checkbox"}
-                onClick={() => {
-                  setIsLengthInputVisible(!isLengthInputVisible);
+          <>
+            <FieldNumberContainer>
+              <LabelStyled>Номер скважины</LabelStyled>
+              <LabelStyled>Месторождение</LabelStyled>
+              <LabelStyled>Промысел</LabelStyled>
+              <InputStyled
+                isNotValid={false}
+                value={number}
+                onChange={(e) => {
+                  setNumber(e.target.value);
                 }}
-              ></CheckboxStyled>
-            </CheckboxContainer>
-            <InputStyled
-              isNotValid={notValidInput === "debitMass"}
-              value={debitMass}
-              onChange={(e) =>
-                validateNumber(e.target.value, setDebitMass, "debitMass")
-              }
-              pattern="[0-9]"
-              title="Numbers only"
-            ></InputStyled>
-            <InputStyled
-              isNotValid={notValidInput === "density"}
-              value={density}
-              onChange={(e) =>
-                validateNumber(e.target.value, setDensity, "density")
-              }
-            ></InputStyled>
-            <InputStyled
-              isNotValid={notValidInput === "watterRate"}
-              value={watterRate}
-              onChange={(e) =>
-                validateNumber(e.target.value, setWatterRate, "watterRate")
-              }
-            ></InputStyled>
-            <LengthInput
-              isNotValid={notValidInput === "duration"}
-              isVisible={isLengthInputVisible}
-              placeholder="Введите продолжительность"
-              value={duration}
-              onChange={(e) =>
-                validateNumber(e.target.value, setDuration, "duration")
-              }
-            ></LengthInput>
-          </ResultContainer>
+              ></InputStyled>
+              <InputStyled
+                isNotValid={false}
+                value={field}
+                onChange={(e) => {
+                  setField(e.target.value);
+                }}
+              ></InputStyled>
+              <SelectStyled
+                value={department}
+                onChange={(e) => setDepartment(Number(e.target.value))}
+              >
+                <option value={1}>{"ЦДНГ-1"}</option>
+                <option value={2}>{"ЦДНГ-2"}</option>
+              </SelectStyled>
+            </FieldNumberContainer>
+            <ResultContainer>
+              <LabelStyled>Дебит в т/сут</LabelStyled>
+              <LabelStyled>
+                Удельный вес <br></br>жидкости в г/см<sup>3</sup>
+              </LabelStyled>
+              <LabelStyled>Обводнённость в %</LabelStyled>
+              <CheckboxContainer>
+                <LabelStyled>Замер окончен?</LabelStyled>
+                <CheckboxStyled
+                  type={"checkbox"}
+                  onClick={() => {
+                    setIsLengthInputVisible(!isLengthInputVisible);
+                  }}
+                ></CheckboxStyled>
+              </CheckboxContainer>
+              <InputStyled
+                isNotValid={notValidInput === "debitMass"}
+                value={debitMass}
+                onChange={(e) =>
+                  validateNumber(e.target.value, setDebitMass, "debitMass")
+                }
+                pattern="[0-9]"
+                title="Numbers only"
+              ></InputStyled>
+              <InputStyled
+                isNotValid={notValidInput === "density"}
+                value={density}
+                onChange={(e) =>
+                  validateNumber(e.target.value, setDensity, "density", 2)
+                }
+              ></InputStyled>
+              <InputStyled
+                isNotValid={notValidInput === "watterRate"}
+                value={watterRate}
+                onChange={(e) =>
+                  validateNumber(
+                    e.target.value,
+                    setWatterRate,
+                    "watterRate",
+                    100
+                  )
+                }
+              ></InputStyled>
+              <LengthInput
+                isNotValid={notValidInput === "duration"}
+                isVisible={isLengthInputVisible}
+                placeholder="Введите продолжительность"
+                value={duration}
+                onChange={(e) =>
+                  validateNumber(e.target.value, setDuration, "duration")
+                }
+              ></LengthInput>
+            </ResultContainer>
+          </>
           <AddButtonsContainer>
             <AddPhotoButton></AddPhotoButton>
             <AddExcellButton></AddExcellButton>

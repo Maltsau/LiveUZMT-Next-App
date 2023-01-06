@@ -1,39 +1,7 @@
 import { LowSync } from "lowdb";
 import { JSONFileSync } from "lowdb/node";
 import MONTH_MAP from "../services/monthMap";
-
-type DataBaseType = [
-  {
-    year: number;
-    months: [
-      {
-        month: string;
-        wishfullAverageLength: number;
-        planOps: number;
-        ops: [
-          {
-            id?: string;
-            date: string;
-            department: number;
-            number: string;
-            field: string;
-            duration?: number;
-            result: [
-              {
-                isFinal: boolean;
-                dateTime: string;
-                debitMass: number;
-                density: number;
-                watterRate: number;
-                files?: [string];
-              }
-            ];
-          }
-        ];
-      }
-    ];
-  }
-];
+import { DataBaseType } from "../types/types";
 
 const db = new LowSync(
   new JSONFileSync<DataBaseType>(
@@ -51,6 +19,9 @@ export function getDataBase() {
 }
 
 export function addRecord(
+  startDay: number,
+  startMonth: string,
+  startYear: number,
   day: number,
   month: string,
   year: number,
@@ -93,7 +64,12 @@ export function addRecord(
     });
     if (requiredMonth) {
       const requredOperation = requiredMonth.ops?.find((item) => {
-        return item.number === number && item.field === field;
+        return (
+          item.id ===
+          `${startDay}.${getMonthNumber(
+            startMonth
+          )}.${startYear} ${number} ${field}`
+        );
       });
       if (requredOperation) {
         requredOperation.result.push({
@@ -108,8 +84,10 @@ export function addRecord(
         db.write();
       } else {
         requiredMonth.ops.push({
-          id: `${day}.${getMonthNumber(month)}.${year} ${number} ${field}`,
-          date: `${day}.${getMonthNumber(month)}.${year}`,
+          id: `${startDay}.${getMonthNumber(
+            startMonth
+          )}.${startYear} ${number} ${field}`,
+          date: `${startDay}.${getMonthNumber(startMonth)}.${startYear}`,
           department,
           number,
           field,
@@ -135,8 +113,10 @@ export function addRecord(
         planOps: 23,
         ops: [
           {
-            id: `${day}.${getMonthNumber(month)}.${year} ${number} ${field}`,
-            date: `${day}.${getMonthNumber(month)}.${year}`,
+            id: `${startDay}.${getMonthNumber(
+              startMonth
+            )}.${startYear} ${number} ${field}`,
+            date: `${startDay}.${getMonthNumber(startMonth)}.${startYear}`,
             department,
             number,
             field,
@@ -167,8 +147,10 @@ export function addRecord(
           planOps: 23,
           ops: [
             {
-              id: `${day}.${getMonthNumber(month)}.${year} ${number} ${field}`,
-              date: `${day}.${getMonthNumber(month)}.${year}`,
+              id: `${startDay}.${getMonthNumber(
+                startMonth
+              )}.${startYear} ${number} ${field}`,
+              date: `${startDay}.${getMonthNumber(startMonth)}.${startYear}`,
               department,
               number,
               field,
@@ -191,4 +173,16 @@ export function addRecord(
     });
     db.write();
   }
+}
+
+export function deleteRecord(id: string, year: number, month: string) {
+  db.read();
+  const requiredMonth = db
+    .data!.find((yearItem) => yearItem.year === year)
+    ?.months.find((monthItem) => monthItem.month === month)?.ops;
+  const requiredOperationIndex = requiredMonth?.findIndex(
+    (operationItem) => operationItem.id === id
+  );
+  requiredMonth?.splice(requiredOperationIndex!);
+  db.write();
 }

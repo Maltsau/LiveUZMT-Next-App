@@ -1,6 +1,8 @@
 import { useState } from "react";
 import styled from "styled-components";
 import Image from "next/image";
+import { useMutation } from "react-query";
+import ky from "ky";
 
 import { useUserContext } from "../pages/context/UserContext";
 import { useEditModeContext } from "../pages/context/EditModeContext";
@@ -54,6 +56,27 @@ export default function MonthTable({
   const { user } = useUserContext();
   const { isEditMode } = useEditModeContext();
 
+  const { mutate: deleteOperation, mutateAsync: deleteOperationAsync } =
+    useMutation(
+      "DELETE_RECORD",
+      async ({
+        id,
+        year,
+        month,
+      }: {
+        id: string;
+        year: number;
+        month: string;
+      }) => {
+        const res = await ky
+          .delete("/api/dataBaseApi", {
+            json: { id, year, month },
+          })
+          .json<{ message: string }>();
+        return res;
+      }
+    );
+
   const currentMonth =
     db
       .find((yearItem: any) => yearItem.year === year)
@@ -92,6 +115,9 @@ export default function MonthTable({
   const buttons = currentMonthOps?.map((element: any, index: number) => {
     return (
       <OperationButton
+        onDeleteOperation={() => {
+          deleteOperation({ id: element.id, year, month });
+        }}
         isDeleteble={user?.role === "ADMIN" && isEditMode}
         onClick={() => {
           setOperation(element.id);
@@ -132,7 +158,7 @@ export default function MonthTable({
                     <Cell>
                       {result.watterRate}
                       {user?.role === "ADMIN" && isEditMode ? (
-                        <DeleteButton>
+                        <DeleteButton onClick={() => {}}>
                           <Image
                             src="/delete.png"
                             height={20}

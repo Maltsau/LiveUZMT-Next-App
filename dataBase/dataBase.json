@@ -8,98 +8,25 @@
         "planOps": 23,
         "ops": [
           {
-            "id": "3.01.2023 34 fdsfks",
-            "date": "3.01.2023",
+            "id": "6.01.2023 45 343",
+            "date": "6.01.2023",
             "department": 1,
-            "number": "34",
-            "field": "fdsfks",
+            "number": "45",
+            "field": "343",
             "result": [
               {
                 "isFinal": false,
-                "dateTime": "3.01.2023 11:27",
-                "debitMass": 23,
-                "density": 43,
-                "watterRate": 1
-              }
-            ]
-          },
-          {
-            "id": "3.01.2023 67 RERRRT",
-            "date": "3.01.2023",
-            "department": 1,
-            "number": "67",
-            "field": "RERRRT",
-            "duration": 12,
-            "result": [
-              {
-                "isFinal": true,
-                "dateTime": "3.01.2023 11:28",
-                "debitMass": 234,
-                "density": 23,
-                "watterRate": 232
-              }
-            ]
-          },
-          {
-            "id": "3.01.2023 34 TTTTTT",
-            "date": "3.01.2023",
-            "department": 1,
-            "number": "34",
-            "field": "TTTTTT",
-            "duration": 19,
-            "result": [
-              {
-                "isFinal": true,
-                "dateTime": "3.01.2023 11:59",
-                "debitMass": 34,
-                "density": 56,
-                "watterRate": 34
-              }
-            ]
-          },
-          {
-            "id": "3.01.2023  ",
-            "date": "3.01.2023",
-            "department": 1,
-            "number": "",
-            "field": "",
-            "result": [
-              {
-                "isFinal": false,
-                "dateTime": "3.01.2023 15:01",
-                "debitMass": 0,
-                "density": 0,
-                "watterRate": 0
+                "dateTime": "6.01.2023 09:53",
+                "debitMass": 334,
+                "density": 4,
+                "watterRate": 45
               },
               {
                 "isFinal": false,
-                "dateTime": "3.01.2023 15:11",
-                "debitMass": 0,
-                "density": 0,
-                "watterRate": 0
-              },
-              {
-                "isFinal": false,
-                "dateTime": "4.01.2023 09:35",
-                "debitMass": null,
-                "density": 0,
-                "watterRate": 0
-              }
-            ]
-          },
-          {
-            "id": "3.01.2023 56 556gf",
-            "date": "3.01.2023",
-            "department": 1,
-            "number": "56",
-            "field": "556gf",
-            "result": [
-              {
-                "isFinal": true,
-                "dateTime": "3.01.2023 19:01",
-                "debitMass": 56,
-                "density": 66,
-                "watterRate": 66
+                "dateTime": "6.01.2023 09:54",
+                "debitMass": 334,
+                "density": 4,
+                "watterRate": 45
               }
             ]
           }
@@ -329,50 +256,7 @@
         "month": "июль",
         "wishfullAverageLength": 19,
         "planOps": 23,
-        "ops": [
-          {
-            "date": "01.07.2023",
-            "department": 2,
-            "number": "168",
-            "field": "Ю.-Сосновская",
-            "duration": 19,
-            "result": [
-              {
-                "debitMass": 138.7,
-                "density": 1.12,
-                "watterRate": 96
-              }
-            ]
-          },
-          {
-            "date": "02.07.2023",
-            "department": 1,
-            "number": "534n",
-            "field": "Речицкая",
-            "duration": 14,
-            "result": [
-              {
-                "debitMass": 87.5,
-                "density": 1.01,
-                "watterRate": 23
-              }
-            ]
-          },
-          {
-            "date": "03.07.2023",
-            "department": 2,
-            "number": "114n",
-            "field": "Давыдовская",
-            "duration": 12,
-            "result": [
-              {
-                "debitMass": 10.9,
-                "density": 0.87,
-                "watterRate": 0
-              }
-            ]
-          }
-        ]
+        "ops": []
       },
       {
         "month": "август",
@@ -1175,6 +1059,93 @@
                 "debitMass": 34,
                 "density": 56,
                 "watterRate": 34
+              }
+            ]
+          },
+          {
+            "id": "5.01.2022 34 gdfhf",
+            "date": "5.01.2022",
+            "department": 1,
+            "number": "34",
+            "field": "gdfhf",
+            "result": [
+              {
+                "isFinal": false,
+                "dateTime": "5.01.2022 10:23",
+                "debitMass": 245,
+                "density": 0.89,
+                "watterRate": 90
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "month": "февраль",
+        "wishfullAverageLength": 19,
+        "planOps": 23,
+        "ops": [
+          {
+            "id": "5.02.2022 45 fdg",
+            "date": "5.02.2022",
+            "department": 1,
+            "number": "45",
+            "field": "fdg",
+            "result": [
+              {
+                "isFinal": false,
+                "dateTime": "5.02.2022 10:24",
+                "debitMass": 123,
+                "density": 0.8,
+                "watterRate": 12
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "month": "сентябрь",
+        "wishfullAverageLength": 19,
+        "planOps": 23,
+        "ops": [
+          {
+            "id": "5.09.2022 34 fdsdffcxvx",
+            "date": "5.09.2022",
+            "department": 1,
+            "number": "34",
+            "field": "fdsdffcxvx",
+            "duration": 12,
+            "result": [
+              {
+                "isFinal": true,
+                "dateTime": "5.09.2022 10:25",
+                "debitMass": 455,
+                "density": 33,
+                "watterRate": 444
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "month": "май",
+        "wishfullAverageLength": 19,
+        "planOps": 23,
+        "ops": [
+          {
+            "id": "5.05.2022 34 GGHJK",
+            "date": "5.05.2022",
+            "department": 1,
+            "number": "34",
+            "field": "GGHJK",
+            "duration": 12,
+            "result": [
+              {
+                "isFinal": true,
+                "dateTime": "5.05.2022 10:25",
+                "debitMass": 455,
+                "density": 33,
+                "watterRate": 444
               }
             ]
           }

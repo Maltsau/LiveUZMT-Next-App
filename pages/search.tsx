@@ -3,41 +3,12 @@ import { useState, useEffect } from "react";
 import { useQuery } from "react-query";
 
 import { useDataBase } from "../hooks/useDataBase";
+import { useEditModeContext } from "./context/EditModeContext";
 
 import OperationButton from "../components/buttons/OperationButton";
 import ModalWindow from "../components/modalWindows/ModalWindow";
 
-type DataBaseType = [
-  {
-    year: number;
-    months: [
-      {
-        month: string;
-        wishfullAverageLength: number;
-        planOps: number;
-        ops: [
-          {
-            date: string;
-            department: number;
-            number: string;
-            field: string;
-            duration: number;
-            result: [
-              {
-                isFinal: boolean;
-                dateTime: string;
-                debitMass: number;
-                density: number;
-                watterRate: number;
-                files?: [string];
-              }
-            ];
-          }
-        ];
-      }
-    ];
-  }
-];
+import { DataBaseType } from "../types/types";
 
 const WrapperAllContent = styled.div`
   width: 100%;
@@ -75,17 +46,9 @@ const Cell = styled.td`
 
 export default function SearchPage() {
   const [search, setSearch] = useState<string>("");
-  // const [dataBase, setDataBase] = useState<DataBaseType | []>([]);
   const [operation, setOperation] = useState<string | undefined>("");
 
-  // useEffect(() => {
-  //   (async function () {
-  //     const response = await fetch("/api/dataBaseApi");
-  //     const responseData = await response.json();
-  //     setDataBase(responseData);
-  //   })();
-  // }, []);
-
+  const { isEditMode } = useEditModeContext();
   const { isLoading, data, isError, error } = useDataBase({});
   console.log(data);
 
@@ -155,10 +118,11 @@ export default function SearchPage() {
         }}
       ></InputStyled>
       <ResultContainer>
-        {outputArray.map((item: any, index: number) => {
+        {outputArray?.map((item: any, index: number) => {
           return (
             <OperationButton
-              isDeleteble={false}
+              onDeleteOperation={() => {}}
+              isDeleteble={isEditMode}
               onClick={() => {
                 setOperation(item?.date);
               }}

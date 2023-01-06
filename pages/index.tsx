@@ -4,7 +4,7 @@ import styles from "../styles/Home.module.css";
 import { useState, useEffect, useCallback } from "react";
 import styled from "styled-components";
 import { useUserContext } from "./context/UserContext";
-import { useQuery } from "react-query";
+import { useMutation, useQuery } from "react-query";
 import ky from "ky";
 
 import { useDataBase } from "../hooks/useDataBase";

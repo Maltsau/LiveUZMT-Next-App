@@ -1,12 +1,7 @@
 import { ReactNode, useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/router";
 import { useUserContext } from "../pages/context/UserContext";
-import {
-  useQuery,
-  useMutation,
-  UseQueryResult,
-  MutationFunction,
-} from "react-query";
+import { useQuery, useMutation } from "react-query";
 import styled from "styled-components";
 import ky from "ky";
 

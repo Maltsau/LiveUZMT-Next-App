@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { checkUser } from "./cookie";
-import { addRecord, getDataBase } from "../../dataBase/DataBase";
+import { addRecord, deleteRecord, getDataBase } from "../../dataBase/DataBase";
 
 type ResponseType =
   | Array<any>
@@ -21,6 +21,9 @@ export default function handler(
     if (checkUser(req.cookies.secret)) {
       console.log(req.body);
       addRecord(
+        req.body.startDay,
+        req.body.startMonth,
+        req.body.startYear,
         req.body.day,
         req.body.month,
         req.body.year,
@@ -41,5 +44,9 @@ export default function handler(
         message: `Not allowed`,
       });
     }
+  } else if (req.method === "DELETE") {
+    console.log("DataBaseApi", req.body.id);
+    deleteRecord(req.body.id, req.body.year, req.body.month);
+    res.status(200).json({ message: "Deleted" });
   }
 }

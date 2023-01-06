@@ -72,7 +72,7 @@ export default function Footer({
               setIsEditMode(false);
             }}
           >
-            <Link href={"/"}>Закончить редактирование</Link>
+            Закончить редактирование
           </FooterButton>
         );
       } else {
@@ -86,7 +86,7 @@ export default function Footer({
               setIsEditMode(true);
             }}
           >
-            <Link href={"/"}>Редактировать записи</Link>
+            Редактировать записи
           </FooterButton>
         );
       }

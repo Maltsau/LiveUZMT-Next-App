@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import MONTH_MAP from "../services/monthMap";
 
 import CustomLink from "./buttons/CustomLink";
 
@@ -52,7 +53,17 @@ export default function MonthPannel({
     .find((yearItem: any) => yearItem.year === year)
     ?.months?.map((monthItem: any) => {
       return monthItem.month;
+    })
+    .map((item: any) => {
+      return [...MONTH_MAP.keys()].find((key) => MONTH_MAP.get(key) === item);
+    })
+    .sort((a: number, b: number) => {
+      return a - b;
+    })
+    .map((month: number) => {
+      return MONTH_MAP.get(month);
     });
+
   const yearHalf: Array<string> = [];
   const yearRest: Array<string> = [];
   currentYear?.forEach((element: string, index: number) => {

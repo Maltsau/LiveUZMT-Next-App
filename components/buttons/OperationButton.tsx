@@ -66,6 +66,7 @@ const DeleteButton = styled.span<{
 export default function OperationButton({
   onClick,
   onSecondClick,
+  onDeleteOperation,
   text,
   isHighlighted,
   isDeleteble,
@@ -74,6 +75,7 @@ export default function OperationButton({
 }: {
   onClick?: any;
   onSecondClick?: any;
+  onDeleteOperation?: any;
   text: string;
   isHighlighted: boolean;
   isDeleteble: boolean;
@@ -86,7 +88,13 @@ export default function OperationButton({
         <UpperTrapezoid isCurrent={isCurrent}>
           <ButtonStyled isCurrent={isCurrent}>
             <span>{text}</span>
-            <DeleteButton isVisible={isDeleteble}>
+            <DeleteButton
+              isVisible={isDeleteble}
+              onClick={(e) => {
+                e.stopPropagation();
+                onDeleteOperation();
+              }}
+            >
               <Image src="/delete.png" height={20} width={20} alt="DELETE" />
             </DeleteButton>
           </ButtonStyled>
