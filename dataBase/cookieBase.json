@@ -133,5 +133,25 @@
     "secret": "0.5828529754401184",
     "userName": "d.maltsev",
     "role": "ADMIN"
+  },
+  {
+    "secret": "1.038539849899577",
+    "userName": "d.maltsev",
+    "role": "ADMIN"
+  },
+  {
+    "secret": "2.6570020700664227",
+    "userName": "d.maltsev",
+    "role": "ADMIN"
+  },
+  {
+    "secret": "5.25372844160138",
+    "userName": "d.maltsev",
+    "role": "ADMIN"
+  },
+  {
+    "secret": "2.452033979597315",
+    "userName": "d.maltsev",
+    "role": "ADMIN"
   }
 ]

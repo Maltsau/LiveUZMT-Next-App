@@ -6,6 +6,7 @@ import ky from "ky";
 
 import { useUserContext } from "../pages/context/UserContext";
 import { useEditModeContext } from "../pages/context/EditModeContext";
+import { useDeleteRecord } from "../hooks/useDeleteRecord";
 
 import OperationButton from "./buttons/OperationButton";
 
@@ -57,29 +58,30 @@ export default function MonthTable({
   const [statisticVisible, setStatisticVisible] = useState(false);
   const { user } = useUserContext();
   const { isEditMode } = useEditModeContext();
+  const { mutate: deleteOperation } = useDeleteRecord();
 
-  const { mutate: deleteOperation, mutateAsync: deleteOperationAsync } =
-    useMutation(
-      "DELETE_RECORD",
-      async ({
-        id,
-        year,
-        month,
-        dateTime,
-      }: {
-        id: string;
-        year: number;
-        month: string;
-        dateTime?: string;
-      }) => {
-        const res = await ky
-          .delete("/api/dataBaseApi", {
-            json: { id, year, month, dateTime },
-          })
-          .json<{ message: string }>();
-        return res;
-      }
-    );
+  // const { mutate: deleteOperation, mutateAsync: deleteOperationAsync } =
+  //   useMutation(
+  //     "DELETE_RECORD",
+  //     async ({
+  //       id,
+  //       year,
+  //       month,
+  //       dateTime,
+  //     }: {
+  //       id: string;
+  //       year: number;
+  //       month: string;
+  //       dateTime?: string;
+  //     }) => {
+  //       const res = await ky
+  //         .delete("/api/dataBaseApi", {
+  //           json: { id, year, month, dateTime },
+  //         })
+  //         .json<{ message: string }>();
+  //       return res;
+  //     }
+  //   );
 
   const currentMonth =
     db
