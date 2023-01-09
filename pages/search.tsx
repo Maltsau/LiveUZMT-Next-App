@@ -1,14 +1,16 @@
 import styled from "styled-components";
+import Image from "next/image";
 import { useState, useEffect } from "react";
-import { useQuery } from "react-query";
 
 import { useDataBase } from "../hooks/useDataBase";
 import { useEditModeContext } from "./context/EditModeContext";
+import { useDeleteRecord } from "../hooks/useDeleteRecord";
 
 import OperationButton from "../components/buttons/OperationButton";
 import ModalWindow from "../components/modalWindows/ModalWindow";
 
 import { DataBaseType } from "../types/types";
+import { useUserContext } from "./context/UserContext";
 
 const WrapperAllContent = styled.div`
   width: 100%;
@@ -44,13 +46,19 @@ const Cell = styled.td`
   border: solid black 1px;
 `;
 
+const DeleteButton = styled.button`
+  border: 0;
+  background-color: transparent;
+`;
+
 export default function SearchPage() {
   const [search, setSearch] = useState<string>("");
-  const [operation, setOperation] = useState<string | undefined>("");
+  const [operation, setOperation] = useState("");
 
   const { isEditMode } = useEditModeContext();
+  const { user } = useUserContext();
   const { isLoading, data, isError, error } = useDataBase({});
-  console.log(data);
+  const { mutate: deleteOperation } = useDeleteRecord();
 
   const searchBase = data?.flatMap((yearItem: any) => {
     return yearItem.months?.flatMap((monthItem: any) => {
@@ -59,19 +67,29 @@ export default function SearchPage() {
           year: Number(yearItem.year),
           month: monthItem.month,
           date: opsItem.date,
-          index: opsItem.number + " " + opsItem.field,
+          index: (
+            opsItem.date +
+            " " +
+            opsItem.number +
+            " " +
+            opsItem.field
+          ).toLowerCase(),
         };
       });
     });
   });
 
   const result = searchBase
-    ?.filter((item: any) => item?.index.includes(search) && search.length > 0)
+    ?.filter(
+      (item: any) =>
+        item?.index.includes(search.toLowerCase()) && search.length > 0
+    )
     .map((operation: any) => {
       return {
         year: operation.year,
         month: operation.month,
         date: operation.date,
+        index: operation.index,
       };
     });
 
@@ -90,9 +108,25 @@ export default function SearchPage() {
         return monthItem.ops;
       })
       ?.find((opsItem: any) => {
-        return opsItem.date === resultItem.date;
+        return opsItem.id === resultItem.index;
       });
   });
+
+  const getRecordYear = (result: any, item: any) => {
+    const year = result?.find((element: any) => {
+      element.date === item.date;
+      return element.year;
+    });
+    return year.year;
+  };
+
+  const getRecordMonth = (result: any, item: any) => {
+    const year = result?.find((element: any) => {
+      element.date === item.date;
+      return element.year;
+    });
+    return year.month;
+  };
 
   if (isLoading)
     return (
@@ -121,10 +155,19 @@ export default function SearchPage() {
         {outputArray?.map((item: any, index: number) => {
           return (
             <OperationButton
-              onDeleteOperation={() => {}}
-              isDeleteble={isEditMode}
+              onDeleteOperation={() => {
+                deleteOperation({
+                  id: item.id,
+                  year: getRecordYear(result, item),
+                  month: getRecordMonth(result, item),
+                });
+              }}
+              isDeleteble={user?.role === "ADMIN" && isEditMode}
               onClick={() => {
-                setOperation(item?.date);
+                console.log(outputArray);
+                console.log(item.id);
+                setOperation(item.id);
+                console.log("sets", operation);
               }}
               onSecondClick={() => {
                 setOperation("");
@@ -144,20 +187,44 @@ export default function SearchPage() {
                     </TableRow>
                   </thead>
                   <tbody>
-                    {item?.result.map((result: any) => {
+                    {item?.result.map((resultItem: any) => {
                       return (
-                        <TableRow key={result.dateTime}>
-                          <Cell>{result.dateTime}</Cell>
-                          <Cell>{result.debitMass}</Cell>
-                          <Cell>{result.density}</Cell>
-                          <Cell>{result.watterRate}</Cell>
+                        <TableRow key={resultItem.dateTime}>
+                          <Cell>{resultItem.dateTime}</Cell>
+                          <Cell>{resultItem.debitMass}</Cell>
+                          <Cell>{resultItem.density}</Cell>
+                          <Cell>
+                            {resultItem.watterRate}
+                            {user?.role === "ADMIN" && isEditMode ? (
+                              <DeleteButton
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  deleteOperation({
+                                    id: item?.id,
+                                    year: getRecordYear(result, resultItem),
+                                    month: getRecordMonth(result, resultItem),
+                                    dateTime: resultItem.dateTime,
+                                  });
+                                  console.log("Item", item);
+                                  console.log("resultItem", resultItem);
+                                }}
+                              >
+                                <Image
+                                  src="/delete.png"
+                                  height={20}
+                                  width={20}
+                                  alt="DELETE"
+                                />
+                              </DeleteButton>
+                            ) : null}
+                          </Cell>
                         </TableRow>
                       );
                     })}
                   </tbody>
                 </Table>
               }
-              isHighlighted={item?.date === operation}
+              isHighlighted={item?.id === operation}
               isCurrent={
                 !item?.result
                   .map((res: any) => {

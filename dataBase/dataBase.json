@@ -8,34 +8,43 @@
         "planOps": 23,
         "ops": [
           {
-            "id": "6.01.2023 45 rfdd",
-            "date": "6.01.2023",
+            "id": "9.01.2023 34 esfdg",
+            "date": "9.01.2023",
             "department": 1,
-            "number": "45",
-            "field": "rfdd",
+            "number": "34",
+            "field": "esfdg",
+            "duration": 16,
             "result": [
               {
-                "isFinal": false,
-                "dateTime": "6.01.2023 16:47",
-                "debitMass": 3,
-                "density": 1,
-                "watterRate": 22
+                "isFinal": true,
+                "dateTime": "9.01.2023 15:01",
+                "debitMass": 23,
+                "density": 2,
+                "watterRate": 3
+              },
+              {
+                "isFinal": true,
+                "dateTime": "9.01.2023 15:16",
+                "debitMass": 23,
+                "density": 2,
+                "watterRate": 3
               }
             ]
           },
           {
-            "id": "6.01.2023 34 gffsfd",
-            "date": "6.01.2023",
+            "id": "9.01.2023 4 gf",
+            "date": "9.01.2023",
             "department": 1,
-            "number": "34",
-            "field": "gffsfd",
+            "number": "4",
+            "field": "gf",
+            "duration": 13,
             "result": [
               {
-                "isFinal": false,
-                "dateTime": "6.01.2023 17:28",
-                "debitMass": 4,
+                "isFinal": true,
+                "dateTime": "9.01.2023 15:06",
+                "debitMass": 45,
                 "density": 1,
-                "watterRate": 34
+                "watterRate": 22
               }
             ]
           }
@@ -47,19 +56,35 @@
         "planOps": 22,
         "ops": [
           {
-            "id": "3.02.2023 23 Rtdskrhdsj",
-            "date": "3.02.2023",
+            "id": "6.02.2023 4eds gfsad",
+            "date": "6.02.2023",
             "department": 1,
-            "number": "23",
-            "field": "Rtdskrhdsj",
-            "duration": 20,
+            "number": "4eds",
+            "field": "gfsad",
+            "result": [
+              {
+                "isFinal": false,
+                "dateTime": "6.02.2023 20:16",
+                "debitMass": 4,
+                "density": 0.9,
+                "watterRate": 36
+              }
+            ]
+          },
+          {
+            "id": "9.02.2023 45 gfffffffffffffff",
+            "date": "9.02.2023",
+            "department": 1,
+            "number": "45",
+            "field": "gfffffffffffffff",
+            "duration": 12,
             "result": [
               {
                 "isFinal": true,
-                "dateTime": "3.02.2023 15:18",
-                "debitMass": 23,
-                "density": 44,
-                "watterRate": 33
+                "dateTime": "9.02.2023 15:02",
+                "debitMass": 4,
+                "density": 1,
+                "watterRate": 23
               }
             ]
           }

@@ -173,7 +173,6 @@ export default function MonthTable({
                               month,
                               dateTime: result.dateTime,
                             });
-                            console.log(result.dateTime);
                           }}
                         >
                           <Image
