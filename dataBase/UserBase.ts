@@ -8,7 +8,6 @@ const db = new LowSync(
   )
 );
 
-db.read();
 // db.data ||= { posts: [] }
 
 // db.data.posts.push({ title: 'lowdb' })
@@ -16,5 +15,6 @@ db.read();
 // db.write()
 
 export default function getUserBase() {
+  db.read();
   return db.data;
 }

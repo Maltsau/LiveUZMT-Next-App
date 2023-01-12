@@ -50,7 +50,7 @@ export default function MonthTable({
   year,
   month,
 }: {
-  db: DataBaseType;
+  db: DataBaseType | undefined;
   year: number;
   month: string;
 }) {
@@ -84,7 +84,7 @@ export default function MonthTable({
   //   );
 
   const currentMonth =
-    db
+    db!
       .find((yearItem: any) => yearItem.year === year)
       ?.months?.find((monthItem: any) => monthItem.month === month) ??
     ({} as any);

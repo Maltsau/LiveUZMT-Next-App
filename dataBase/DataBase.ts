@@ -36,6 +36,7 @@ export function addRecord(
   isFinal: boolean,
   duration: number
 ) {
+  db.read();
   const getMonthNumber = (monthString: string) => {
     const monthNumber = [...MONTH_MAP.keys()].find(
       (key) => MONTH_MAP.get(key) === monthString
@@ -54,7 +55,7 @@ export function addRecord(
       return `0${hoursMinutes}`;
     }
   };
-  db.read();
+
   const requiredYear = db.data!.find((item) => {
     return item.year === year;
   });
@@ -83,7 +84,7 @@ export function addRecord(
         });
         db.write();
       } else {
-        requiredMonth.ops.push({
+        requiredMonth.ops?.push({
           id: `${startDay}.${getMonthNumber(
             startMonth
           )}.${startYear} ${number} ${field}`,
@@ -206,6 +207,43 @@ export function deleteRecord(
   } else {
     console.log("DataBase", requiredMonth, requiredOperationIndex);
     requiredMonth?.splice(requiredOperationIndex!, 1);
+  }
+  db.write();
+}
+
+export function addMonth(
+  year: number,
+  month: string,
+  planOps: number,
+  wishfullAverageLength: number
+) {
+  db.read();
+  const requiredYear = db.data!.find((yearItem) => yearItem.year === year);
+  if (requiredYear) {
+    const requiredMonth = requiredYear.months.find(
+      (monthItem) => monthItem.month === month
+    );
+    if (requiredMonth) {
+      const isMonthExists = true;
+      return isMonthExists;
+    } else {
+      requiredYear.months.push({
+        month,
+        wishfullAverageLength,
+        planOps,
+      });
+    }
+  } else {
+    db.data!.push({
+      year,
+      months: [
+        {
+          month,
+          wishfullAverageLength,
+          planOps,
+        },
+      ],
+    });
   }
   db.write();
 }

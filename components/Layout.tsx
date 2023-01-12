@@ -1,7 +1,12 @@
-import { ReactNode, useState, useEffect, useCallback } from "react";
+import { ReactNode, useState, useEffect, useCallback, useRef } from "react";
 import { useRouter } from "next/router";
 import { useUserContext } from "../pages/context/UserContext";
-import { useQuery, useMutation } from "react-query";
+import {
+  useQuery,
+  useMutation,
+  UseQueryResult,
+  MutationFunction,
+} from "react-query";
 import styled from "styled-components";
 import ky from "ky";
 
@@ -9,7 +14,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import SignInModal from "./modalWindows/SignInModal";
 import AreYouSureModal from "./modalWindows/AreYouSureModal";
-import ModalWindow from "./modalWindows/ModalWindow";
+import ErrorModal from "./modalWindows/ErrorModal";
 import LoaderModal from "./modalWindows/LoaderModal";
 
 const Wraper = styled.div`
@@ -27,7 +32,10 @@ export default function Layout({ children }: { children: ReactNode }) {
   const [isSignInModalVisible, setIsSignInModalVisible] = useState(false);
   const [isAreYouSureModalVisible, setIsAreYouSureModalVisible] =
     useState(false);
+  const [isErrorVisible, setIserrorVisible] = useState(false);
+  const [isLoginFailed, setIsLoginFailed] = useState(false);
   const { user, setUser } = useUserContext();
+  const userRef = useRef();
 
   // const getUser = () => {
   //   setUser(data);
@@ -42,23 +50,60 @@ export default function Layout({ children }: { children: ReactNode }) {
   //   setUser(responseData);
   // }, []);
 
-  const { mutateAsync, mutate, data } = useMutation(
+  const {
+    mutateAsync,
+    mutate,
+    data: loginResponse,
+    isLoading: isSigningIn,
+    isError: isLoginError,
+  } = useMutation(
     "LOG_IN_REQUEST",
-    async ({ login, password }: { login: string; password: string }) => {
-      const res = await ky
+    ({ login, password }: { login: string; password: string }) => {
+      return ky
         .post("/api/login2", {
           json: { login, password },
         })
-        .json<{ login: string; role: string }>();
-      return res;
+        .json<{ userName: string; role: string }>();
+    },
+    {
+      onError: () => {
+        setIsLoginFailed(true);
+        setTimeout(() => {
+          setIsLoginFailed(false);
+        }, 500);
+      },
+      onSuccess: (loginResponse) => {
+        setUser(loginResponse);
+        setIsSignInModalVisible(false);
+      },
     }
   );
 
   const handleSignIn = async (login: string, password: string) => {
-    await mutateAsync({ login, password });
-    setUser(data);
-    setIsSignInModalVisible(false);
+    const n = mutate({ login, password });
+    console.log("n", n);
+    // console.log("response", loginResponse);
+    // setUser(loginResponse);
   };
+
+  // useEffect(() => {
+  //   if (loginResponse?.role) {
+  //     console.log("before login", loginResponse);
+  //     setUser(loginResponse);
+  //     console.log({
+  //       userName: loginResponse.userName,
+  //       role: loginResponse.role,
+  //     });
+  //     console.log(user);
+  //     setIsSignInModalVisible(false);
+  //   } else {
+  // console.log("before login if not", loginResponse);
+  // setIsLoginFailed(true);
+  // setTimeout(() => {
+  //   setIsLoginFailed(false);
+  // }, 500);
+  //   }
+  // }, [loginResponse]);
 
   const handleSignOut = () => {
     mutate({ login: "", password: "" });
@@ -89,28 +134,61 @@ export default function Layout({ children }: { children: ReactNode }) {
     data: secretResponse,
     isLoading,
     isError,
+    isSuccess,
     error,
-  } = useQuery("CHECK_SECRET", async () => {
-    return await ky
-      .get("/api/cookie")
-      .json<{ secret: string; userName: string; role: string }>();
-  });
-  console.log(secretResponse);
+  } = useQuery(
+    ["CHECK_SECRET"],
+    async () => {
+      return await ky
+        .get("/api/cookie")
+        .json<{ userName: string; role: string }>();
+    },
+    {
+      onSuccess: (secretResponse) => {
+        if (secretResponse?.role) {
+          console.log("secretResponse", secretResponse);
+          setUser({
+            userName: secretResponse.userName,
+            role: secretResponse.role,
+          });
+        } else {
+          setUser(undefined);
+        }
+      },
+      // onError: () => {
+      //   router.push("/");
+      //   setUser(undefined);
+      // },
+      // cacheTime: 0,
+    }
+  );
 
-  // if (isLoading) return <LoaderModal />;
+  // useEffect(() => {
+  //   if (secretResponse?.role) {
+  //     console.log("secretResponse", secretResponse);
+  //     setUser({
+  //       userName: secretResponse.userName,
+  //       role: secretResponse.role,
+  //     });
+  //   } else {
+  //     setUser(undefined);
+  //   }
+  // }, [secretResponse]);
 
-  // if (isError)
-  //   return (
-  //     <ModalWindow isVisible={true} onClose={() => {}}>
-  //       <h1>{`error`}</h1>
-  //     </ModalWindow>
-  //   );
+  // console.log("secretResponse", secretResponse);
 
-  // if (secretResponse?.role) {
-  //   setUser({ userName: secretResponse.userName, role: secretResponse.role });
-  // } else {
-  //   setUser(undefined);
-  // }
+  if (isSigningIn) return <LoaderModal text="Выполняется вход..." />;
+
+  if (isLoginError)
+    return (
+      <ErrorModal
+        isVisible={true}
+        onClose={() => {
+          setIserrorVisible(false);
+        }}
+      ></ErrorModal>
+    );
+
   console.log("User", user);
 
   return (
@@ -119,6 +197,7 @@ export default function Layout({ children }: { children: ReactNode }) {
       <Container>
         {children}
         <SignInModal
+          isNotValid={isLoginFailed}
           isVisible={isSignInModalVisible}
           onClose={() => {
             setIsSignInModalVisible(false);

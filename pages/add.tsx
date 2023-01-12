@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useMutation, useQuery } from "react-query";
+import { useCallback, useState } from "react";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import { useUserContext } from "./context/UserContext";
 import styled from "styled-components";
 
@@ -213,6 +213,7 @@ export default function AddPage() {
   const [wishfullAverageLength, setWishfullAveregeLength] = useState("");
   const [notValidInput, setNotValidInput] = useState("");
 
+  const queryClient = useQueryClient();
   // console.log("Add Page", user);
 
   const {
@@ -279,6 +280,46 @@ export default function AddPage() {
         })
         .json<{ message: string }>();
       return res;
+    },
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries("REQUEST_DATA_BASE");
+      },
+    }
+  );
+
+  const {
+    data: addMonthResponse,
+    mutate: addMonth,
+    mutateAsync: addMonthAsync,
+  } = useMutation(
+    "ADD_MONTH",
+    async ({
+      year,
+      month,
+      planOps,
+      wishfullAverageLength,
+    }: {
+      year: number;
+      month: string | undefined;
+      planOps: number;
+      wishfullAverageLength: number;
+    }) => {
+      const res = await ky
+        .put("/api/dataBaseApi", {
+          json: {
+            year,
+            month,
+            planOps,
+            wishfullAverageLength,
+          },
+        })
+        .json<{ message: string }>();
+    },
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries("REQUEST_DATA_BASE");
+      },
     }
   );
 
@@ -302,6 +343,15 @@ export default function AddPage() {
       duration,
     });
   };
+
+  const onAdminFormSubmit = useCallback(() => {
+    addMonth({
+      year: newYear,
+      month: newMonth,
+      planOps: Number(planOps),
+      wishfullAverageLength: Number(wishfullAverageLength),
+    });
+  }, [newYear, newMonth, planOps, wishfullAverageLength]);
 
   const getDaysInMonth = (month: string | undefined, year: number) => {
     return (
@@ -568,7 +618,7 @@ export default function AddPage() {
                 setNewYear(Number(e.target.value));
               }}
             >
-              {yearIterator.map((yearItem) => {
+              {startYearIterator.map((yearItem) => {
                 return <option value={yearItem}>{yearItem}</option>;
               })}
             </SelectStyled>
@@ -600,7 +650,9 @@ export default function AddPage() {
               }
             ></InputStyled>
           </AddContainer>
-          <ButtonStyled>Добавить месяц</ButtonStyled>
+          <ButtonStyled onClick={onAdminFormSubmit}>
+            Добавить месяц
+          </ButtonStyled>
         </AdminContainer>
       </Wraper>
     </WrapperAllContent>

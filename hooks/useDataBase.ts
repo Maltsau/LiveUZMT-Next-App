@@ -9,8 +9,12 @@ export function useDataBase({
   onError?: (error: any) => void;
   onSuccess?: (data: DataBaseType) => void;
 }): UseQueryResult<DataBaseType> {
-  return useQuery("REQUEST_DATA_BASE", async () => {
-    const res = await ky.get("/api/dataBaseApi");
-    return await res.json();
-  });
+  return useQuery(
+    "REQUEST_DATA_BASE",
+    async () => {
+      const res = await ky.get("/api/dataBaseApi");
+      return await res.json();
+    },
+    { cacheTime: 0 }
+  );
 }

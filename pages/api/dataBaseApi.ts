@@ -1,6 +1,11 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { checkUser } from "./cookie";
-import { addRecord, deleteRecord, getDataBase } from "../../dataBase/DataBase";
+import {
+  addRecord,
+  deleteRecord,
+  getDataBase,
+  addMonth,
+} from "../../dataBase/DataBase";
 
 type ResponseType =
   | Array<any>
@@ -15,7 +20,7 @@ export default function handler(
   res: NextApiResponse<ResponseType>
 ) {
   if (req.method === "GET") {
-    res.status(200).json(DataBase);
+    res.status(200).json(getDataBase());
     res.status(500).json({ error: "Status 500" });
   } else if (req.method === "POST") {
     if (checkUser(req.cookies.secret)) {
@@ -48,5 +53,17 @@ export default function handler(
     console.log("DataBaseApi", req.body.dateTime);
     deleteRecord(req.body.id, req.body.year, req.body.month, req.body.dateTime);
     res.status(200).json({ message: "Deleted" });
+  } else if (req.method === "PUT" && checkUser(req.cookies.secret)) {
+    const isMonthExists = addMonth(
+      req.body.year,
+      req.body.month,
+      req.body.planOps,
+      req.body.wishfullAverageLength
+    );
+    if (isMonthExists) {
+      res.status(400).json({ message: "Month exists" });
+    } else {
+      res.status(200).json({ message: "Month added" });
+    }
   }
 }

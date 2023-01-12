@@ -35,7 +35,7 @@ export default function YearPannel({
     .sort((a: number, b: number) => {
       return a - b;
     });
-  console.log(yearList);
+
   return (
     <Container>
       <SmallRectangle />

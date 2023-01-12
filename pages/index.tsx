@@ -15,8 +15,8 @@ import MONTH_MAP from "../services/monthMap";
 import YearPannel from "../components/YearPannel";
 import MonthPannel from "../components/MonthPannel";
 import MonthTable from "../components/MonthTable";
-import ModalWindow from "../components/modalWindows/ModalWindow";
 import LoaderModal from "../components/modalWindows/LoaderModal";
+import ErrorModal from "../components/modalWindows/ErrorModal";
 
 const Wraper = styled.div`
   width: 100%;
@@ -43,37 +43,20 @@ const ButtonStyled = styled.button`
   border-radius: 5px;
 `;
 
-export default function Home({ userBase }: { userBase: any }) {
-  const [dataBase, setDataBase] = useState([]);
-  const [userDataBase, setUserDataBase] = useState([]);
-  const { user, setUser } = useUserContext();
-
+export default function Home() {
   const [year, setYear] = useState(now.getFullYear());
   const [month, setMonth] = useState([...MONTH_MAP.values()][now.getMonth()]);
+  const [isErrorVisible, setIserrorVisible] = useState(false);
 
-  // useEffect(() => {
-  //   (async function () {
-  //     const response = await fetch("/api/dataBaseApi", { method: "GET" });
-  //     const responseData = await response.json();
-  //     setDataBase(responseData);
-  //   })();
-  // }, []);
+  const { isLoading, data, isError, error } = useDataBase({});
 
-  const onError = (error: any) => {
-    console.log(error);
-  };
+  // function onError(error: any) {
+  //   console.log(error);
+  // }
 
-  const onSuccess = (data: any) => {
-    console.log(data);
-  };
-
-  const { isLoading, data, isError, error } = useDataBase({
-    onError,
-    onSuccess,
-  });
-
-  // console.log(JSON.stringify(data));
-  // console.dir(error);
+  // function onSuccess(data: any) {
+  //   console.log("onSuccess", data);
+  // }
 
   const handleYearChange = useCallback(
     (year: number) => {
@@ -89,13 +72,16 @@ export default function Home({ userBase }: { userBase: any }) {
     [setMonth]
   );
 
-  if (isLoading) return <LoaderModal />;
+  if (isLoading) return <LoaderModal text="Загружается база данных..." />;
 
   if (isError)
     return (
-      <ModalWindow isVisible={true} onClose={() => {}}>
-        <h1>{`error`}</h1>
-      </ModalWindow>
+      <ErrorModal
+        isVisible={true}
+        onClose={() => {
+          setIserrorVisible(false);
+        }}
+      ></ErrorModal>
     );
 
   return (

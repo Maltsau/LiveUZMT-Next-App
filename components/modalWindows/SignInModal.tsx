@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { useState, useEffect, useCallback } from "react";
 import styled from "styled-components";
 
@@ -18,24 +19,28 @@ const SignInForm = styled.form`
   justify-content: center;
 `;
 
-const InputStyled = styled.input`
+const InputStyled = styled.input<{
+  isNotValid: boolean;
+}>`
   width: 100%;
-  min-height: 50px;
   font-size: 1.2em;
   margin: 5px;
   padding: 10px;
   border: solid red 1px;
   border-radius: 5px;
+  background-color: ${({ isNotValid }) => (isNotValid ? "pink" : "white")};
 `;
 
 export default function SignInModal({
   isVisible,
   onClose,
   onFormSubmit,
+  isNotValid,
 }: {
   isVisible: boolean;
   onClose: any;
   onFormSubmit: any;
+  isNotValid: boolean;
 }) {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
@@ -51,6 +56,7 @@ export default function SignInModal({
       <Container>
         <SignInForm onSubmit={handleSubmit}>
           <InputStyled
+            isNotValid={isNotValid}
             value={login}
             onChange={(e) => {
               setLogin(e.target.value);
@@ -59,14 +65,15 @@ export default function SignInModal({
             placeholder={"Логин"}
           />
           <InputStyled
+            isNotValid={isNotValid}
             value={password}
             onChange={(e) => {
               setPassword(e.target.value);
             }}
-            type={"input"}
+            type={"password"}
             placeholder={"Пароль"}
           />
-          <InputStyled type={"submit"} value={"Войти"} />
+          <InputStyled isNotValid={false} type={"submit"} value={"Войти"} />
         </SignInForm>
       </Container>
     </ModalWindow>

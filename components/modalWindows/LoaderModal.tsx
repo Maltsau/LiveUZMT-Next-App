@@ -2,7 +2,9 @@ import React from "react";
 import styled, { keyframes } from "styled-components";
 
 const ModalBackground = styled.div`
-  display: "block";
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   position: fixed;
   z-index: 1;
   padding-top: 100px;
@@ -38,10 +40,18 @@ const Spinner = styled.div`
   border-radius: 50%;
 `;
 
-export default function LoaderModal() {
+const LabelStyled = styled.label`
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  color: white;
+`;
+
+export default function LoaderModal({ text }: { text: string }) {
   return (
     <ModalBackground>
       <Spinner></Spinner>
+      <LabelStyled>{text}</LabelStyled>
     </ModalBackground>
   );
 }

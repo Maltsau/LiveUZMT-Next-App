@@ -6,7 +6,7 @@ export type DataBaseType = [
         month: string;
         wishfullAverageLength: number;
         planOps: number;
-        ops: [
+        ops?: [
           {
             id?: string;
             date: string;

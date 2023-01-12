@@ -7,7 +7,8 @@ import { useEditModeContext } from "./context/EditModeContext";
 import { useDeleteRecord } from "../hooks/useDeleteRecord";
 
 import OperationButton from "../components/buttons/OperationButton";
-import ModalWindow from "../components/modalWindows/ModalWindow";
+import LoaderModal from "../components/modalWindows/LoaderModal";
+import ErrorModal from "../components/modalWindows/ErrorModal";
 
 import { DataBaseType } from "../types/types";
 import { useUserContext } from "./context/UserContext";
@@ -59,6 +60,19 @@ export default function SearchPage() {
   const { user } = useUserContext();
   const { isLoading, data, isError, error } = useDataBase({});
   const { mutate: deleteOperation } = useDeleteRecord();
+  const [isErrorVisible, setIserrorVisible] = useState(false);
+
+  if (isLoading) return <LoaderModal />;
+
+  if (isError)
+    return (
+      <ErrorModal
+        isVisible={true}
+        onClose={() => {
+          setIserrorVisible(false);
+        }}
+      ></ErrorModal>
+    );
 
   const searchBase = data?.flatMap((yearItem: any) => {
     return yearItem.months?.flatMap((monthItem: any) => {
@@ -108,7 +122,8 @@ export default function SearchPage() {
         return monthItem.ops;
       })
       ?.find((opsItem: any) => {
-        return opsItem.id === resultItem.index;
+        console.log("index", resultItem.index);
+        return opsItem.id?.toLowerCase() === resultItem.index;
       });
   });
 
@@ -128,19 +143,30 @@ export default function SearchPage() {
     return year.month;
   };
 
-  if (isLoading)
-    return (
-      <ModalWindow isVisible={true} onClose={() => {}}>
-        <h1>Loading...</h1>
-      </ModalWindow>
-    );
-
-  if (isError)
-    return (
-      <ModalWindow isVisible={true} onClose={() => {}}>
-        <h1>{`error`}</h1>
-      </ModalWindow>
-    );
+  console.log("searchBase", searchBase);
+  console.log(
+    "presult",
+    result?.flatMap((resultItem: any) => {
+      return data
+        ?.filter((yearItem: any) => {
+          return yearItem.year === resultItem.year;
+        })
+        ?.flatMap((monthItem: any) => {
+          return monthItem.months;
+        })
+        ?.filter((monthItem: any) => {
+          return monthItem.month === resultItem.month;
+        })
+        ?.flatMap((monthItem: any) => {
+          return monthItem.ops;
+        });
+      // ?.find((opsItem: any) => {
+      //   return opsItem.id === resultItem.index;
+      // });
+    })
+  );
+  console.log("outputArray", outputArray);
+  console.log("result", outputArray);
 
   return (
     <WrapperAllContent>

@@ -1,5 +1,5 @@
 import ky from "ky";
-import { useMutation, UseMutationResult } from "react-query";
+import { useMutation, UseMutationResult, useQueryClient } from "react-query";
 
 type DeleteRequestType = {
   id: string;
@@ -9,6 +9,7 @@ type DeleteRequestType = {
 };
 
 export function useDeleteRecord() {
+  const queryClient = useQueryClient();
   return useMutation(
     "DELETE_RECORD",
     async ({ id, year, month, dateTime }: DeleteRequestType) => {
@@ -18,6 +19,11 @@ export function useDeleteRecord() {
         })
         .json<{ message: string }>();
       return res;
+    },
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries("REQUEST_DATA_BASE");
+      },
     }
   );
 }
