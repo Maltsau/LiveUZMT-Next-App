@@ -2,6 +2,8 @@ import styled from "styled-components";
 
 import CustomLink from "./buttons/CustomLink";
 
+import { DataBaseType } from "../types/types";
+
 const Container = styled.div`
   display: flex;
   margin-top: 2px;
@@ -24,14 +26,13 @@ export default function YearPannel({
   year,
   onChange,
 }: {
-  db: any;
+  db: DataBaseType | undefined;
   year: number;
-  onChange: any;
+  onChange: (year: number) => void;
 }) {
   const yearList = db
-    .map((yearItem: any) => {
-      return yearItem.year;
-    })
+    ?.filter((yearItem) => yearItem.months.length)
+    .map((yearItem) => yearItem.year)
     .sort((a: number, b: number) => {
       return a - b;
     });
@@ -39,7 +40,7 @@ export default function YearPannel({
   return (
     <Container>
       <SmallRectangle />
-      {yearList.map((yearItem: any) => {
+      {yearList?.map((yearItem: any) => {
         return (
           <CustomLink
             text={yearItem}

@@ -621,8 +621,8 @@ export default function AddPage() {
                 onChange={(e) =>
                   validateNumber(e.target.value, setDebitMass, "debitMass")
                 }
-                pattern="[0-9]"
-                title="Numbers only"
+                // pattern="[0-9]"
+                // title="Numbers only"
               ></InputStyled>
               <InputStyled
                 isNotValid={notValidInput === "density"}

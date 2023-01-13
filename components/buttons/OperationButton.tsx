@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Image from "next/image";
+import { DataBaseType, SingleOpType } from "../../types/types";
 
 const Container = styled.div`
   width: 100%;
@@ -63,26 +64,135 @@ const DeleteButton = styled.span<{
   margin-left: auto;
 `;
 
+const Table = styled.table`
+  width: 100%;
+  border-collapse: collapse;
+`;
+const TableRow = styled.tr`
+  height: 20px;
+`;
+
+const Cell = styled.td`
+  text-align: center;
+  padding: 10px;
+  border: solid black 1px;
+`;
+
+const DeleteTableButton = styled.button`
+  border: 0;
+  background-color: transparent;
+  justify-self: end;
+`;
+
+const FileIconsContainer = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
 export default function OperationButton({
+  operation,
+  user,
+  isEditMode,
   onClick,
   onSecondClick,
   onDeleteOperation,
+  onDeleteRecord,
   text,
   isHighlighted,
   isDeleteble,
   isCurrent,
-  table,
 }: {
+  operation: SingleOpType;
+  user: any;
+  isEditMode: boolean;
   onClick?: any;
   onSecondClick?: any;
   onDeleteOperation?: any;
+  onDeleteRecord: (dateTime: string) => void;
   text: string;
   isHighlighted: boolean;
   isDeleteble: boolean;
   isCurrent: boolean;
-  table: JSX.Element | string;
 }) {
-  if (!isHighlighted) {
+  if (isHighlighted) {
+    return (
+      <Container onClick={onSecondClick}>
+        <UpperTrapezoid isCurrent={isCurrent}>
+          <ButtonStyledActive isCurrent={isCurrent}>{text}</ButtonStyledActive>
+        </UpperTrapezoid>
+        <InnerContainer>
+          <Table>
+            <thead>
+              <TableRow>
+                <Cell>Дата, время</Cell>
+                <Cell>Дебит, т/сут</Cell>
+                <Cell>
+                  Плотность <br></br> жидкости, <br></br> кг/м<sup>3</sup>
+                </Cell>
+                <Cell>
+                  Обводнён-<br></br>ность, <br></br> %
+                </Cell>
+                <Cell>Дополнительно</Cell>
+                {user?.role === "ADMIN" && isEditMode ? (
+                  <Cell>Действия</Cell>
+                ) : null}
+              </TableRow>
+            </thead>
+            <tbody>
+              {operation.result.map((result: any) => {
+                return (
+                  <TableRow
+                    key={result.dateTime + result.number + result.field}
+                  >
+                    <Cell>{result.dateTime}</Cell>
+                    <Cell>{result.debitMass}</Cell>
+                    <Cell>{result.density}</Cell>
+                    <Cell>{result.watterRate}</Cell>
+                    <Cell>
+                      <FileIconsContainer>
+                        <Image
+                          src="/excell.svg"
+                          height={20}
+                          width={20}
+                          alt="EXSELL"
+                        />
+                        <Image
+                          src="/add-photo.png"
+                          height={20}
+                          width={20}
+                          alt="PHOTO"
+                        />
+                      </FileIconsContainer>
+                    </Cell>
+                    {user?.role === "ADMIN" && isEditMode ? (
+                      <Cell>
+                        <DeleteTableButton
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            onDeleteRecord(result.dateTime);
+                          }}
+                        >
+                          <Image
+                            src="/delete.png"
+                            height={20}
+                            width={20}
+                            alt="DELETE"
+                          />
+                        </DeleteTableButton>{" "}
+                      </Cell>
+                    ) : null}
+                  </TableRow>
+                );
+              })}
+            </tbody>
+          </Table>
+        </InnerContainer>
+        <LowerTrapezoid isCurrent={isCurrent} />
+      </Container>
+    );
+  } else {
     return (
       <Container onClick={onClick}>
         <UpperTrapezoid isCurrent={isCurrent}>
@@ -99,16 +209,6 @@ export default function OperationButton({
             </DeleteButton>
           </ButtonStyled>
         </UpperTrapezoid>
-        <LowerTrapezoid isCurrent={isCurrent} />
-      </Container>
-    );
-  } else {
-    return (
-      <Container onClick={onSecondClick}>
-        <UpperTrapezoid isCurrent={isCurrent}>
-          <ButtonStyledActive isCurrent={isCurrent}>{text}</ButtonStyledActive>
-        </UpperTrapezoid>
-        <InnerContainer>{table}</InnerContainer>
         <LowerTrapezoid isCurrent={isCurrent} />
       </Container>
     );

@@ -243,5 +243,10 @@
     "secret": "6.007529740907423",
     "userName": "1",
     "role": "ADMIN"
+  },
+  {
+    "secret": "7.390043596519177",
+    "userName": "1",
+    "role": "ADMIN"
   }
 ]

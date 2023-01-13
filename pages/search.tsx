@@ -62,7 +62,7 @@ export default function SearchPage() {
   const { mutate: deleteOperation } = useDeleteRecord();
   const [isErrorVisible, setIserrorVisible] = useState(false);
 
-  if (isLoading) return <LoaderModal />;
+  if (isLoading) return <LoaderModal text="Fetching data..." />;
 
   if (isError)
     return (
@@ -181,6 +181,9 @@ export default function SearchPage() {
         {outputArray?.map((item: any, index: number) => {
           return (
             <OperationButton
+              user={user}
+              isEditMode={isEditMode}
+              operation={item}
               onDeleteOperation={() => {
                 deleteOperation({
                   id: item.id,
@@ -188,68 +191,22 @@ export default function SearchPage() {
                   month: getRecordMonth(result, item),
                 });
               }}
+              onDeleteRecord={(dateTime) => {
+                deleteOperation({
+                  id: item.id,
+                  year: getRecordYear(result, item),
+                  month: getRecordMonth(result, item),
+                  dateTime,
+                });
+              }}
               isDeleteble={user?.role === "ADMIN" && isEditMode}
               onClick={() => {
-                console.log(outputArray);
-                console.log(item.id);
                 setOperation(item.id);
                 console.log("sets", operation);
               }}
               onSecondClick={() => {
                 setOperation("");
               }}
-              table={
-                <Table>
-                  <thead>
-                    <TableRow>
-                      <Cell>Дата, время</Cell>
-                      <Cell>Дебит, т/сут</Cell>
-                      <Cell>
-                        Плотность <br></br> жидкости, <br></br> кг/м<sup>3</sup>
-                      </Cell>
-                      <Cell>
-                        Обводнён-<br></br>ность, <br></br> %
-                      </Cell>
-                    </TableRow>
-                  </thead>
-                  <tbody>
-                    {item?.result.map((resultItem: any) => {
-                      return (
-                        <TableRow key={resultItem.dateTime}>
-                          <Cell>{resultItem.dateTime}</Cell>
-                          <Cell>{resultItem.debitMass}</Cell>
-                          <Cell>{resultItem.density}</Cell>
-                          <Cell>
-                            {resultItem.watterRate}
-                            {user?.role === "ADMIN" && isEditMode ? (
-                              <DeleteButton
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  deleteOperation({
-                                    id: item?.id,
-                                    year: getRecordYear(result, resultItem),
-                                    month: getRecordMonth(result, resultItem),
-                                    dateTime: resultItem.dateTime,
-                                  });
-                                  console.log("Item", item);
-                                  console.log("resultItem", resultItem);
-                                }}
-                              >
-                                <Image
-                                  src="/delete.png"
-                                  height={20}
-                                  width={20}
-                                  alt="DELETE"
-                                />
-                              </DeleteButton>
-                            ) : null}
-                          </Cell>
-                        </TableRow>
-                      );
-                    })}
-                  </tbody>
-                </Table>
-              }
               isHighlighted={item?.id === operation}
               isCurrent={
                 !item?.result
