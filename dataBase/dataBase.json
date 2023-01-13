@@ -8,19 +8,85 @@
         "planOps": 23,
         "ops": [
           {
-            "id": "12.01.2023 34 wads",
+            "id": "1.03.2022 12 dsafds",
+            "date": "1.03.2022",
+            "department": 1,
+            "number": "12",
+            "field": "dsafds",
+            "result": [
+              {
+                "isFinal": false,
+                "dateTime": "12.01.2023 19:49",
+                "debitMass": 123,
+                "density": 2,
+                "watterRate": 1
+              }
+            ]
+          },
+          {
+            "id": "12.01.2023 ds sds",
             "date": "12.01.2023",
             "department": 1,
-            "number": "34",
-            "field": "wads",
-            "duration": 33,
+            "number": "ds",
+            "field": "sds",
+            "result": [
+              {
+                "isFinal": false,
+                "dateTime": "12.01.2023 19:52",
+                "debitMass": 1223,
+                "density": 2,
+                "watterRate": 11
+              }
+            ]
+          },
+          {
+            "id": "12.03.2022 1 dsa",
+            "date": "12.03.2022",
+            "department": 1,
+            "number": "1",
+            "field": "dsa",
+            "duration": 1,
             "result": [
               {
                 "isFinal": true,
-                "dateTime": "12.01.2023 13:25",
-                "debitMass": 22,
+                "dateTime": "12.01.2023 19:52",
+                "debitMass": 1,
                 "density": 1,
-                "watterRate": 32
+                "watterRate": 1
+              }
+            ]
+          },
+          {
+            "id": "13.01.2023 34 dsad",
+            "date": "13.01.2023",
+            "department": 1,
+            "number": "34",
+            "field": "dsad",
+            "duration": 11,
+            "result": [
+              {
+                "isFinal": true,
+                "dateTime": "13.01.2023 09:33",
+                "debitMass": 121,
+                "density": 1,
+                "watterRate": 1
+              }
+            ]
+          },
+          {
+            "id": "13.01.2023 1 sdsdd",
+            "date": "13.01.2023",
+            "department": 1,
+            "number": "1",
+            "field": "sdsdd",
+            "duration": 1,
+            "result": [
+              {
+                "isFinal": true,
+                "dateTime": "13.01.2023 09:46",
+                "debitMass": 1,
+                "density": 2,
+                "watterRate": 1
               }
             ]
           }
@@ -261,7 +327,8 @@
       {
         "month": "июль",
         "wishfullAverageLength": 19,
-        "planOps": 23
+        "planOps": 23,
+        "ops": []
       }
     ]
   },
@@ -271,7 +338,8 @@
       {
         "month": "июль",
         "wishfullAverageLength": 19,
-        "planOps": 23
+        "planOps": 23,
+        "ops": []
       }
     ]
   },
@@ -281,7 +349,8 @@
       {
         "month": "январь",
         "wishfullAverageLength": 19,
-        "planOps": 23
+        "planOps": 23,
+        "ops": []
       }
     ]
   },
@@ -291,7 +360,78 @@
       {
         "month": "январь",
         "wishfullAverageLength": 19,
-        "planOps": 23
+        "planOps": 23,
+        "ops": [
+          {
+            "id": "13.01.2010 1 dsadszf",
+            "date": "13.01.2010",
+            "department": 1,
+            "number": "1",
+            "field": "dsadszf",
+            "result": [
+              {
+                "isFinal": true,
+                "dateTime": "13.01.2010 09:50",
+                "debitMass": 12,
+                "density": 1,
+                "watterRate": 11
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "month": "март",
+        "wishfullAverageLength": "19",
+        "planOps": "23",
+        "ops": [
+          {
+            "id": "13.03.2010 12 dfdsf",
+            "date": "13.03.2010",
+            "department": 1,
+            "number": "12",
+            "field": "dfdsf",
+            "duration": 1,
+            "result": [
+              {
+                "isFinal": true,
+                "dateTime": "13.03.2010 09:59",
+                "debitMass": 12,
+                "density": 1,
+                "watterRate": 11
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "year": 2020,
+    "months": [
+      {
+        "month": "январь",
+        "wishfullAverageLength": 19,
+        "planOps": 23,
+        "ops": [
+          {
+            "id": "13.01.2020 11 dfsddx",
+            "date": "13.01.2020",
+            "department": 1,
+            "number": "11",
+            "field": "dfsddx",
+            "duration": "1",
+            "result": [
+              {
+                "isFinal": true,
+                "dateTime": "13.01.2020 10:03",
+                "debitMass": 12,
+                "density": 1,
+                "watterRate": 11
+              }
+            ]
+          }
+        ]
       }
     ]
   }

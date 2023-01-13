@@ -1,5 +1,3 @@
-import { useRouter } from "next/router";
-import Link from "next/link";
 import styled from "styled-components";
 
 import ModalWindow from "./ModalWindow";
@@ -31,28 +29,23 @@ const ButtonStyled = styled.button`
   border-radius: 5px;
 `;
 
-export default function AreYouSureModal({
-  onClose,
+export default function AddMonthModal({
   isVisible,
-  onFormSubmit,
+  onClose,
+  onSubmit,
 }: {
-  onClose: any;
   isVisible: boolean;
-  onFormSubmit: any;
+  onClose: () => void;
+  onSubmit: () => void;
 }) {
-  const router = useRouter();
-
   return (
-    <ModalWindow onClose={onClose} isVisible={isVisible}>
+    <ModalWindow isVisible={isVisible} onClose={onClose}>
       <Container>
         <Warning>
-          Неавторизованные пользователи не могут добавлять данные
+          Похоже, что вы первый, кто решил добавить запись в этом месяце
         </Warning>
-        <Question>Хотоите выйти?</Question>
-        <Link href={"/"}>
-          <ButtonStyled onClick={onFormSubmit}>Да</ButtonStyled>
-        </Link>
-        <ButtonStyled onClick={onClose}>Нет</ButtonStyled>
+        <Question>Введите дополнительную информацию</Question>
+        <ButtonStyled onClick={onSubmit}>Да</ButtonStyled>
       </Container>
     </ModalWindow>
   );

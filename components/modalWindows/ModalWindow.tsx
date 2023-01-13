@@ -18,7 +18,6 @@ const ModalBackground = styled.div<{
 
 const ModalContent = styled.div`
   display: block;
-  width: 100%;
   min-height: 100px;
   background-color: white;
   margin: auto;

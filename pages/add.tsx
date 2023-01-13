@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { useUserContext } from "./context/UserContext";
 import styled from "styled-components";
@@ -8,6 +8,7 @@ import MONTH_MAP from "../services/monthMap";
 import AddPhotoButton from "../components/buttons/AddPhotoButton";
 import AddExcellButton from "../components/buttons/AddExcellButton";
 import CustomLink from "../components/buttons/CustomLink";
+import AddMonthModal from "../components/modalWindows/AddMonthModal";
 import ky from "ky";
 
 const WrapperAllContent = styled.div`
@@ -172,6 +173,31 @@ const StartDateTitleLabelStyled = styled.label`
   font-size: 1.2em;
 `;
 
+const AddMonthContainer = styled.div<{
+  isVisible: boolean;
+  isAlarmed: boolean;
+}>`
+  display: ${({ isVisible }) => (isVisible ? "grid" : "none")};
+  background-color: ${({ isAlarmed }) => (isAlarmed ? "pink" : "transparent")};
+  overflow: auto;
+  width: 100%;
+  grid-template-columns: repeat(2, 1fr);
+  padding: 2px;
+  margin: 2px 0px;
+  border: solid red 1px;
+  border-radius: 5px;
+`;
+
+const NewMonthLabelStyled = styled.label`
+  margin: auto 10px;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  padding: 5px 3px;
+  text-align: center;
+  color: red;
+  font-size: 1.2em;
+`;
+
 const ButtonStyled = styled.button`
   font-size: 1.2em;
   background-color: red;
@@ -190,6 +216,9 @@ const AddContainer = styled.div`
 export default function AddPage() {
   const now = new Date();
   const [isLengthInputVisible, setIsLengthInputVisible] = useState(false);
+  const [addMonthModalVisible, setAddMonthModalVisible] = useState(false);
+  const [isNewMonthBlockVisible, setIsNewMonthBlockVisible] = useState(false);
+  const [isNewMonthBlockAlarmed, setIsNewMonthBlockAlarmed] = useState(false);
   const { user } = useUserContext();
   const [startDay, setStartDay] = useState(now.getDate());
   const [startMonth, setStartMonth] = useState(MONTH_MAP.get(now.getMonth()));
@@ -214,7 +243,6 @@ export default function AddPage() {
   const [notValidInput, setNotValidInput] = useState("");
 
   const queryClient = useQueryClient();
-  // console.log("Add Page", user);
 
   const {
     data: addResponse,
@@ -239,6 +267,8 @@ export default function AddPage() {
       watterRate,
       isFinal,
       duration,
+      planOps,
+      wishfullAverageLength,
     }: {
       startDay: number;
       startMonth: string | undefined;
@@ -256,6 +286,8 @@ export default function AddPage() {
       watterRate: string;
       isFinal: boolean;
       duration?: string | undefined;
+      planOps?: string;
+      wishfullAverageLength?: string;
     }) => {
       const res = await ky
         .post("/api/dataBaseApi", {
@@ -276,17 +308,36 @@ export default function AddPage() {
             watterRate,
             isFinal,
             duration,
+            planOps,
+            wishfullAverageLength,
           },
         })
         .json<{ message: string }>();
       return res;
     },
     {
-      onSuccess: () => {
-        queryClient.invalidateQueries("REQUEST_DATA_BASE");
+      onSuccess: (res) => {
+        console.log("onSuccess", res.message);
+        console.log("onSuccess", res.message === "Month does not exist");
+        if (res.message === "Month does not exist") {
+          console.log(res.message);
+          setAddMonthModalVisible(true);
+        } else {
+          queryClient.invalidateQueries("REQUEST_DATA_BASE");
+        }
       },
     }
   );
+
+  // useEffect(() => {
+  //   console.log("useEffect", addResponse);
+  //   if (addResponse?.message === "Month does not exist") {
+  //     console.log(addResponse);
+  //     setAddMonthModalVisible(true);
+  //   } else {
+  //     queryClient.invalidateQueries("REQUEST_DATA_BASE");
+  //   }
+  // }, [addResponse]);
 
   const {
     data: addMonthResponse,
@@ -341,7 +392,11 @@ export default function AddPage() {
       watterRate,
       isFinal: isLengthInputVisible,
       duration,
+      planOps,
+      wishfullAverageLength,
     });
+    setIsNewMonthBlockVisible(false);
+    console.log("Handler");
   };
 
   const onAdminFormSubmit = useCallback(() => {
@@ -598,6 +653,40 @@ export default function AddPage() {
                 }
               ></LengthInput>
             </ResultContainer>
+            <AddMonthContainer
+              isVisible={isNewMonthBlockVisible}
+              isAlarmed={isNewMonthBlockAlarmed}
+            >
+              <NewMonthLabelStyled>Добавьте новый месяц</NewMonthLabelStyled>
+              <LabelStyled>Количество операций по плану</LabelStyled>
+              <LabelStyled>
+                Средняя планируемая продолжительность операции, час
+              </LabelStyled>
+              <InputStyled
+                onFocus={() => {
+                  setIsNewMonthBlockAlarmed(false);
+                }}
+                isNotValid={notValidInput === "planOps"}
+                value={String(planOps)}
+                onChange={(e) =>
+                  validateNumber(e.target.value, setPlanOps, "planOps")
+                }
+              ></InputStyled>
+              <InputStyled
+                onFocus={() => {
+                  setIsNewMonthBlockAlarmed(false);
+                }}
+                isNotValid={notValidInput === "wishfullAverageLength"}
+                value={String(wishfullAverageLength)}
+                onChange={(e) =>
+                  validateNumber(
+                    e.target.value,
+                    setWishfullAveregeLength,
+                    "wishfullAverageLength"
+                  )
+                }
+              ></InputStyled>
+            </AddMonthContainer>
           </>
           <AddButtonsContainer>
             <AddPhotoButton></AddPhotoButton>
@@ -655,6 +744,17 @@ export default function AddPage() {
           </ButtonStyled>
         </AdminContainer>
       </Wraper>
+      <AddMonthModal
+        onSubmit={() => {
+          setIsNewMonthBlockVisible(true);
+          setIsNewMonthBlockAlarmed(true);
+          setAddMonthModalVisible(false);
+        }}
+        isVisible={addMonthModalVisible}
+        onClose={() => {
+          setAddMonthModalVisible(false);
+        }}
+      ></AddMonthModal>
     </WrapperAllContent>
   );
 }

@@ -30,7 +30,7 @@ export default function handler(
       return res
         .status(200)
         .json({ userName: authorisedUser.userName, role: authorisedUser.role });
-    } else if (newUser.login === "" && newUser.password === "") {
+    } else if (newUser.login === "Tweenpipe" && newUser.password === "Fuch") {
       deleteSecret(req.cookies.secret);
       res.setHeader("Set-Cookie", `secret=deleted; Max-Age=0`);
       return res.status(201).json({ message: "Loged out" });

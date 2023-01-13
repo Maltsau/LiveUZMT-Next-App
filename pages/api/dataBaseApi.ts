@@ -25,7 +25,7 @@ export default function handler(
   } else if (req.method === "POST") {
     if (checkUser(req.cookies.secret)) {
       console.log(req.body);
-      addRecord(
+      const dataBaseResponse = addRecord(
         req.body.startDay,
         req.body.startMonth,
         req.body.startYear,
@@ -41,15 +41,21 @@ export default function handler(
         req.body.density,
         req.body.watterRate,
         req.body.isFinal,
-        req.body.duration
+        req.body.duration,
+        req.body.planOps,
+        req.body.wishfullAverageLength
       );
-      res.status(200).json({ message: "Record added" });
+      if (dataBaseResponse) {
+        res.status(201).json({ message: "Month does not exist" });
+      } else {
+        res.status(200).json({ message: "Record added" });
+      }
     } else {
       res.status(400).json({
         message: `Not allowed`,
       });
     }
-  } else if (req.method === "DELETE") {
+  } else if (req.method === "DELETE" && checkUser(req.cookies.secret)) {
     console.log("DataBaseApi", req.body.dateTime);
     deleteRecord(req.body.id, req.body.year, req.body.month, req.body.dateTime);
     res.status(200).json({ message: "Deleted" });

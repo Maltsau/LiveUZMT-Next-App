@@ -68,9 +68,6 @@ export default function Layout({ children }: { children: ReactNode }) {
     {
       onError: () => {
         setIsLoginFailed(true);
-        setTimeout(() => {
-          setIsLoginFailed(false);
-        }, 500);
       },
       onSuccess: (loginResponse) => {
         setUser(loginResponse);
@@ -106,7 +103,7 @@ export default function Layout({ children }: { children: ReactNode }) {
   // }, [loginResponse]);
 
   const handleSignOut = () => {
-    mutate({ login: "", password: "" });
+    mutate({ login: "Tweenpipe", password: "Fuch" });
     setUser(undefined);
     setIsAreYouSureModalVisible(false);
   };
@@ -179,15 +176,15 @@ export default function Layout({ children }: { children: ReactNode }) {
 
   if (isSigningIn) return <LoaderModal text="Выполняется вход..." />;
 
-  if (isLoginError)
-    return (
-      <ErrorModal
-        isVisible={true}
-        onClose={() => {
-          setIserrorVisible(false);
-        }}
-      ></ErrorModal>
-    );
+  // if (isLoginError)
+  //   return (
+  //     <ErrorModal
+  //       isVisible={true}
+  //       onClose={() => {
+  //         setIserrorVisible(false);
+  //       }}
+  //     ></ErrorModal>
+  //   );
 
   console.log("User", user);
 
@@ -197,6 +194,9 @@ export default function Layout({ children }: { children: ReactNode }) {
       <Container>
         {children}
         <SignInModal
+          onFocus={() => {
+            setIsLoginFailed(false);
+          }}
           isNotValid={isLoginFailed}
           isVisible={isSignInModalVisible}
           onClose={() => {

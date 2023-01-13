@@ -1,5 +1,6 @@
 [
   { "userName": "d.maltsev", "password": "8604", "role": "ADMIN" },
+  { "userName": "1", "password": "1", "role": "ADMIN" },
   { "userName": "p.chayka", "password": "8424", "role": "EDITOR" },
   { "userName": "v.fedyushko", "password": "8425", "role": "EDITOR" }
 ]

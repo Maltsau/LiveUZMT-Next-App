@@ -34,7 +34,9 @@ export function addRecord(
   density: number,
   watterRate: number,
   isFinal: boolean,
-  duration: number
+  duration: number,
+  planOps: number,
+  wishfullAverageLength: number
 ) {
   db.read();
   const getMonthNumber = (monthString: string) => {
@@ -55,14 +57,17 @@ export function addRecord(
       return `0${hoursMinutes}`;
     }
   };
-
   const requiredYear = db.data!.find((item) => {
     return item.year === year;
   });
+  // найден ли год
+  // год найден
   if (requiredYear) {
     const requiredMonth = requiredYear.months?.find((item) => {
       return item.month === month;
     });
+    // найден ли месяц
+    // месяц найден
     if (requiredMonth) {
       const requredOperation = requiredMonth.ops?.find((item) => {
         return (
@@ -72,6 +77,8 @@ export function addRecord(
           )}.${startYear} ${number} ${field}`
         );
       });
+      // найдена ли операция
+      // операция найден, пушим запись в массив резалтов операции
       if (requredOperation) {
         requredOperation.result.push({
           isFinal,
@@ -83,6 +90,7 @@ export function addRecord(
           watterRate: Number(watterRate),
         });
         db.write();
+        // операция не найдена, пушим операцию вместе с резалтом в массив операций
       } else {
         requiredMonth.ops?.push({
           id: `${startDay}.${getMonthNumber(
@@ -107,11 +115,15 @@ export function addRecord(
         });
         db.write();
       }
-    } else {
+    }
+    //месяц не найден
+    //заполнены ли поля planOps, wishfullAverageLength
+    // planOps, wishfullAverageLength заполнены, пушим месяц в год
+    else if (planOps && wishfullAverageLength) {
       requiredYear.months?.push({
         month,
-        wishfullAverageLength: 19,
-        planOps: 23,
+        wishfullAverageLength,
+        planOps,
         ops: [
           {
             id: `${startDay}.${getMonthNumber(
@@ -137,8 +149,15 @@ export function addRecord(
         ],
       });
       db.write();
+      // поля не заполнены, возвращаем monthDoesNotExist
+    } else {
+      const monthDoesNotExist = true;
+      return monthDoesNotExist;
     }
-  } else {
+    //год не найден
+    //заполнены ли поля planOps, wishfullAverageLength
+    // planOps, wishfullAverageLength заполнены, пушим год в базу
+  } else if (planOps && wishfullAverageLength) {
     db.data!.push({
       year,
       months: [
@@ -173,6 +192,10 @@ export function addRecord(
       ],
     });
     db.write();
+    // поля не заполнены, возвращаем monthDoesNotExist
+  } else {
+    const monthDoesNotExist = true;
+    return monthDoesNotExist;
   }
 }
 
@@ -191,7 +214,7 @@ export function deleteRecord(
     const requiredOperation = requiredMonth?.find(
       (operationItem) => operationItem.id === id
     )?.result;
-    var requiredOperationIndex = requiredMonth?.findIndex(
+    const requiredOperationIndex = requiredMonth?.findIndex(
       (operationItem) => operationItem.id === id
     );
     console.log("Data Base requiredOperation", requiredOperation);
@@ -205,6 +228,9 @@ export function deleteRecord(
       requiredMonth?.splice(requiredOperationIndex!, 1);
     }
   } else {
+    const requiredOperationIndex = requiredMonth?.findIndex(
+      (operationItem) => operationItem.id === id
+    );
     console.log("DataBase", requiredMonth, requiredOperationIndex);
     requiredMonth?.splice(requiredOperationIndex!, 1);
   }

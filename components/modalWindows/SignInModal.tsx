@@ -36,11 +36,13 @@ export default function SignInModal({
   onClose,
   onFormSubmit,
   isNotValid,
+  onFocus,
 }: {
   isVisible: boolean;
   onClose: any;
   onFormSubmit: any;
   isNotValid: boolean;
+  onFocus: () => void;
 }) {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
@@ -56,6 +58,7 @@ export default function SignInModal({
       <Container>
         <SignInForm onSubmit={handleSubmit}>
           <InputStyled
+            onFocus={onFocus}
             isNotValid={isNotValid}
             value={login}
             onChange={(e) => {
@@ -65,6 +68,7 @@ export default function SignInModal({
             placeholder={"Логин"}
           />
           <InputStyled
+            onFocus={onFocus}
             isNotValid={isNotValid}
             value={password}
             onChange={(e) => {
