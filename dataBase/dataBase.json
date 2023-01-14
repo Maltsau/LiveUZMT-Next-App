@@ -4,8 +4,8 @@
     "months": [
       {
         "month": "январь",
-        "wishfullAverageLength": 19,
-        "planOps": 23,
+        "wishfullAverageLength": "12",
+        "planOps": "11",
         "ops": [
           {
             "id": "13.01.2023 45 выпавп",
@@ -371,6 +371,16 @@
             ]
           }
         ]
+      },
+      {
+        "month": "май",
+        "wishfullAverageLength": 34,
+        "planOps": 12
+      },
+      {
+        "month": "июль",
+        "wishfullAverageLength": 12,
+        "planOps": 12
       }
     ]
   },

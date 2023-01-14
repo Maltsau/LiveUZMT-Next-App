@@ -250,8 +250,8 @@ export function addMonth(
       (monthItem) => monthItem.month === month
     );
     if (requiredMonth) {
-      const isMonthExists = true;
-      return isMonthExists;
+      requiredMonth.planOps = planOps;
+      requiredMonth.wishfullAverageLength = wishfullAverageLength;
     } else {
       requiredYear.months.push({
         month,

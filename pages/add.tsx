@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { useUserContext } from "./context/UserContext";
+import { useAddMonth } from "../hooks/useAddMonth";
 import styled from "styled-components";
 
 import MONTH_MAP from "../services/monthMap";
@@ -242,6 +243,12 @@ export default function AddPage() {
   const [wishfullAverageLength, setWishfullAveregeLength] = useState("");
   const [notValidInput, setNotValidInput] = useState("");
 
+  const {
+    data: addMonthResponse,
+    mutate: addMonth,
+    mutateAsync: addMonthAsync,
+  } = useAddMonth();
+
   const queryClient = useQueryClient();
 
   const {
@@ -339,40 +346,40 @@ export default function AddPage() {
   //   }
   // }, [addResponse]);
 
-  const {
-    data: addMonthResponse,
-    mutate: addMonth,
-    mutateAsync: addMonthAsync,
-  } = useMutation(
-    "ADD_MONTH",
-    async ({
-      year,
-      month,
-      planOps,
-      wishfullAverageLength,
-    }: {
-      year: number;
-      month: string | undefined;
-      planOps: number;
-      wishfullAverageLength: number;
-    }) => {
-      const res = await ky
-        .put("/api/dataBaseApi", {
-          json: {
-            year,
-            month,
-            planOps,
-            wishfullAverageLength,
-          },
-        })
-        .json<{ message: string }>();
-    },
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries("REQUEST_DATA_BASE");
-      },
-    }
-  );
+  // const {
+  //   data: addMonthResponse,
+  //   mutate: addMonth,
+  //   mutateAsync: addMonthAsync,
+  // } = useMutation(
+  //   "ADD_MONTH",
+  //   async ({
+  //     year,
+  //     month,
+  //     planOps,
+  //     wishfullAverageLength,
+  //   }: {
+  //     year: number;
+  //     month: string | undefined;
+  //     planOps: number;
+  //     wishfullAverageLength: number;
+  //   }) => {
+  //     const res = await ky
+  //       .put("/api/dataBaseApi", {
+  //         json: {
+  //           year,
+  //           month,
+  //           planOps,
+  //           wishfullAverageLength,
+  //         },
+  //       })
+  //       .json<{ message: string }>();
+  //   },
+  //   {
+  //     onSuccess: () => {
+  //       queryClient.invalidateQueries("REQUEST_DATA_BASE");
+  //     },
+  //   }
+  // );
 
   const onEditorFormSubmit = () => {
     addRecord({

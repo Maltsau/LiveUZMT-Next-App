@@ -7,6 +7,7 @@ import ky from "ky";
 import { useUserContext } from "../pages/context/UserContext";
 import { useEditModeContext } from "../pages/context/EditModeContext";
 import { useDeleteRecord } from "../hooks/useDeleteRecord";
+import { useAddMonth } from "../hooks/useAddMonth";
 
 import OperationButton from "./buttons/OperationButton";
 
@@ -87,6 +88,15 @@ const InputStyled = styled.input`
   font-size: 1em;
 `;
 
+const ButtonStyled = styled.button`
+  font-size: 1.2em;
+  background-color: red;
+  color: white;
+  margin: 10px;
+  border: solid red 1px;
+  border-radius: 5px;
+`;
+
 export default function MonthTable({
   db,
   year,
@@ -99,7 +109,7 @@ export default function MonthTable({
   const [operation, setOperation] = useState("");
 
   const { user } = useUserContext();
-  const { isEditMode } = useEditModeContext();
+  const { isEditMode, setIsEditMode } = useEditModeContext();
   const { mutate: deleteOperation } = useDeleteRecord();
   const [mode, setMode] = useState("opeartions");
 
@@ -115,12 +125,12 @@ export default function MonthTable({
     ops: currentMonthOps,
   } = currentMonth;
 
-  console.log(planOps);
-
   const [newPlanOps, setNewPlanOps] = useState(planOps);
   const [newWishfullAverageLength, setNewWishfullAverageLength] = useState(
     wishfullAverageLength
   );
+
+  const { mutate: changeMonth } = useAddMonth();
 
   const factOps1: number = currentMonthOps?.filter(
     (elem: any) => elem.department === 1
@@ -143,6 +153,16 @@ export default function MonthTable({
         return sum + elem.duration;
       } else return sum;
     }, 0);
+
+  const handleSaveChanges = () => {
+    changeMonth({
+      year,
+      month,
+      planOps: newPlanOps,
+      wishfullAverageLength: newWishfullAverageLength,
+    });
+    setIsEditMode(false);
+  };
 
   const buttons = currentMonthOps?.map((element: any, index: number) => {
     return (
@@ -175,75 +195,6 @@ export default function MonthTable({
             })
             .includes(true)
         }
-        // table={
-        //   <Table>
-        //     <thead>
-        //       <TableRow>
-        //         <Cell>Дата, время</Cell>
-        //         <Cell>Дебит, т/сут</Cell>
-        //         <Cell>
-        //           Плотность <br></br> жидкости, <br></br> кг/м<sup>3</sup>
-        //         </Cell>
-        //         <Cell>
-        //           Обводнён-<br></br>ность, <br></br> %
-        //         </Cell>
-        //         <Cell>Дополнительно</Cell>
-        //       </TableRow>
-        //     </thead>
-        //     <tbody>
-        //       {element.result.map((result: any) => {
-        //         return (
-        //           <TableRow
-        //             key={result.dateTime + result.number + result.field}
-        //           >
-        //             <Cell>{result.dateTime}</Cell>
-        //             <Cell>{result.debitMass}</Cell>
-        //             <Cell>{result.density}</Cell>
-        //             <Cell>
-        //               {result.watterRate}
-        //               {user?.role === "ADMIN" && isEditMode ? (
-        //                 <DeleteButton
-        //                   onClick={(e) => {
-        //                     e.stopPropagation();
-        //                     deleteOperation({
-        //                       id: element.id,
-        //                       year,
-        //                       month,
-        //                       dateTime: result.dateTime,
-        //                     });
-        //                   }}
-        //                 >
-        //                   <Image
-        //                     src="/delete.png"
-        //                     height={20}
-        //                     width={20}
-        //                     alt="DELETE"
-        //                   />
-        //                 </DeleteButton>
-        //               ) : null}
-        //             </Cell>
-        //             <Cell>
-        //               <FileIconsContainer>
-        //                 <Image
-        //                   src="/excell.svg"
-        //                   height={20}
-        //                   width={20}
-        //                   alt="EXSELL"
-        //                 />
-        //                 <Image
-        //                   src="/add-photo.png"
-        //                   height={20}
-        //                   width={20}
-        //                   alt="PHOTO"
-        //                 />
-        //               </FileIconsContainer>
-        //             </Cell>
-        //           </TableRow>
-        //         );
-        //       })}
-        //     </tbody>
-        //   </Table>
-        // }
         key={element.id}
         isHighlighted={element.id === operation}
         text={`${index + 1}.  ${element.date}  ${element.number}  ${
@@ -397,6 +348,11 @@ export default function MonthTable({
               </TableRow>
             </tbody>
           </Table>
+          {user?.role === "ADMIN" && isEditMode ? (
+            <ButtonStyled onClick={handleSaveChanges}>
+              Сохранить изменения
+            </ButtonStyled>
+          ) : null}
         </StatisticTableContainer>
       </StatisticsContainer>
     </Wraper>

@@ -66,10 +66,6 @@ export default function handler(
       req.body.planOps,
       req.body.wishfullAverageLength
     );
-    if (isMonthExists) {
-      res.status(400).json({ message: "Month exists" });
-    } else {
-      res.status(200).json({ message: "Month added" });
-    }
+    res.status(200).json({ message: "Month added" });
   }
 }
