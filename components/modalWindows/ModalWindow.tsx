@@ -6,7 +6,7 @@ const ModalBackground = styled.div<{
 }>`
   display: ${({ isVisible }) => (isVisible ? "block" : "none")};
   position: fixed;
-  z-index: 1;
+  z-index: 100;
   padding-top: 100px;
   left: 0;
   top: 0;

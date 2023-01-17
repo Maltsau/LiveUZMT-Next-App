@@ -60,7 +60,7 @@ export default function handler(
     deleteRecord(req.body.id, req.body.year, req.body.month, req.body.dateTime);
     res.status(200).json({ message: "Deleted" });
   } else if (req.method === "PUT" && checkUser(req.cookies.secret)) {
-    const isMonthExists = addMonth(
+    addMonth(
       req.body.year,
       req.body.month,
       req.body.planOps,

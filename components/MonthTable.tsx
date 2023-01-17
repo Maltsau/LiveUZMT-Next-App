@@ -89,6 +89,9 @@ const InputStyled = styled.input`
 `;
 
 const ButtonStyled = styled.button`
+  position: absolute;
+  top: 350px;
+  right: 50px;
   font-size: 1.2em;
   background-color: red;
   color: white;

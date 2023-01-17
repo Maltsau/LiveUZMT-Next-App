@@ -214,6 +214,27 @@ const AddContainer = styled.div`
   grid-template-columns: 1fr 1fr 1fr 1fr;
 `;
 
+const DropDownListContainer = styled.div<{
+  isVisible: boolean;
+}>`
+  position: fixed;
+  top: 374px;
+  left: 214px;
+  display: ${({ isVisible }) => (isVisible ? "block" : "none")};
+  width: 293px;
+  min-height: 20px;
+  z-index: 20;
+  border: 1px solid black;
+  opacity: 1;
+  background-color: white;
+`;
+
+const DropDownUl = styled.ul`
+  font-size: 1em;
+  margin: 0;
+  list-style-type: none;
+`;
+
 export default function AddPage() {
   const now = new Date();
   const [isLengthInputVisible, setIsLengthInputVisible] = useState(false);
@@ -242,6 +263,7 @@ export default function AddPage() {
   const [planOps, setPlanOps] = useState("");
   const [wishfullAverageLength, setWishfullAveregeLength] = useState("");
   const [notValidInput, setNotValidInput] = useState("");
+  const [isDropDownListVisible, setIsDropDownListVisible] = useState(false);
 
   const {
     data: addMonthResponse,
@@ -336,50 +358,14 @@ export default function AddPage() {
     }
   );
 
-  // useEffect(() => {
-  //   console.log("useEffect", addResponse);
-  //   if (addResponse?.message === "Month does not exist") {
-  //     console.log(addResponse);
-  //     setAddMonthModalVisible(true);
-  //   } else {
-  //     queryClient.invalidateQueries("REQUEST_DATA_BASE");
-  //   }
-  // }, [addResponse]);
-
-  // const {
-  //   data: addMonthResponse,
-  //   mutate: addMonth,
-  //   mutateAsync: addMonthAsync,
-  // } = useMutation(
-  //   "ADD_MONTH",
-  //   async ({
-  //     year,
-  //     month,
-  //     planOps,
-  //     wishfullAverageLength,
-  //   }: {
-  //     year: number;
-  //     month: string | undefined;
-  //     planOps: number;
-  //     wishfullAverageLength: number;
-  //   }) => {
-  //     const res = await ky
-  //       .put("/api/dataBaseApi", {
-  //         json: {
-  //           year,
-  //           month,
-  //           planOps,
-  //           wishfullAverageLength,
-  //         },
-  //       })
-  //       .json<{ message: string }>();
-  //   },
-  //   {
-  //     onSuccess: () => {
-  //       queryClient.invalidateQueries("REQUEST_DATA_BASE");
-  //     },
-  //   }
-  // );
+  const { data: fieldBase } = useQuery("GET_FIELD_BASE", async () => {
+    const res = await ky.get("api/fieldBaseApi");
+    return await res.json<[string] | []>();
+  });
+  console.log(fieldBase);
+  const dropDownList = fieldBase?.filter((fieldItem) =>
+    fieldItem.includes(field.toUpperCase())
+  );
 
   const onEditorFormSubmit = () => {
     addRecord({
@@ -468,7 +454,8 @@ export default function AddPage() {
       return number;
     }
   };
-  console.log(notValidInput);
+  // console.log(notValidInput);
+
   return (
     <WrapperAllContent>
       <PannelContainer isAdmin={user?.role === "ADMIN"}>
@@ -593,6 +580,12 @@ export default function AddPage() {
                 }}
               ></InputStyled>
               <InputStyled
+                onFocus={() => {
+                  setIsDropDownListVisible(true);
+                }}
+                onBlur={() => {
+                  setIsDropDownListVisible(false);
+                }}
                 isNotValid={false}
                 value={field}
                 onChange={(e) => {
@@ -606,6 +599,25 @@ export default function AddPage() {
                 <option value={1}>{"ЦДНГ-1"}</option>
                 <option value={2}>{"ЦДНГ-2"}</option>
               </SelectStyled>
+              <DropDownListContainer
+                isVisible={isDropDownListVisible && field.length > 0}
+              >
+                <DropDownUl>
+                  {dropDownList?.map((fieldItem) => {
+                    return (
+                      <li
+                        value={fieldItem}
+                        onClick={(e) => {
+                          setField(fieldItem);
+                          console.log(field);
+                        }}
+                      >
+                        {fieldItem}
+                      </li>
+                    );
+                  })}
+                </DropDownUl>
+              </DropDownListContainer>
             </FieldNumberContainer>
             <ResultContainer>
               <LabelStyled>Дебит в т/сут</LabelStyled>
@@ -628,8 +640,6 @@ export default function AddPage() {
                 onChange={(e) =>
                   validateNumber(e.target.value, setDebitMass, "debitMass")
                 }
-                // pattern="[0-9]"
-                // title="Numbers only"
               ></InputStyled>
               <InputStyled
                 isNotValid={notValidInput === "density"}
