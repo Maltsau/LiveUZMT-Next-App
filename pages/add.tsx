@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import { useUserContext } from "./context/UserContext";
+// import { useUserContext } from "./context/UserContext";
+import { useUserStore } from "../stores/useUserStore";
 import { useAddMonth } from "../hooks/useAddMonth";
 import styled from "styled-components";
 
@@ -74,11 +75,6 @@ const DateTimeContainer = styled.div`
   border: 1px red solid;
   border-radius: 5px;
 `;
-// const OperationResultContainer = styled.div`
-//   margin: 5px 0px;
-//   border: 2px red solid;
-//   border-radius: 5px;
-// `;
 
 const ResultContainer = styled.div`
   display: grid;
@@ -241,7 +237,8 @@ export default function AddPage() {
   const [addMonthModalVisible, setAddMonthModalVisible] = useState(false);
   const [isNewMonthBlockVisible, setIsNewMonthBlockVisible] = useState(false);
   const [isNewMonthBlockAlarmed, setIsNewMonthBlockAlarmed] = useState(false);
-  const { user } = useUserContext();
+  // const { user } = useUserContext();
+  const user = useUserStore();
   const [startDay, setStartDay] = useState(now.getDate());
   const [startMonth, setStartMonth] = useState(MONTH_MAP.get(now.getMonth()));
   const [startYear, setStartYear] = useState(now.getFullYear());
@@ -458,7 +455,7 @@ export default function AddPage() {
 
   return (
     <WrapperAllContent>
-      <PannelContainer isAdmin={user?.role === "ADMIN"}>
+      <PannelContainer isAdmin={user?.user.role === "ADMIN"}>
         <SmallRectangle />
         <CustomLink
           text="Инженер"
@@ -473,7 +470,7 @@ export default function AddPage() {
         <Rectangle />
       </PannelContainer>
 
-      <Wraper isAdmin={user?.role === "ADMIN"}>
+      <Wraper isAdmin={user?.user.role === "ADMIN"}>
         <EditorContainer isVisible={!adminPannel}>
           <StartDateContainer>
             <StartDateTitleLabelStyled>

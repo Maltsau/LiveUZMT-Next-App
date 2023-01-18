@@ -6,7 +6,48 @@
         "month": "январь",
         "wishfullAverageLength": "12",
         "planOps": "11",
-        "ops": []
+        "ops": [
+          {
+            "id": "18.01.2023 3 выф",
+            "date": "18.01.2023",
+            "department": 1,
+            "number": "3",
+            "field": "выф",
+            "duration": 1,
+            "result": [
+              {
+                "isFinal": true,
+                "dateTime": "18.01.2023 11:53",
+                "debitMass": 22,
+                "density": 1,
+                "watterRate": 11
+              },
+              {
+                "isFinal": true,
+                "dateTime": "18.01.2023 11:55",
+                "debitMass": 22,
+                "density": 1,
+                "watterRate": 11
+              }
+            ]
+          },
+          {
+            "id": "18.01.2023 ф ффф",
+            "date": "18.01.2023",
+            "department": 1,
+            "number": "ф",
+            "field": "ффф",
+            "result": [
+              {
+                "isFinal": false,
+                "dateTime": "18.01.2023 11:54",
+                "debitMass": 11,
+                "density": 1,
+                "watterRate": 11
+              }
+            ]
+          }
+        ]
       },
       {
         "month": "февраль",

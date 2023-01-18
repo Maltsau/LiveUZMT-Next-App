@@ -4,7 +4,8 @@ import Image from "next/image";
 import { useMutation } from "react-query";
 import ky from "ky";
 
-import { useUserContext } from "../pages/context/UserContext";
+// import { useUserContext } from "../pages/context/UserContext";
+import { useUserStore } from "../stores/useUserStore";
 import { useEditModeContext } from "../pages/context/EditModeContext";
 import { useDeleteRecord } from "../hooks/useDeleteRecord";
 import { useAddMonth } from "../hooks/useAddMonth";
@@ -110,8 +111,8 @@ export default function MonthTable({
   month: string;
 }) {
   const [operation, setOperation] = useState("");
-
-  const { user } = useUserContext();
+  // const { user } = useUserContext();
+  const user = useUserStore();
   const { isEditMode, setIsEditMode } = useEditModeContext();
   const { mutate: deleteOperation } = useDeleteRecord();
   const [mode, setMode] = useState("opeartions");
@@ -184,7 +185,7 @@ export default function MonthTable({
             dateTime,
           });
         }}
-        isDeleteble={user?.role === "ADMIN" && isEditMode}
+        isDeleteble={user?.user.role === "ADMIN" && isEditMode}
         onClick={() => {
           setOperation(element.id);
         }}
@@ -242,7 +243,7 @@ export default function MonthTable({
               </TableRow>
               <TableRow>
                 <Cell colSpan={2}>План, операций</Cell>
-                {user?.role === "ADMIN" && isEditMode ? (
+                {user?.user.role === "ADMIN" && isEditMode ? (
                   <Cell>
                     <InputStyled
                       value={String(newPlanOps)}
@@ -257,7 +258,7 @@ export default function MonthTable({
                 )}
               </TableRow>
               <TableRow>
-                {user?.role === "ADMIN" && isEditMode ? (
+                {user?.user.role === "ADMIN" && isEditMode ? (
                   <Cell colSpan={2}>
                     План, часов <br /> (при планируемой средней
                     продолжительности операции{" "}
@@ -351,7 +352,7 @@ export default function MonthTable({
               </TableRow>
             </tbody>
           </Table>
-          {user?.role === "ADMIN" && isEditMode ? (
+          {user?.user.role === "ADMIN" && isEditMode ? (
             <ButtonStyled onClick={handleSaveChanges}>
               Сохранить изменения
             </ButtonStyled>

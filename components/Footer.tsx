@@ -2,7 +2,8 @@ import { ReactNode, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import styled from "styled-components";
-import { useUserContext } from "./../pages/context/UserContext";
+// import { useUserContext } from "./../pages/context/UserContext";
+import { useUserStore } from "../stores/useUserStore";
 import { useEditModeContext } from "../pages/context/EditModeContext";
 
 import FooterButton from "./buttons/FooterButton";
@@ -27,7 +28,8 @@ export default function Footer({
   onSignOut: any;
 }) {
   const router = useRouter();
-  const { user } = useUserContext();
+  // const { user } = useUserContext();
+  const user = useUserStore();
   const { isEditMode, setIsEditMode } = useEditModeContext();
 
   // const handleAdd = async () => {
@@ -39,12 +41,10 @@ export default function Footer({
   //   console.log("DataBase response", responseData);
   // };
 
-  let content: ReactNode | string;
-
   type ContentType = ReactNode[];
   const contentArray: ContentType = [];
 
-  switch (user?.role) {
+  switch (user?.user.role) {
     case undefined: {
       contentArray.push(
         <FooterButton onClick={onSignIn} key={"Sign_In"}>
@@ -94,61 +94,19 @@ export default function Footer({
     }
   }
 
-  if (router.asPath !== "/add" && user?.role) {
+  if (router.asPath !== "/add" && user?.user.role) {
     contentArray.push(
       <FooterButton onClick={() => {}} key={"ADD"}>
         <Link href={"/add"}>Добавить запись</Link>
       </FooterButton>
     );
   }
-  // useEffect(() => {
-  //   if (router.asPath !== "/add") {
-  //     contentArray.push(
-  //       <FooterButton onClick={handleAdd}>
-  //         <Link href={"/add"}>Добавить запись</Link>
-  //       </FooterButton>
-  //     );
-  //     console.log("Button added");
-  //   }
-  // }, [router.asPath, user]);
-
-  // if (!user?.role) {
-  //   content = (
-  //     <>
-  //       <FooterButton onClick={onSignIn} key={"SignIn"}>
-  //         Вoйти
-  //       </FooterButton>
-  //     </>
-  //   );
-  // } else {
-  //   if (router.asPath === "/add") {
-  //     content = (
-  //       <>
-  //         {JSON.stringify(user?.userName)}
-  //         <FooterButton onClick={onSignOut} key={"SignOut"}>
-  //           Выйти
-  //         </FooterButton>
-  //       </>
-  //     );
-  //   } else {
-  //     content = (
-  //       <>
-  //         <FooterButton onClick={onSignOut} key={"SignOut"}>
-  //           Выйти
-  //         </FooterButton>
-  //         <FooterButton onClick={()=>{}} key={"Add"}>
-  //           <Link href={"/add"}>Добавить запись</Link>
-  //         </FooterButton>
-  //       </>
-  //     );
-  //   }
-  // }
 
   return (
     <Rectangle>
       <ButtonBar>{contentArray}</ButtonBar>
       {children}
-      {user?.userName}
+      {user?.user.userName}
     </Rectangle>
   );
 }

@@ -1,12 +1,7 @@
 import { ReactNode, useState, useEffect, useCallback, useRef } from "react";
 import { useRouter } from "next/router";
-import { useUserContext } from "../pages/context/UserContext";
-import {
-  useQuery,
-  useMutation,
-  UseQueryResult,
-  MutationFunction,
-} from "react-query";
+// import { useUserContext } from "../pages/context/UserContext";
+import { useQuery, useMutation } from "react-query";
 import styled from "styled-components";
 import ky from "ky";
 
@@ -16,6 +11,7 @@ import SignInModal from "./modalWindows/SignInModal";
 import AreYouSureModal from "./modalWindows/AreYouSureModal";
 import ErrorModal from "./modalWindows/ErrorModal";
 import LoaderModal from "./modalWindows/LoaderModal";
+import { useUserStore } from "../stores/useUserStore";
 
 const Wraper = styled.div`
   border: 1px solid red;
@@ -34,21 +30,9 @@ export default function Layout({ children }: { children: ReactNode }) {
     useState(false);
   const [isErrorVisible, setIserrorVisible] = useState(false);
   const [isLoginFailed, setIsLoginFailed] = useState(false);
-  const { user, setUser } = useUserContext();
+  // const { user, setUser } = useUserContext();
+  const user = useUserStore();
   const userRef = useRef();
-
-  // const getUser = () => {
-  //   setUser(data);
-  // };
-  // const getUser = useCallback(async (login: string, password: string) => {
-  //   const response = await fetch("/api/login2", {
-  //     method: "POST",
-  //     body: JSON.stringify({ login, password }),
-  //     headers: { "Content-Type": "application/json" },
-  //   });
-  //   const responseData = await response.json();
-  //   setUser(responseData);
-  // }, []);
 
   const {
     mutateAsync,
@@ -70,62 +54,21 @@ export default function Layout({ children }: { children: ReactNode }) {
         setIsLoginFailed(true);
       },
       onSuccess: (loginResponse) => {
-        setUser(loginResponse);
+        user?.setUser(loginResponse.userName, loginResponse.role);
         setIsSignInModalVisible(false);
       },
     }
   );
 
   const handleSignIn = async (login: string, password: string) => {
-    const n = mutate({ login, password });
-    console.log("n", n);
-    // console.log("response", loginResponse);
-    // setUser(loginResponse);
+    mutate({ login, password });
   };
-
-  // useEffect(() => {
-  //   if (loginResponse?.role) {
-  //     console.log("before login", loginResponse);
-  //     setUser(loginResponse);
-  //     console.log({
-  //       userName: loginResponse.userName,
-  //       role: loginResponse.role,
-  //     });
-  //     console.log(user);
-  //     setIsSignInModalVisible(false);
-  //   } else {
-  // console.log("before login if not", loginResponse);
-  // setIsLoginFailed(true);
-  // setTimeout(() => {
-  //   setIsLoginFailed(false);
-  // }, 500);
-  //   }
-  // }, [loginResponse]);
 
   const handleSignOut = () => {
     mutate({ login: "Tweenpipe", password: "Fuch" });
-    setUser(undefined);
+    user?.setUser("", "");
     setIsAreYouSureModalVisible(false);
   };
-
-  // useEffect(() => {
-  //   (async () => {
-  //     const response = await fetch("/api/cookie", { method: "GET" });
-  //     if (response.status !== 200) {
-  //       router.push("/");
-  //       console.log("Redirected");
-  //     } else {
-  //       const responseData = await response.json();
-  //       const responseObject = JSON.parse(responseData);
-  //       setUser({
-  //         userName: responseObject.userName,
-  //         role: responseObject.role,
-  //       });
-  //       console.log(JSON.stringify(responseData));
-  //       console.log(responseObject.userName, responseObject.role);
-  //     }
-  //   })();
-  // }, []);
 
   const {
     data: secretResponse,
@@ -144,12 +87,9 @@ export default function Layout({ children }: { children: ReactNode }) {
       onSuccess: (secretResponse) => {
         if (secretResponse?.role) {
           console.log("secretResponse", secretResponse);
-          setUser({
-            userName: secretResponse.userName,
-            role: secretResponse.role,
-          });
+          user?.setUser(secretResponse.userName, secretResponse.role);
         } else {
-          setUser(undefined);
+          user?.setUser("", "");
         }
       },
       // onError: () => {
@@ -159,20 +99,6 @@ export default function Layout({ children }: { children: ReactNode }) {
       // cacheTime: 0,
     }
   );
-
-  // useEffect(() => {
-  //   if (secretResponse?.role) {
-  //     console.log("secretResponse", secretResponse);
-  //     setUser({
-  //       userName: secretResponse.userName,
-  //       role: secretResponse.role,
-  //     });
-  //   } else {
-  //     setUser(undefined);
-  //   }
-  // }, [secretResponse]);
-
-  // console.log("secretResponse", secretResponse);
 
   if (isSigningIn) return <LoaderModal text="Выполняется вход..." />;
 

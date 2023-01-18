@@ -3,9 +3,6 @@ import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import { useState, useEffect, useCallback } from "react";
 import styled from "styled-components";
-import { useUserContext } from "./context/UserContext";
-import { useMutation, useQuery } from "react-query";
-import ky from "ky";
 
 import { useDataBase } from "../hooks/useDataBase";
 
