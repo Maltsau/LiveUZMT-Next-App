@@ -6,6 +6,7 @@ import ky from "ky";
 
 // import { useUserContext } from "../pages/context/UserContext";
 import { useUserStore } from "../stores/useUserStore";
+import { useMainStore } from "../stores/useMainStore";
 import { useEditModeContext } from "../pages/context/EditModeContext";
 import { useDeleteRecord } from "../hooks/useDeleteRecord";
 import { useAddMonth } from "../hooks/useAddMonth";
@@ -101,18 +102,11 @@ const ButtonStyled = styled.button`
   border-radius: 5px;
 `;
 
-export default function MonthTable({
-  db,
-  year,
-  month,
-}: {
-  db: DataBaseType | undefined;
-  year: number;
-  month: string;
-}) {
+export default function MonthTable({ db }: { db: DataBaseType | undefined }) {
   const [operation, setOperation] = useState("");
   // const { user } = useUserContext();
   const user = useUserStore();
+  const { year, month } = useMainStore();
   const { isEditMode, setIsEditMode } = useEditModeContext();
   const { mutate: deleteOperation } = useDeleteRecord();
   const [mode, setMode] = useState("opeartions");
@@ -171,7 +165,6 @@ export default function MonthTable({
   const buttons = currentMonthOps?.map((element: any, index: number) => {
     return (
       <OperationButton
-        user={user}
         isEditMode={isEditMode}
         operation={element}
         onDeleteOperation={() => {

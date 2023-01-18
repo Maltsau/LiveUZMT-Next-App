@@ -5,9 +5,7 @@ import { useState, useEffect, useCallback } from "react";
 import styled from "styled-components";
 
 import { useDataBase } from "../hooks/useDataBase";
-
-import now from "../services/now";
-import MONTH_MAP from "../services/monthMap";
+import { useMainStore } from "../stores/useMainStore";
 
 import YearPannel from "../components/YearPannel";
 import MonthPannel from "../components/MonthPannel";
@@ -41,9 +39,9 @@ const ButtonStyled = styled.button`
 `;
 
 export default function Home() {
-  const [year, setYear] = useState(now.getFullYear());
-  const [month, setMonth] = useState([...MONTH_MAP.values()][now.getMonth()]);
   const [isErrorVisible, setIserrorVisible] = useState(false);
+
+  const mainStore = useMainStore();
 
   const { isLoading, data, isError, error } = useDataBase({});
 
@@ -55,19 +53,23 @@ export default function Home() {
   //   console.log("onSuccess", data);
   // }
 
-  const handleYearChange = useCallback(
-    (year: number) => {
-      setYear(year);
-    },
-    [setYear]
-  );
+  // const handleYearChange = useCallback(
+  //   (year: number) => {
+  //     mainStore.setYear(year);
+  //     console.log("HandleYearChange", mainStore.year);
+  //   },
+  //   [mainStore.setYear]
+  // );
 
-  const handleMonthChange = useCallback(
-    (month: string) => {
-      setMonth(month);
-    },
-    [setMonth]
-  );
+  // const handleMonthChange = useCallback(
+  //   (month: string) => {
+  //     mainStore.setMonth(month);
+  //     console.log("HandleMonthChange", mainStore.month);
+  //   },
+  //   [mainStore.setMonth]
+  // );
+
+  console.log("index", mainStore.year, mainStore.month);
 
   if (isLoading) return <LoaderModal text="Загружается база данных..." />;
 
@@ -84,18 +86,9 @@ export default function Home() {
   return (
     <Wraper>
       <InnerWraper>
-        <YearPannel
-          db={data}
-          year={year}
-          onChange={handleYearChange}
-        ></YearPannel>
-        <MonthPannel
-          db={data}
-          year={year}
-          month={month}
-          onChange={handleMonthChange}
-        ></MonthPannel>
-        <MonthTable db={data} year={year} month={month}></MonthTable>
+        <YearPannel db={data}></YearPannel>
+        <MonthPannel db={data}></MonthPannel>
+        <MonthTable db={data}></MonthTable>
       </InnerWraper>
     </Wraper>
   );

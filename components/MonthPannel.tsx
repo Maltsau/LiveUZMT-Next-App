@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import MONTH_MAP from "../services/monthMap";
+import { useMainStore } from "../stores/useMainStore";
 
 import CustomLink from "./buttons/CustomLink";
 
@@ -40,15 +41,12 @@ const SmallRectangle = styled.div`
 
 export default function MonthPannel({
   db,
-  year,
-  month,
-  onChange,
-}: {
+}: // onChange,
+{
   db: any;
-  year: number;
-  month: string;
-  onChange: any;
+  // onChange: any;
 }) {
+  const { year, month, setMonth } = useMainStore();
   const currentYear = db
     .find((yearItem: any) => yearItem.year === year)
     ?.months?.map((monthItem: any) => {
@@ -81,7 +79,7 @@ export default function MonthPannel({
           return (
             <CustomLink
               onClick={() => {
-                onChange(monthItem);
+                setMonth(monthItem);
               }}
               key={monthItem}
               text={monthItem}
@@ -97,7 +95,7 @@ export default function MonthPannel({
           return (
             <CustomLink
               onClick={() => {
-                onChange(monthItem);
+                setMonth(monthItem);
               }}
               key={monthItem}
               text={monthItem}

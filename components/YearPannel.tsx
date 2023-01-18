@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import { useMainStore } from "../stores/useMainStore";
+
 import CustomLink from "./buttons/CustomLink";
 
 import { DataBaseType } from "../types/types";
@@ -21,15 +23,8 @@ const SmallRectangle = styled.div`
   width: 30px;
 `;
 
-export default function YearPannel({
-  db,
-  year,
-  onChange,
-}: {
-  db: DataBaseType | undefined;
-  year: number;
-  onChange: (year: number) => void;
-}) {
+export default function YearPannel({ db }: { db: DataBaseType | undefined }) {
+  const { year, setYear } = useMainStore();
   const yearList = db
     ?.filter((yearItem) => yearItem.months.length)
     .map((yearItem) => yearItem.year)
@@ -47,7 +42,7 @@ export default function YearPannel({
             isHighlighted={yearItem === year}
             key={yearItem}
             onClick={() => {
-              onChange(yearItem);
+              setYear(yearItem);
             }}
           ></CustomLink>
         );

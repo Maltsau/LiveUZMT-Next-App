@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import Image from "next/image";
 import { DataBaseType, SingleOpType } from "../../types/types";
+import { useUserStore } from "../../stores/useUserStore";
 
 const Container = styled.div`
   width: 100%;
@@ -93,7 +94,6 @@ const FileIconsContainer = styled.div`
 
 export default function OperationButton({
   operation,
-  user,
   isEditMode,
   onClick,
   onSecondClick,
@@ -105,7 +105,6 @@ export default function OperationButton({
   isCurrent,
 }: {
   operation: SingleOpType;
-  user: any;
   isEditMode: boolean;
   onClick?: any;
   onSecondClick?: any;
@@ -116,6 +115,7 @@ export default function OperationButton({
   isDeleteble: boolean;
   isCurrent: boolean;
 }) {
+  const user = useUserStore();
   if (isHighlighted) {
     return (
       <Container onClick={onSecondClick}>
@@ -135,7 +135,7 @@ export default function OperationButton({
                   Обводнён-<br></br>ность, <br></br> %
                 </Cell>
                 <Cell>Дополнительно</Cell>
-                {user?.role === "ADMIN" && isEditMode ? (
+                {user?.user.role === "ADMIN" && isEditMode ? (
                   <Cell>Действия</Cell>
                 ) : null}
               </TableRow>
@@ -166,7 +166,7 @@ export default function OperationButton({
                         />
                       </FileIconsContainer>
                     </Cell>
-                    {user?.role === "ADMIN" && isEditMode ? (
+                    {user?.user.role === "ADMIN" && isEditMode ? (
                       <Cell>
                         <DeleteTableButton
                           onClick={(e) => {
