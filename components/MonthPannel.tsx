@@ -39,13 +39,7 @@ const SmallRectangle = styled.div`
   width: 100px;
 `;
 
-export default function MonthPannel({
-  db,
-}: // onChange,
-{
-  db: any;
-  // onChange: any;
-}) {
+export default function MonthPannel({ db }: { db: any }) {
   const { year, month, setMonth } = useMainStore();
   const currentYear = db
     .find((yearItem: any) => yearItem.year === year)

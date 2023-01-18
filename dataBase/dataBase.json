@@ -34,13 +34,6 @@
             "result": [
               {
                 "isFinal": true,
-                "dateTime": "18.01.2023 13:09",
-                "debitMass": 12,
-                "density": 1,
-                "watterRate": 11
-              },
-              {
-                "isFinal": true,
                 "dateTime": "18.01.2023 13:13",
                 "debitMass": 12,
                 "density": 1,

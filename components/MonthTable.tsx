@@ -103,10 +103,8 @@ const ButtonStyled = styled.button`
 `;
 
 export default function MonthTable({ db }: { db: DataBaseType | undefined }) {
-  const [operation, setOperation] = useState("");
-  // const { user } = useUserContext();
   const user = useUserStore();
-  const { year, month } = useMainStore();
+  const { year, month, operation, setOperation } = useMainStore();
   const { isEditMode, setIsEditMode } = useEditModeContext();
   const { mutate: deleteOperation } = useDeleteRecord();
   const [mode, setMode] = useState("opeartions");
