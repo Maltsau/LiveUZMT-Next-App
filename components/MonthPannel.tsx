@@ -3,6 +3,10 @@ import MONTH_MAP from "../services/monthMap";
 import { useMainStore } from "../stores/useMainStore";
 
 import CustomLink from "./buttons/CustomLink";
+import {
+  Rectangle,
+  SmallRectangle,
+} from "./menuComponents/AdditionalComponents";
 
 const Wrapper = styled.div`
   display: flex;
@@ -25,18 +29,6 @@ const ButtonBar2 = styled.div<{
   display: flex;
   padding-top: 2px;
   order: ${({ isHighlighted }) => (isHighlighted ? "2" : "1")};
-`;
-
-const Rectangle = styled.div`
-  height: 30px;
-  border-bottom: solid red 2px;
-  width: 100%;
-`;
-
-const SmallRectangle = styled.div`
-  height: 30px;
-  border-bottom: solid red 2px;
-  width: 100px;
 `;
 
 export default function MonthPannel({ db }: { db: any }) {

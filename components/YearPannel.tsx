@@ -3,24 +3,16 @@ import styled from "styled-components";
 import { useMainStore } from "../stores/useMainStore";
 
 import CustomLink from "./buttons/CustomLink";
+import {
+  Rectangle,
+  SmallRectangle,
+} from "./menuComponents/AdditionalComponents";
 
 import { DataBaseType } from "../types/types";
 
 const Container = styled.div`
   display: flex;
   margin-top: 2px;
-`;
-
-const Rectangle = styled.div`
-  height: 30px;
-  border-bottom: solid red 2px;
-  width: 100%;
-`;
-
-const SmallRectangle = styled.div`
-  height: 30px;
-  border-bottom: solid red 2px;
-  width: 30px;
 `;
 
 export default function YearPannel({ db }: { db: DataBaseType | undefined }) {

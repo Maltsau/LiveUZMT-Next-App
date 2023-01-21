@@ -4,7 +4,6 @@ import Image from "next/image";
 import { useMutation } from "react-query";
 import ky from "ky";
 
-// import { useUserContext } from "../pages/context/UserContext";
 import { useUserStore } from "../stores/useUserStore";
 import { useMainStore } from "../stores/useMainStore";
 import { useEditModeContext } from "../pages/context/EditModeContext";
@@ -12,6 +11,11 @@ import { useDeleteRecord } from "../hooks/useDeleteRecord";
 import { useAddMonth } from "../hooks/useAddMonth";
 
 import OperationButton from "./buttons/OperationButton";
+import {
+  Rectangle,
+  SmallRectangle,
+  PannelContainer,
+} from "./menuComponents/AdditionalComponents";
 
 import { DataBaseType, SingleMonthType } from "../types/types";
 import CustomLink from "./buttons/CustomLink";
@@ -31,6 +35,7 @@ const OperationContainer = styled.div<{ isVisible: boolean }>`
   border-left: 2px solid red;
   border-bottom: 2px solid red;
   min-height: 200px;
+  margin-top: -3px;
 `;
 
 const StatisticsContainer = styled.div<{ isVisible: boolean }>`
@@ -39,11 +44,13 @@ const StatisticsContainer = styled.div<{ isVisible: boolean }>`
   border-left: 2px solid red;
   border-bottom: 2px solid red;
   min-height: 100px;
+  margin-top: -3px;
 `;
 
 const Table = styled.table`
   width: 100%;
   border-collapse: collapse;
+  border: 2px solid white;
 `;
 const TableRow = styled.tr`
   height: 20px;
@@ -53,33 +60,6 @@ const Cell = styled.td`
   text-align: center;
   padding: 10px;
   border: solid black 1px;
-`;
-
-const DeleteButton = styled.button`
-  border: 0;
-  background-color: transparent;
-`;
-
-const Rectangle = styled.div`
-  height: 30px;
-  border-bottom: solid red 2px;
-  width: 100%;
-`;
-
-const SmallRectangle = styled.div`
-  height: 30px;
-  border-bottom: solid red 2px;
-  width: 30px;
-`;
-
-const StatisticTableContainer = styled.div`
-  padding: 2px;
-`;
-
-const FileIconsContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
 `;
 
 const InputStyled = styled.input`
@@ -201,7 +181,7 @@ export default function MonthTable({ db }: { db: DataBaseType | undefined }) {
 
   return (
     <Wraper>
-      <Container>
+      <PannelContainer isAdmin={true}>
         <SmallRectangle />
         <CustomLink
           text={"Oперации"}
@@ -218,137 +198,131 @@ export default function MonthTable({ db }: { db: DataBaseType | undefined }) {
           }}
         ></CustomLink>
         <Rectangle />
-      </Container>
+      </PannelContainer>
       <OperationContainer isVisible={mode === "opeartions"}>
         {buttons}
       </OperationContainer>
       <StatisticsContainer isVisible={mode === "statistics"}>
-        <StatisticTableContainer>
-          <Table>
-            <tbody>
-              <TableRow>
-                <Cell colSpan={2}>Месяц, год</Cell>
+        <Table>
+          <tbody>
+            <TableRow>
+              <Cell colSpan={2}>Месяц, год</Cell>
+              <Cell>
+                {month} {year}
+              </Cell>
+            </TableRow>
+            <TableRow>
+              <Cell colSpan={2}>План, операций</Cell>
+              {user?.user.role === "ADMIN" && isEditMode ? (
                 <Cell>
-                  {month} {year}
+                  <InputStyled
+                    value={String(newPlanOps)}
+                    placeholder={planOps}
+                    onChange={(e) => {
+                      setNewPlanOps(e.target.value);
+                    }}
+                  ></InputStyled>
                 </Cell>
-              </TableRow>
-              <TableRow>
-                <Cell colSpan={2}>План, операций</Cell>
-                {user?.user.role === "ADMIN" && isEditMode ? (
-                  <Cell>
-                    <InputStyled
-                      value={String(newPlanOps)}
-                      placeholder={planOps}
-                      onChange={(e) => {
-                        setNewPlanOps(e.target.value);
-                      }}
-                    ></InputStyled>
-                  </Cell>
-                ) : (
-                  <Cell>{planOps}</Cell>
-                )}
-              </TableRow>
-              <TableRow>
-                {user?.user.role === "ADMIN" && isEditMode ? (
-                  <Cell colSpan={2}>
-                    План, часов <br /> (при планируемой средней
-                    продолжительности операции{" "}
-                    <InputStyled
-                      value={String(newWishfullAverageLength)}
-                      placeholder={wishfullAverageLength}
-                      onChange={(e) => {
-                        setNewWishfullAverageLength(e.target.value);
-                      }}
-                    ></InputStyled>{" "}
-                    часов)
-                  </Cell>
-                ) : (
-                  <Cell colSpan={2}>
-                    План, часов <br /> (при планируемой средней
-                    продолжительности операции {wishfullAverageLength} часов)
-                  </Cell>
-                )}
+              ) : (
+                <Cell>{planOps}</Cell>
+              )}
+            </TableRow>
+            <TableRow>
+              {user?.user.role === "ADMIN" && isEditMode ? (
+                <Cell colSpan={2}>
+                  План, часов <br /> (при планируемой средней продолжительности
+                  операции{" "}
+                  <InputStyled
+                    value={String(newWishfullAverageLength)}
+                    placeholder={wishfullAverageLength}
+                    onChange={(e) => {
+                      setNewWishfullAverageLength(e.target.value);
+                    }}
+                  ></InputStyled>{" "}
+                  часов)
+                </Cell>
+              ) : (
+                <Cell colSpan={2}>
+                  План, часов <br /> (при планируемой средней продолжительности
+                  операции {wishfullAverageLength} часов)
+                </Cell>
+              )}
 
-                <Cell>{planOps * wishfullAverageLength}</Cell>
-              </TableRow>
-              <TableRow>
-                <Cell rowSpan={3}>Факт, операций</Cell>
-                <Cell>Общий</Cell>
-                <Cell>{factOps1 + factOps2}</Cell>
-              </TableRow>
-              <TableRow>
-                <Cell>ЦДНГ-1</Cell>
-                <Cell>{factOps1}</Cell>
-              </TableRow>
-              <TableRow>
-                <Cell>ЦДНГ-2</Cell>
-                <Cell>{factOps2}</Cell>
-              </TableRow>
-              <TableRow>
-                <Cell rowSpan={3}>Факт, часов</Cell>
-                <Cell>Общий</Cell>
-                <Cell>{factHrs1 + factHrs2}</Cell>
-              </TableRow>
-              <TableRow>
-                <Cell>ЦДНГ-1</Cell>
-                <Cell>{factHrs1}</Cell>
-              </TableRow>
-              <TableRow>
-                <Cell>ЦДНГ-2</Cell>
-                <Cell>{factHrs2}</Cell>
-              </TableRow>
-              <TableRow>
-                <Cell rowSpan={3}>
-                  Средняя продолжительность операции, час/операция
-                </Cell>
-                <Cell>Общая</Cell>
-                <Cell>
-                  {Math.round(
-                    ((factHrs1 + factHrs2) / (factOps1 + factOps2)) * 100
-                  ) / 100 || 0}
-                </Cell>
-              </TableRow>
-              <TableRow>
-                <Cell>ЦДНГ-1</Cell>
-                <Cell>
-                  {Math.round((factHrs1 / factOps1) * 100) / 100 || 0}
-                </Cell>
-              </TableRow>
-              <TableRow>
-                <Cell>ЦДНГ-2</Cell>
-                <Cell>
-                  {Math.round((factHrs2 / factOps2) * 100) / 100 || 0}
-                </Cell>
-              </TableRow>
-              <TableRow>
-                <Cell rowSpan={3}>Осталось</Cell>
-                <Cell>Операций</Cell>
-                <Cell>{planOps - factOps1 - factOps2}</Cell>
-              </TableRow>
-              <TableRow>
-                <Cell>Часов</Cell>
-                <Cell>
-                  {planOps * wishfullAverageLength - (factHrs1 + factHrs2)}
-                </Cell>
-              </TableRow>
-              <TableRow>
-                <Cell>Часов/операция</Cell>
-                <Cell>
-                  {Math.round(
-                    ((planOps * wishfullAverageLength - (factHrs1 + factHrs2)) /
-                      (planOps - factOps1 - factOps2)) *
-                      100
-                  ) / 100}
-                </Cell>
-              </TableRow>
-            </tbody>
-          </Table>
-          {user?.user.role === "ADMIN" && isEditMode ? (
-            <ButtonStyled onClick={handleSaveChanges}>
-              Сохранить изменения
-            </ButtonStyled>
-          ) : null}
-        </StatisticTableContainer>
+              <Cell>{planOps * wishfullAverageLength}</Cell>
+            </TableRow>
+            <TableRow>
+              <Cell rowSpan={3}>Факт, операций</Cell>
+              <Cell>Общий</Cell>
+              <Cell>{factOps1 + factOps2}</Cell>
+            </TableRow>
+            <TableRow>
+              <Cell>ЦДНГ-1</Cell>
+              <Cell>{factOps1}</Cell>
+            </TableRow>
+            <TableRow>
+              <Cell>ЦДНГ-2</Cell>
+              <Cell>{factOps2}</Cell>
+            </TableRow>
+            <TableRow>
+              <Cell rowSpan={3}>Факт, часов</Cell>
+              <Cell>Общий</Cell>
+              <Cell>{factHrs1 + factHrs2}</Cell>
+            </TableRow>
+            <TableRow>
+              <Cell>ЦДНГ-1</Cell>
+              <Cell>{factHrs1}</Cell>
+            </TableRow>
+            <TableRow>
+              <Cell>ЦДНГ-2</Cell>
+              <Cell>{factHrs2}</Cell>
+            </TableRow>
+            <TableRow>
+              <Cell rowSpan={3}>
+                Средняя продолжительность операции, час/операция
+              </Cell>
+              <Cell>Общая</Cell>
+              <Cell>
+                {Math.round(
+                  ((factHrs1 + factHrs2) / (factOps1 + factOps2)) * 100
+                ) / 100 || 0}
+              </Cell>
+            </TableRow>
+            <TableRow>
+              <Cell>ЦДНГ-1</Cell>
+              <Cell>{Math.round((factHrs1 / factOps1) * 100) / 100 || 0}</Cell>
+            </TableRow>
+            <TableRow>
+              <Cell>ЦДНГ-2</Cell>
+              <Cell>{Math.round((factHrs2 / factOps2) * 100) / 100 || 0}</Cell>
+            </TableRow>
+            <TableRow>
+              <Cell rowSpan={3}>Осталось</Cell>
+              <Cell>Операций</Cell>
+              <Cell>{planOps - factOps1 - factOps2}</Cell>
+            </TableRow>
+            <TableRow>
+              <Cell>Часов</Cell>
+              <Cell>
+                {planOps * wishfullAverageLength - (factHrs1 + factHrs2)}
+              </Cell>
+            </TableRow>
+            <TableRow>
+              <Cell>Часов/операция</Cell>
+              <Cell>
+                {Math.round(
+                  ((planOps * wishfullAverageLength - (factHrs1 + factHrs2)) /
+                    (planOps - factOps1 - factOps2)) *
+                    100
+                ) / 100}
+              </Cell>
+            </TableRow>
+          </tbody>
+        </Table>
+        {user?.user.role === "ADMIN" && isEditMode ? (
+          <ButtonStyled onClick={handleSaveChanges}>
+            Сохранить изменения
+          </ButtonStyled>
+        ) : null}
       </StatisticsContainer>
     </Wraper>
   );

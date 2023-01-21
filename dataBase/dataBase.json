@@ -40,6 +40,133 @@
                 "watterRate": 11
               }
             ]
+          },
+          {
+            "id": "18.01.2023 4 w",
+            "date": "18.01.2023",
+            "department": 1,
+            "number": "4",
+            "field": "w",
+            "result": [
+              {
+                "isFinal": true,
+                "dateTime": "18.01.2023 17:28",
+                "debitMass": 0,
+                "density": 0,
+                "watterRate": 0
+              }
+            ]
+          },
+          {
+            "id": "18.01.2023  ",
+            "date": "18.01.2023",
+            "department": 1,
+            "number": "",
+            "field": "",
+            "result": [
+              {
+                "isFinal": false,
+                "dateTime": "18.01.2023 17:37",
+                "debitMass": 0,
+                "density": 0,
+                "watterRate": 0
+              }
+            ]
+          },
+          {
+            "id": "20.01.2023 1 1",
+            "date": "20.01.2023",
+            "department": 1,
+            "number": "1",
+            "field": "1",
+            "duration": 1,
+            "result": [
+              {
+                "isFinal": true,
+                "dateTime": "20.01.2023 19:50",
+                "debitMass": 1,
+                "density": 1,
+                "watterRate": 1
+              },
+              {
+                "isFinal": false,
+                "dateTime": "20.01.2023 20:02",
+                "debitMass": 1,
+                "density": 1,
+                "watterRate": 1
+              },
+              {
+                "isFinal": false,
+                "dateTime": "20.01.2023 20:02",
+                "debitMass": 1,
+                "density": 1,
+                "watterRate": 1
+              }
+            ]
+          },
+          {
+            "id": "21.01.2023 1 11",
+            "date": "21.01.2023",
+            "department": 1,
+            "number": "1",
+            "field": "11",
+            "result": [
+              {
+                "isFinal": false,
+                "dateTime": "21.01.2023 09:40",
+                "debitMass": 1,
+                "density": 1,
+                "watterRate": 1
+              }
+            ]
+          },
+          {
+            "id": "21.01.2023 1 1",
+            "date": "21.01.2023",
+            "department": 1,
+            "number": "1",
+            "field": "1",
+            "result": [
+              {
+                "isFinal": false,
+                "dateTime": "21.01.2023 10:26",
+                "debitMass": 1,
+                "density": 1,
+                "watterRate": 1
+              }
+            ]
+          },
+          {
+            "id": "21.06.2022 1 1",
+            "date": "21.06.2022",
+            "department": 1,
+            "number": "1",
+            "field": "1",
+            "result": [
+              {
+                "isFinal": false,
+                "dateTime": "21.01.2023 11:51",
+                "debitMass": 1,
+                "density": 1,
+                "watterRate": 1
+              }
+            ]
+          },
+          {
+            "id": "21.08.2022 1 1",
+            "date": "21.08.2022",
+            "department": 1,
+            "number": "1",
+            "field": "1",
+            "result": [
+              {
+                "isFinal": false,
+                "dateTime": "21.01.2023 11:53",
+                "debitMass": 1,
+                "density": 1,
+                "watterRate": 1
+              }
+            ]
           }
         ]
       },
@@ -101,7 +228,24 @@
         "month": "август",
         "wishfullAverageLength": 19,
         "planOps": 23,
-        "ops": []
+        "ops": [
+          {
+            "id": "21.08.2023 1 1",
+            "date": "21.08.2023",
+            "department": 1,
+            "number": "1",
+            "field": "1",
+            "result": [
+              {
+                "isFinal": false,
+                "dateTime": "21.08.2023 09:35",
+                "debitMass": 1,
+                "density": 1,
+                "watterRate": 1
+              }
+            ]
+          }
+        ]
       },
       {
         "month": "сентябрь",
@@ -255,6 +399,29 @@
         "wishfullAverageLength": 19,
         "planOps": 23,
         "ops": []
+      },
+      {
+        "month": "август",
+        "wishfullAverageLength": "1",
+        "planOps": "1",
+        "ops": [
+          {
+            "id": "21.08.2022 dbaskj fekjdslf",
+            "date": "21.08.2022",
+            "department": 1,
+            "number": "dbaskj",
+            "field": "fekjdslf",
+            "result": [
+              {
+                "isFinal": false,
+                "dateTime": "21.08.2022 11:58",
+                "debitMass": 1,
+                "density": 1,
+                "watterRate": 1
+              }
+            ]
+          }
+        ]
       }
     ]
   },

@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
-// import { useUserContext } from "./context/UserContext";
 import { useUserStore } from "../stores/useUserStore";
 import { useAddMonth } from "../hooks/useAddMonth";
 import styled from "styled-components";
@@ -11,89 +10,23 @@ import AddPhotoButton from "../components/buttons/AddPhotoButton";
 import AddExcellButton from "../components/buttons/AddExcellButton";
 import CustomLink from "../components/buttons/CustomLink";
 import AddMonthModal from "../components/modalWindows/AddMonthModal";
+import {
+  InputSimple,
+  InputVanishing,
+  InputSubmit,
+  SelectStyled,
+} from "../components/menuComponents/Inputs";
+import {
+  Rectangle,
+  SmallRectangle,
+  PannelContainer,
+  AddFormContentWrapper,
+  GridBorderedContainer,
+  GridUnborderedContainer,
+  VanishingContainer,
+} from "../components/menuComponents/AdditionalComponents";
+
 import ky from "ky";
-
-const WrapperAllContent = styled.div`
-  width: 100%;
-`;
-
-const PannelContainer = styled.div<{
-  isAdmin: boolean;
-}>`
-  display: ${({ isAdmin }) => (isAdmin ? "flex" : "none")};
-  width: 100%;
-  margin-top: 2px;
-  padding: 1px 1px 1px 1px;
-`;
-
-const Rectangle = styled.div`
-  height: 30px;
-  border-bottom: solid red 2px;
-  width: 100%;
-`;
-
-const SmallRectangle = styled.div`
-  height: 30px;
-  border-bottom: solid red 2px;
-  width: 30px;
-`;
-
-const Wraper = styled.div<{
-  isAdmin: boolean;
-}>`
-  padding: 2px;
-  margin: -1px 1px 1px 1px;
-  ${({ isAdmin }) =>
-    isAdmin
-      ? "border-right: 2px solid red; border-left: 2px solid red;border-bottom: 2px solid red;"
-      : "border: 2px solid red"};
-`;
-
-const EditorContainer = styled.div<{
-  isVisible: boolean;
-}>`
-  display: ${({ isVisible }) => (isVisible ? "block" : "none")};
-`;
-
-const AdminContainer = styled.div<{
-  isVisible: boolean;
-}>`
-  display: ${({ isVisible }) => (isVisible ? "block" : "none")};
-`;
-
-const StartDateContainer = styled.div`
-  display: grid;
-  grid-template-columns: 150px 1fr 150px;
-  border: 1px red solid;
-  border-radius: 5px;
-  margin-bottom: 3px;
-`;
-
-const DateTimeContainer = styled.div`
-  display: grid;
-  grid-template-columns: 150px 1fr 150px 70px 70px;
-  border: 1px red solid;
-  border-radius: 5px;
-`;
-
-const ResultContainer = styled.div`
-  display: grid;
-  justify-items: stretch;
-  overflow: auto;
-  width: 100%;
-  grid-template-columns: repeat(4, 1fr);
-  padding: 2px;
-  overflow: hidden;
-`;
-
-const FieldNumberContainer = styled.div`
-  display: grid;
-  overflow: auto;
-  width: 100%;
-  grid-template-columns: 200px 1fr 200px;
-  padding: 2px;
-  margin: 2px 0px;
-`;
 
 const CheckboxContainer = styled.div`
   display: flex;
@@ -101,44 +34,6 @@ const CheckboxContainer = styled.div`
 
 const AddButtonsContainer = styled.div`
   display: flex;
-`;
-
-const InputStyled = styled.input<{
-  isNotValid: boolean;
-}>`
-  min-height: 50px;
-  font-size: 1.2em;
-  overflow: auto;
-  margin: 5px;
-  padding: 10px;
-  border: solid red 1px;
-  border-radius: 5px;
-  background-color: ${({ isNotValid }) => (isNotValid ? "pink" : "white")};
-`;
-
-const SelectStyled = styled.select`
-  min-height: 50px;
-  font-size: 1.2em;
-  overflow: auto;
-  margin: 5px;
-  border: solid red 1px;
-  border-radius: 5px;
-  background-color: white;
-`;
-
-const LengthInput = styled.input<{
-  isVisible: boolean;
-  isNotValid: boolean;
-}>`
-  display: ${({ isVisible }) => (isVisible ? "block" : "none")};
-  min-height: 50px;
-  font-size: 1.2em;
-  overflow: auto;
-  margin: 5px;
-  padding: 10px;
-  border: solid red 1px;
-  border-radius: 5px;
-  background-color: ${({ isNotValid }) => (isNotValid ? "pink" : "white")};
 `;
 
 const CheckboxStyled = styled.input`
@@ -195,15 +90,6 @@ const NewMonthLabelStyled = styled.label`
   font-size: 1.2em;
 `;
 
-const ButtonStyled = styled.button`
-  font-size: 1.2em;
-  background-color: red;
-  color: white;
-  margin: 10px;
-  border: solid red 1px;
-  border-radius: 5px;
-`;
-
 const AddContainer = styled.div`
   width: 100%;
   display: grid;
@@ -237,7 +123,6 @@ export default function AddPage() {
   const [addMonthModalVisible, setAddMonthModalVisible] = useState(false);
   const [isNewMonthBlockVisible, setIsNewMonthBlockVisible] = useState(false);
   const [isNewMonthBlockAlarmed, setIsNewMonthBlockAlarmed] = useState(false);
-  // const { user } = useUserContext();
   const user = useUserStore();
   const [startDay, setStartDay] = useState(now.getDate());
   const [startMonth, setStartMonth] = useState(MONTH_MAP.get(now.getMonth()));
@@ -396,7 +281,7 @@ export default function AddPage() {
       planOps: Number(planOps),
       wishfullAverageLength: Number(wishfullAverageLength),
     });
-  }, [newYear, newMonth, planOps, wishfullAverageLength]);
+  }, [newYear, newMonth, planOps, wishfullAverageLength, addMonth]);
 
   const getDaysInMonth = (month: string | undefined, year: number) => {
     return (
@@ -451,10 +336,9 @@ export default function AddPage() {
       return number;
     }
   };
-  // console.log(notValidInput);
 
   return (
-    <WrapperAllContent>
+    <>
       <PannelContainer isAdmin={user?.user.role === "ADMIN"}>
         <SmallRectangle />
         <CustomLink
@@ -470,9 +354,9 @@ export default function AddPage() {
         <Rectangle />
       </PannelContainer>
 
-      <Wraper isAdmin={user?.user.role === "ADMIN"}>
-        <EditorContainer isVisible={!adminPannel}>
-          <StartDateContainer>
+      <AddFormContentWrapper isAdmin={user?.user.role === "ADMIN"}>
+        <VanishingContainer isVisible={!adminPannel}>
+          <GridBorderedContainer gridColumns={"150px 1fr 150px"}>
             <StartDateTitleLabelStyled>
               Дата начала исследований
             </StartDateTitleLabelStyled>
@@ -486,7 +370,11 @@ export default function AddPage() {
               }}
             >
               {startDayIterator.map((dayItem) => {
-                return <option value={dayItem}>{dayItem}</option>;
+                return (
+                  <option key={dayItem} value={dayItem}>
+                    {dayItem}
+                  </option>
+                );
               })}
             </SelectStyled>
             <SelectStyled
@@ -496,7 +384,11 @@ export default function AddPage() {
               }}
             >
               {[...MONTH_MAP.values()].map((mnth) => {
-                return <option value={mnth}>{mnth}</option>;
+                return (
+                  <option key={mnth} value={mnth}>
+                    {mnth}
+                  </option>
+                );
               })}
             </SelectStyled>
             <SelectStyled
@@ -506,11 +398,15 @@ export default function AddPage() {
               }}
             >
               {startYearIterator.map((yearItem) => {
-                return <option value={yearItem}>{yearItem}</option>;
+                return (
+                  <option key={yearItem} value={yearItem}>
+                    {yearItem}
+                  </option>
+                );
               })}
             </SelectStyled>
-          </StartDateContainer>
-          <DateTimeContainer>
+          </GridBorderedContainer>
+          <GridBorderedContainer gridColumns="150px 1fr 150px 70px 70px">
             <CurrentTimeTitleLabelStyled>
               Текущее время
             </CurrentTimeTitleLabelStyled>
@@ -526,7 +422,11 @@ export default function AddPage() {
               }}
             >
               {dayIterator.map((dayItem) => {
-                return <option value={dayItem}>{dayItem}</option>;
+                return (
+                  <option key={dayItem} value={dayItem}>
+                    {dayItem}
+                  </option>
+                );
               })}
             </SelectStyled>
             <SelectStyled
@@ -536,7 +436,11 @@ export default function AddPage() {
               }}
             >
               {[...MONTH_MAP.values()].map((mnth) => {
-                return <option value={mnth}>{mnth}</option>;
+                return (
+                  <option key={mnth} value={mnth}>
+                    {mnth}
+                  </option>
+                );
               })}
             </SelectStyled>
             <SelectStyled
@@ -546,37 +450,41 @@ export default function AddPage() {
               }}
             >
               {yearIterator.map((yearItem) => {
-                return <option value={yearItem}>{yearItem}</option>;
+                return (
+                  <option key={yearItem} value={yearItem}>
+                    {yearItem}
+                  </option>
+                );
               })}
             </SelectStyled>
-            <InputStyled
+            <InputSimple
               isNotValid={notValidInput === "hours"}
               onChange={(e) => {
                 validateNumber(e.target.value, setHours, "hours", 24);
               }}
               value={hours}
-            ></InputStyled>
-            <InputStyled
+            ></InputSimple>
+            <InputSimple
               isNotValid={notValidInput === "minutes"}
               onChange={(e) => {
                 validateNumber(e.target.value, setMinutes, "minutes", 59);
               }}
               value={minutes}
-            ></InputStyled>
-          </DateTimeContainer>
+            ></InputSimple>
+          </GridBorderedContainer>
           <>
-            <FieldNumberContainer>
+            <GridUnborderedContainer gridColumns="200px 1fr 200px">
               <LabelStyled>Номер скважины</LabelStyled>
               <LabelStyled>Месторождение</LabelStyled>
               <LabelStyled>Промысел</LabelStyled>
-              <InputStyled
+              <InputSimple
                 isNotValid={false}
                 value={number}
                 onChange={(e) => {
                   setNumber(e.target.value);
                 }}
-              ></InputStyled>
-              <InputStyled
+              ></InputSimple>
+              <InputSimple
                 onFocus={() => {
                   setIsDropDownListVisible(true);
                 }}
@@ -588,7 +496,7 @@ export default function AddPage() {
                 onChange={(e) => {
                   setField(e.target.value);
                 }}
-              ></InputStyled>
+              ></InputSimple>
               <SelectStyled
                 value={department}
                 onChange={(e) => setDepartment(Number(e.target.value))}
@@ -603,6 +511,7 @@ export default function AddPage() {
                   {dropDownList?.map((fieldItem) => {
                     return (
                       <li
+                        key={fieldItem}
                         value={fieldItem}
                         onClick={(e) => {
                           setField(fieldItem);
@@ -615,13 +524,13 @@ export default function AddPage() {
                   })}
                 </DropDownUl>
               </DropDownListContainer>
-            </FieldNumberContainer>
-            <ResultContainer>
-              <LabelStyled>Дебит в т/сут</LabelStyled>
+            </GridUnborderedContainer>
+            <GridUnborderedContainer gridColumns="repeat(4, 1fr)">
+              <LabelStyled>Дебит, т/сут</LabelStyled>
               <LabelStyled>
-                Удельный вес <br></br>жидкости в г/см<sup>3</sup>
+                Удельный вес <br></br>жидкости, г/см<sup>3</sup>
               </LabelStyled>
-              <LabelStyled>Обводнённость в %</LabelStyled>
+              <LabelStyled>Обводнённость, %</LabelStyled>
               <CheckboxContainer>
                 <LabelStyled>Замер окончен?</LabelStyled>
                 <CheckboxStyled
@@ -631,21 +540,21 @@ export default function AddPage() {
                   }}
                 ></CheckboxStyled>
               </CheckboxContainer>
-              <InputStyled
+              <InputSimple
                 isNotValid={notValidInput === "debitMass"}
                 value={debitMass}
                 onChange={(e) =>
                   validateNumber(e.target.value, setDebitMass, "debitMass")
                 }
-              ></InputStyled>
-              <InputStyled
+              ></InputSimple>
+              <InputSimple
                 isNotValid={notValidInput === "density"}
                 value={density}
                 onChange={(e) =>
                   validateNumber(e.target.value, setDensity, "density", 2)
                 }
-              ></InputStyled>
-              <InputStyled
+              ></InputSimple>
+              <InputSimple
                 isNotValid={notValidInput === "watterRate"}
                 value={watterRate}
                 onChange={(e) =>
@@ -656,8 +565,8 @@ export default function AddPage() {
                     100
                   )
                 }
-              ></InputStyled>
-              <LengthInput
+              ></InputSimple>
+              <InputVanishing
                 isNotValid={notValidInput === "duration"}
                 isVisible={isLengthInputVisible}
                 placeholder="Введите продолжительность"
@@ -665,8 +574,8 @@ export default function AddPage() {
                 onChange={(e) =>
                   validateNumber(e.target.value, setDuration, "duration")
                 }
-              ></LengthInput>
-            </ResultContainer>
+              ></InputVanishing>
+            </GridUnborderedContainer>
             <AddMonthContainer
               isVisible={isNewMonthBlockVisible}
               isAlarmed={isNewMonthBlockAlarmed}
@@ -676,7 +585,7 @@ export default function AddPage() {
               <LabelStyled>
                 Средняя планируемая продолжительность операции, час
               </LabelStyled>
-              <InputStyled
+              <InputSimple
                 onFocus={() => {
                   setIsNewMonthBlockAlarmed(false);
                 }}
@@ -685,8 +594,8 @@ export default function AddPage() {
                 onChange={(e) =>
                   validateNumber(e.target.value, setPlanOps, "planOps")
                 }
-              ></InputStyled>
-              <InputStyled
+              ></InputSimple>
+              <InputSimple
                 onFocus={() => {
                   setIsNewMonthBlockAlarmed(false);
                 }}
@@ -699,16 +608,20 @@ export default function AddPage() {
                     "wishfullAverageLength"
                   )
                 }
-              ></InputStyled>
+              ></InputSimple>
             </AddMonthContainer>
           </>
           <AddButtonsContainer>
             <AddPhotoButton></AddPhotoButton>
             <AddExcellButton></AddExcellButton>
           </AddButtonsContainer>
-          <ButtonStyled onClick={onEditorFormSubmit}>Добавить</ButtonStyled>
-        </EditorContainer>
-        <AdminContainer isVisible={adminPannel}>
+          <InputSubmit
+            type={"submit"}
+            onClick={onEditorFormSubmit}
+            value={"Добавить"}
+          ></InputSubmit>
+        </VanishingContainer>
+        <VanishingContainer isVisible={adminPannel}>
           <AddContainer>
             <LabelStyled>Год</LabelStyled>
             <LabelStyled>Месяц</LabelStyled>
@@ -722,7 +635,11 @@ export default function AddPage() {
               }}
             >
               {startYearIterator.map((yearItem) => {
-                return <option value={yearItem}>{yearItem}</option>;
+                return (
+                  <option key={yearItem} value={yearItem}>
+                    {yearItem}
+                  </option>
+                );
               })}
             </SelectStyled>
             <SelectStyled
@@ -731,17 +648,21 @@ export default function AddPage() {
               }}
             >
               {[...MONTH_MAP.values()].map((mnth) => {
-                return <option value={mnth}>{mnth}</option>;
+                return (
+                  <option key={month} value={mnth}>
+                    {mnth}
+                  </option>
+                );
               })}
             </SelectStyled>
-            <InputStyled
+            <InputSimple
               isNotValid={notValidInput === "planOps"}
               value={String(planOps)}
               onChange={(e) =>
                 validateNumber(e.target.value, setPlanOps, "planOps")
               }
-            ></InputStyled>
-            <InputStyled
+            ></InputSimple>
+            <InputSimple
               isNotValid={notValidInput === "wishfullAverageLength"}
               value={String(wishfullAverageLength)}
               onChange={(e) =>
@@ -751,13 +672,15 @@ export default function AddPage() {
                   "wishfullAverageLength"
                 )
               }
-            ></InputStyled>
+            ></InputSimple>
           </AddContainer>
-          <ButtonStyled onClick={onAdminFormSubmit}>
-            Добавить месяц
-          </ButtonStyled>
-        </AdminContainer>
-      </Wraper>
+          <InputSubmit
+            type={"submit"}
+            value={"Добавить месяц"}
+            onClick={onAdminFormSubmit}
+          ></InputSubmit>
+        </VanishingContainer>
+      </AddFormContentWrapper>
       <AddMonthModal
         onSubmit={() => {
           setIsNewMonthBlockVisible(true);
@@ -769,6 +692,6 @@ export default function AddPage() {
           setAddMonthModalVisible(false);
         }}
       ></AddMonthModal>
-    </WrapperAllContent>
+    </>
   );
 }

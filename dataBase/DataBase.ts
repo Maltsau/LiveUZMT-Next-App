@@ -58,7 +58,7 @@ export function addRecord(
     }
   };
   const requiredYear = db.data!.find((item) => {
-    return item.year === year;
+    return item.year === Number(year);
   });
   // найден ли год
   // год найден
@@ -159,7 +159,7 @@ export function addRecord(
     // planOps, wishfullAverageLength заполнены, пушим год в базу
   } else if (planOps && wishfullAverageLength) {
     db.data!.push({
-      year,
+      year: Number(year),
       months: [
         {
           month,

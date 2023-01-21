@@ -97,7 +97,7 @@ export default function Footer({
   if (router.asPath !== "/add" && user?.user.role) {
     contentArray.push(
       <FooterButton onClick={() => {}} key={"ADD"}>
-        <Link href={"/add"}>Добавить запись</Link>
+        <Link href={"/addRecord"}>Добавить запись</Link>
       </FooterButton>
     );
   }
