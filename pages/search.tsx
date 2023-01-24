@@ -1,17 +1,19 @@
 import styled from "styled-components";
 import Image from "next/image";
 import { useState, useEffect } from "react";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 
 import { useDataBase } from "../hooks/useDataBase";
 import { useEditModeContext } from "./context/EditModeContext";
 import { useDeleteRecord } from "../hooks/useDeleteRecord";
+import { useUserStore } from "../stores/useUserStore";
 
 import OperationButton from "../components/buttons/OperationButton";
 import LoaderModal from "../components/modalWindows/LoaderModal";
 import ErrorModal from "../components/modalWindows/ErrorModal";
 
 import { DataBaseType } from "../types/types";
-import { useUserContext } from "./context/UserContext";
+// import { useUserContext } from "./context/UserContext";
 
 const WrapperAllContent = styled.div`
   width: 100%;
@@ -53,14 +55,16 @@ const DeleteButton = styled.button`
 `;
 
 export default function SearchPage() {
+  const user = useUserStore();
   const [search, setSearch] = useState<string>("");
   const [operation, setOperation] = useState("");
 
   const { isEditMode } = useEditModeContext();
-  const { user } = useUserContext();
+
   const { isLoading, data, isError, error } = useDataBase({});
   const { mutate: deleteOperation } = useDeleteRecord();
   const [isErrorVisible, setIserrorVisible] = useState(false);
+  const [parent, enableAnimations] = useAutoAnimate<HTMLDivElement>();
 
   if (isLoading) return <LoaderModal text="Fetching data..." />;
 
@@ -177,11 +181,11 @@ export default function SearchPage() {
           setSearch(e.target.value);
         }}
       ></InputStyled>
-      <ResultContainer>
+      <ResultContainer ref={parent}>
         {outputArray?.map((item: any, index: number) => {
           return (
             <OperationButton
-              user={user}
+              key={Math.random()}
               isEditMode={isEditMode}
               operation={item}
               onDeleteOperation={() => {
@@ -199,7 +203,7 @@ export default function SearchPage() {
                   dateTime,
                 });
               }}
-              isDeleteble={user?.role === "ADMIN" && isEditMode}
+              isDeleteble={user?.user.role === "ADMIN" && isEditMode}
               onClick={() => {
                 setOperation(item.id);
                 console.log("sets", operation);

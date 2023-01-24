@@ -2,7 +2,6 @@ import { ReactNode, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import styled from "styled-components";
-// import { useUserContext } from "./../pages/context/UserContext";
 import { useUserStore } from "../stores/useUserStore";
 import { useEditModeContext } from "../pages/context/EditModeContext";
 
@@ -24,22 +23,12 @@ export default function Footer({
   onSignOut,
 }: {
   children?: ReactNode | string;
-  onSignIn: any;
-  onSignOut: any;
+  onSignIn: () => void;
+  onSignOut: () => void;
 }) {
   const router = useRouter();
-  // const { user } = useUserContext();
   const user = useUserStore();
   const { isEditMode, setIsEditMode } = useEditModeContext();
-
-  // const handleAdd = async () => {
-  //   const response = await fetch("/api/dataBaseApi", {
-  //     method: "POST",
-  //     body: "Request",
-  //   });
-  //   const responseData = await response.json();
-  //   console.log("DataBase response", responseData);
-  // };
 
   type ContentType = ReactNode[];
   const contentArray: ContentType = [];

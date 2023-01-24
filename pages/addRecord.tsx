@@ -1,30 +1,17 @@
 import { useCallback, useEffect, useState } from "react";
-import { useMutation, useQuery, useQueryClient } from "react-query";
+
 import { useUserStore } from "../stores/useUserStore";
-import { useAddMonth } from "../hooks/useAddMonth";
-import { useForm, SubmitHandler } from "react-hook-form";
+
 import styled from "styled-components";
 
-import MONTH_MAP from "../services/monthMap";
-
-import AddPhotoButton from "../components/buttons/AddPhotoButton";
-import AddExcellButton from "../components/buttons/AddExcellButton";
 import CustomLink from "../components/buttons/CustomLink";
-import AddMonthModal from "../components/modalWindows/AddMonthModal";
 import AddRecordForm from "../components/forms/AddRecordForm";
-import {
-  InputSimple,
-  InputVanishing,
-  InputSubmit,
-  SelectStyled,
-} from "../components/menuComponents/Inputs";
+import AddMonthForm from "../components/forms/addMonthForm";
 import {
   Rectangle,
   SmallRectangle,
   PannelContainer,
   AddFormContentWrapper,
-  GridBorderedContainer,
-  GridUnborderedContainer,
   VanishingContainer,
 } from "../components/menuComponents/AdditionalComponents";
 
@@ -164,33 +151,8 @@ export default function AddRecordPage() {
         <VanishingContainer isVisible={!adminPannel}>
           <AddRecordForm />
         </VanishingContainer>
-
         <VanishingContainer isVisible={adminPannel}>
-          <form>
-            <GridUnborderedContainer gridColumns="1fr 1fr 1fr 1fr">
-              <LabelStyled>
-                <SpanStyled minHeight={72}>Месяц</SpanStyled>
-                <SelectStyled></SelectStyled>
-              </LabelStyled>
-              <LabelStyled>
-                <SpanStyled minHeight={72}>Год</SpanStyled>
-                <SelectStyled></SelectStyled>
-              </LabelStyled>
-              <LabelStyled>
-                <SpanStyled minHeight={72}>
-                  Количество операций по плану
-                </SpanStyled>
-                <InputSimple></InputSimple>
-              </LabelStyled>
-              <LabelStyled>
-                <SpanStyled minHeight={72}>
-                  Средняя планируемая продолжительность операции, час
-                </SpanStyled>
-                <InputSimple></InputSimple>
-              </LabelStyled>
-            </GridUnborderedContainer>
-            <InputSubmit type={"submit"} value={"Добавить месяц"}></InputSubmit>
-          </form>
+          <AddMonthForm />
         </VanishingContainer>
       </AddFormContentWrapper>
     </>

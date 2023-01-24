@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
-import Image from "next/image";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { useMutation } from "react-query";
 import ky from "ky";
 
@@ -88,6 +88,7 @@ export default function MonthTable({ db }: { db: DataBaseType | undefined }) {
   const { isEditMode, setIsEditMode } = useEditModeContext();
   const { mutate: deleteOperation } = useDeleteRecord();
   const [mode, setMode] = useState("opeartions");
+  const [parent, enableAnimations] = useAutoAnimate<HTMLDivElement>();
 
   const currentMonth =
     db!
@@ -199,7 +200,7 @@ export default function MonthTable({ db }: { db: DataBaseType | undefined }) {
         ></CustomLink>
         <Rectangle />
       </PannelContainer>
-      <OperationContainer isVisible={mode === "opeartions"}>
+      <OperationContainer isVisible={mode === "opeartions"} ref={parent}>
         {buttons}
       </OperationContainer>
       <StatisticsContainer isVisible={mode === "statistics"}>

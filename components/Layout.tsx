@@ -30,12 +30,10 @@ export default function Layout({ children }: { children: ReactNode }) {
     useState(false);
   const [isErrorVisible, setIserrorVisible] = useState(false);
   const [isLoginFailed, setIsLoginFailed] = useState(false);
-  // const { user, setUser } = useUserContext();
+
   const user = useUserStore();
-  const userRef = useRef();
 
   const {
-    mutateAsync,
     mutate,
     data: loginResponse,
     isLoading: isSigningIn,

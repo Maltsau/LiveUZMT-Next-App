@@ -2,7 +2,6 @@ import styled from "styled-components";
 import { useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { useForm, SubmitHandler, useFormState } from "react-hook-form";
-import { useUserStore } from "../../stores/useUserStore";
 import ky from "ky";
 
 import MONTH_MAP from "../../services/monthMap";
@@ -166,7 +165,6 @@ type Inputs = {
 
 export default function AddRecordForm() {
   const now = new Date();
-  const user = useUserStore();
   const queryClient = useQueryClient();
   const [addMonthModalVisible, setAddMonthModalVisible] = useState(false);
   const [isNewMonthBlockVisible, setIsNewMonthBlockVisible] = useState(false);
@@ -246,6 +244,7 @@ export default function AddRecordForm() {
     handleSubmit,
     watch,
     reset,
+    resetField,
     formState: { errors },
   } = useForm<Inputs>({
     defaultValues: {
@@ -274,9 +273,10 @@ export default function AddRecordForm() {
   });
   const watchInputs = watch();
   console.log("watch", watchInputs);
-  const onSubmit: SubmitHandler<Inputs> = async (data, e) => {
+
+  const onSubmit: SubmitHandler<Inputs> = (data, e) => {
     e?.preventDefault();
-    console.log("Form", data, errors);
+    console.log("data", data);
     addRecord(data);
   };
 
@@ -317,7 +317,7 @@ export default function AddRecordForm() {
   for (let i = watchInputs.startYear; i < now.getFullYear() + 10; i++) {
     yearIterator.push(i);
   }
-
+  console.log("errors", errors);
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -406,10 +406,16 @@ export default function AddRecordForm() {
             <SpanStyled>Время</SpanStyled>
             <FlexInlineContainer>
               <InputSimple
-                {...register("hours", { required: true, maxLength: 2 })}
+                {...register("hours", {
+                  required: "Поле обязательно к заполнению",
+                  maxLength: 2,
+                })}
               ></InputSimple>
               <InputSimple
-                {...register("minutes", { required: true, maxLength: 2 })}
+                {...register("minutes", {
+                  required: "Поле обязательно к заполнению",
+                  maxLength: 2,
+                })}
               ></InputSimple>
             </FlexInlineContainer>
           </LabelStyled>
@@ -418,14 +424,32 @@ export default function AddRecordForm() {
           <LabelStyled>
             <SpanStyled>Номер скважины</SpanStyled>
             <InputSimple
-              {...register("number", { required: true })}
+              {...register("number", {
+                required: "Поле обязательно к заполнению",
+              })}
             ></InputSimple>
+            <ErrorDiv>
+              {errors.number && (
+                <ErrorParagraph>
+                  {errors.number.message || `Ошибка заполнения`}
+                </ErrorParagraph>
+              )}
+            </ErrorDiv>
           </LabelStyled>
           <LabelStyled>
             <SpanStyled>Месторождение</SpanStyled>
             <InputSimple
-              {...register("field", { required: true })}
+              {...register("field", {
+                required: "Поле обязательно к заполнению",
+              })}
             ></InputSimple>
+            <ErrorDiv>
+              {errors.field && (
+                <ErrorParagraph>
+                  {errors.field.message || `Ошибка заполнения`}
+                </ErrorParagraph>
+              )}
+            </ErrorDiv>
           </LabelStyled>
           <LabelStyled>
             <SpanStyled>Промысел</SpanStyled>
@@ -507,20 +531,30 @@ export default function AddRecordForm() {
             </ErrorDiv>
           </LabelStyled>
           <LabelStyled>
-            <SpanStyled minHeight={40}>
-              Замер окончен?
-              <CheckboxStyled type={"checkbox"} {...register("isFinal", {})} />
-            </SpanStyled>
+            <CheckboxContainer>
+              <SpanStyled minHeight={40}>
+                Замер окончен?
+                <CheckboxStyled
+                  onClick={() => resetField("duration")}
+                  type={"checkbox"}
+                  {...register("isFinal", {})}
+                />
+              </SpanStyled>
+            </CheckboxContainer>
             <InputVanishing
               isVisible={watchInputs.isFinal}
+              placeholder={"Введите продолжительность"}
               {...register("duration", {
+                required: watchInputs.isFinal
+                  ? "Поле обязательно к заполнению"
+                  : false,
                 pattern: {
                   value: /^[0-9]*[.,]?[0-9]+$/,
                   message: "Продолжительность должна быть числом",
                 },
                 min: {
                   value: 0,
-                  message: "Продолжительность должна быть не меньше нуля",
+                  message: "Продолжительность должна больше нуля",
                 },
               })}
             ></InputVanishing>
@@ -542,6 +576,9 @@ export default function AddRecordForm() {
             <SpanStyled minHeight={40}>Количество операций по плану</SpanStyled>
             <InputSimple
               {...register("planOps", {
+                required: isNewMonthBlockVisible
+                  ? "Поле обязательно к заполнению"
+                  : false,
                 pattern: {
                   value: /^[0-9]*[.,]?[0-9]+$/,
                   message: "Количество операций должно быть числом",
@@ -569,6 +606,9 @@ export default function AddRecordForm() {
             </SpanStyled>
             <InputSimple
               {...register("wishfullAverageLength", {
+                required: isNewMonthBlockVisible
+                  ? "Поле обязательно к заполнению"
+                  : false,
                 pattern: {
                   value: /^[0-9]*[.,]?[0-9]+$/,
                   message: "Продолжительность должна быть числом",
@@ -596,11 +636,7 @@ export default function AddRecordForm() {
           <AddExcellButton></AddExcellButton>
           <div></div>
         </AddButtonsContainer>
-        <InputSubmit
-          type={"submit"}
-          value={"Добавить"}
-          // onClick={handleSubmit(onSubmit)}
-        ></InputSubmit>
+        <InputSubmit type={"submit"} value={"Добавить"}></InputSubmit>
       </form>
       <AddMonthModal
         onSubmit={() => {
