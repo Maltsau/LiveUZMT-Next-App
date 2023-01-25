@@ -29,18 +29,28 @@ const ButtonStyled = styled.button`
   border-radius: 5px;
 `;
 
-export default function AreYouSureDialog(isVisible: boolean) {
+interface LogOutConfirmationDialogPropsType {
+  isVisible: boolean;
+  onSubmit: () => void;
+  onAbort: () => void;
+}
+
+export default function AreYouSureDialog({
+  isVisible,
+  onSubmit,
+  onAbort,
+}: LogOutConfirmationDialogPropsType) {
   return (
-    <ModalDialog isVisible={isVisible}>
+    <ModalDialog isVisible={isVisible} onClose={onAbort}>
       <Container>
         <Warning>
           Неавторизованные пользователи не могут добавлять данные
         </Warning>
         <Question>Хотоите выйти?</Question>
         <Link href={"/"}>
-          <ButtonStyled>Да</ButtonStyled>
+          <ButtonStyled onClick={onSubmit}>Да</ButtonStyled>
         </Link>
-        <ButtonStyled>Нет</ButtonStyled>
+        <ButtonStyled onClick={onAbort}>Нет</ButtonStyled>
       </Container>
     </ModalDialog>
   );

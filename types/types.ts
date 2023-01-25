@@ -138,7 +138,7 @@ export type OpsArrayType = [
 ];
 
 export type SingleOpType = {
-  id?: string;
+  id: string;
   date: string;
   department: number;
   number: string;

@@ -11,6 +11,8 @@ import SignInModal from "./modalWindows/SignInModal";
 import AreYouSureModal from "./modalWindows/AreYouSureModal";
 import ErrorModal from "./modalWindows/ErrorModal";
 import LoaderModal from "./modalWindows/LoaderModal";
+import LogOutConfirmationDialog from "./modalWindows/LogOutConfirmationDialog";
+
 import { useUserStore } from "../stores/useUserStore";
 
 const Wraper = styled.div`
@@ -116,6 +118,13 @@ export default function Layout({ children }: { children: ReactNode }) {
     <Wraper>
       <Header></Header>
       <Container>
+        <LogOutConfirmationDialog
+          isVisible={isAreYouSureModalVisible}
+          onAbort={() => {
+            setIsAreYouSureModalVisible(false);
+          }}
+          onSubmit={handleSignOut}
+        ></LogOutConfirmationDialog>
         {children}
         <SignInModal
           onFocus={() => {
@@ -131,13 +140,13 @@ export default function Layout({ children }: { children: ReactNode }) {
             console.log("Layout", login, password, user);
           }}
         ></SignInModal>
-        <AreYouSureModal
+        {/* <AreYouSureModal
           onClose={() => {
             setIsAreYouSureModalVisible(false);
           }}
           isVisible={isAreYouSureModalVisible}
           onFormSubmit={handleSignOut}
-        ></AreYouSureModal>
+        ></AreYouSureModal> */}
       </Container>
       <Footer
         onSignIn={() => {

@@ -3,6 +3,8 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 
+import MONTH_MAP from "../services/monthMap";
+
 import { useDataBase } from "../hooks/useDataBase";
 import { useEditModeContext } from "./context/EditModeContext";
 import { useDeleteRecord } from "../hooks/useDeleteRecord";
@@ -13,7 +15,6 @@ import LoaderModal from "../components/modalWindows/LoaderModal";
 import ErrorModal from "../components/modalWindows/ErrorModal";
 
 import { DataBaseType } from "../types/types";
-// import { useUserContext } from "./context/UserContext";
 
 const WrapperAllContent = styled.div`
   width: 100%;
@@ -133,11 +134,18 @@ export default function SearchPage() {
 
   const getRecordYear = (result: any, item: any) => {
     const year = result?.find((element: any) => {
-      element.date === item.date;
+      console.log("element.index", element.index);
+      console.log("item.index", item.id);
+      element.id === item.index;
       return element.year;
     });
-    return year.year;
+    console.log("year", year.year);
+    return year;
   };
+
+  // const getRecordYear1 = (item) => {
+  //   const year = result?.find((element) => {});
+  // };
 
   const getRecordMonth = (result: any, item: any) => {
     const year = result?.find((element: any) => {
@@ -148,29 +156,36 @@ export default function SearchPage() {
   };
 
   console.log("searchBase", searchBase);
-  console.log(
-    "presult",
-    result?.flatMap((resultItem: any) => {
-      return data
-        ?.filter((yearItem: any) => {
-          return yearItem.year === resultItem.year;
-        })
-        ?.flatMap((monthItem: any) => {
-          return monthItem.months;
-        })
-        ?.filter((monthItem: any) => {
-          return monthItem.month === resultItem.month;
-        })
-        ?.flatMap((monthItem: any) => {
-          return monthItem.ops;
-        });
-      // ?.find((opsItem: any) => {
-      //   return opsItem.id === resultItem.index;
-      // });
-    })
-  );
+  // console.log(
+  //   "presult",
+  //   result?.flatMap((resultItem: any) => {
+  //     return data
+  //       ?.filter((yearItem: any) => {
+  //         return yearItem.year === resultItem.year;
+  //       })
+  //       ?.flatMap((monthItem: any) => {
+  //         return monthItem.months;
+  //       })
+  //       ?.filter((monthItem: any) => {
+  //         return monthItem.month === resultItem.month;
+  //       })
+  //       ?.flatMap((monthItem: any) => {
+  //         return monthItem.ops;
+  //       });
+  // ?.find((opsItem: any) => {
+  //   return opsItem.id === resultItem.index;
+  // });
+  //   })
+  // );
   console.log("outputArray", outputArray);
-  console.log("result", outputArray);
+  // console.log(
+  //   "result",
+  //   outputArray,
+  //   result,
+  //   "year month",
+  //   outputArray?.map((item) => getRecordYear(result, item)),
+  //   outputArray?.map((item) => getRecordMonth(result, item))
+  // );
 
   return (
     <WrapperAllContent>
@@ -189,17 +204,18 @@ export default function SearchPage() {
               isEditMode={isEditMode}
               operation={item}
               onDeleteOperation={() => {
+                console.log(MONTH_MAP.get(Number(item.id.split(".")[1])));
                 deleteOperation({
                   id: item.id,
-                  year: getRecordYear(result, item),
-                  month: getRecordMonth(result, item),
+                  year: Number(item.id.split(".")[2].slice(0, 4)),
+                  month: MONTH_MAP.get(Number(item.id.split(".")[1]) - 1),
                 });
               }}
               onDeleteRecord={(dateTime) => {
                 deleteOperation({
                   id: item.id,
-                  year: getRecordYear(result, item),
-                  month: getRecordMonth(result, item),
+                  year: Number(item.id.split(".")[2].slice(0, 4)),
+                  month: MONTH_MAP.get(Number(item.id.split(".")[1]) - 1),
                   dateTime,
                 });
               }}

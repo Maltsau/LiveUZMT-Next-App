@@ -4,85 +4,36 @@
     "months": [
       {
         "month": "январь",
-        "wishfullAverageLength": 1,
-        "planOps": 1,
+        "wishfullAverageLength": "19",
+        "planOps": "23",
         "ops": [
           {
-            "id": "24.01.2023 q q",
-            "date": "24.01.2023",
+            "id": "25.01.2023 22 2",
+            "date": "25.01.2023",
             "department": 1,
-            "number": "q",
-            "field": "q",
-            "duration": 1,
+            "number": "22",
+            "field": "2",
             "result": [
               {
-                "isFinal": true,
-                "dateTime": "24.01.2023 15:53",
-                "debitMass": 111,
-                "density": 1,
-                "watterRate": 1
+                "isFinal": false,
+                "dateTime": "25.01.2023 12:36",
+                "debitMass": 2,
+                "density": 2,
+                "watterRate": 2
               }
             ]
           },
           {
-            "id": "24.01.2023 dsa sssssssssssss",
-            "date": "24.01.2023",
-            "department": 1,
-            "number": "dsa",
-            "field": "sssssssssssss",
-            "duration": 1,
-            "result": [
-              {
-                "isFinal": true,
-                "dateTime": "24.01.2023 16:00",
-                "debitMass": 1,
-                "density": 1,
-                "watterRate": 1
-              }
-            ]
-          },
-          {
-            "id": "24.01.2023 1 1",
-            "date": "24.01.2023",
+            "id": "25.01.2023 1 ва",
+            "date": "25.01.2023",
             "department": 1,
             "number": "1",
-            "field": "1",
+            "field": "ва",
+            "duration": 1,
             "result": [
               {
                 "isFinal": false,
-                "dateTime": "24.01.2023 16:00",
-                "debitMass": 1,
-                "density": 1,
-                "watterRate": 1
-              }
-            ]
-          },
-          {
-            "id": "24.01.2023 dsa dsaa",
-            "date": "24.01.2023",
-            "department": 1,
-            "number": "dsa",
-            "field": "dsaa",
-            "result": [
-              {
-                "isFinal": false,
-                "dateTime": "24.01.2023 16:00",
-                "debitMass": 1,
-                "density": 1,
-                "watterRate": 1
-              }
-            ]
-          },
-          {
-            "id": "24.01.2023 dsad dfc",
-            "date": "24.01.2023",
-            "department": 1,
-            "number": "dsad",
-            "field": "dfc",
-            "result": [
-              {
-                "isFinal": false,
-                "dateTime": "24.01.2023 16:00",
+                "dateTime": "25.01.2023 12:44",
                 "debitMass": 1,
                 "density": 1,
                 "watterRate": 1
@@ -95,25 +46,7 @@
         "month": "февраль",
         "wishfullAverageLength": "23",
         "planOps": "11",
-        "ops": [
-          {
-            "id": "12.02.2023 23 ds",
-            "date": "12.02.2023",
-            "department": 1,
-            "number": "23",
-            "field": "ds",
-            "duration": 1,
-            "result": [
-              {
-                "isFinal": true,
-                "dateTime": "12.02.2023 13:27",
-                "debitMass": 12,
-                "density": 1,
-                "watterRate": 22
-              }
-            ]
-          }
-        ]
+        "ops": []
       },
       {
         "month": "март",
@@ -149,24 +82,7 @@
         "month": "август",
         "wishfullAverageLength": 19,
         "planOps": 23,
-        "ops": [
-          {
-            "id": "21.08.2023 1 1",
-            "date": "21.08.2023",
-            "department": 1,
-            "number": "1",
-            "field": "1",
-            "result": [
-              {
-                "isFinal": false,
-                "dateTime": "21.08.2023 09:35",
-                "debitMass": 1,
-                "density": 1,
-                "watterRate": 1
-              }
-            ]
-          }
-        ]
+        "ops": []
       },
       {
         "month": "сентябрь",
