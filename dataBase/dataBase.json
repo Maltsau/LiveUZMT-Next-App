@@ -17,15 +17,32 @@
             "result": [
               {
                 "isFinal": true,
-                "dateTime": "26.01.2023 09:52",
+                "dateTime": "26.01.2023 12:06",
                 "debitMass": 1,
                 "density": 1,
                 "watterRate": 1
               },
               {
                 "isFinal": true,
-                "dateTime": "26.01.2023 11:15",
+                "dateTime": "26.01.2023 12:13",
                 "debitMass": 1,
+                "density": 1,
+                "watterRate": 1
+              }
+            ]
+          },
+          {
+            "id": "26.01.2023 das sad",
+            "date": "26.01.2023",
+            "department": 1,
+            "number": "das",
+            "field": "sad",
+            "duration": 111,
+            "result": [
+              {
+                "isFinal": true,
+                "dateTime": "26.01.2023 12:15",
+                "debitMass": 11,
                 "density": 1,
                 "watterRate": 1
               }
@@ -205,25 +222,7 @@
         "month": "сентябрь",
         "wishfullAverageLength": 1,
         "planOps": 1,
-        "ops": [
-          {
-            "id": "24.09.2022 d 1111",
-            "date": "24.09.2022",
-            "department": 1,
-            "number": "d",
-            "field": "1111",
-            "duration": 1,
-            "result": [
-              {
-                "isFinal": true,
-                "dateTime": "24.09.2022 14:33",
-                "debitMass": 1,
-                "density": 1,
-                "watterRate": 1
-              }
-            ]
-          }
-        ]
+        "ops": []
       }
     ]
   },
@@ -282,25 +281,7 @@
         "month": "январь",
         "wishfullAverageLength": 19,
         "planOps": 23,
-        "ops": [
-          {
-            "id": "13.01.2020 11 dfsddx",
-            "date": "13.01.2020",
-            "department": 1,
-            "number": "11",
-            "field": "dfsddx",
-            "duration": "1",
-            "result": [
-              {
-                "isFinal": true,
-                "dateTime": "13.01.2020 10:03",
-                "debitMass": 12,
-                "density": 1,
-                "watterRate": 11
-              }
-            ]
-          }
-        ]
+        "ops": []
       }
     ]
   }

@@ -119,7 +119,7 @@ export default function Layout({ children }: { children: ReactNode }) {
 
   return (
     <Wraper>
-      <Header></Header>
+      <Header onAllReset={() => {}}></Header>
       <Container>
         <LogOutConfirmationDialog
           isVisible={signOutConfirmationDialogVisible}

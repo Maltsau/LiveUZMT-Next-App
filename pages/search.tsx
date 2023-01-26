@@ -13,8 +13,9 @@ import { useUserStore } from "../stores/useUserStore";
 import OperationButton from "../components/buttons/OperationButton";
 import LoaderModal from "../components/modalWindows/LoaderModal";
 import ErrorModal from "../components/modalWindows/ErrorModal";
+import DeleteConfirmationDialog from "../components/modalWindows/DeleteConfirmationDialog";
 
-import { DataBaseType } from "../types/types";
+import { DataBaseType, DeleteStateType } from "../types/types";
 
 const WrapperAllContent = styled.div`
   width: 100%;
@@ -66,6 +67,8 @@ export default function SearchPage() {
   const { mutate: deleteOperation } = useDeleteRecord();
   const [isErrorVisible, setIserrorVisible] = useState(false);
   const [parent, enableAnimations] = useAutoAnimate<HTMLDivElement>();
+  const [deleteConfirmationState, setDeleteConfirmationState] =
+    useState<DeleteStateType>({ id: "", year: "", month: "" });
 
   if (isLoading) return <LoaderModal text="Fetching data..." />;
 
@@ -132,28 +135,28 @@ export default function SearchPage() {
       });
   });
 
-  const getRecordYear = (result: any, item: any) => {
-    const year = result?.find((element: any) => {
-      console.log("element.index", element.index);
-      console.log("item.index", item.id);
-      element.id === item.index;
-      return element.year;
-    });
-    console.log("year", year.year);
-    return year;
-  };
+  // const getRecordYear = (result: any, item: any) => {
+  //   const year = result?.find((element: any) => {
+  //     console.log("element.index", element.index);
+  //     console.log("item.index", item.id);
+  //     element.id === item.index;
+  //     return element.year;
+  //   });
+  //   console.log("year", year.year);
+  //   return year;
+  // };
 
   // const getRecordYear1 = (item) => {
   //   const year = result?.find((element) => {});
   // };
 
-  const getRecordMonth = (result: any, item: any) => {
-    const year = result?.find((element: any) => {
-      element.date === item.date;
-      return element.year;
-    });
-    return year.month;
-  };
+  // const getRecordMonth = (result: any, item: any) => {
+  //   const year = result?.find((element: any) => {
+  //     element.date === item.date;
+  //     return element.year;
+  //   });
+  //   return year.month;
+  // };
 
   console.log("searchBase", searchBase);
   // console.log(
@@ -205,14 +208,14 @@ export default function SearchPage() {
               operation={item}
               onDeleteOperation={() => {
                 console.log(MONTH_MAP.get(Number(item.id.split(".")[1])));
-                deleteOperation({
+                setDeleteConfirmationState({
                   id: item.id,
                   year: Number(item.id.split(".")[2].slice(0, 4)),
                   month: MONTH_MAP.get(Number(item.id.split(".")[1]) - 1),
                 });
               }}
               onDeleteRecord={(dateTime) => {
-                deleteOperation({
+                setDeleteConfirmationState({
                   id: item.id,
                   year: Number(item.id.split(".")[2].slice(0, 4)),
                   month: MONTH_MAP.get(Number(item.id.split(".")[1]) - 1),
@@ -242,6 +245,16 @@ export default function SearchPage() {
           );
         })}
       </ResultContainer>
+      <DeleteConfirmationDialog
+        isVisible={!!deleteConfirmationState?.id}
+        onAbort={() => {
+          setDeleteConfirmationState({ id: "", year: "", month: "" });
+        }}
+        onSubmit={() => {
+          deleteOperation(deleteConfirmationState);
+          setDeleteConfirmationState({ id: "", year: "", month: "" });
+        }}
+      ></DeleteConfirmationDialog>
     </WrapperAllContent>
   );
 }

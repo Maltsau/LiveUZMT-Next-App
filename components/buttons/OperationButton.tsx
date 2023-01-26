@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Image from "next/image";
 import { DataBaseType, SingleOpType } from "../../types/types";
 import { useUserStore } from "../../stores/useUserStore";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 
 const Container = styled.div`
   width: 100%;
@@ -116,6 +117,7 @@ export default function OperationButton({
   isCurrent: boolean;
 }) {
   const user = useUserStore();
+  const [parent] = useAutoAnimate<HTMLTableSectionElement>();
   if (isHighlighted) {
     return (
       <Container onClick={onSecondClick}>
@@ -140,7 +142,7 @@ export default function OperationButton({
                 ) : null}
               </TableRow>
             </thead>
-            <tbody>
+            <tbody ref={parent}>
               {operation.result.map((result: any) => {
                 return (
                   <TableRow

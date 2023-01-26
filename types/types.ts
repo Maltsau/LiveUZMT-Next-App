@@ -179,6 +179,6 @@ export type SingleResultType = {
 export type DeleteStateType = {
   id: string;
   year: number | "";
-  month: string;
+  month: string | undefined;
   dateTime?: string;
 };

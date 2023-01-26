@@ -146,31 +146,31 @@ export default function MonthTable({ db }: { db: DataBaseType | undefined }) {
     setIsEditMode(false);
   };
 
-  const handleDeleteOperation = ({
-    id,
-    year,
-    month,
-  }: {
-    id: string;
-    year: number;
-    month: string;
-  }) => {
-    deleteOperation({ id, year, month });
-  };
+  // const handleDeleteOperation = ({
+  //   id,
+  //   year,
+  //   month,
+  // }: {
+  //   id: string;
+  //   year: number;
+  //   month: string;
+  // }) => {
+  //   deleteOperation({ id, year, month });
+  // };
 
-  const handleDeleteRecord = ({
-    id,
-    year,
-    month,
-    dateTime,
-  }: {
-    id: string;
-    year: number;
-    month: string;
-    dateTime: string;
-  }) => {
-    deleteOperation({ id, year, month, dateTime });
-  };
+  // const handleDeleteRecord = ({
+  //   id,
+  //   year,
+  //   month,
+  //   dateTime,
+  // }: {
+  //   id: string;
+  //   year: number;
+  //   month: string;
+  //   dateTime: string;
+  // }) => {
+  //   deleteOperation({ id, year, month, dateTime });
+  // };
 
   console.log("deleteState component", deleteConfirmationState);
 

@@ -36,11 +36,13 @@ export default function DeleteConfirmationDialog({
 }: DeleteConfirmationDialogPropsType) {
   return (
     <ModalDialog isVisible={isVisible} onClose={onAbort}>
-      <Question>
-        Хотоите удaлить запись без возможности восстановления?
-      </Question>
-      <ButtonStyled onClick={onSubmit}>Да</ButtonStyled>
-      <ButtonStyled onClick={onAbort}>Нет</ButtonStyled>
+      <Container>
+        <Question>
+          Хотоите удaлить запись без возможности восстановления?
+        </Question>
+        <ButtonStyled onClick={onSubmit}>Да</ButtonStyled>
+        <ButtonStyled onClick={onAbort}>Нет</ButtonStyled>
+      </Container>
     </ModalDialog>
   );
 }
