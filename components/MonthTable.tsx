@@ -10,6 +10,8 @@ import { useEditModeContext } from "../pages/context/EditModeContext";
 import { useDeleteRecord } from "../hooks/useDeleteRecord";
 import { useAddMonth } from "../hooks/useAddMonth";
 
+import { DeleteStateType } from "../types/types";
+
 import OperationButton from "./buttons/OperationButton";
 import {
   Rectangle,
@@ -19,6 +21,7 @@ import {
 
 import { DataBaseType, SingleMonthType } from "../types/types";
 import CustomLink from "./buttons/CustomLink";
+import DeleteConfirmationDialog from "./modalWindows/DeleteConfirmationDialog";
 
 const Wraper = styled.div`
   margin: 1px;
@@ -84,6 +87,8 @@ const ButtonStyled = styled.button`
 
 export default function MonthTable({ db }: { db: DataBaseType | undefined }) {
   const user = useUserStore();
+  const [deleteConfirmationState, setDeleteConfirmationState] =
+    useState<DeleteStateType>({ id: "", year: "", month: "" });
   const { year, month, operation, setOperation } = useMainStore();
   const { isEditMode, setIsEditMode } = useEditModeContext();
   const { mutate: deleteOperation } = useDeleteRecord();
@@ -141,21 +146,44 @@ export default function MonthTable({ db }: { db: DataBaseType | undefined }) {
     setIsEditMode(false);
   };
 
+  const handleDeleteOperation = ({
+    id,
+    year,
+    month,
+  }: {
+    id: string;
+    year: number;
+    month: string;
+  }) => {
+    deleteOperation({ id, year, month });
+  };
+
+  const handleDeleteRecord = ({
+    id,
+    year,
+    month,
+    dateTime,
+  }: {
+    id: string;
+    year: number;
+    month: string;
+    dateTime: string;
+  }) => {
+    deleteOperation({ id, year, month, dateTime });
+  };
+
+  console.log("deleteState component", deleteConfirmationState);
+
   const buttons = currentMonthOps?.map((element: any, index: number) => {
     return (
       <OperationButton
         isEditMode={isEditMode}
         operation={element}
         onDeleteOperation={() => {
-          deleteOperation({ id: element.id, year, month });
+          setDeleteConfirmationState({ id: element.id, year, month });
         }}
         onDeleteRecord={(dateTime) => {
-          deleteOperation({
-            id: element.id,
-            year,
-            month,
-            dateTime,
-          });
+          setDeleteConfirmationState({ id: element.id, year, month, dateTime });
         }}
         isDeleteble={user?.user.role === "ADMIN" && isEditMode}
         onClick={() => {
@@ -200,6 +228,16 @@ export default function MonthTable({ db }: { db: DataBaseType | undefined }) {
         ></CustomLink>
         <Rectangle />
       </PannelContainer>
+      <DeleteConfirmationDialog
+        isVisible={!!deleteConfirmationState?.id}
+        onAbort={() => {
+          setDeleteConfirmationState({ id: "", year: "", month: "" });
+        }}
+        onSubmit={() => {
+          deleteOperation(deleteConfirmationState);
+          setDeleteConfirmationState({ id: "", year: "", month: "" });
+        }}
+      ></DeleteConfirmationDialog>
       <OperationContainer isVisible={mode === "opeartions"} ref={parent}>
         {buttons}
       </OperationContainer>

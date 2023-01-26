@@ -3,7 +3,7 @@ import { useMutation, UseMutationResult, useQueryClient } from "react-query";
 
 type DeleteRequestType = {
   id: string;
-  year: number;
+  year: number | "";
   month: string | undefined;
   dateTime?: string;
 };

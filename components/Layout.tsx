@@ -12,6 +12,7 @@ import AreYouSureModal from "./modalWindows/AreYouSureModal";
 import ErrorModal from "./modalWindows/ErrorModal";
 import LoaderModal from "./modalWindows/LoaderModal";
 import LogOutConfirmationDialog from "./modalWindows/LogOutConfirmationDialog";
+import DeleteConfirmationDialog from "./modalWindows/DeleteConfirmationDialog";
 
 import { useUserStore } from "../stores/useUserStore";
 
@@ -28,8 +29,10 @@ const Container = styled.div`
 export default function Layout({ children }: { children: ReactNode }) {
   const router = useRouter();
   const [isSignInModalVisible, setIsSignInModalVisible] = useState(false);
-  const [isAreYouSureModalVisible, setIsAreYouSureModalVisible] =
-    useState(false);
+  const [
+    signOutConfirmationDialogVisible,
+    setSignOutConfirmationDialogVisible,
+  ] = useState(false);
   const [isErrorVisible, setIserrorVisible] = useState(false);
   const [isLoginFailed, setIsLoginFailed] = useState(false);
 
@@ -67,7 +70,7 @@ export default function Layout({ children }: { children: ReactNode }) {
   const handleSignOut = () => {
     mutate({ login: "Tweenpipe", password: "Fuch" });
     user?.setUser("", "");
-    setIsAreYouSureModalVisible(false);
+    setSignOutConfirmationDialogVisible(false);
   };
 
   const {
@@ -119,9 +122,9 @@ export default function Layout({ children }: { children: ReactNode }) {
       <Header></Header>
       <Container>
         <LogOutConfirmationDialog
-          isVisible={isAreYouSureModalVisible}
+          isVisible={signOutConfirmationDialogVisible}
           onAbort={() => {
-            setIsAreYouSureModalVisible(false);
+            setSignOutConfirmationDialogVisible(false);
           }}
           onSubmit={handleSignOut}
         ></LogOutConfirmationDialog>
@@ -153,7 +156,7 @@ export default function Layout({ children }: { children: ReactNode }) {
           setIsSignInModalVisible(true);
         }}
         onSignOut={() => {
-          setIsAreYouSureModalVisible(true);
+          setSignOutConfirmationDialogVisible(true);
         }}
       ></Footer>
     </Wraper>

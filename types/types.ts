@@ -175,3 +175,10 @@ export type SingleResultType = {
   watterRate: number;
   files?: [string];
 };
+
+export type DeleteStateType = {
+  id: string;
+  year: number | "";
+  month: string;
+  dateTime?: string;
+};

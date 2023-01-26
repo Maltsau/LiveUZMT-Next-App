@@ -9,11 +9,13 @@ interface DialogPropsType {
 }
 
 const DialogStyled = styled.dialog`
+  position: absolute;
+  top: 20%;
+  max-width: 90%;
   border: 0;
-  margin-top: 100px;
   padding: 0;
   text-align: center;
-  z-index: 10;
+  z-index: 1000;
   ::backdrop {
     background: rgba(255, 0, 0, 0.25);
     opacity: 0.9;
