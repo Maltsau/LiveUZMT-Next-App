@@ -8,11 +8,11 @@ import ky from "ky";
 import Header from "./Header";
 import Footer from "./Footer";
 import SignInModal from "./modalWindows/SignInModal";
-import AreYouSureModal from "./modalWindows/AreYouSureModal";
+
 import ErrorModal from "./modalWindows/ErrorModal";
 import LoaderModal from "./modalWindows/LoaderModal";
 import LogOutConfirmationDialog from "./modalWindows/LogOutConfirmationDialog";
-import DeleteConfirmationDialog from "./modalWindows/DeleteConfirmationDialog";
+import SignInDialog from "./modalWindows/SignInDialog";
 
 import { useUserStore } from "../stores/useUserStore";
 
@@ -63,7 +63,7 @@ export default function Layout({ children }: { children: ReactNode }) {
     }
   );
 
-  const handleSignIn = async (login: string, password: string) => {
+  const handleSignIn = (login: string, password: string) => {
     mutate({ login, password });
   };
 
@@ -128,28 +128,13 @@ export default function Layout({ children }: { children: ReactNode }) {
           }}
           onSubmit={handleSignOut}
         ></LogOutConfirmationDialog>
-        {children}
-        <SignInModal
-          onFocus={() => {
-            setIsLoginFailed(false);
-          }}
-          isNotValid={isLoginFailed}
+        <SignInDialog
           isVisible={isSignInModalVisible}
           onClose={() => {
             setIsSignInModalVisible(false);
           }}
-          onFormSubmit={(login: string, password: string) => {
-            handleSignIn(login, password);
-            console.log("Layout", login, password, user);
-          }}
-        ></SignInModal>
-        {/* <AreYouSureModal
-          onClose={() => {
-            setIsAreYouSureModalVisible(false);
-          }}
-          isVisible={isAreYouSureModalVisible}
-          onFormSubmit={handleSignOut}
-        ></AreYouSureModal> */}
+        ></SignInDialog>
+        {children}
       </Container>
       <Footer
         onSignIn={() => {

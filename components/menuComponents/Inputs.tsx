@@ -47,3 +47,15 @@ export const SelectStyled = styled.select`
   border-radius: 5px;
   background-color: white;
 `;
+
+export const ErrorDiv = styled.div`
+  color: red;
+  margin: 0;
+  padding: 0;
+  height: 20px;
+  font-size: 0.6em;
+`;
+
+export const ErrorParagraph = styled.p`
+  margin: 0 10px;
+`;

@@ -14,6 +14,8 @@ import {
   InputVanishing,
   InputSubmit,
   SelectStyled,
+  ErrorDiv,
+  ErrorParagraph,
 } from "../menuComponents/Inputs";
 import {
   GridBorderedContainer,
@@ -126,18 +128,6 @@ const DropDownUl = styled.ul`
   font-size: 1em;
   margin: 0;
   list-style-type: none;
-`;
-
-const ErrorDiv = styled.div`
-  color: red;
-  margin: 0;
-  padding: 0;
-  height: 20px;
-  font-size: 0.6em;
-`;
-
-const ErrorParagraph = styled.p`
-  margin: 0 10px;
 `;
 
 type Inputs = {

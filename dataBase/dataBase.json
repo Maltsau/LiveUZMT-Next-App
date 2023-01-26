@@ -8,23 +8,33 @@
         "planOps": "23",
         "ops": [
           {
-            "id": "26.01.2023 1 1",
+            "id": "26.01.2023 12 11",
             "date": "26.01.2023",
             "department": 1,
-            "number": "1",
+            "number": "12",
+            "field": "11",
+            "duration": 1,
+            "result": [
+              {
+                "isFinal": true,
+                "dateTime": "26.01.2023 12:26",
+                "debitMass": 11,
+                "density": 1,
+                "watterRate": 1
+              }
+            ]
+          },
+          {
+            "id": "26.01.2023 12 1",
+            "date": "26.01.2023",
+            "department": 1,
+            "number": "12",
             "field": "1",
             "duration": 1,
             "result": [
               {
                 "isFinal": true,
-                "dateTime": "26.01.2023 12:06",
-                "debitMass": 1,
-                "density": 1,
-                "watterRate": 1
-              },
-              {
-                "isFinal": true,
-                "dateTime": "26.01.2023 12:13",
+                "dateTime": "26.01.2023 12:26",
                 "debitMass": 1,
                 "density": 1,
                 "watterRate": 1
@@ -32,17 +42,17 @@
             ]
           },
           {
-            "id": "26.01.2023 das sad",
-            "date": "26.01.2023",
+            "id": "23.01.2023 12 11",
+            "date": "23.01.2023",
             "department": 1,
-            "number": "das",
-            "field": "sad",
-            "duration": 111,
+            "number": "12",
+            "field": "11",
+            "duration": 1,
             "result": [
               {
                 "isFinal": true,
-                "dateTime": "26.01.2023 12:15",
-                "debitMass": 11,
+                "dateTime": "26.01.2023 12:27",
+                "debitMass": 1,
                 "density": 1,
                 "watterRate": 1
               }

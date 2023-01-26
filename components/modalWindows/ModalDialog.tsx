@@ -42,7 +42,7 @@ export default function ModalDialog({
   }, []);
   console.log(dialogRef);
   return isVisible ? (
-    <DialogStyled ref={dialogRef} open onClick={onClose} style={{}}>
+    <DialogStyled ref={dialogRef} open onClick={onClose}>
       <ModalHeader>
         <button onClick={onClose}>X</button>
       </ModalHeader>
