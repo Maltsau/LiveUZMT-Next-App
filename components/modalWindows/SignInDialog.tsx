@@ -1,13 +1,11 @@
-import { useState, useEffect, useCallback } from "react";
-import ky from "ky";
 import styled from "styled-components";
 import { useForm, SubmitHandler, useFormState } from "react-hook-form";
 import { useUserStore } from "../../stores/useUserStore";
-import { useMutation } from "react-query";
+import { useLogin } from "../../hooks/useLoginHook";
 import ModalDialog from "./ModalDialog";
+import LoaderModal from "./LoaderModal";
 import {
   InputSimple,
-  InputSubmit,
   ErrorDiv,
   ErrorParagraph,
 } from "../menuComponents/Inputs";
@@ -31,6 +29,11 @@ const ErrorParagraphModal = styled(ErrorParagraph)`
   color: red;
 `;
 
+const ButtonStyledSignIn = styled(ButtonStyled)`
+  width: 200px;
+  min-height: 50px;
+`;
+
 interface Inputs {
   login: string;
   password: string;
@@ -45,7 +48,6 @@ export default function SignInDialog({
   isVisible,
   onClose,
 }: LogInDialogPropsType) {
-  // const [isLoginError, setIsLoginError] = useState(false)
   const user = useUserStore();
   const {
     register,
@@ -55,36 +57,27 @@ export default function SignInDialog({
   } = useForm<Inputs>({ mode: "all" });
 
   const {
-    mutate,
+    mutate: logIn,
     data: loginResponse,
     isLoading: isSigningIn,
     isError: isLoginError,
-  } = useMutation(
-    "LOG_IN_REQUEST",
-    ({ login, password }: { login: string; password: string }) => {
-      return ky
-        .post("/api/login2", {
-          json: { login, password },
-        })
-        .json<{ userName: string; role: string }>();
+  } = useLogin({
+    onSuccess: (loginResponse) => {
+      user?.setUser(loginResponse.userName, loginResponse.role);
+      reset();
+      onClose();
     },
-    {
-      onError: () => {
-        reset();
-      },
-      onSuccess: (loginResponse) => {
-        user?.setUser(loginResponse.userName, loginResponse.role);
-        console.log("response", loginResponse);
-        console.log("user", user);
-        onClose();
-        // setIsSignInModalVisible(false);
-      },
-    }
-  );
+    onError: () => {
+      reset();
+    },
+  });
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
-    mutate(data);
+  const onSubmit: SubmitHandler<Inputs> = (data, e) => {
+    e?.preventDefault();
+    logIn(data);
   };
+
+  if (isSigningIn) return <LoaderModal text="Выполняется вход..." />;
 
   return (
     <ModalDialog isVisible={isVisible} onClose={onClose}>
@@ -127,7 +120,7 @@ export default function SignInDialog({
           {isLoginError ? (
             <ErrorParagraphModal>Ошибка авторизации</ErrorParagraphModal>
           ) : null}
-          <ButtonStyled type="submit">Войти</ButtonStyled>
+          <ButtonStyledSignIn type="submit">Войти</ButtonStyledSignIn>
         </SignInForm>
       </DialogContainer>
     </ModalDialog>

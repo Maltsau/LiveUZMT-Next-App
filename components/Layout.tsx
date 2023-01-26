@@ -1,16 +1,13 @@
-import { ReactNode, useState, useEffect, useCallback, useRef } from "react";
+import { ReactNode, useState } from "react";
 import { useRouter } from "next/router";
-// import { useUserContext } from "../pages/context/UserContext";
-import { useQuery, useMutation } from "react-query";
+
+import { useQuery } from "react-query";
 import styled from "styled-components";
 import ky from "ky";
 
 import Header from "./Header";
 import Footer from "./Footer";
-import SignInModal from "./modalWindows/SignInModal";
 
-import ErrorModal from "./modalWindows/ErrorModal";
-import LoaderModal from "./modalWindows/LoaderModal";
 import LogOutConfirmationDialog from "./modalWindows/LogOutConfirmationDialog";
 import SignInDialog from "./modalWindows/SignInDialog";
 
@@ -37,41 +34,6 @@ export default function Layout({ children }: { children: ReactNode }) {
   const [isLoginFailed, setIsLoginFailed] = useState(false);
 
   const user = useUserStore();
-
-  const {
-    mutate,
-    data: loginResponse,
-    isLoading: isSigningIn,
-    isError: isLoginError,
-  } = useMutation(
-    "LOG_IN_REQUEST",
-    ({ login, password }: { login: string; password: string }) => {
-      return ky
-        .post("/api/login2", {
-          json: { login, password },
-        })
-        .json<{ userName: string; role: string }>();
-    },
-    {
-      onError: () => {
-        setIsLoginFailed(true);
-      },
-      onSuccess: (loginResponse) => {
-        user?.setUser(loginResponse.userName, loginResponse.role);
-        setIsSignInModalVisible(false);
-      },
-    }
-  );
-
-  const handleSignIn = (login: string, password: string) => {
-    mutate({ login, password });
-  };
-
-  const handleSignOut = () => {
-    mutate({ login: "Tweenpipe", password: "Fuch" });
-    user?.setUser("", "");
-    setSignOutConfirmationDialogVisible(false);
-  };
 
   const {
     data: secretResponse,
@@ -103,20 +65,6 @@ export default function Layout({ children }: { children: ReactNode }) {
     }
   );
 
-  if (isSigningIn) return <LoaderModal text="Выполняется вход..." />;
-
-  // if (isLoginError)
-  //   return (
-  //     <ErrorModal
-  //       isVisible={true}
-  //       onClose={() => {
-  //         setIserrorVisible(false);
-  //       }}
-  //     ></ErrorModal>
-  //   );
-
-  console.log("User", user);
-
   return (
     <Wraper>
       <Header onAllReset={() => {}}></Header>
@@ -126,7 +74,9 @@ export default function Layout({ children }: { children: ReactNode }) {
           onAbort={() => {
             setSignOutConfirmationDialogVisible(false);
           }}
-          onSubmit={handleSignOut}
+          onSubmit={() => {
+            setSignOutConfirmationDialogVisible(false);
+          }}
         ></LogOutConfirmationDialog>
         <SignInDialog
           isVisible={isSignInModalVisible}

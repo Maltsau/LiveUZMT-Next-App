@@ -12,6 +12,7 @@ const DialogStyled = styled.dialog`
   position: absolute;
   top: 20%;
   max-width: 90%;
+  min-width: 80%;
   border: 0;
   padding: 0;
   text-align: center;

@@ -34,7 +34,7 @@ export default function Footer({
   const contentArray: ContentType = [];
 
   switch (user?.user.role) {
-    case undefined: {
+    case "": {
       contentArray.push(
         <FooterButton onClick={onSignIn} key={"Sign_In"}>
           Вoйти

@@ -1,6 +1,7 @@
-import styled from "styled-components";
 import Link from "next/link";
 import ModalDialog from "./ModalDialog";
+import { useUserStore } from "../../stores/useUserStore";
+import { useLogin } from "../../hooks/useLoginHook";
 
 import {
   DialogContainer,
@@ -20,6 +21,14 @@ export default function LogOutConfirmationDialog({
   onSubmit,
   onAbort,
 }: LogOutConfirmationDialogPropsType) {
+  const user = useUserStore();
+  const { mutate: logOut, data: logOutResponse } = useLogin({
+    onSuccess: (logOutResponse) => {
+      user?.setUser(logOutResponse.userName, logOutResponse.role);
+      onSubmit();
+    },
+    onError: () => {},
+  });
   return (
     <ModalDialog isVisible={isVisible} onClose={onAbort}>
       <DialogContainer>
@@ -28,7 +37,13 @@ export default function LogOutConfirmationDialog({
         </Warning>
         <Question>Хотоите выйти?</Question>
         <Link href={"/"}>
-          <ButtonStyled onClick={onSubmit}>Да</ButtonStyled>
+          <ButtonStyled
+            onClick={() => {
+              logOut({ login: "Tweenpipe", password: "Fuch" });
+            }}
+          >
+            Да
+          </ButtonStyled>
         </Link>
         <ButtonStyled onClick={onAbort}>Нет</ButtonStyled>
       </DialogContainer>

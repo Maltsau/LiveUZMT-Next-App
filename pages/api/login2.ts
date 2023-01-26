@@ -33,7 +33,7 @@ export default function handler(
     } else if (newUser.login === "Tweenpipe" && newUser.password === "Fuch") {
       deleteSecret(req.cookies.secret);
       res.setHeader("Set-Cookie", `secret=deleted; Max-Age=0`);
-      return res.status(201).json({ message: "Loged out" });
+      return res.status(201).json({ userName: "", role: "" });
     } else {
       return res.status(401).json({ message: "Not logged in" });
     }
