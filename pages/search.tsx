@@ -14,6 +14,8 @@ import OperationButton from "../components/buttons/OperationButton";
 import LoaderModal from "../components/modalWindows/LoaderModal";
 import ErrorModal from "../components/modalWindows/ErrorModal";
 import DeleteConfirmationDialog from "../components/modalWindows/DeleteConfirmationDialog";
+import SuccessDialog from "../components/modalWindows/SuccessDialog";
+import ErrorDialog from "../components/modalWindows/ErrorDialog";
 
 import { DataBaseType, DeleteStateType } from "../types/types";
 
@@ -60,11 +62,20 @@ export default function SearchPage() {
   const user = useUserStore();
   const [search, setSearch] = useState<string>("");
   const [operation, setOperation] = useState("");
+  const [isSuccessDialogVisible, setIsSuccessDialogVisible] = useState(false);
+  const [isErrorDialogVisible, setErrorDialogVisible] = useState(false);
 
   const { isEditMode } = useEditModeContext();
 
   const { isLoading, data, isError, error } = useDataBase({});
-  const { mutate: deleteOperation } = useDeleteRecord();
+  const { mutate: deleteOperation } = useDeleteRecord({
+    onSuccess: () => {
+      setIsSuccessDialogVisible(true);
+    },
+    onError: () => {
+      setErrorDialogVisible(true);
+    },
+  });
   const [isErrorVisible, setIserrorVisible] = useState(false);
   const [parent, enableAnimations] = useAutoAnimate<HTMLDivElement>();
   const [deleteConfirmationState, setDeleteConfirmationState] =
@@ -135,61 +146,6 @@ export default function SearchPage() {
       });
   });
 
-  // const getRecordYear = (result: any, item: any) => {
-  //   const year = result?.find((element: any) => {
-  //     console.log("element.index", element.index);
-  //     console.log("item.index", item.id);
-  //     element.id === item.index;
-  //     return element.year;
-  //   });
-  //   console.log("year", year.year);
-  //   return year;
-  // };
-
-  // const getRecordYear1 = (item) => {
-  //   const year = result?.find((element) => {});
-  // };
-
-  // const getRecordMonth = (result: any, item: any) => {
-  //   const year = result?.find((element: any) => {
-  //     element.date === item.date;
-  //     return element.year;
-  //   });
-  //   return year.month;
-  // };
-
-  console.log("searchBase", searchBase);
-  // console.log(
-  //   "presult",
-  //   result?.flatMap((resultItem: any) => {
-  //     return data
-  //       ?.filter((yearItem: any) => {
-  //         return yearItem.year === resultItem.year;
-  //       })
-  //       ?.flatMap((monthItem: any) => {
-  //         return monthItem.months;
-  //       })
-  //       ?.filter((monthItem: any) => {
-  //         return monthItem.month === resultItem.month;
-  //       })
-  //       ?.flatMap((monthItem: any) => {
-  //         return monthItem.ops;
-  //       });
-  // ?.find((opsItem: any) => {
-  //   return opsItem.id === resultItem.index;
-  // });
-  //   })
-  // );
-  console.log("outputArray", outputArray);
-  // console.log(
-  //   "result",
-  //   outputArray,
-  //   result,
-  //   "year month",
-  //   outputArray?.map((item) => getRecordYear(result, item)),
-  //   outputArray?.map((item) => getRecordMonth(result, item))
-  // );
-
   return (
     <WrapperAllContent>
       <InputStyled
@@ -255,6 +211,20 @@ export default function SearchPage() {
           setDeleteConfirmationState({ id: "", year: "", month: "" });
         }}
       ></DeleteConfirmationDialog>
+      <SuccessDialog
+        onClose={() => {
+          setIsSuccessDialogVisible(false);
+        }}
+        isVisible={isSuccessDialogVisible}
+        message={"Запись успешно удалена"}
+      ></SuccessDialog>
+      <ErrorDialog
+        onClose={() => {
+          setErrorDialogVisible(false);
+        }}
+        isVisible={isErrorDialogVisible}
+        message={"При удалении произошла ошибка"}
+      ></ErrorDialog>
     </WrapperAllContent>
   );
 }

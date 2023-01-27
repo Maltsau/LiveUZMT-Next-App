@@ -8,7 +8,13 @@ type AddMonthRequestType = {
   wishfullAverageLength: number;
 };
 
-export function useAddMonth() {
+export function useAddMonth({
+  onSuccess,
+  onError,
+}: {
+  onSuccess: () => void;
+  onError: () => void;
+}) {
   const queryClient = useQueryClient();
   return useMutation(
     "ADD_MONTH",
@@ -32,6 +38,10 @@ export function useAddMonth() {
     {
       onSuccess: () => {
         queryClient.invalidateQueries(["REQUEST_DATA_BASE"]);
+        onSuccess();
+      },
+      onError: () => {
+        onError();
       },
     }
   );

@@ -7,6 +7,8 @@ import styled from "styled-components";
 import CustomLink from "../components/buttons/CustomLink";
 import AddRecordForm from "../components/forms/AddRecordForm";
 import AddMonthForm from "../components/forms/addMonthForm";
+import SuccessDialog from "../components/modalWindows/SuccessDialog";
+import ErrorDialog from "../components/modalWindows/ErrorDialog";
 import {
   Rectangle,
   SmallRectangle,
@@ -14,8 +16,6 @@ import {
   AddFormContentWrapper,
   VanishingContainer,
 } from "../components/menuComponents/AdditionalComponents";
-
-import ky from "ky";
 
 const SpanStyled = styled.span<{ minHeight?: number }>`
   margin: 0 5px;
@@ -129,6 +129,8 @@ export default function AddRecordPage() {
   const user = useUserStore();
 
   const [adminPannel, setAdminPannel] = useState(false);
+  const [isSuccessDialogVisible, setIsSuccessDialogVisible] = useState(false);
+  const [isErrorDialogVisible, setErrorDialogVisible] = useState(false);
 
   return (
     <>
@@ -149,12 +151,40 @@ export default function AddRecordPage() {
 
       <AddFormContentWrapper isAdmin={user?.user.role === "ADMIN"}>
         <VanishingContainer isVisible={!adminPannel}>
-          <AddRecordForm />
+          <AddRecordForm
+            onSuccess={() => {
+              setIsSuccessDialogVisible(true);
+            }}
+            onError={() => {
+              setIsSuccessDialogVisible(true);
+            }}
+          />
         </VanishingContainer>
         <VanishingContainer isVisible={adminPannel}>
-          <AddMonthForm />
+          <AddMonthForm
+            onSuccess={() => {
+              setIsSuccessDialogVisible(true);
+            }}
+            onError={() => {
+              setIsSuccessDialogVisible(true);
+            }}
+          />
         </VanishingContainer>
       </AddFormContentWrapper>
+      <SuccessDialog
+        onClose={() => {
+          setIsSuccessDialogVisible(false);
+        }}
+        isVisible={isSuccessDialogVisible}
+        message={"Запись успешно добавлена"}
+      ></SuccessDialog>
+      <ErrorDialog
+        onClose={() => {
+          setErrorDialogVisible(false);
+        }}
+        isVisible={isErrorDialogVisible}
+        message={"При добавлении записи произошла ошибка"}
+      ></ErrorDialog>
     </>
   );
 }

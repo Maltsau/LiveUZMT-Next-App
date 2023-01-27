@@ -8,7 +8,13 @@ type DeleteRequestType = {
   dateTime?: string;
 };
 
-export function useDeleteRecord() {
+export function useDeleteRecord({
+  onSuccess,
+  onError,
+}: {
+  onSuccess: () => void;
+  onError: () => void;
+}) {
   const queryClient = useQueryClient();
   return useMutation(
     "DELETE_RECORD",
@@ -23,6 +29,10 @@ export function useDeleteRecord() {
     {
       onSuccess: () => {
         queryClient.invalidateQueries("REQUEST_DATA_BASE");
+        onSuccess();
+      },
+      onError: () => {
+        onError();
       },
     }
   );

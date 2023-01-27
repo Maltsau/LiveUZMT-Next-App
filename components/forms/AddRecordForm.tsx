@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useState } from "react";
-import { useMutation, useQuery, useQueryClient } from "react-query";
-import { useForm, SubmitHandler, useFormState } from "react-hook-form";
+import { useMutation, useQueryClient } from "react-query";
+import { useForm, SubmitHandler } from "react-hook-form";
 import ky from "ky";
 
 import MONTH_MAP from "../../services/monthMap";
@@ -9,6 +9,7 @@ import MONTH_MAP from "../../services/monthMap";
 import AddPhotoButton from "../buttons/AddPhotoButton";
 import AddExcellButton from "../buttons/AddExcellButton";
 import AddMonthModal from "../modalWindows/AddMonthModal";
+
 import {
   InputSimple,
   InputVanishing,
@@ -153,7 +154,13 @@ type Inputs = {
   wishfullAverageLength?: string;
 };
 
-export default function AddRecordForm() {
+export default function AddRecordForm({
+  onSuccess,
+  onError,
+}: {
+  onSuccess: () => void;
+  onError: () => void;
+}) {
   const now = new Date();
   const queryClient = useQueryClient();
   const [addMonthModalVisible, setAddMonthModalVisible] = useState(false);
@@ -224,7 +231,11 @@ export default function AddRecordForm() {
           queryClient.invalidateQueries("REQUEST_DATA_BASE");
           setIsNewMonthBlockVisible(false);
           reset();
+          onSuccess();
         }
+      },
+      onError: () => {
+        onError();
       },
     }
   );

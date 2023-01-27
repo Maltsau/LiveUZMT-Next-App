@@ -4,54 +4,41 @@
     "months": [
       {
         "month": "январь",
-        "wishfullAverageLength": "19",
-        "planOps": "23",
+        "wishfullAverageLength": "12",
+        "planOps": "12",
         "ops": [
           {
-            "id": "26.01.2023 12 11",
-            "date": "26.01.2023",
+            "id": "27.01.2023 1 1",
+            "date": "27.01.2023",
             "department": 1,
-            "number": "12",
-            "field": "11",
-            "duration": 1,
-            "result": [
-              {
-                "isFinal": true,
-                "dateTime": "26.01.2023 12:26",
-                "debitMass": 11,
-                "density": 1,
-                "watterRate": 1
-              }
-            ]
-          },
-          {
-            "id": "26.01.2023 12 1",
-            "date": "26.01.2023",
-            "department": 1,
-            "number": "12",
+            "number": "1",
             "field": "1",
             "duration": 1,
             "result": [
               {
                 "isFinal": true,
-                "dateTime": "26.01.2023 12:26",
+                "dateTime": "27.01.2023 12:32",
                 "debitMass": 1,
                 "density": 1,
                 "watterRate": 1
-              }
-            ]
-          },
-          {
-            "id": "23.01.2023 12 11",
-            "date": "23.01.2023",
-            "department": 1,
-            "number": "12",
-            "field": "11",
-            "duration": 1,
-            "result": [
+              },
               {
                 "isFinal": true,
-                "dateTime": "26.01.2023 12:27",
+                "dateTime": "27.01.2023 12:33",
+                "debitMass": 1,
+                "density": 1,
+                "watterRate": 1
+              },
+              {
+                "isFinal": true,
+                "dateTime": "27.01.2023 12:32",
+                "debitMass": 1,
+                "density": 1,
+                "watterRate": 1
+              },
+              {
+                "isFinal": true,
+                "dateTime": "27.01.2023 12:34",
                 "debitMass": 1,
                 "density": 1,
                 "watterRate": 1

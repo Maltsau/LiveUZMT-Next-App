@@ -52,14 +52,27 @@ type Inputs = {
   wishfullAverageLength: string;
 };
 
-export default function AddMonthForm() {
+export default function AddMonthForm({
+  onSuccess,
+  onError,
+}: {
+  onSuccess: () => void;
+  onError: () => void;
+}) {
   const now = new Date();
 
   const {
     data: addMonthResponse,
     mutate: addMonth,
     mutateAsync: addMonthAsync,
-  } = useAddMonth();
+  } = useAddMonth({
+    onSuccess: () => {
+      onSuccess();
+    },
+    onError: () => {
+      onError();
+    },
+  });
 
   const {
     register,

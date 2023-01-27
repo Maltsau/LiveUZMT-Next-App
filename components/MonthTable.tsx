@@ -1,8 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
-import { useMutation } from "react-query";
-import ky from "ky";
 
 import { useUserStore } from "../stores/useUserStore";
 import { useMainStore } from "../stores/useMainStore";
@@ -22,6 +20,8 @@ import {
 import { DataBaseType, SingleMonthType } from "../types/types";
 import CustomLink from "./buttons/CustomLink";
 import DeleteConfirmationDialog from "./modalWindows/DeleteConfirmationDialog";
+import SuccessDialog from "./modalWindows/SuccessDialog";
+import ErrorDialog from "./modalWindows/ErrorDialog";
 
 const Wraper = styled.div`
   margin: 1px;
@@ -85,15 +85,30 @@ const ButtonStyled = styled.button`
   border-radius: 5px;
 `;
 
+interface VisibilityState {
+  state: "" | "change" | "delete";
+}
+
 export default function MonthTable({ db }: { db: DataBaseType | undefined }) {
   const user = useUserStore();
   const [deleteConfirmationState, setDeleteConfirmationState] =
     useState<DeleteStateType>({ id: "", year: "", month: "" });
+  const [isSuccessDialogVisible, setIsSuccessDialogVisible] =
+    useState<VisibilityState>({ state: "" });
+  const [isErrorDialogVisible, setErrorDialogVisible] =
+    useState<VisibilityState>({ state: "" });
   const { year, month, operation, setOperation } = useMainStore();
   const { isEditMode, setIsEditMode } = useEditModeContext();
-  const { mutate: deleteOperation } = useDeleteRecord();
+  const { mutate: deleteOperation } = useDeleteRecord({
+    onSuccess: () => {
+      setIsSuccessDialogVisible({ state: "delete" });
+    },
+    onError: () => {
+      setErrorDialogVisible({ state: "delete" });
+    },
+  });
   const [mode, setMode] = useState("opeartions");
-  const [parent, enableAnimations] = useAutoAnimate<HTMLDivElement>();
+  const [parent] = useAutoAnimate<HTMLDivElement>();
 
   const currentMonth =
     db!
@@ -112,7 +127,14 @@ export default function MonthTable({ db }: { db: DataBaseType | undefined }) {
     wishfullAverageLength
   );
 
-  const { mutate: changeMonth } = useAddMonth();
+  const { mutate: changeMonth } = useAddMonth({
+    onSuccess: () => {
+      setIsSuccessDialogVisible({ state: "change" });
+    },
+    onError: () => {
+      setErrorDialogVisible({ state: "change" });
+    },
+  });
 
   const factOps1: number = currentMonthOps?.filter(
     (elem: any) => elem.department === 1
@@ -145,32 +167,6 @@ export default function MonthTable({ db }: { db: DataBaseType | undefined }) {
     });
     setIsEditMode(false);
   };
-
-  // const handleDeleteOperation = ({
-  //   id,
-  //   year,
-  //   month,
-  // }: {
-  //   id: string;
-  //   year: number;
-  //   month: string;
-  // }) => {
-  //   deleteOperation({ id, year, month });
-  // };
-
-  // const handleDeleteRecord = ({
-  //   id,
-  //   year,
-  //   month,
-  //   dateTime,
-  // }: {
-  //   id: string;
-  //   year: number;
-  //   month: string;
-  //   dateTime: string;
-  // }) => {
-  //   deleteOperation({ id, year, month, dateTime });
-  // };
 
   console.log("deleteState component", deleteConfirmationState);
 
@@ -238,6 +234,28 @@ export default function MonthTable({ db }: { db: DataBaseType | undefined }) {
           setDeleteConfirmationState({ id: "", year: "", month: "" });
         }}
       ></DeleteConfirmationDialog>
+      <SuccessDialog
+        onClose={() => {
+          setIsSuccessDialogVisible({ state: "" });
+        }}
+        isVisible={!!isSuccessDialogVisible.state}
+        message={
+          isSuccessDialogVisible.state === "delete"
+            ? "Запись успешно удалена"
+            : "Запись успешно изменена"
+        }
+      ></SuccessDialog>
+      <ErrorDialog
+        onClose={() => {
+          setErrorDialogVisible({ state: "" });
+        }}
+        isVisible={!!isErrorDialogVisible.state}
+        message={
+          isErrorDialogVisible.state === "delete"
+            ? "При удалении произошла ошибка"
+            : "При изменении записи произошла ошибка"
+        }
+      ></ErrorDialog>
       <OperationContainer isVisible={mode === "opeartions"} ref={parent}>
         {buttons}
       </OperationContainer>
