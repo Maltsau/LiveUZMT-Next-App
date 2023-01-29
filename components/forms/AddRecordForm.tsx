@@ -91,8 +91,6 @@ const AddMonthContainer = styled.div<{
   grid-template-columns: repeat(2, 1fr);
   padding: 2px;
   margin: 2px 0px;
-  border: solid red 1px;
-  border-radius: 5px;
 `;
 
 const NewMonthLabelStyled = styled.label`

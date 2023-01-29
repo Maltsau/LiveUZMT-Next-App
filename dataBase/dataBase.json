@@ -344,6 +344,29 @@
             ]
           }
         ]
+      },
+      {
+        "month": "октябрь",
+        "wishfullAverageLength": "19",
+        "planOps": "23",
+        "ops": [
+          {
+            "id": "29.010.2022 1 ДОЛГАЯ",
+            "date": "29.010.2022",
+            "department": 1,
+            "number": "1",
+            "field": "ДОЛГАЯ",
+            "result": [
+              {
+                "isFinal": false,
+                "dateTime": "29.010.2022 18:22",
+                "debitMass": 1,
+                "density": 1,
+                "watterRate": 1
+              }
+            ]
+          }
+        ]
       }
     ]
   },

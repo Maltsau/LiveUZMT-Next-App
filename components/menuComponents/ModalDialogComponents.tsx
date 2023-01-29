@@ -1,10 +1,11 @@
 import styled, { StyledComponent } from "styled-components";
 
 export const DialogContainer = styled.div`
+  display: block;
   padding: 16px;
   margin: auto;
   border: solid #3c3e3f 1px;
-  text-align: center;
+  justify-content: center;
 `;
 
 export const Warning = styled.h2`

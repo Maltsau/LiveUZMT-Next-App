@@ -3,10 +3,10 @@ import { DataBaseType } from "../types/types";
 
 type DataBaseStoreType = {
   dataBase: DataBaseType | [];
-  //   getDataBase: (dataBase) => DataBaseType;
+  setDataBase: (dataBase: DataBaseType) => void;
 };
 
 export const useDataBaseStore = create<DataBaseStoreType>((set) => ({
   dataBase: [],
-  //   getDataBase: (dataBase) => set(() => ({ dataBase })),
+  setDataBase: (dataBase) => set(() => ({ dataBase })),
 }));

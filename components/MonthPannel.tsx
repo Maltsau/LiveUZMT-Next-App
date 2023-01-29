@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import MONTH_MAP from "../services/monthMap";
 import { useMainStore } from "../stores/useMainStore";
+import { useDataBaseStore } from "../stores/useDataBaseStore";
 
 import CustomLink from "./buttons/CustomLink";
 import {
@@ -23,29 +24,30 @@ const ButtonBar = styled.div<{
   order: ${({ isHighlighted }) => (isHighlighted ? "2" : "1")};
 `;
 
-export default function MonthPannel({ db }: { db: any }) {
+export default function MonthPannel() {
   const { year, month, setMonth } = useMainStore();
-  const currentYear = db
-    .find((yearItem: any) => yearItem.year === year)
-    ?.months?.map((monthItem: any) => {
+  const dataBase = useDataBaseStore();
+  const currentYear = dataBase.dataBase
+    .find((yearItem) => yearItem.year === year)
+    ?.months?.map((monthItem) => {
       return monthItem.month;
     })
     .map((item: any) => {
       return [...MONTH_MAP.keys()].find((key) => MONTH_MAP.get(key) === item);
     })
-    .sort((a: number, b: number) => {
-      return a - b;
+    .sort((a, b) => {
+      return a! - b!;
     })
-    .map((month: number) => {
-      return MONTH_MAP.get(month);
+    .map((month) => {
+      return MONTH_MAP.get(month!);
     });
 
   const yearHalf: Array<string> = [];
   const yearRest: Array<string> = [];
-  currentYear?.forEach((element: string, index: number) => {
-    if (index < 6) {
+  currentYear?.forEach((element, index) => {
+    if (index < 6 && element) {
       yearHalf.push(element);
-    } else {
+    } else if (element) {
       yearRest.push(element);
     }
   });

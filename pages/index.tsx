@@ -5,12 +5,14 @@ import { useState, useEffect, useCallback } from "react";
 import styled from "styled-components";
 
 import { useDataBase } from "../hooks/useDataBase";
+import { useDataBaseStore } from "../stores/useDataBaseStore";
 import { useMainStore } from "../stores/useMainStore";
 
 import YearPannel from "../components/YearPannel";
 import MonthPannel from "../components/MonthPannel";
 import MonthTable from "../components/MonthTable";
 import LoaderModal from "../components/modalWindows/LoaderModal";
+import ErrorDialog from "../components/modalWindows/ErrorDialog";
 import ErrorModal from "../components/modalWindows/ErrorModal";
 
 const Wraper = styled.div`
@@ -42,6 +44,8 @@ export default function Home() {
   const [isErrorVisible, setIserrorVisible] = useState(false);
 
   const mainStore = useMainStore();
+  const dataBase = useDataBaseStore();
+  console.log("DataBase", dataBase.dataBase);
 
   const { isLoading, data, isError, error } = useDataBase({});
 
@@ -75,20 +79,21 @@ export default function Home() {
 
   if (isError)
     return (
-      <ErrorModal
+      <ErrorDialog
         isVisible={true}
         onClose={() => {
           setIserrorVisible(false);
         }}
-      ></ErrorModal>
+        message="Что-то пошло не так. Обновите страницу."
+      ></ErrorDialog>
     );
 
   return (
     <Wraper>
       <InnerWraper>
-        <YearPannel db={data}></YearPannel>
-        <MonthPannel db={data}></MonthPannel>
-        <MonthTable db={data}></MonthTable>
+        <YearPannel></YearPannel>
+        <MonthPannel></MonthPannel>
+        <MonthTable></MonthTable>
       </InnerWraper>
     </Wraper>
   );

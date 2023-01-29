@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 
 import { useUserStore } from "../stores/useUserStore";
+import { useDataBaseStore } from "../stores/useDataBaseStore";
 import { useMainStore } from "../stores/useMainStore";
 import { useEditModeContext } from "../pages/context/EditModeContext";
 import { useDeleteRecord } from "../hooks/useDeleteRecord";
@@ -89,8 +90,9 @@ interface VisibilityState {
   state: "" | "change" | "delete";
 }
 
-export default function MonthTable({ db }: { db: DataBaseType | undefined }) {
+export default function MonthTable() {
   const user = useUserStore();
+  const dataBase = useDataBaseStore();
   const [deleteConfirmationState, setDeleteConfirmationState] =
     useState<DeleteStateType>({ id: "", year: "", month: "" });
   const [isSuccessDialogVisible, setIsSuccessDialogVisible] =
@@ -109,9 +111,9 @@ export default function MonthTable({ db }: { db: DataBaseType | undefined }) {
   });
   const [mode, setMode] = useState("opeartions");
   const [parent] = useAutoAnimate<HTMLDivElement>();
-
+  console.log("MonthTable", dataBase.dataBase);
   const currentMonth =
-    db!
+    dataBase.dataBase
       .find((yearItem) => yearItem.year === year)
       ?.months?.find((monthItem) => monthItem.month === month) ?? ({} as any);
 

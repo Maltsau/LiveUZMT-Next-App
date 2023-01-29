@@ -8,6 +8,7 @@ import {
 } from "./menuComponents/AdditionalComponents";
 
 import { DataBaseType } from "../types/types";
+import { useDataBaseStore } from "../stores/useDataBaseStore";
 
 const Container = styled.div`
   display: flex;
@@ -23,10 +24,11 @@ const ButtonBar = styled.div<{
   order: ${({ isHighlighted }) => (isHighlighted ? "3" : "1")};
 `;
 
-export default function YearPannel({ db }: { db: DataBaseType | undefined }) {
+export default function YearPannel() {
   const { year, setYear } = useMainStore();
-  const yearList = db
-    ?.filter((yearItem) => yearItem.months.length)
+  const dataBase = useDataBaseStore();
+  const yearList = dataBase.dataBase
+    .filter((yearItem) => yearItem.months.length)
     .map((yearItem) => yearItem.year)
     .sort((a: number, b: number) => {
       return a - b;
@@ -37,8 +39,8 @@ export default function YearPannel({ db }: { db: DataBaseType | undefined }) {
   const rest: Array<number> = [];
 
   yearList?.forEach((year, index) => {
-    if (index <= 6) firstSix.push(year);
-    else if (index <= 13) secondSix.push(year);
+    if (index < 7) firstSix.push(year);
+    else if (index < 14) secondSix.push(year);
     else rest.push(year);
   });
 
