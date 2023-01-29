@@ -55,7 +55,9 @@ export default function Header({
   return (
     <Rectangle>
       {content}
-      <UserLabel>{user?.user.label}</UserLabel>
+      <UserLabel>
+        {user?.user.role ? `${user?.user.label} ~ ${user?.user.role}` : null}
+      </UserLabel>
       {children}
     </Rectangle>
   );

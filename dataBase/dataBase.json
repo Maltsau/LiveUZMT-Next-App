@@ -296,6 +296,54 @@
         "wishfullAverageLength": "1",
         "planOps": "1",
         "ops": []
+      },
+      {
+        "month": "июнь",
+        "wishfullAverageLength": "19",
+        "planOps": "20",
+        "ops": [
+          {
+            "id": "29.06.2022 1 ГОРНИНСКАЯ",
+            "date": "29.06.2022",
+            "department": 1,
+            "number": "1",
+            "field": "ГОРНИНСКАЯ",
+            "duration": 1,
+            "result": [
+              {
+                "isFinal": true,
+                "dateTime": "29.06.2022 16:34",
+                "debitMass": 1,
+                "density": 1,
+                "watterRate": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "month": "июль",
+        "wishfullAverageLength": "1",
+        "planOps": "1",
+        "ops": [
+          {
+            "id": "29.07.2022 23 БУЙНОВИЧСКАЯ",
+            "date": "29.07.2022",
+            "department": 1,
+            "number": "23",
+            "field": "БУЙНОВИЧСКАЯ",
+            "duration": 1,
+            "result": [
+              {
+                "isFinal": true,
+                "dateTime": "29.07.2022 16:54",
+                "debitMass": 1,
+                "density": 1,
+                "watterRate": 1
+              }
+            ]
+          }
+        ]
       }
     ]
   },
@@ -355,6 +403,35 @@
         "wishfullAverageLength": 19,
         "planOps": 23,
         "ops": []
+      }
+    ]
+  },
+  {
+    "year": 2011,
+    "months": [
+      {
+        "month": "январь",
+        "wishfullAverageLength": 19,
+        "planOps": 23,
+        "ops": [
+          {
+            "id": "29.01.2011 1 ВЕТХИНСКАЯ",
+            "date": "29.01.2011",
+            "department": 1,
+            "number": "1",
+            "field": "ВЕТХИНСКАЯ",
+            "duration": "1",
+            "result": [
+              {
+                "isFinal": true,
+                "dateTime": "29.01.2011 17:21",
+                "debitMass": 1,
+                "density": 1,
+                "watterRate": 1
+              }
+            ]
+          }
+        ]
       }
     ]
   }

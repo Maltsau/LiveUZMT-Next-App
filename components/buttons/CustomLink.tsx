@@ -25,7 +25,7 @@ const InnerTrapezoid = styled.div<{
   top: 17px;
   right: 9px;
   border-bottom: ${({ isHighlighted }) =>
-    isHighlighted ? "30px solid white" : "30px solid transparent"};
+    isHighlighted ? "30px solid #f3f5f6" : "30px solid transparent"};
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
   height: 0;
@@ -37,7 +37,7 @@ const ButtonStyled = styled.span<{
 }>`
   position: relative;
   top: 5px;
-  color: ${({ isHighlighted }) => (isHighlighted ? "#3c3e3f" : "white")};
+  color: ${({ isHighlighted }) => (isHighlighted ? "#3c3e3f" : "#f3f5f6")};
 `;
 
 export default function CustomLink({

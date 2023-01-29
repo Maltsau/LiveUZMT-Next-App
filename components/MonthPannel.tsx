@@ -15,15 +15,7 @@ const Wrapper = styled.div`
   padding: 2px 0px;
 `;
 
-const ButtonBar1 = styled.div<{
-  isHighlighted: boolean;
-}>`
-  display: flex;
-  padding-top: 2px;
-  order: ${({ isHighlighted }) => (isHighlighted ? "2" : "1")};
-`;
-
-const ButtonBar2 = styled.div<{
+const ButtonBar = styled.div<{
   isHighlighted: boolean;
 }>`
   display: flex;
@@ -59,38 +51,42 @@ export default function MonthPannel({ db }: { db: any }) {
   });
   return (
     <Wrapper>
-      <ButtonBar1 isHighlighted={yearHalf.includes(month)}>
-        <SmallRectangle />
-        {yearHalf.map((monthItem) => {
-          return (
-            <CustomLink
-              onClick={() => {
-                setMonth(monthItem);
-              }}
-              key={monthItem}
-              text={monthItem}
-              isHighlighted={monthItem === month}
-            />
-          );
-        })}
-        <Rectangle />
-      </ButtonBar1>
-      <ButtonBar2 isHighlighted={yearRest.includes(month)}>
-        <SmallRectangle />
-        {yearRest.map((monthItem) => {
-          return (
-            <CustomLink
-              onClick={() => {
-                setMonth(monthItem);
-              }}
-              key={monthItem}
-              text={monthItem}
-              isHighlighted={monthItem === month}
-            />
-          );
-        })}
-        <Rectangle />
-      </ButtonBar2>
+      {yearHalf.length ? (
+        <ButtonBar isHighlighted={yearHalf.includes(month)}>
+          <SmallRectangle />
+          {yearHalf.map((monthItem) => {
+            return (
+              <CustomLink
+                onClick={() => {
+                  setMonth(monthItem);
+                }}
+                key={monthItem}
+                text={monthItem}
+                isHighlighted={monthItem === month}
+              />
+            );
+          })}
+          <Rectangle />
+        </ButtonBar>
+      ) : null}
+      {yearRest.length ? (
+        <ButtonBar isHighlighted={yearRest.includes(month)}>
+          <SmallRectangle />
+          {yearRest.map((monthItem) => {
+            return (
+              <CustomLink
+                onClick={() => {
+                  setMonth(monthItem);
+                }}
+                key={monthItem}
+                text={monthItem}
+                isHighlighted={monthItem === month}
+              />
+            );
+          })}
+          <Rectangle />
+        </ButtonBar>
+      ) : null}
     </Wrapper>
   );
 }

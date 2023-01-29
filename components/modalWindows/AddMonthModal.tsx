@@ -1,6 +1,4 @@
-import styled from "styled-components";
-
-import ModalWindow from "./ModalWindow";
+import ModalDialog from "./ModalDialog";
 import {
   DialogContainer,
   Warning,
@@ -18,7 +16,7 @@ export default function AddMonthModal({
   onSubmit: () => void;
 }) {
   return (
-    <ModalWindow isVisible={isVisible} onClose={onClose}>
+    <ModalDialog isVisible={isVisible} onClose={onClose}>
       <DialogContainer>
         <Warning>
           Похоже, что вы первый, кто решил добавить запись в этом месяце
@@ -27,6 +25,6 @@ export default function AddMonthModal({
         <ButtonStyled onClick={onSubmit}>Ввести</ButtonStyled>
         <ButtonStyled onClick={onClose}>Отмена</ButtonStyled>
       </DialogContainer>
-    </ModalWindow>
+    </ModalDialog>
   );
 }

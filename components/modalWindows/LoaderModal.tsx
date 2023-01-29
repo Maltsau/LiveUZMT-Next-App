@@ -33,7 +33,7 @@ const Spinner = styled.div`
   border-top: 2px solid white;
   border-right: 2px solid white;
   border-bottom: 2px solid white;
-  border-left: 4px solid red;
+  border-left: 4px solid #3c3e3f;
   background: transparent;
   width: 60px;
   height: 60px;
