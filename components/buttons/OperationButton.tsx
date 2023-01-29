@@ -16,14 +16,14 @@ const UpperTrapezoid = styled.div<{
 }>`
   max-height: 0px;
   border-bottom: 20px solid ${({ isCurrent }) =>
-    isCurrent ? "red" : "#c0c0c0"}};
+    isCurrent ? "red" : "#787e80"}};
   border-right: 10px solid transparent;
 `;
 
 const LowerTrapezoid = styled.div<{
   isCurrent: boolean;
 }>`
-  border-top: 20px solid ${({ isCurrent }) => (isCurrent ? "red" : "#c0c0c0")}};
+  border-top: 20px solid ${({ isCurrent }) => (isCurrent ? "red" : "#787e80")}};
   border-right: 10px solid transparent;
 `;
 
@@ -35,7 +35,7 @@ const ButtonStyled = styled.span<{
   background-color: transparent;
   top: 10px;
   padding-left: 5px;
-  color: ${({ isCurrent }) => (isCurrent ? "white" : "black")}};
+  color: white;
 `;
 
 const ButtonStyledActive = styled.div<{
@@ -47,7 +47,7 @@ const ButtonStyledActive = styled.div<{
   top: 2px;
   font-size: 0.9em;
   padding-left: 5px;
-  color: ${({ isCurrent }) => (isCurrent ? "white" : "black")}};
+  color: white;
 `;
 
 const InnerContainer = styled.span`
@@ -207,7 +207,13 @@ export default function OperationButton({
                 onDeleteOperation();
               }}
             >
-              <Image src="/delete.png" height={20} width={20} alt="DELETE" />
+              <Image
+                style={{ filter: "invert(100%)" }}
+                src="/delete.png"
+                height={20}
+                width={20}
+                alt="DELETE"
+              />
             </DeleteButton>
           </ButtonStyled>
         </UpperTrapezoid>

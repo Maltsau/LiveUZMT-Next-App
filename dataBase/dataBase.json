@@ -8,23 +8,6 @@
         "planOps": "12",
         "ops": [
           {
-            "id": "27.01.2023 1 1",
-            "date": "27.01.2023",
-            "department": 1,
-            "number": "1",
-            "field": "1",
-            "duration": 1,
-            "result": [
-              {
-                "isFinal": true,
-                "dateTime": "27.01.2023 12:34",
-                "debitMass": 1,
-                "density": 1,
-                "watterRate": 1
-              }
-            ]
-          },
-          {
             "id": "27.01.2023 1 ГРЕБЕНЕВСКАЯ",
             "date": "27.01.2023",
             "department": 1,
@@ -59,42 +42,8 @@
             ]
           },
           {
-            "id": "28.01.2023 1 sddscxz",
-            "date": "28.01.2023",
-            "department": 1,
-            "number": "1",
-            "field": "sddscxz",
-            "duration": 1,
-            "result": [
-              {
-                "isFinal": true,
-                "dateTime": "28.01.2023 09:16",
-                "debitMass": 1,
-                "density": 1,
-                "watterRate": 1
-              }
-            ]
-          },
-          {
-            "id": "28.01.2023 1 высчсч",
-            "date": "28.01.2023",
-            "department": 1,
-            "number": "1",
-            "field": "высчсч",
-            "duration": 1,
-            "result": [
-              {
-                "isFinal": true,
-                "dateTime": "28.01.2023 09:22",
-                "debitMass": 1,
-                "density": 1,
-                "watterRate": 1
-              }
-            ]
-          },
-          {
-            "id": "28.01.2023 1 АВТЮКОВСКАЯ",
-            "date": "28.01.2023",
+            "id": "29.05.2022 1 АВТЮКОВСКАЯ",
+            "date": "29.05.2022",
             "department": 1,
             "number": "1",
             "field": "АВТЮКОВСКАЯ",
@@ -102,14 +51,7 @@
             "result": [
               {
                 "isFinal": true,
-                "dateTime": "28.01.2023 11:03",
-                "debitMass": 1,
-                "density": 1,
-                "watterRate": 1
-              },
-              {
-                "isFinal": true,
-                "dateTime": "28.01.2023 11:27",
+                "dateTime": "29.01.2023 10:41",
                 "debitMass": 1,
                 "density": 1,
                 "watterRate": 1
@@ -117,56 +59,16 @@
             ]
           },
           {
-            "id": "28.01.2023 1 1",
-            "date": "28.01.2023",
-            "department": 1,
-            "number": "1",
-            "field": "1",
-            "duration": 1,
-            "result": [
-              {
-                "isFinal": true,
-                "dateTime": "28.01.2023 11:03",
-                "debitMass": 1,
-                "density": 1,
-                "watterRate": 1
-              }
-            ]
-          },
-          {
-            "id": "29.01.2023 1 fdssdfsdjk",
+            "id": "29.01.2023 1 БОРОВИКОВСКАЯ",
             "date": "29.01.2023",
             "department": 1,
             "number": "1",
-            "field": "fdssdfsdjk",
-            "result": [
-              {
-                "isFinal": false,
-                "dateTime": "29.01.2023 07:59",
-                "debitMass": 1,
-                "density": 1,
-                "watterRate": 1
-              }
-            ]
-          },
-          {
-            "id": "29.01.2023 1 1",
-            "date": "29.01.2023",
-            "department": 1,
-            "number": "1",
-            "field": "1",
+            "field": "БОРОВИКОВСКАЯ",
             "duration": 1,
             "result": [
               {
-                "isFinal": true,
-                "dateTime": "29.01.2023 09:16",
-                "debitMass": 1,
-                "density": 1,
-                "watterRate": 1
-              },
-              {
                 "isFinal": false,
-                "dateTime": "29.01.2023 09:39",
+                "dateTime": "29.01.2023 13:19",
                 "debitMass": 1,
                 "density": 1,
                 "watterRate": 1
@@ -179,25 +81,17 @@
             "department": 1,
             "number": "1",
             "field": "АВТЮКОВСКАЯ",
-            "duration": 1,
             "result": [
               {
-                "isFinal": true,
-                "dateTime": "29.01.2023 09:39",
+                "isFinal": false,
+                "dateTime": "29.01.2023 11:01",
                 "debitMass": 1,
                 "density": 1,
                 "watterRate": 1
               },
               {
                 "isFinal": true,
-                "dateTime": "29.01.2023 09:39",
-                "debitMass": 1,
-                "density": 1,
-                "watterRate": 1
-              },
-              {
-                "isFinal": true,
-                "dateTime": "29.01.2023 09:39",
+                "dateTime": "29.01.2023 13:17",
                 "debitMass": 1,
                 "density": 1,
                 "watterRate": 1
@@ -205,16 +99,16 @@
             ]
           },
           {
-            "id": "29.01.2023 1 АЗЕРЕЦКАЯ",
+            "id": "29.01.2023 1 ЛЮДВИНСКАЯ",
             "date": "29.01.2023",
-            "department": 1,
+            "department": "1",
             "number": "1",
-            "field": "АЗЕРЕЦКАЯ",
+            "field": "ЛЮДВИНСКАЯ",
             "duration": 1,
             "result": [
               {
                 "isFinal": true,
-                "dateTime": "29.01.2023 09:39",
+                "dateTime": "29.01.2023 14:41",
                 "debitMass": 1,
                 "density": 1,
                 "watterRate": 1
@@ -395,6 +289,12 @@
         "month": "сентябрь",
         "wishfullAverageLength": 1,
         "planOps": 1,
+        "ops": []
+      },
+      {
+        "month": "май",
+        "wishfullAverageLength": "1",
+        "planOps": "1",
         "ops": []
       }
     ]

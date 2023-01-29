@@ -33,18 +33,6 @@ const SpanStyled = styled.span<{ minHeight?: number }>`
   vertical-align: bottom;
 `;
 
-// const ErrorDiv = styled.div`
-//   color: red;
-//   margin: 0;
-//   padding: 0;
-//   height: 20px;
-//   font-size: 0.6em;
-// `;
-
-// const ErrorParagraph = styled.p`
-//   margin: 0 10px;
-// `;
-
 type Inputs = {
   year: number;
   month: string | undefined;

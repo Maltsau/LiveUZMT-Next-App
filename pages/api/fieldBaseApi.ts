@@ -8,7 +8,6 @@ export default function handler(
   if (req.method === "GET") res.status(200).json(getFields());
   if (req.method === "POST") {
     const confirmation = addField(req.body.field);
-
     if (confirmation) {
       res.status(201).json({ message: "Field added" });
     } else {

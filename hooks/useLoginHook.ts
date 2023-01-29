@@ -5,7 +5,7 @@ export function useLogin({
   onSuccess,
   onError,
 }: {
-  onSuccess: (data: { userName: string; role: string }) => void;
+  onSuccess: (data: { userName: string; role: string; label: string }) => void;
   onError: () => void;
 }) {
   return useMutation(
@@ -15,7 +15,7 @@ export function useLogin({
         .post("/api/login2", {
           json: { login, password },
         })
-        .json<{ userName: string; role: string }>();
+        .json<{ userName: string; role: string; label: string }>();
     },
     {
       onSuccess: (data) => {

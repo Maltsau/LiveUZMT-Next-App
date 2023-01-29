@@ -9,7 +9,7 @@ import FooterButton from "./buttons/FooterButton";
 
 const Rectangle = styled.div`
   display: flex;
-  background-color: red;
+  background-color: #3c3e3f;
   width: 100%;
   padding: 1px;
 `;
@@ -95,7 +95,6 @@ export default function Footer({
     <Rectangle>
       <ButtonBar>{contentArray}</ButtonBar>
       {children}
-      {user?.user.userName}
     </Rectangle>
   );
 }

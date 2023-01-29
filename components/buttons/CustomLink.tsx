@@ -8,7 +8,7 @@ const OuterTrapezoid = styled.div<{
   flex-direction: column;
   justify-content: center;
   position: relative;
-  border-bottom: 30px solid red;
+  border-bottom: 30px solid #3c3e3f;
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
   height: 0;
@@ -37,7 +37,7 @@ const ButtonStyled = styled.span<{
 }>`
   position: relative;
   top: 5px;
-  color: ${({ isHighlighted }) => (isHighlighted ? "red" : "white")};
+  color: ${({ isHighlighted }) => (isHighlighted ? "#3c3e3f" : "white")};
 `;
 
 export default function CustomLink({

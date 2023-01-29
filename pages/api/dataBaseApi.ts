@@ -24,7 +24,6 @@ export default function handler(
     res.status(500).json({ error: "Status 500" });
   } else if (req.method === "POST") {
     if (checkUser(req.cookies.secret)) {
-      console.log("before", req.body);
       const dataBaseResponse = addRecord(
         req.body.startDay,
         req.body.startMonth,

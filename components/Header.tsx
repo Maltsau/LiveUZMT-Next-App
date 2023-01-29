@@ -3,12 +3,13 @@ import styled from "styled-components";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Image from "next/image";
+import { useUserStore } from "../stores/useUserStore";
 
 import HeaderButton from "./buttons/HeaderButton";
 
 const Rectangle = styled.div`
   display: flex;
-  background-color: red;
+  background-color: #3c3e3f;
   width: 100%;
   padding: 1px;
 `;
@@ -20,17 +21,15 @@ const ButtonBar = styled.div`
 const UserLabel = styled.label`
   margin: auto 5px;
   color: white;
+  margin-left: auto;
 `;
 export default function Header({
   children,
-  user,
-  onAllReset,
 }: {
   children?: ReactNode | string;
-  user?: string | undefined;
-  onAllReset?: any;
 }) {
   const router = useRouter();
+  const user = useUserStore();
   if (router.asPath === "/search") {
     var content = (
       <ButtonBar>
@@ -56,7 +55,7 @@ export default function Header({
   return (
     <Rectangle>
       {content}
-      <UserLabel>{user}</UserLabel>
+      <UserLabel>{user?.user.label}</UserLabel>
       {children}
     </Rectangle>
   );

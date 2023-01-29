@@ -24,6 +24,10 @@ const SignInForm = styled.form`
   justify-content: center;
 `;
 
+const ButtonBar = styled.div`
+  display: flex;
+`;
+
 const ErrorParagraphModal = styled(ErrorParagraph)`
   font-size: 1rem;
   color: red;
@@ -63,7 +67,11 @@ export default function SignInDialog({
     isError: isLoginError,
   } = useLogin({
     onSuccess: (loginResponse) => {
-      user?.setUser(loginResponse.userName, loginResponse.role);
+      user?.setUser(
+        loginResponse.userName,
+        loginResponse.role,
+        loginResponse.label
+      );
       reset();
       onClose();
     },
@@ -120,7 +128,10 @@ export default function SignInDialog({
           {isLoginError ? (
             <ErrorParagraphModal>Ошибка авторизации</ErrorParagraphModal>
           ) : null}
-          <ButtonStyledSignIn type="submit">Войти</ButtonStyledSignIn>
+          <ButtonBar>
+            <ButtonStyledSignIn type="submit">Войти</ButtonStyledSignIn>
+            <ButtonStyledSignIn onClick={onClose}>Отмена</ButtonStyledSignIn>
+          </ButtonBar>
         </SignInForm>
       </DialogContainer>
     </ModalDialog>

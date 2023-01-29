@@ -29,13 +29,13 @@ const InputStyled = styled.input`
   font-size: 1.2em;
   margin: 5px;
   padding: 0px 10px;
-  border: solid red 1px;
+  border: solid #3c3e3f 1px;
   border-radius: 5px;
 `;
 
 const ResultContainer = styled.div`
   margin: 5px 2px;
-  border: 2px red solid;
+  border: 2px #3c3e3f solid;
   min-height: 300px;
 `;
 

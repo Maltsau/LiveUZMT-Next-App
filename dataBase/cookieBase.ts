@@ -1,7 +1,9 @@
 import { LowSync } from "lowdb";
 import { JSONFileSync } from "lowdb/node";
 
-type SecretBase = [{ secret: string; userName: string; role: string }];
+type SecretBase = [
+  { secret: string; userName: string; role: string; label: string }
+];
 
 const secretBase = new LowSync(
   new JSONFileSync<SecretBase>(
@@ -14,9 +16,14 @@ export function getSecretBase() {
   return secretBase.data;
 }
 
-export function addSecret(secret: string, userName: string, role: string) {
+export function addSecret(
+  secret: string,
+  userName: string,
+  role: string,
+  label: string
+) {
   secretBase.read();
-  secretBase.data!.push({ secret, userName, role });
+  secretBase.data!.push({ secret, userName, role, label });
   secretBase.write();
 }
 

@@ -9,7 +9,7 @@ export const InputSimple = styled.input<{
   overflow: auto;
   margin: 5px;
   padding: 10px;
-  border: solid red 1px;
+  border: solid #3c3e3f 1px;
   border-radius: 5px;
   background-color: ${({ isNotValid }) => (isNotValid ? "pink" : "white")};
 `;
@@ -24,7 +24,7 @@ export const InputVanishing = styled.input<{
   overflow: auto;
   margin: 5px;
   padding: 10px;
-  border: solid red 1px;
+  border: solid #3c3e3f 1px;
   border-radius: 5px;
   background-color: ${({ isNotValid }) => (isNotValid ? "pink" : "white")};
 `;
@@ -44,7 +44,7 @@ export const SelectStyled = styled.select`
   overflow: auto;
   margin: 5px;
   padding: 0 5px;
-  border: solid red 1px;
+  border: solid #3c3e3f 1px;
   border-radius: 5px;
   background-color: white;
 `;

@@ -2,7 +2,6 @@ import styled from "styled-components";
 import { useState } from "react";
 import { useMutation, useQueryClient, useQuery } from "react-query";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
-import Select from "react-select";
 import CreatableSelect, { useCreatable } from "react-select/creatable";
 import ky from "ky";
 
@@ -224,7 +223,7 @@ export default function AddRecordForm({
             hours,
             minutes,
             number,
-            field,
+            field: field.toUpperCase(),
             department,
             debitMass,
             density,
@@ -293,13 +292,14 @@ export default function AddRecordForm({
     mode: "all",
   });
   const watchInputs = watch();
-  console.log("watch", watchInputs);
 
   const onSubmit: SubmitHandler<Inputs> = (data, e) => {
     e?.preventDefault();
     console.log("data", data);
     addRecord(data);
-    addField({ field: data.field });
+    if (!fieldBase?.includes(data.field)) {
+      addField({ field: data.field.toUpperCase() });
+    }
   };
 
   let options: OptionType[] = [];
@@ -354,7 +354,7 @@ export default function AddRecordForm({
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <GridBorderedContainer gridColumns={"150px 1fr 150px"}>
+        <GridUnborderedContainer gridColumns={"150px 1fr 150px"}>
           <StartDateTitleLabelStyled>
             Дата начала исследований
           </StartDateTitleLabelStyled>
@@ -394,8 +394,8 @@ export default function AddRecordForm({
               })}
             </SelectStyled>
           </LabelStyled>
-        </GridBorderedContainer>
-        <GridBorderedContainer gridColumns="150px 1fr 150px 150px">
+        </GridUnborderedContainer>
+        <GridUnborderedContainer gridColumns="150px 1fr 150px 150px">
           <CurrentTimeTitleLabelStyled>
             Текущее время
           </CurrentTimeTitleLabelStyled>
@@ -452,7 +452,7 @@ export default function AddRecordForm({
               ></InputSimple>
             </FlexInlineContainer>
           </LabelStyled>
-        </GridBorderedContainer>
+        </GridUnborderedContainer>
         <GridUnborderedContainer gridColumns="200px 1fr 200px">
           <LabelStyled>
             <SpanStyled>Номер скважины</SpanStyled>
@@ -493,15 +493,6 @@ export default function AddRecordForm({
               }) => (
                 <>
                   <CreatableSelect
-                    // styles={{
-                    //   control: (baseStyles, state) => ({
-                    //     ...baseStyles,
-                    //     borderColor: state.isFocused ? "yellow" : "red",
-                    //     borderRadius: "5px",
-                    //     height: "50px",
-                    //     margin: "5px",
-                    //   }),
-                    // }}
                     className="react-select-container"
                     classNamePrefix="react-select"
                     placeholder={"Введите месторождение"}

@@ -255,8 +255,9 @@
     "role": "ADMIN"
   },
   {
-    "secret": "24.092788389218615",
-    "userName": "1",
-    "role": "ADMIN"
+    "secret": "22.740551988925592",
+    "userName": "d.maltsev",
+    "role": "ADMIN",
+    "label": "Д.В.Мальцев"
   }
 ]

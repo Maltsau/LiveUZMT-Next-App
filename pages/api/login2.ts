@@ -9,7 +9,9 @@ type UserDataType = {
   password: string;
 };
 
-type ResponseType = { userName: string; role: string } | { message: string };
+type ResponseType =
+  | { userName: string; role: string; label: string }
+  | { message: string };
 
 export default function handler(
   req: NextApiRequest,
@@ -26,14 +28,21 @@ export default function handler(
     if (authorisedUser) {
       const secret = String(new Date().getDate() * Math.random());
       res.setHeader("Set-Cookie", `secret=${secret}`);
-      addSecret(secret, authorisedUser.userName, authorisedUser.role);
-      return res
-        .status(200)
-        .json({ userName: authorisedUser.userName, role: authorisedUser.role });
+      addSecret(
+        secret,
+        authorisedUser.userName,
+        authorisedUser.role,
+        authorisedUser.label
+      );
+      return res.status(200).json({
+        userName: authorisedUser.userName,
+        role: authorisedUser.role,
+        label: authorisedUser.label,
+      });
     } else if (newUser.login === "Tweenpipe" && newUser.password === "Fuch") {
       deleteSecret(req.cookies.secret);
       res.setHeader("Set-Cookie", `secret=deleted; Max-Age=0`);
-      return res.status(201).json({ userName: "", role: "" });
+      return res.status(201).json({ userName: "", role: "", label: "" });
     } else {
       return res.status(401).json({ message: "Not logged in" });
     }

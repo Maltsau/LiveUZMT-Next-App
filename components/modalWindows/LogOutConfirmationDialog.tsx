@@ -24,7 +24,11 @@ export default function LogOutConfirmationDialog({
   const user = useUserStore();
   const { mutate: logOut, data: logOutResponse } = useLogin({
     onSuccess: (logOutResponse) => {
-      user?.setUser(logOutResponse.userName, logOutResponse.role);
+      user?.setUser(
+        logOutResponse.userName,
+        logOutResponse.role,
+        logOutResponse.label
+      );
       onSubmit();
     },
     onError: () => {},

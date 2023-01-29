@@ -2,13 +2,13 @@ import styled, { StyledComponent } from "styled-components";
 
 export const Rectangle = styled.div`
   height: 30px;
-  border-bottom: solid red 2px;
+  border-bottom: solid #3c3e3f 2px;
   width: 100%;
 `;
 
 export const SmallRectangle = styled.div`
   height: 30px;
-  border-bottom: solid red 2px;
+  border-bottom: solid #3c3e3f 2px;
   width: 30px;
 `;
 
@@ -28,8 +28,8 @@ export const AddFormContentWrapper = styled.div<{
   margin: -1px 1px 1px 1px;
   ${({ isAdmin }) =>
     isAdmin
-      ? "border-right: 2px solid red; border-left: 2px solid red;border-bottom: 2px solid red;"
-      : "border: 2px solid red"};
+      ? "border-right: 2px solid #3c3e3f; border-left: 2px solid #3c3e3f;border-bottom: 2px solid #3c3e3f;"
+      : "border: 2px solid #3c3e3f"};
 `;
 
 export const GridBorderedContainer = styled.div<{
@@ -37,8 +37,8 @@ export const GridBorderedContainer = styled.div<{
 }>`
   display: grid;
   grid-template-columns: ${(props) => props.gridColumns};
-  border: 1px red solid;
-  border-radius: 5px;
+  // border: 1px red solid;
+  // border-radius: 5px;
   margin-bottom: 3px;
 `;
 

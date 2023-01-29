@@ -6,12 +6,17 @@ import {
 } from "../../dataBase/cookieBase";
 
 type SecretBaseType =
-  | [{ secret: string; userName: string; role: string }]
+  | [{ secret: string; userName: string; role: string; label: string }]
   | null;
 type ResponseType = object | string;
 
-export function postSecret(secret: string, userName: string, role: string) {
-  addSecret(secret, userName, role);
+export function postSecret(
+  secret: string,
+  userName: string,
+  role: string,
+  label: string
+) {
+  addSecret(secret, userName, role, label);
   const SecretBase: SecretBaseType = getSecretBase();
 }
 
@@ -45,6 +50,7 @@ export default function handler(
           .json({
             userName: checkUser(req.cookies.secret)?.userName,
             role: checkUser(req.cookies.secret)?.role,
+            label: checkUser(req.cookies.secret)?.label,
           })
       );
     }

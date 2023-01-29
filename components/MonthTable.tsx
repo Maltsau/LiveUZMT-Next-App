@@ -34,18 +34,18 @@ const Container = styled.div`
 
 const OperationContainer = styled.div<{ isVisible: boolean }>`
   display: ${({ isVisible }) => (isVisible ? "block" : "none")};
-  border-right: 2px solid red;
-  border-left: 2px solid red;
-  border-bottom: 2px solid red;
+  border-right: 2px solid #3c3e3f;
+  border-left: 2px solid #3c3e3f;
+  border-bottom: 2px solid #3c3e3f;
   min-height: 200px;
   margin-top: -3px;
 `;
 
 const StatisticsContainer = styled.div<{ isVisible: boolean }>`
   display: ${({ isVisible }) => (isVisible ? "block" : "none")};
-  border-right: 2px solid red;
-  border-left: 2px solid red;
-  border-bottom: 2px solid red;
+  border-right: 2px solid #3c3e3f;
+  border-left: 2px solid #3c3e3f;
+  border-bottom: 2px solid #3c3e3f;
   min-height: 100px;
   margin-top: -3px;
 `;
@@ -66,7 +66,7 @@ const Cell = styled.td`
 `;
 
 const InputStyled = styled.input`
-  border: 1px solid red;
+  border: 1px solid #3c3e3f;
   border-radius: 5px;
   background-color: transparent;
   width: 30px;

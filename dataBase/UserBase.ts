@@ -1,6 +1,8 @@
 import { LowSync } from "lowdb";
 import { JSONFileSync } from "lowdb/node";
-type UserBase = [{ userName: string; password: string; role: string }];
+type UserBase = [
+  { userName: string; password: string; role: string; label: string }
+];
 
 const db = new LowSync(
   new JSONFileSync<UserBase>(

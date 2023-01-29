@@ -1,6 +1,21 @@
 [
-  { "userName": "d.maltsev", "password": "8604", "role": "ADMIN" },
-  { "userName": "1", "password": "1", "role": "ADMIN" },
-  { "userName": "p.chayka", "password": "8424", "role": "EDITOR" },
-  { "userName": "v.fedyushko", "password": "8425", "role": "EDITOR" }
+  {
+    "userName": "d.maltsev",
+    "password": "8604",
+    "role": "ADMIN",
+    "label": "Д.В.Мальцев"
+  },
+  { "userName": "1", "password": "1", "role": "ADMIN", "label": "1" },
+  {
+    "userName": "p.chayka",
+    "password": "8424",
+    "role": "EDITOR",
+    "label": "П.В.Чайка"
+  },
+  {
+    "userName": "v.fedyushko",
+    "password": "8425",
+    "role": "EDITOR",
+    "label": "В.О.Федюшко"
+  }
 ]

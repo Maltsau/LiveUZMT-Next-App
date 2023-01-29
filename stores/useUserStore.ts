@@ -6,8 +6,8 @@ type LoginRequestType = { login: string; password: string };
 
 type UserStoreType =
   | {
-      user: { userName: string; role: string };
-      setUser: (userName: string, role: string) => void;
+      user: { userName: string; role: string; label: string };
+      setUser: (userName: string, role: string, label: string) => void;
       // getUser: ({ login, password }: LoginRequestType) => {
       //   userName: string;
       //   role: string;
@@ -16,8 +16,9 @@ type UserStoreType =
   | undefined;
 
 export const useUserStore = create<UserStoreType>((set) => ({
-  user: { userName: "", role: "" },
-  setUser: (userName, role) => set(() => ({ user: { userName, role } })),
+  user: { userName: "", role: "", label: "" },
+  setUser: (userName, role, label) =>
+    set(() => ({ user: { userName, role, label } })),
   // getUser: ({ login, password }: LoginRequestType) =>
   //   set(({ login, password }: LoginRequestType) => {
   //     {

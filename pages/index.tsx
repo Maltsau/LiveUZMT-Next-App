@@ -19,24 +19,24 @@ const Wraper = styled.div`
 
 const InnerWraper = styled.div`
   margin: 1px 1px 1px 1px;
-  border: 2px solid red;
+  border: 2px solid #3c3e3f;
 `;
 
-const AdninPannel = styled.div<{
-  isVisible: boolean;
-}>`
-  display: ${({ isVisible }) => (isVisible ? "flex" : "none")};
-  flex-direction: row-reverse;
-  padding: 3px;
-`;
+// const AdninPannel = styled.div<{
+//   isVisible: boolean;
+// }>`
+//   display: ${({ isVisible }) => (isVisible ? "flex" : "none")};
+//   flex-direction: row-reverse;
+//   padding: 3px;
+// `;
 
-const ButtonStyled = styled.button`
-  font-size: 1.2em;
-  background-color: red;
-  color: white;
-  border: solid red 1px;
-  border-radius: 5px;
-`;
+// const ButtonStyled = styled.button`
+//   font-size: 1.2em;
+//   background-color: red;
+//   color: white;
+//   border: solid red 1px;
+//   border-radius: 5px;
+// `;
 
 export default function Home() {
   const [isErrorVisible, setIserrorVisible] = useState(false);

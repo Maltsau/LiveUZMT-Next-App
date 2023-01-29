@@ -14,12 +14,12 @@ import SignInDialog from "./modalWindows/SignInDialog";
 import { useUserStore } from "../stores/useUserStore";
 
 const Wraper = styled.div`
-  border: 1px solid red;
+  border: 1px solid r#3c3e3f;
 `;
 
 const Container = styled.div`
   width: 100%;
-  border: 1px solid red;
+  border: 1px solid #3c3e3f;
   min-height: 200px;
 `;
 
@@ -46,15 +46,19 @@ export default function Layout({ children }: { children: ReactNode }) {
     async () => {
       return await ky
         .get("/api/cookie")
-        .json<{ userName: string; role: string }>();
+        .json<{ userName: string; role: string; label: string }>();
     },
     {
       onSuccess: (secretResponse) => {
         if (secretResponse?.role) {
           console.log("secretResponse", secretResponse);
-          user?.setUser(secretResponse.userName, secretResponse.role);
+          user?.setUser(
+            secretResponse.userName,
+            secretResponse.role,
+            secretResponse.label
+          );
         } else {
-          user?.setUser("", "");
+          user?.setUser("", "", "");
         }
       },
       // onError: () => {
@@ -67,7 +71,7 @@ export default function Layout({ children }: { children: ReactNode }) {
 
   return (
     <Wraper>
-      <Header onAllReset={() => {}}></Header>
+      <Header></Header>
       <Container>
         <LogOutConfirmationDialog
           isVisible={signOutConfirmationDialogVisible}

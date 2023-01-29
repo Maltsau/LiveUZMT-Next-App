@@ -23,12 +23,12 @@ const DialogStyled = styled.dialog`
   }
 `;
 
-const ModalHeader = styled.div`
-  display: flex;
-  background-color: red;
-  width: 100%;
-  padding: 1px;
-`;
+// const ModalHeader = styled.div`
+//   display: flex;
+//   background-color: red;
+//   width: 100%;
+//   padding: 1px;
+// `;
 
 export default function ModalDialog({
   children,
@@ -44,9 +44,6 @@ export default function ModalDialog({
   console.log(dialogRef);
   return isVisible ? (
     <DialogStyled ref={dialogRef} open onClick={onClose}>
-      <ModalHeader>
-        <button onClick={onClose}>X</button>
-      </ModalHeader>
       {children}
     </DialogStyled>
   ) : null;
