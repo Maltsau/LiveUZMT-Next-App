@@ -1,4 +1,5 @@
 import "../styles/globals.css";
+import "../styles/reactSelect.scss";
 import type { AppProps } from "next/app";
 import { QueryClientProvider, QueryClient } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";

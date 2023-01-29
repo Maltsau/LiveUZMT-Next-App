@@ -1,0 +1,24 @@
+.react-select {
+  &__control {
+    border: 1px solid red !important;
+    margin: 5px;
+    height: 50px;
+    box-shadow: none !important;
+  }
+  &__value-container {
+    cursor: text !important;
+  }
+  &__indicator {
+    color: black;
+  }
+  &__indicator-separator {
+    display: none;
+  }
+  &__menu {
+    margin: 0 !important;
+    z-index: 1000 !important;
+  }
+  &__option {
+    padding: 0% 5px !important;
+  }
+}

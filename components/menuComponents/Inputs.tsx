@@ -43,6 +43,7 @@ export const SelectStyled = styled.select`
   font-size: 1.2em;
   overflow: auto;
   margin: 5px;
+  padding: 0 5px;
   border: solid red 1px;
   border-radius: 5px;
   background-color: white;

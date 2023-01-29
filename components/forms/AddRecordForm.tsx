@@ -1,7 +1,9 @@
 import styled from "styled-components";
 import { useState } from "react";
-import { useMutation, useQueryClient } from "react-query";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useMutation, useQueryClient, useQuery } from "react-query";
+import { useForm, SubmitHandler, Controller } from "react-hook-form";
+import Select from "react-select";
+import CreatableSelect, { useCreatable } from "react-select/creatable";
 import ky from "ky";
 
 import MONTH_MAP from "../../services/monthMap";
@@ -113,9 +115,7 @@ const AddContainer = styled.div`
 const DropDownListContainer = styled.div<{
   isVisible: boolean;
 }>`
-  position: fixed;
-  top: 374px;
-  left: 214px;
+  position: relative;
   display: ${({ isVisible }) => (isVisible ? "block" : "none")};
   width: 293px;
   min-height: 20px;
@@ -154,6 +154,11 @@ type Inputs = {
   wishfullAverageLength?: string;
 };
 
+interface OptionType {
+  readonly value: string;
+  readonly label: string;
+}
+
 export default function AddRecordForm({
   onSuccess,
   onError,
@@ -166,6 +171,20 @@ export default function AddRecordForm({
   const [addMonthModalVisible, setAddMonthModalVisible] = useState(false);
   const [isNewMonthBlockVisible, setIsNewMonthBlockVisible] = useState(false);
   const [isNewMonthBlockAlarmed, setIsNewMonthBlockAlarmed] = useState(false);
+
+  const { data: fieldBase } = useQuery("GET_FIELD_BASE", async () => {
+    const res = await ky.get("api/fieldBaseApi");
+    return await res.json<[string]>();
+  });
+
+  const { mutate: addField } = useMutation(
+    "ADD_FIELD",
+    async ({ field }: { field: string }) => {
+      await ky
+        .post("api/fieldBaseApi", { json: { field } })
+        .json<{ message: string }>();
+    }
+  );
 
   const {
     data: addResponse,
@@ -246,6 +265,7 @@ export default function AddRecordForm({
     watch,
     reset,
     resetField,
+    control,
     formState: { errors },
   } = useForm<Inputs>({
     defaultValues: {
@@ -279,6 +299,18 @@ export default function AddRecordForm({
     e?.preventDefault();
     console.log("data", data);
     addRecord(data);
+    addField({ field: data.field });
+  };
+
+  let options: OptionType[] = [];
+  if (fieldBase) {
+    options = fieldBase.map((field) => {
+      return { value: field, label: field };
+    });
+  }
+
+  const getValue = (value: string) => {
+    return value ? options.find((field) => field.value === value) : "";
   };
 
   const getDaysInMonth = (month: string | undefined, year: number) => {
@@ -439,7 +471,7 @@ export default function AddRecordForm({
           </LabelStyled>
           <LabelStyled>
             <SpanStyled>Месторождение</SpanStyled>
-            <InputSimple
+            {/* <InputSimple
               {...register("field", {
                 required: "Поле обязательно к заполнению",
               })}
@@ -450,7 +482,47 @@ export default function AddRecordForm({
                   {errors.field.message || `Ошибка заполнения`}
                 </ErrorParagraph>
               )}
-            </ErrorDiv>
+            </ErrorDiv> */}
+            <Controller
+              control={control}
+              name={"field"}
+              rules={{ required: "Поле обязательно к заполнению" }}
+              render={({
+                field: { onChange, value },
+                fieldState: { error },
+              }) => (
+                <>
+                  <CreatableSelect
+                    // styles={{
+                    //   control: (baseStyles, state) => ({
+                    //     ...baseStyles,
+                    //     borderColor: state.isFocused ? "yellow" : "red",
+                    //     borderRadius: "5px",
+                    //     height: "50px",
+                    //     margin: "5px",
+                    //   }),
+                    // }}
+                    className="react-select-container"
+                    classNamePrefix="react-select"
+                    placeholder={"Введите месторождение"}
+                    isSearchable
+                    menuIsOpen
+                    options={options}
+                    value={getValue(value)}
+                    onChange={(newValue) =>
+                      onChange((newValue as OptionType).value)
+                    }
+                  ></CreatableSelect>
+                  <ErrorDiv>
+                    {errors.field && (
+                      <ErrorParagraph>
+                        {errors.field.message || `Ошибка заполнения`}
+                      </ErrorParagraph>
+                    )}
+                  </ErrorDiv>
+                </>
+              )}
+            ></Controller>
           </LabelStyled>
           <LabelStyled>
             <SpanStyled>Промысел</SpanStyled>

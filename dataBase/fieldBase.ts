@@ -15,17 +15,20 @@ export function getFields() {
 
 export function addField(field: string) {
   fields.read();
-  if (!fields.data?.includes(field.toUpperCase())) {
+  if (fields.data?.includes(field.toUpperCase())) {
+    return false;
+  } else {
     fields.data?.push(field.toUpperCase());
+    fields.write();
+    return true;
   }
-  fields.write();
 }
 
-export function searchField(search: string) {
-  fields.read();
-  const res = fields.data?.filter((item) =>
-    item.includes(search.toUpperCase())
-  );
-  if (res) return res;
-  else return [];
-}
+// export function searchField(search: string) {
+//   fields.read();
+//   const res = fields.data?.filter((item) =>
+//     item.includes(search.toUpperCase())
+//   );
+//   if (res) return res;
+//   else return [];
+// }

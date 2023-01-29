@@ -17,28 +17,204 @@
             "result": [
               {
                 "isFinal": true,
-                "dateTime": "27.01.2023 12:32",
-                "debitMass": 1,
-                "density": 1,
-                "watterRate": 1
-              },
-              {
-                "isFinal": true,
-                "dateTime": "27.01.2023 12:33",
-                "debitMass": 1,
-                "density": 1,
-                "watterRate": 1
-              },
-              {
-                "isFinal": true,
-                "dateTime": "27.01.2023 12:32",
-                "debitMass": 1,
-                "density": 1,
-                "watterRate": 1
-              },
-              {
-                "isFinal": true,
                 "dateTime": "27.01.2023 12:34",
+                "debitMass": 1,
+                "density": 1,
+                "watterRate": 1
+              }
+            ]
+          },
+          {
+            "id": "27.01.2023 1 ГРЕБЕНЕВСКАЯ",
+            "date": "27.01.2023",
+            "department": 1,
+            "number": "1",
+            "field": "ГРЕБЕНЕВСКАЯ",
+            "duration": 1,
+            "result": [
+              {
+                "isFinal": true,
+                "dateTime": "27.01.2023 19:25",
+                "debitMass": 1,
+                "density": 1,
+                "watterRate": 1
+              }
+            ]
+          },
+          {
+            "id": "27.01.2023 1 В.-ДАВЫДОВСКАЯ",
+            "date": "27.01.2023",
+            "department": 1,
+            "number": "1",
+            "field": "В.-ДАВЫДОВСКАЯ",
+            "duration": 1,
+            "result": [
+              {
+                "isFinal": true,
+                "dateTime": "27.01.2023 19:39",
+                "debitMass": 1,
+                "density": 1,
+                "watterRate": 1
+              }
+            ]
+          },
+          {
+            "id": "28.01.2023 1 sddscxz",
+            "date": "28.01.2023",
+            "department": 1,
+            "number": "1",
+            "field": "sddscxz",
+            "duration": 1,
+            "result": [
+              {
+                "isFinal": true,
+                "dateTime": "28.01.2023 09:16",
+                "debitMass": 1,
+                "density": 1,
+                "watterRate": 1
+              }
+            ]
+          },
+          {
+            "id": "28.01.2023 1 высчсч",
+            "date": "28.01.2023",
+            "department": 1,
+            "number": "1",
+            "field": "высчсч",
+            "duration": 1,
+            "result": [
+              {
+                "isFinal": true,
+                "dateTime": "28.01.2023 09:22",
+                "debitMass": 1,
+                "density": 1,
+                "watterRate": 1
+              }
+            ]
+          },
+          {
+            "id": "28.01.2023 1 АВТЮКОВСКАЯ",
+            "date": "28.01.2023",
+            "department": 1,
+            "number": "1",
+            "field": "АВТЮКОВСКАЯ",
+            "duration": 1,
+            "result": [
+              {
+                "isFinal": true,
+                "dateTime": "28.01.2023 11:03",
+                "debitMass": 1,
+                "density": 1,
+                "watterRate": 1
+              },
+              {
+                "isFinal": true,
+                "dateTime": "28.01.2023 11:27",
+                "debitMass": 1,
+                "density": 1,
+                "watterRate": 1
+              }
+            ]
+          },
+          {
+            "id": "28.01.2023 1 1",
+            "date": "28.01.2023",
+            "department": 1,
+            "number": "1",
+            "field": "1",
+            "duration": 1,
+            "result": [
+              {
+                "isFinal": true,
+                "dateTime": "28.01.2023 11:03",
+                "debitMass": 1,
+                "density": 1,
+                "watterRate": 1
+              }
+            ]
+          },
+          {
+            "id": "29.01.2023 1 fdssdfsdjk",
+            "date": "29.01.2023",
+            "department": 1,
+            "number": "1",
+            "field": "fdssdfsdjk",
+            "result": [
+              {
+                "isFinal": false,
+                "dateTime": "29.01.2023 07:59",
+                "debitMass": 1,
+                "density": 1,
+                "watterRate": 1
+              }
+            ]
+          },
+          {
+            "id": "29.01.2023 1 1",
+            "date": "29.01.2023",
+            "department": 1,
+            "number": "1",
+            "field": "1",
+            "duration": 1,
+            "result": [
+              {
+                "isFinal": true,
+                "dateTime": "29.01.2023 09:16",
+                "debitMass": 1,
+                "density": 1,
+                "watterRate": 1
+              },
+              {
+                "isFinal": false,
+                "dateTime": "29.01.2023 09:39",
+                "debitMass": 1,
+                "density": 1,
+                "watterRate": 1
+              }
+            ]
+          },
+          {
+            "id": "29.01.2023 1 АВТЮКОВСКАЯ",
+            "date": "29.01.2023",
+            "department": 1,
+            "number": "1",
+            "field": "АВТЮКОВСКАЯ",
+            "duration": 1,
+            "result": [
+              {
+                "isFinal": true,
+                "dateTime": "29.01.2023 09:39",
+                "debitMass": 1,
+                "density": 1,
+                "watterRate": 1
+              },
+              {
+                "isFinal": true,
+                "dateTime": "29.01.2023 09:39",
+                "debitMass": 1,
+                "density": 1,
+                "watterRate": 1
+              },
+              {
+                "isFinal": true,
+                "dateTime": "29.01.2023 09:39",
+                "debitMass": 1,
+                "density": 1,
+                "watterRate": 1
+              }
+            ]
+          },
+          {
+            "id": "29.01.2023 1 АЗЕРЕЦКАЯ",
+            "date": "29.01.2023",
+            "department": 1,
+            "number": "1",
+            "field": "АЗЕРЕЦКАЯ",
+            "duration": 1,
+            "result": [
+              {
+                "isFinal": true,
+                "dateTime": "29.01.2023 09:39",
                 "debitMass": 1,
                 "density": 1,
                 "watterRate": 1
