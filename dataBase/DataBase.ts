@@ -80,6 +80,9 @@ export function addRecord(
       // найдена ли операция
       // операция найден, пушим запись в массив резалтов операции
       if (requredOperation) {
+        if (isFinal) {
+          requredOperation.duration = Number(duration);
+        }
         requredOperation.result.push({
           isFinal,
           dateTime: `${day}.${getMonthNumber(month)}.${year} ${getProperTime(

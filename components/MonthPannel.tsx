@@ -51,44 +51,31 @@ export default function MonthPannel() {
       yearRest.push(element);
     }
   });
+
+  const getBarContent = (arr: string[]) => {
+    return arr.length ? (
+      <ButtonBar isHighlighted={arr.includes(month)}>
+        <SmallRectangle />
+        {arr.map((monthItem) => {
+          return (
+            <CustomLink
+              onClick={() => {
+                setMonth(monthItem);
+              }}
+              key={monthItem}
+              text={monthItem}
+              isHighlighted={monthItem === month}
+            />
+          );
+        })}
+        <Rectangle />
+      </ButtonBar>
+    ) : null;
+  };
   return (
     <Wrapper>
-      {yearHalf.length ? (
-        <ButtonBar isHighlighted={yearHalf.includes(month)}>
-          <SmallRectangle />
-          {yearHalf.map((monthItem) => {
-            return (
-              <CustomLink
-                onClick={() => {
-                  setMonth(monthItem);
-                }}
-                key={monthItem}
-                text={monthItem}
-                isHighlighted={monthItem === month}
-              />
-            );
-          })}
-          <Rectangle />
-        </ButtonBar>
-      ) : null}
-      {yearRest.length ? (
-        <ButtonBar isHighlighted={yearRest.includes(month)}>
-          <SmallRectangle />
-          {yearRest.map((monthItem) => {
-            return (
-              <CustomLink
-                onClick={() => {
-                  setMonth(monthItem);
-                }}
-                key={monthItem}
-                text={monthItem}
-                isHighlighted={monthItem === month}
-              />
-            );
-          })}
-          <Rectangle />
-        </ButtonBar>
-      ) : null}
+      {getBarContent(yearHalf)}
+      {getBarContent(yearRest)}
     </Wrapper>
   );
 }

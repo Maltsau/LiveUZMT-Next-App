@@ -170,8 +170,6 @@ export default function MonthTable() {
     setIsEditMode(false);
   };
 
-  console.log("deleteState component", deleteConfirmationState);
-
   const buttons = currentMonthOps?.map((element: any, index: number) => {
     return (
       <OperationButton
@@ -202,6 +200,7 @@ export default function MonthTable() {
         text={`${index + 1}.  ${element.date}  ${element.number}  ${
           element.field
         } `}
+        duration={element.duration}
       ></OperationButton>
     );
   });

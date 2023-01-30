@@ -93,6 +93,13 @@ const FileIconsContainer = styled.div`
   justify-content: center;
 `;
 
+const DurationContainer = styled.div`
+  display: flex;
+  margin-left: auto;
+  font-size: 0.9em;
+  align-item: center;
+`;
+
 export default function OperationButton({
   operation,
   isEditMode,
@@ -101,6 +108,7 @@ export default function OperationButton({
   onDeleteOperation,
   onDeleteRecord,
   text,
+  duration,
   isHighlighted,
   isDeleteble,
   isCurrent,
@@ -112,6 +120,7 @@ export default function OperationButton({
   onDeleteOperation?: any;
   onDeleteRecord: (dateTime: string) => void;
   text: string;
+  duration?: string;
   isHighlighted: boolean;
   isDeleteble: boolean;
   isCurrent: boolean;
@@ -200,21 +209,24 @@ export default function OperationButton({
         <UpperTrapezoid isCurrent={isCurrent}>
           <ButtonStyled isCurrent={isCurrent}>
             <span>{text}</span>
-            <DeleteButton
-              isVisible={isDeleteble}
-              onClick={(e) => {
-                e.stopPropagation();
-                onDeleteOperation();
-              }}
-            >
-              <Image
-                style={{ filter: "invert(100%)" }}
-                src="/delete.png"
-                height={20}
-                width={20}
-                alt="DELETE"
-              />
-            </DeleteButton>
+            <DurationContainer>
+              {!isCurrent ? `Продолжительность ${duration} ч.` : null}
+              <DeleteButton
+                isVisible={isDeleteble}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onDeleteOperation();
+                }}
+              >
+                <Image
+                  style={{ filter: "invert(100%)" }}
+                  src="/delete.png"
+                  height={20}
+                  width={20}
+                  alt="DELETE"
+                />
+              </DeleteButton>
+            </DurationContainer>
           </ButtonStyled>
         </UpperTrapezoid>
         <LowerTrapezoid isCurrent={isCurrent} />

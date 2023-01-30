@@ -61,11 +61,6 @@ export default function Layout({ children }: { children: ReactNode }) {
           user?.setUser("", "", "");
         }
       },
-      // onError: () => {
-      //   router.push("/");
-      //   setUser(undefined);
-      // },
-      // cacheTime: 0,
     }
   );
 
