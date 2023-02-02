@@ -197,6 +197,7 @@ export default function SearchPage() {
               text={`${index + 1}.  ${item?.date}  ${item?.number}  ${
                 item?.field
               } `}
+              duration={item.duration}
             ></OperationButton>
           );
         })}

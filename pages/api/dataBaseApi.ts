@@ -6,20 +6,32 @@ import {
   getDataBase,
   addMonth,
 } from "../../dataBase/DataBase";
+import { getDataBase as getFireBase } from "../../dataBase/firebase";
+import { DocumentData } from "firebase/firestore";
+import { DataBaseType } from "../../types/types";
 
 type ResponseType =
-  | Array<any>
+  | DataBaseType
   | { message?: string }
   | null
   | { error?: string };
 
-let DataBase = getDataBase();
+let DATA_BASE: DocumentData[] = [];
+getFireBase().then(
+  (response) => {
+    DATA_BASE = response;
+  },
+  (error) => {
+    console.log(error);
+  }
+);
 
 export default function handler(
   req: NextApiRequest,
   res: NextApiResponse<ResponseType>
 ) {
   if (req.method === "GET") {
+    console.log("api", DATA_BASE);
     res.status(200).json(getDataBase());
     res.status(500).json({ error: "Status 500" });
   } else if (req.method === "POST") {
@@ -45,7 +57,6 @@ export default function handler(
         req.body.wishfullAverageLength
       );
       if (dataBaseResponse) {
-        console.log("if does not", req.body);
         res.status(201).json({ message: "Month does not exist" });
       } else {
         res.status(200).json({ message: "Record added" });

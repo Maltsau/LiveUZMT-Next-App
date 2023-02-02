@@ -4,7 +4,7 @@
     "months": [
       {
         "month": "январь",
-        "wishfullAverageLength": "12",
+        "wishfullAverageLength": "19",
         "planOps": "12",
         "ops": [
           {
@@ -67,7 +67,7 @@
             "result": [
               {
                 "isFinal": false,
-                "dateTime": "30.01.2023 10:21",
+                "dateTime": "30.01.2023 17:17",
                 "debitMass": 1,
                 "density": 1,
                 "watterRate": 1
@@ -80,7 +80,25 @@
         "month": "февраль",
         "wishfullAverageLength": "23",
         "planOps": "11",
-        "ops": []
+        "ops": [
+          {
+            "id": "1.02.2023 23 АРАВИЧСКАЯ",
+            "date": "1.02.2023",
+            "department": 1,
+            "number": "23",
+            "field": "АРАВИЧСКАЯ",
+            "duration": 1,
+            "result": [
+              {
+                "isFinal": true,
+                "dateTime": "1.02.2023 19:35",
+                "debitMass": 122,
+                "density": 1,
+                "watterRate": 1
+              }
+            ]
+          }
+        ]
       },
       {
         "month": "март",

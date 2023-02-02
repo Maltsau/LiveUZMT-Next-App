@@ -5,45 +5,48 @@ import styled from "styled-components";
 interface DialogPropsType {
   children: React.ReactNode | string;
   isVisible: boolean;
+  isNotTransparent: boolean;
   onClose: () => void;
 }
 
-const DialogStyled = styled.dialog`
-  position: absolute;
-  top: 20%;
+const DialogStyled = styled.dialog<{
+  isNotTransparent: boolean;
+}>`
+  background-color: ${({ isNotTransparent }) =>
+    isNotTransparent ? "#f3f5f6" : "transparent"};
   max-width: 90%;
   min-width: 60%;
   border: 0;
   padding: 0;
+  margin: auto;
   text-align: center;
-  z-index: 1000;
+  z-index: 9999;
   ::backdrop {
-    background: rgba(255, 0, 0, 0.25);
-    opacity: 0.9;
+    background: white;
+    opacity: 0.8;
   }
 `;
-
-// const ModalHeader = styled.div`
-//   display: flex;
-//   background-color: red;
-//   width: 100%;
-//   padding: 1px;
-// `;
 
 export default function ModalDialog({
   children,
   isVisible,
+  isNotTransparent,
   onClose,
 }: DialogPropsType) {
   const dialogRef = useRef<HTMLDialogElement>(null);
   useEffect(() => {
     if (dialogRef.current) {
-      dialogRef.current.show();
+      if (isVisible) dialogRef.current.showModal();
+      else dialogRef.current.close();
     }
-  }, []);
-  console.log(dialogRef);
+  }, [isVisible]);
+
   return isVisible ? (
-    <DialogStyled ref={dialogRef} open onClick={onClose}>
+    <DialogStyled
+      isNotTransparent={isNotTransparent}
+      ref={dialogRef}
+      onClick={onClose}
+    >
       {children}
     </DialogStyled>
   ) : null;

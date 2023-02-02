@@ -88,7 +88,11 @@ export default function SignInDialog({
   if (isSigningIn) return <LoaderModal text="Выполняется вход..." />;
 
   return (
-    <ModalDialog isVisible={isVisible} onClose={onClose}>
+    <ModalDialog
+      isNotTransparent={true}
+      isVisible={isVisible}
+      onClose={onClose}
+    >
       <DialogContainer
         onClick={(e) => {
           e.stopPropagation();

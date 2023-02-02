@@ -1,4 +1,6 @@
 import ky from "ky";
+import * as firebase from "firebase/app";
+
 import { useMutation, useQueryClient } from "react-query";
 
 export function useLogin({

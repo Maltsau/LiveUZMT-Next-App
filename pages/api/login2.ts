@@ -1,10 +1,22 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { addSecret, deleteSecret } from "../../dataBase/cookieBase";
-import getUserBase from "../../dataBase/UserBase";
+// import getUserBase from "../../dataBase/UserBase";
+import { getUsers } from "../../dataBase/firebase";
+import { DocumentData } from "firebase/firestore";
 
-const USER_DATA = getUserBase();
+// const USER_DATA = getUserBase();
+const users = getUsers();
+let USER_FIREBASE: DocumentData[] = [];
+users.then(
+  (response) => {
+    return (USER_FIREBASE = response);
+  },
+  (error) => {
+    console.log(error);
+  }
+);
 
-type UserDataType = {
+type UserRequestType = {
   login: string;
   password: string;
 };
@@ -18,13 +30,14 @@ export default function handler(
   res: NextApiResponse<ResponseType>
 ) {
   if (req.method === "POST") {
-    const newUser: UserDataType = req.body;
-    const authorisedUser = USER_DATA?.find(
+    const newUser: UserRequestType = req.body;
+    const authorisedUser = USER_FIREBASE?.find(
       (userObj) =>
         newUser.login === userObj.userName &&
         newUser.password === userObj.password
     );
     console.log("Authorised", authorisedUser);
+    console.log("Firebase", users);
     if (authorisedUser) {
       const secret = String(new Date().getDate() * Math.random());
       res.setHeader("Set-Cookie", `secret=${secret}`);

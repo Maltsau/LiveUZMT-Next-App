@@ -20,7 +20,11 @@ export default function DeleteConfirmationDialog({
   onSubmit,
 }: DeleteConfirmationDialogPropsType) {
   return (
-    <ModalDialog isVisible={isVisible} onClose={onAbort}>
+    <ModalDialog
+      isNotTransparent={true}
+      isVisible={isVisible}
+      onClose={onAbort}
+    >
       <DialogContainer>
         <Question>
           Хотоите удaлить запись без возможности восстановления?

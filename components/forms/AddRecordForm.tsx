@@ -495,7 +495,6 @@ export default function AddRecordForm({
                     classNamePrefix="react-select"
                     placeholder={"Введите месторождение"}
                     isSearchable
-                    menuIsOpen
                     options={options}
                     value={getValue(value)}
                     onChange={(newValue) =>

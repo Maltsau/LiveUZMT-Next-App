@@ -16,7 +16,11 @@ export default function AddMonthModal({
   onSubmit: () => void;
 }) {
   return (
-    <ModalDialog isVisible={isVisible} onClose={onClose}>
+    <ModalDialog
+      isNotTransparent={true}
+      isVisible={isVisible}
+      onClose={onClose}
+    >
       <DialogContainer>
         <Warning>
           Похоже, что вы первый, кто решил добавить запись в этом месяце

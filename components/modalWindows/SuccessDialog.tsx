@@ -15,7 +15,11 @@ export default function SuccessDialog({
   message: string;
 }) {
   return (
-    <ModalDialog onClose={onClose} isVisible={isVisible}>
+    <ModalDialog
+      isNotTransparent={true}
+      onClose={onClose}
+      isVisible={isVisible}
+    >
       <DialogContainer>
         <Warning>{message}</Warning>
         <Image

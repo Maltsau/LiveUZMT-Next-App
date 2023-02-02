@@ -34,7 +34,11 @@ export default function LogOutConfirmationDialog({
     onError: () => {},
   });
   return (
-    <ModalDialog isVisible={isVisible} onClose={onAbort}>
+    <ModalDialog
+      isNotTransparent={true}
+      isVisible={isVisible}
+      onClose={onAbort}
+    >
       <DialogContainer>
         <Warning>
           Неавторизованные пользователи не могут добавлять данные

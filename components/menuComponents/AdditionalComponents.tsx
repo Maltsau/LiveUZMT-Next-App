@@ -47,12 +47,10 @@ export const GridUnborderedContainer = styled.div<{
 }>`
   display: grid;
   justify-items: stretch;
-  overflow: auto;
   width: 100%;
   grid-template-columns: ${(props) => props.gridColumns};
   grid-column-gap: 5px;
   padding: 2px;
-  overflow: hidden;
 `;
 
 export const VanishingContainer = styled.div<{
