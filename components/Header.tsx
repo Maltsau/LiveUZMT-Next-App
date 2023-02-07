@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
 import styled from "styled-components";
 import { useRouter } from "next/router";
 import Link from "next/link";
@@ -6,6 +6,7 @@ import Image from "next/image";
 import { useUserStore } from "../stores/useUserStore";
 
 import HeaderButton from "./buttons/HeaderButton";
+import AboutDialog from "./modalWindows/AboutDialog";
 
 const Rectangle = styled.div`
   display: flex;
@@ -30,6 +31,7 @@ export default function Header({
 }) {
   const router = useRouter();
   const user = useUserStore();
+  const [isAboutVisible, setIsAboutVisible] = useState(false);
   if (router.asPath === "/search") {
     var content = (
       <ButtonBar>
@@ -53,12 +55,27 @@ export default function Header({
     );
   }
   return (
-    <Rectangle>
-      {content}
-      <UserLabel>
-        {user?.user.role ? `${user?.user.label} ~ ${user?.user.role}` : null}
-      </UserLabel>
-      {children}
-    </Rectangle>
+    <>
+      <Rectangle>
+        {content}
+        <UserLabel>
+          {user?.user.role ? `${user?.user.label} ~ ${user?.user.role}` : null}
+        </UserLabel>
+        <HeaderButton
+          onClick={() => {
+            setIsAboutVisible(!isAboutVisible);
+          }}
+        >
+          <Image src="/info.png" alt="Info" width={15} height={15} />
+        </HeaderButton>
+        {children}
+      </Rectangle>
+      <AboutDialog
+        isVisible={isAboutVisible}
+        onClose={() => {
+          setIsAboutVisible(false);
+        }}
+      />
+    </>
   );
 }

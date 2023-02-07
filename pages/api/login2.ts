@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { addSecret, deleteSecret } from "../../dataBase/cookieBase";
 import getUserBase from "../../dataBase/UserBase";
+import { getUserFireBase, getAllFireBase } from "../../dataBase/fireBase";
 
 const USER_DATA = getUserBase();
 
@@ -18,6 +19,14 @@ export default function handler(
   res: NextApiResponse<ResponseType>
 ) {
   if (req.method === "POST") {
+    // console.log(
+    //   "All Firebase",
+    //   getAllFireBase()
+    //     .then((res) => console.log("Promise", res.val()))
+    //     .catch((err) => err)
+    // );
+    // console.log("Firebase", getUserFireBase());
+    // getUserFireBase();
     const newUser: UserDataType = req.body;
     const authorisedUser = USER_DATA?.find(
       (userObj) =>

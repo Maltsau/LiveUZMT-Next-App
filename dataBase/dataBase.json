@@ -80,7 +80,41 @@
         "month": "февраль",
         "wishfullAverageLength": "23",
         "planOps": "11",
-        "ops": []
+        "ops": [
+          {
+            "id": "6.02.2023 1 АВТЮКОВСКАЯ",
+            "date": "6.02.2023",
+            "department": 1,
+            "number": "1",
+            "field": "АВТЮКОВСКАЯ",
+            "result": [
+              {
+                "isFinal": false,
+                "dateTime": "6.02.2023 15:41",
+                "debitMass": 1,
+                "density": 1,
+                "watterRate": 1
+              }
+            ]
+          },
+          {
+            "id": "7.02.2023 1 АНДРЕЕВСКАЯ",
+            "date": "7.02.2023",
+            "department": 1,
+            "number": "1",
+            "field": "АНДРЕЕВСКАЯ",
+            "duration": 1,
+            "result": [
+              {
+                "isFinal": true,
+                "dateTime": "7.02.2023 19:47",
+                "debitMass": 1,
+                "density": 1,
+                "watterRate": 1
+              }
+            ]
+          }
+        ]
       },
       {
         "month": "март",

@@ -259,5 +259,11 @@
     "userName": "d.maltsev",
     "role": "ADMIN",
     "label": "Д.В.Мальцев"
+  },
+  {
+    "secret": "5.451527555070156",
+    "userName": "1",
+    "role": "ADMIN",
+    "label": "1"
   }
 ]
