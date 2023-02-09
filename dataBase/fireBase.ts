@@ -2,9 +2,18 @@ import { initializeApp } from "firebase-admin/app";
 import { getDatabase } from "firebase-admin/database";
 
 import admin from "firebase-admin";
+import { getFirestore, Timestamp, FieldValue } from "firebase-admin/firestore";
+import { DocumentData } from "firebase-admin/firestore";
 
 // import serviceAccount from "../liveuzmt-firebase-adminsdk-uwgys-1f0306b01f.json";
 const serviceAccount = require("../liveuzmt-firebase-adminsdk-uwgys-1f0306b01f.json");
+
+type userBaseType = {
+  userName: string;
+  password: string;
+  role: string;
+  label: string;
+};
 
 // const {
 //   API_KEY,
@@ -35,8 +44,12 @@ const serviceAccount = require("../liveuzmt-firebase-adminsdk-uwgys-1f0306b01f.j
     })
   : admin.app();
 
-const db = admin.database();
-const usersRef = db.ref("users");
+// const db = getFirestore();
+
+const db = admin.firestore();
+const usersRef = db.collection("users");
+
+// const userBase = admin.firestore().collection("users").get();
 
 // export function getUserFireBase() {
 //   usersRef.on("value", (snapshot) => {
@@ -48,18 +61,13 @@ const usersRef = db.ref("users");
 // const db = getDatabase(app);
 // const usersRef = db.ref("users");
 
-export function getUserFireBase() {
-  usersRef.on(
-    "value",
-    (snapshot) => {
-      console.log("Function resolved", snapshot.val());
-    },
-    (error) => {
-      console.log("Function error", error);
-    }
-  );
+export async function getUserFireBase() {
+  const snapshot = await usersRef.get();
+  const usersFirebase: DocumentData[] = [];
+  snapshot.forEach((doc) => usersFirebase.push(doc.data()));
+  return usersFirebase;
 }
 
 export function getAllFireBase() {
-  return usersRef.get();
+  return db;
 }

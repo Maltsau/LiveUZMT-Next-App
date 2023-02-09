@@ -60,6 +60,10 @@ const LabelStyled = styled.label`
   margin: 5px 0;
 `;
 
+const DurationLabel = styled(LabelStyled)`
+  grid-column: 2 / 4;
+`;
+
 const CurrentTimeTitleLabelStyled = styled.label`
   margin: auto 10px;
   grid-column-start: 1;
@@ -101,31 +105,6 @@ const NewMonthLabelStyled = styled.label`
   text-align: center;
   color: red;
   font-size: 1.2em;
-`;
-
-const AddContainer = styled.div`
-  width: 100%;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-`;
-
-const DropDownListContainer = styled.div<{
-  isVisible: boolean;
-}>`
-  position: relative;
-  display: ${({ isVisible }) => (isVisible ? "block" : "none")};
-  width: 293px;
-  min-height: 20px;
-  z-index: 20;
-  border: 1px solid black;
-  opacity: 1;
-  background-color: white;
-`;
-
-const DropDownUl = styled.ul`
-  font-size: 1em;
-  margin: 0;
-  list-style-type: none;
 `;
 
 type Inputs = {
@@ -222,7 +201,7 @@ export default function AddRecordForm({
             minutes,
             number,
             field: field.toUpperCase(),
-            department,
+            department: Number(department),
             debitMass,
             density,
             watterRate,
@@ -469,18 +448,6 @@ export default function AddRecordForm({
           </LabelStyled>
           <LabelStyled>
             <SpanStyled>Месторождение</SpanStyled>
-            {/* <InputSimple
-              {...register("field", {
-                required: "Поле обязательно к заполнению",
-              })}
-            ></InputSimple>
-            <ErrorDiv>
-              {errors.field && (
-                <ErrorParagraph>
-                  {errors.field.message || `Ошибка заполнения`}
-                </ErrorParagraph>
-              )}
-            </ErrorDiv> */}
             <Controller
               control={control}
               name={"field"}
@@ -520,7 +487,7 @@ export default function AddRecordForm({
             </SelectStyled>
           </LabelStyled>
         </GridUnborderedContainer>
-        <GridUnborderedContainer gridColumns="repeat(4, 1fr)">
+        <GridUnborderedContainer gridColumns="repeat(3, 1fr)">
           <LabelStyled>
             <SpanStyled minHeight={40}>Дебит, т/сут</SpanStyled>
             <InputSimple
@@ -591,6 +558,8 @@ export default function AddRecordForm({
               )}
             </ErrorDiv>
           </LabelStyled>
+        </GridUnborderedContainer>
+        <GridUnborderedContainer gridColumns="repeat(3, 1fr)">
           <LabelStyled>
             <CheckboxContainer>
               <SpanStyled minHeight={40}>
@@ -602,6 +571,8 @@ export default function AddRecordForm({
                 />
               </SpanStyled>
             </CheckboxContainer>
+          </LabelStyled>
+          <DurationLabel>
             <InputVanishing
               isVisible={watchInputs.isFinal}
               placeholder={"Введите продолжительность"}
@@ -626,7 +597,7 @@ export default function AddRecordForm({
                 </ErrorParagraph>
               )}
             </ErrorDiv>
-          </LabelStyled>
+          </DurationLabel>
         </GridUnborderedContainer>
         <AddMonthContainer
           isVisible={isNewMonthBlockVisible}

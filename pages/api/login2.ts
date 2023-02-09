@@ -1,11 +1,20 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { addSecret, deleteSecret } from "../../dataBase/cookieBase";
-import getUserBase from "../../dataBase/UserBase";
+// import getUserBase from "../../dataBase/UserBase";
 import { getUserFireBase, getAllFireBase } from "../../dataBase/fireBase";
+import { DocumentData } from "firebase-admin/firestore";
+import { getUserPB } from "../../dataBase/pocketbase";
 
-const USER_DATA = getUserBase();
+// const USER_DATA = getUserBase();
 
-type UserDataType = {
+// type userBaseType = {
+//   userName: string;
+//   password: string;
+//   role: string;
+//   label: string;
+// }[];
+
+type NewUserType = {
   login: string;
   password: string;
 };
@@ -14,22 +23,18 @@ type ResponseType =
   | { userName: string; role: string; label: string }
   | { message: string };
 
-export default function handler(
+export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<ResponseType>
 ) {
   if (req.method === "POST") {
-    // console.log(
-    //   "All Firebase",
-    //   getAllFireBase()
-    //     .then((res) => console.log("Promise", res.val()))
-    //     .catch((err) => err)
-    // );
-    // console.log("Firebase", getUserFireBase());
-    // getUserFireBase();
-    const newUser: UserDataType = req.body;
-    const authorisedUser = USER_DATA?.find(
-      (userObj) =>
+    const PBusers: any = await getUserPB();
+    console.log("PB", PBusers);
+    // const usersFireBase: DocumentData = await getUserFireBase();
+    // console.log("Login", usersFireBase);
+    const newUser: NewUserType = req.body;
+    const authorisedUser = PBusers?.find(
+      (userObj: any) =>
         newUser.login === userObj.userName &&
         newUser.password === userObj.password
     );

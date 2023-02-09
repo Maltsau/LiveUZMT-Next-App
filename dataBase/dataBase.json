@@ -6,75 +6,7 @@
         "month": "январь",
         "wishfullAverageLength": "12",
         "planOps": "12",
-        "ops": [
-          {
-            "id": "30.01.2023 1 АВТЮКОВСКАЯ",
-            "date": "30.01.2023",
-            "department": 1,
-            "number": "1",
-            "field": "АВТЮКОВСКАЯ",
-            "duration": 20,
-            "result": [
-              {
-                "isFinal": true,
-                "dateTime": "30.01.2023 08:20",
-                "debitMass": 23,
-                "density": 1.5,
-                "watterRate": 23
-              }
-            ]
-          },
-          {
-            "id": "30.01.2023 11 АВТЮКОВСКАЯ",
-            "date": "30.01.2023",
-            "department": 1,
-            "number": "11",
-            "field": "АВТЮКОВСКАЯ",
-            "result": [
-              {
-                "isFinal": true,
-                "dateTime": "30.01.2023 08:31",
-                "debitMass": 11,
-                "density": 1,
-                "watterRate": 1
-              }
-            ],
-            "duration": 1
-          },
-          {
-            "id": "30.01.2023 1 БУЙНОВИЧСКАЯ",
-            "date": "30.01.2023",
-            "department": 1,
-            "number": "1",
-            "field": "БУЙНОВИЧСКАЯ",
-            "duration": 1,
-            "result": [
-              {
-                "isFinal": true,
-                "dateTime": "30.01.2023 10:21",
-                "debitMass": 1,
-                "density": 1,
-                "watterRate": 1
-              }
-            ]
-          },
-          {
-            "id": "30.01.2023 1 В.-ДОБРОГОЩАНСКАЯ",
-            "date": "30.01.2023",
-            "department": 1,
-            "number": "1",
-            "field": "В.-ДОБРОГОЩАНСКАЯ",
-            "result": [
-              {
-                "isFinal": false,
-                "dateTime": "30.01.2023 10:21",
-                "debitMass": 1,
-                "density": 1,
-                "watterRate": 1
-              }
-            ]
-          }
-        ]
+        "ops": []
       },
       {
         "month": "февраль",
@@ -82,15 +14,16 @@
         "planOps": "11",
         "ops": [
           {
-            "id": "6.02.2023 1 АВТЮКОВСКАЯ",
-            "date": "6.02.2023",
-            "department": 1,
-            "number": "1",
-            "field": "АВТЮКОВСКАЯ",
+            "id": "7.02.2023 11 КУСТИНСКАЯ",
+            "date": "7.02.2023",
+            "department": 2,
+            "number": "11",
+            "field": "КУСТИНСКАЯ",
+            "duration": 1,
             "result": [
               {
-                "isFinal": false,
-                "dateTime": "6.02.2023 15:41",
+                "isFinal": true,
+                "dateTime": "7.02.2023 20:53",
                 "debitMass": 1,
                 "density": 1,
                 "watterRate": 1
@@ -98,16 +31,33 @@
             ]
           },
           {
-            "id": "7.02.2023 1 АНДРЕЕВСКАЯ",
+            "id": "7.02.2023 23 АНТОНОВСКАЯ",
             "date": "7.02.2023",
-            "department": 1,
-            "number": "1",
-            "field": "АНДРЕЕВСКАЯ",
+            "department": 2,
+            "number": "23",
+            "field": "АНТОНОВСКАЯ",
             "duration": 1,
             "result": [
               {
                 "isFinal": true,
-                "dateTime": "7.02.2023 19:47",
+                "dateTime": "7.02.2023 20:53",
+                "debitMass": 1,
+                "density": 1,
+                "watterRate": 1
+              }
+            ]
+          },
+          {
+            "id": "7.02.2023 111s БАЖЕНОВСКАЯ",
+            "date": "7.02.2023",
+            "department": 1,
+            "number": "111s",
+            "field": "БАЖЕНОВСКАЯ",
+            "duration": 1,
+            "result": [
+              {
+                "isFinal": true,
+                "dateTime": "7.02.2023 20:53",
                 "debitMass": 1,
                 "density": 1,
                 "watterRate": 1
