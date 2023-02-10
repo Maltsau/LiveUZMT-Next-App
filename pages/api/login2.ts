@@ -1,9 +1,13 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { addSecret, deleteSecret } from "../../dataBase/cookieBase";
 // import getUserBase from "../../dataBase/UserBase";
-import { getUserFireBase, getAllFireBase } from "../../dataBase/fireBase";
-import { DocumentData } from "firebase-admin/firestore";
-import { getUserPB } from "../../dataBase/pocketbase";
+// import { getUserFireBase, getAllFireBase } from "../../dataBase/fireBase";
+// import { DocumentData } from "firebase-admin/firestore";
+import {
+  addPBSecret,
+  deletePBSecret,
+  getUserPB,
+} from "../../dataBase/pocketbase";
 
 // const USER_DATA = getUserBase();
 
@@ -42,6 +46,12 @@ export default async function handler(
     if (authorisedUser) {
       const secret = String(new Date().getDate() * Math.random());
       res.setHeader("Set-Cookie", `secret=${secret}`);
+      await addPBSecret({
+        secret,
+        userName: authorisedUser.userName,
+        role: authorisedUser.role,
+        label: authorisedUser.label,
+      });
       addSecret(
         secret,
         authorisedUser.userName,
@@ -55,6 +65,7 @@ export default async function handler(
       });
     } else if (newUser.login === "Tweenpipe" && newUser.password === "Fuch") {
       deleteSecret(req.cookies.secret);
+      await deletePBSecret(req.cookies.secret!);
       res.setHeader("Set-Cookie", `secret=deleted; Max-Age=0`);
       return res.status(201).json({ userName: "", role: "", label: "" });
     } else {
