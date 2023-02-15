@@ -1,4 +1,5 @@
 import Pocketbase from "pocketbase";
+import { getFields } from "./fieldBase";
 
 type userBaseType = {
   userName: string;
@@ -66,19 +67,51 @@ export async function addPBSecret({
     label,
   };
   const record = await pb.collection("secretBase").create(data);
-  console.log("Added", record);
+  // console.log("Added", record);
 }
 
 export async function deletePBSecret(secret: string) {
   const PBsecrets = await getCookies();
   const PBsecret = PBsecrets.find((doc) => doc.secret === secret);
   if (PBsecret) await pb.collection("secretBase").delete(PBsecret.id);
-  console.log("Deleted", PBsecret);
+  // console.log("Deleted", PBsecret);
 }
 
 export async function checkPBUser(secret: string) {
   const PBsecrets = await getCookies();
   const authorisedUser = PBsecrets.find((doc) => doc.secret === secret);
-  console.log("Check", authorisedUser);
+  // console.log("Check", authorisedUser);
   return authorisedUser;
+}
+
+//fieldBase
+// export async function setFieldBaseFromJSON() {
+//   const fieldsJSON = getFields();
+//   console.log("fields", fieldsJSON);
+//   fieldsJSON.forEach((field) => pb.collection("fieldBase").create(field));
+//   //   await pb.collection("fieldBase").create(fieldsJSON);
+//}
+
+export async function getPBfields() {
+  await getAuthData();
+  const fields = await pb.collection("fieldBase").getOne("czbx8e0cqinc2ss");
+  return fields;
+}
+
+export async function addPBField(field: string) {
+  const fields = await getPBfields();
+  const confirmation = fields.field1.find(
+    (fieldItem: string) => fieldItem === field
+  );
+  if (!confirmation) {
+    console.log("does not exist");
+    var afterFields = fields.field1.push.field;
+    const toAdd = await pb
+      .collection("fieldBase")
+      .update("czbx8e0cqinc2ss", afterFields);
+    console.log("last", afterFields[afterFields.length - 1]);
+    console.log("toAdd", toAdd);
+  } else {
+    console.log("Field exists");
+  }
 }

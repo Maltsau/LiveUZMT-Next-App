@@ -16,6 +16,7 @@ import {
   AddFormContentWrapper,
   VanishingContainer,
 } from "../components/menuComponents/AdditionalComponents";
+import AddRecordForm2 from "../components/forms/AddRecordForm2";
 
 const SpanStyled = styled.span<{ minHeight?: number }>`
   margin: 0 5px;
@@ -151,7 +152,15 @@ export default function AddRecordPage() {
 
       <AddFormContentWrapper isAdmin={user?.user.role === "ADMIN"}>
         <VanishingContainer isVisible={!adminPannel}>
-          <AddRecordForm
+          {/* <AddRecordForm
+            onSuccess={() => {
+              setIsSuccessDialogVisible(true);
+            }}
+            onError={() => {
+              setIsSuccessDialogVisible(true);
+            }}
+          /> */}
+          <AddRecordForm2
             onSuccess={() => {
               setIsSuccessDialogVisible(true);
             }}

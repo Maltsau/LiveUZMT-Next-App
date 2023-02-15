@@ -43,7 +43,7 @@ export default async function handler(
       authorisedUser = await checkPBUser(req.cookies.secret);
     }
     if (authorisedUser) {
-      console.log("Check or not", authorisedUser);
+      // console.log("Check or not", authorisedUser);
       return res.status(200).json({
         userName: authorisedUser.userName,
         role: authorisedUser.role,

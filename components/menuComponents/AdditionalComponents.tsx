@@ -53,6 +53,15 @@ export const GridUnborderedContainer = styled.div<{
   padding: 2px;
 `;
 
+export const UnborderedContainer = styled.div<{
+  gridColumns: string;
+}>`
+  display: grid;
+  grid-template-columns: ${(props) => props.gridColumns};
+  justify-items: stretch;
+  grid-column-gap: 1em;
+`;
+
 export const VanishingContainer = styled.div<{
   isVisible: boolean;
 }>`

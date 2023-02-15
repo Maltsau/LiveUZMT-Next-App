@@ -18,6 +18,7 @@ import {
 import {
   GridBorderedContainer,
   GridUnborderedContainer,
+  UnborderedContainer,
 } from "../menuComponents/AdditionalComponents";
 
 const LabelStyled = styled.label`
@@ -97,7 +98,7 @@ export default function AddMonthForm({
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <GridUnborderedContainer gridColumns="1fr 1fr 1fr 1fr">
+      <UnborderedContainer gridColumns="repeat(auto-fill, minmax(150px, 1fr))">
         <LabelStyled>
           <SpanStyled minHeight={72}>Месяц</SpanStyled>
           <SelectStyled {...register("month", { required: true })}>
@@ -170,7 +171,7 @@ export default function AddMonthForm({
             )}
           </ErrorDiv>
         </LabelStyled>
-      </GridUnborderedContainer>
+      </UnborderedContainer>
       <InputSubmit type={"submit"} value={"Добавить месяц"}></InputSubmit>
     </form>
   );

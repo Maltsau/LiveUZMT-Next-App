@@ -19,91 +19,42 @@ import {
   ErrorDiv,
   ErrorParagraph,
 } from "../menuComponents/Inputs";
-import {
-  GridBorderedContainer,
-  GridUnborderedContainer,
-} from "../menuComponents/AdditionalComponents";
+import { UnborderedContainer } from "../menuComponents/AdditionalComponents";
 
-const SpanStyled = styled.span<{ minHeight?: number }>`
-  margin: 0 10px;
-  min-height: ${(props) => props.minHeight}px;
-  vertical-align: bottom;
-`;
-
-const CheckboxContainer = styled.div`
-  display: flex;
-`;
-
-const FlexInlineContainer = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-column-gap: 5px;
-  width: 100%;
-  padding: 0 2px;
-  justify-items: center;
-`;
-
-const AddButtonsContainer = styled.div`
-  display: flex;
-`;
-
-const CheckboxStyled = styled.input`
-  height: 25px;
-  width: 25px;
-`;
-
-const LabelStyled = styled.label`
-  display: flex;
-  flex-direction: column;
-  text-align: left;
-  margin: 5px 0;
-`;
-
-// const DurationLabel = styled(LabelStyled)`
-//   grid-column: 2 / 4;
-// `;
-
-const CurrentTimeTitleLabelStyled = styled.label`
-  margin: auto 10px;
-  grid-column-start: 1;
-  grid-column-end: 6;
-  padding: 5px 3px;
+const TitleContainer = styled.div`
+  font-size: 1.2rem;
   text-align: center;
   color: red;
-  font-size: 1.2em;
-`;
-
-const StartDateTitleLabelStyled = styled.label`
-  margin: auto 10px;
-  grid-column-start: 1;
-  grid-column-end: 4;
-  padding: 5px 3px;
-  text-align: center;
-  color: red;
-  font-size: 1.2em;
 `;
 
 const AddMonthContainer = styled.div<{
   isVisible: boolean;
   isAlarmed: boolean;
 }>`
-  display: ${({ isVisible }) => (isVisible ? "grid" : "none")};
+  display: ${({ isVisible }) => (isVisible ? "flex" : "none")};
   background-color: ${({ isAlarmed }) => (isAlarmed ? "pink" : "transparent")};
-  overflow: auto;
-  width: 100%;
-  grid-template-columns: repeat(2, 1fr);
-  padding: 2px;
-  margin: 2px 0px;
+  flex-direction: column;
 `;
 
-const NewMonthLabelStyled = styled.label`
-  margin: auto 10px;
-  grid-column-start: 1;
-  grid-column-end: 3;
-  padding: 5px 3px;
-  text-align: center;
-  color: red;
-  font-size: 1.2em;
+const LabelStyled = styled.label`
+  display: flex;
+  flex-direction: column;
+  padding: 0px 5px;
+`;
+
+const ParagraphStyled = styled.p<{ minHeight?: number }>`
+  min-height: ${(props) => props.minHeight}px;
+  margin: 0px 10px;
+`;
+
+const FlexContainer = styled.div`
+  display: flex;
+  padding: 0px;
+`;
+
+const CheckboxStyled = styled.input`
+  height: 25px;
+  width: 25px;
 `;
 
 type Inputs = {
@@ -134,7 +85,7 @@ interface OptionType {
   readonly label: string;
 }
 
-export default function AddRecordForm({
+export default function AddRecordForm2({
   onSuccess,
   onError,
 }: {
@@ -233,7 +184,6 @@ export default function AddRecordForm({
       },
     }
   );
-
   const {
     register,
     handleSubmit,
@@ -326,16 +276,16 @@ export default function AddRecordForm({
   for (let i = watchInputs.startYear; i < now.getFullYear() + 10; i++) {
     yearIterator.push(i);
   }
-  console.log("errors", errors);
+
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <GridUnborderedContainer gridColumns={"repeat(auto-fill, 1fr)"}>
-          <StartDateTitleLabelStyled>
-            Дата начала исследований
-          </StartDateTitleLabelStyled>
+        <TitleContainer>
+          <p>Дата начала исследований</p>
+        </TitleContainer>
+        <UnborderedContainer gridColumns="repeat(auto-fill, minmax(150px, 1fr))">
           <LabelStyled>
-            <SpanStyled>Число</SpanStyled>
+            <ParagraphStyled>Число</ParagraphStyled>
             <SelectStyled {...register("startDay", { required: true })}>
               {startDayIterator.map((dayItem) => {
                 return (
@@ -347,7 +297,7 @@ export default function AddRecordForm({
             </SelectStyled>
           </LabelStyled>
           <LabelStyled>
-            <SpanStyled>Месяц</SpanStyled>
+            <ParagraphStyled>Месяц</ParagraphStyled>
             <SelectStyled {...register("startMonth", { required: true })}>
               {[...MONTH_MAP.values()].map((mnth) => {
                 return (
@@ -359,7 +309,7 @@ export default function AddRecordForm({
             </SelectStyled>
           </LabelStyled>
           <LabelStyled>
-            <SpanStyled>Год</SpanStyled>
+            <ParagraphStyled>Год</ParagraphStyled>
             <SelectStyled {...register("startYear", { required: true })}>
               {startYearIterator.map((yearItem) => {
                 return (
@@ -370,13 +320,13 @@ export default function AddRecordForm({
               })}
             </SelectStyled>
           </LabelStyled>
-        </GridUnborderedContainer>
-        <GridUnborderedContainer gridColumns="repeat(auto-fill, 1fr)">
-          <CurrentTimeTitleLabelStyled>
-            Текущее время
-          </CurrentTimeTitleLabelStyled>
+        </UnborderedContainer>
+        <TitleContainer>
+          <p>Текущее время</p>
+        </TitleContainer>
+        <UnborderedContainer gridColumns="repeat(auto-fill, minmax(150px, 1fr))">
           <LabelStyled>
-            <SpanStyled>Число</SpanStyled>
+            <ParagraphStyled>Число</ParagraphStyled>
             <SelectStyled {...register("day", { required: true })}>
               {dayIterator.map((dayItem) => {
                 return (
@@ -388,7 +338,7 @@ export default function AddRecordForm({
             </SelectStyled>
           </LabelStyled>
           <LabelStyled>
-            <SpanStyled>Месяц</SpanStyled>
+            <ParagraphStyled>Месяц</ParagraphStyled>
             <SelectStyled {...register("month", { required: true })}>
               {[...MONTH_MAP.values()].map((mnth) => {
                 return (
@@ -400,7 +350,7 @@ export default function AddRecordForm({
             </SelectStyled>
           </LabelStyled>
           <LabelStyled>
-            <SpanStyled>Год</SpanStyled>
+            <ParagraphStyled>Год</ParagraphStyled>
             <SelectStyled {...register("year", { required: true })}>
               {yearIterator.map((yearItem) => {
                 return (
@@ -412,31 +362,31 @@ export default function AddRecordForm({
             </SelectStyled>
           </LabelStyled>
           <LabelStyled>
-            <SpanStyled>Время</SpanStyled>
-            <FlexInlineContainer>
+            <ParagraphStyled>Время</ParagraphStyled>
+            <FlexContainer>
               <InputSimple
                 {...register("hours", {
                   required: "Поле обязательно к заполнению",
                   maxLength: 2,
                 })}
-              ></InputSimple>
+              />
               <InputSimple
                 {...register("minutes", {
                   required: "Поле обязательно к заполнению",
                   maxLength: 2,
                 })}
-              ></InputSimple>
-            </FlexInlineContainer>
+              />
+            </FlexContainer>
           </LabelStyled>
-        </GridUnborderedContainer>
-        <GridUnborderedContainer gridColumns="repeat(auto-fill, 1fr)">
+        </UnborderedContainer>
+        <UnborderedContainer gridColumns="repeat(auto-fit, minmax(200px, 1fr))">
           <LabelStyled>
-            <SpanStyled>Номер скважины</SpanStyled>
+            <ParagraphStyled>Номер скважины</ParagraphStyled>
             <InputSimple
               {...register("number", {
                 required: "Поле обязательно к заполнению",
               })}
-            ></InputSimple>
+            />
             <ErrorDiv>
               {errors.number && (
                 <ErrorParagraph>
@@ -446,7 +396,7 @@ export default function AddRecordForm({
             </ErrorDiv>
           </LabelStyled>
           <LabelStyled>
-            <SpanStyled>Месторождение</SpanStyled>
+            <ParagraphStyled>Месторождение</ParagraphStyled>
             <Controller
               control={control}
               name={"field"}
@@ -479,16 +429,16 @@ export default function AddRecordForm({
             ></Controller>
           </LabelStyled>
           <LabelStyled>
-            <SpanStyled>Промысел</SpanStyled>
+            <ParagraphStyled>Промысел</ParagraphStyled>
             <SelectStyled {...register("department", { required: true })}>
               <option value={1}>{"ЦДНГ-1"}</option>
               <option value={2}>{"ЦДНГ-2"}</option>
             </SelectStyled>
           </LabelStyled>
-        </GridUnborderedContainer>
-        <GridUnborderedContainer gridColumns="repeat(auto-fill, 1fr)">
+        </UnborderedContainer>
+        <UnborderedContainer gridColumns="repeat(auto-fit, minmax(150px, 1fr))">
           <LabelStyled>
-            <SpanStyled minHeight={40}>Дебит, т/сут</SpanStyled>
+            <ParagraphStyled minHeight={40}>Дебит, т/сут</ParagraphStyled>
             <InputSimple
               {...register("debitMass", {
                 required: "Поле обязательно к заполнению",
@@ -497,7 +447,7 @@ export default function AddRecordForm({
                   message: "Дебит должен быть числом",
                 },
               })}
-            ></InputSimple>
+            />
             <ErrorDiv>
               {errors.debitMass && (
                 <ErrorParagraph>
@@ -507,9 +457,9 @@ export default function AddRecordForm({
             </ErrorDiv>
           </LabelStyled>
           <LabelStyled>
-            <SpanStyled minHeight={40}>
-              Удельный вес <br></br>жидкости, г/см<sup>3</sup>
-            </SpanStyled>
+            <ParagraphStyled minHeight={40}>
+              Удельный вес жидкости, г/см<sup>3</sup>
+            </ParagraphStyled>
             <InputSimple
               {...register("density", {
                 required: "Поле обязательно к заполнению",
@@ -523,7 +473,7 @@ export default function AddRecordForm({
                   message: `Плотность должна быть меньше двух`,
                 },
               })}
-            ></InputSimple>
+            />
             <ErrorDiv>
               {errors.density && (
                 <ErrorParagraph>
@@ -533,7 +483,7 @@ export default function AddRecordForm({
             </ErrorDiv>
           </LabelStyled>
           <LabelStyled>
-            <SpanStyled minHeight={40}>Обводнённость, %</SpanStyled>
+            <ParagraphStyled minHeight={40}>Обводнённость, %</ParagraphStyled>
             <InputSimple
               {...register("watterRate", {
                 required: "Поле обязательно к заполнению",
@@ -550,31 +500,29 @@ export default function AddRecordForm({
                   message: `Обводненность должна быть не больше 100%`,
                 },
               })}
-            ></InputSimple>
+            />
             <ErrorDiv>
               {errors.watterRate && (
                 <ErrorParagraph>{errors.watterRate?.message}</ErrorParagraph>
               )}
             </ErrorDiv>
           </LabelStyled>
-        </GridUnborderedContainer>
-        <GridUnborderedContainer gridColumns="1fr 2fr">
+        </UnborderedContainer>
+        <UnborderedContainer gridColumns="repeat(auto-fit, minmax(150px, 1fr))">
           <LabelStyled>
-            <CheckboxContainer>
-              <SpanStyled minHeight={40}>
-                Замер окончен?
-                <CheckboxStyled
-                  onClick={() => resetField("duration")}
-                  type={"checkbox"}
-                  {...register("isFinal", {})}
-                />
-              </SpanStyled>
-            </CheckboxContainer>
+            <FlexContainer>
+              <ParagraphStyled>Исследования окончены?</ParagraphStyled>
+              <CheckboxStyled
+                type={"checkbox"}
+                onClick={() => resetField("duration")}
+                {...register("isFinal", {})}
+              />
+            </FlexContainer>
           </LabelStyled>
           <LabelStyled>
-            <InputVanishing
-              isVisible={watchInputs.isFinal}
-              placeholder={"Введите продолжительность"}
+            Продолжительность исследований
+            <InputSimple
+              disabled={!watchInputs.isFinal}
               {...register("duration", {
                 required: watchInputs.isFinal
                   ? "Поле обязательно к заполнению"
@@ -588,7 +536,7 @@ export default function AddRecordForm({
                   message: "Продолжительность должна больше нуля",
                 },
               })}
-            ></InputVanishing>
+            />
             <ErrorDiv>
               {errors.duration && (
                 <ErrorParagraph>
@@ -597,75 +545,80 @@ export default function AddRecordForm({
               )}
             </ErrorDiv>
           </LabelStyled>
-        </GridUnborderedContainer>
+        </UnborderedContainer>
         <AddMonthContainer
           isVisible={isNewMonthBlockVisible}
           isAlarmed={isNewMonthBlockAlarmed}
         >
-          <NewMonthLabelStyled>Добавьте новый месяц</NewMonthLabelStyled>
-          <LabelStyled>
-            <SpanStyled minHeight={40}>Количество операций по плану</SpanStyled>
-            <InputSimple
-              {...register("planOps", {
-                required: isNewMonthBlockVisible
-                  ? "Поле обязательно к заполнению"
-                  : false,
-                pattern: {
-                  value: /^[0-9]*[.,]?[0-9]+$/,
-                  message: "Количество операций должно быть числом",
-                },
-                min: {
-                  value: 0,
-                  message: "Количество операций должно быть больше нуля",
-                },
-              })}
-              onFocus={() => {
-                setIsNewMonthBlockAlarmed(false);
-              }}
-            ></InputSimple>
-            <ErrorDiv>
-              {errors.planOps && (
-                <ErrorParagraph>
-                  {errors.planOps?.message || "Ошибка заполнения"}
-                </ErrorParagraph>
-              )}
-            </ErrorDiv>
-          </LabelStyled>
-          <LabelStyled>
-            <SpanStyled minHeight={40}>
-              Средняя планируемая продолжительность операции, час
-            </SpanStyled>
-            <InputSimple
-              {...register("wishfullAverageLength", {
-                required: isNewMonthBlockVisible
-                  ? "Поле обязательно к заполнению"
-                  : false,
-                pattern: {
-                  value: /^[0-9]*[.,]?[0-9]+$/,
-                  message: "Продолжительность должна быть числом",
-                },
-                min: {
-                  value: 0,
-                  message: "Продолжительность должна быть больше нуля",
-                },
-              })}
-              onFocus={() => {
-                setIsNewMonthBlockAlarmed(false);
-              }}
-            ></InputSimple>
-            <ErrorDiv>
-              {errors.wishfullAverageLength && (
-                <ErrorParagraph>
-                  {errors.wishfullAverageLength?.message || "Ошибка заполнения"}
-                </ErrorParagraph>
-              )}
-            </ErrorDiv>
-          </LabelStyled>
+          <TitleContainer>Добавьте новый месяц</TitleContainer>
+          <UnborderedContainer gridColumns="repeat(auto-fit, minmax(150px, 1fr))">
+            <LabelStyled>
+              <ParagraphStyled minHeight={80}>
+                Количество операций по плану
+              </ParagraphStyled>
+              <InputSimple
+                {...register("planOps", {
+                  required: isNewMonthBlockVisible
+                    ? "Поле обязательно к заполнению"
+                    : false,
+                  pattern: {
+                    value: /^[0-9]*[.,]?[0-9]+$/,
+                    message: "Количество операций должно быть числом",
+                  },
+                  min: {
+                    value: 0,
+                    message: "Количество операций должно быть больше нуля",
+                  },
+                })}
+                onFocus={() => {
+                  setIsNewMonthBlockAlarmed(false);
+                }}
+              />
+              <ErrorDiv>
+                {errors.planOps && (
+                  <ErrorParagraph>
+                    {errors.planOps?.message || "Ошибка заполнения"}
+                  </ErrorParagraph>
+                )}
+              </ErrorDiv>
+            </LabelStyled>
+            <LabelStyled>
+              <ParagraphStyled minHeight={80}>
+                Средняя планируемая продолжительность операции, час
+              </ParagraphStyled>
+              <InputSimple
+                {...register("wishfullAverageLength", {
+                  required: isNewMonthBlockVisible
+                    ? "Поле обязательно к заполнению"
+                    : false,
+                  pattern: {
+                    value: /^[0-9]*[.,]?[0-9]+$/,
+                    message: "Продолжительность должна быть числом",
+                  },
+                  min: {
+                    value: 0,
+                    message: "Продолжительность должна быть больше нуля",
+                  },
+                })}
+                onFocus={() => {
+                  setIsNewMonthBlockAlarmed(false);
+                }}
+              />
+              <ErrorDiv>
+                {errors.wishfullAverageLength && (
+                  <ErrorParagraph>
+                    {errors.wishfullAverageLength?.message ||
+                      "Ошибка заполнения"}
+                  </ErrorParagraph>
+                )}
+              </ErrorDiv>
+            </LabelStyled>
+          </UnborderedContainer>
         </AddMonthContainer>
-        <AddButtonsContainer>
+        <FlexContainer>
           <AddPhotoButton></AddPhotoButton>
           <AddExcellButton></AddExcellButton>
-        </AddButtonsContainer>
+        </FlexContainer>
         <InputSubmit type={"submit"} value={"Добавить"}></InputSubmit>
       </form>
       <AddMonthModal

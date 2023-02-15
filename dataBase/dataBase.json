@@ -63,6 +63,56 @@
                 "watterRate": 1
               }
             ]
+          },
+          {
+            "id": "10.02.2023 s Ю.-ЧЕРНИНСКАЯ",
+            "date": "10.02.2023",
+            "department": 1,
+            "number": "s",
+            "field": "Ю.-ЧЕРНИНСКАЯ",
+            "duration": 1,
+            "result": [
+              {
+                "isFinal": true,
+                "dateTime": "10.02.2023 19:20",
+                "debitMass": 1,
+                "density": 1,
+                "watterRate": 1
+              }
+            ]
+          },
+          {
+            "id": "11.02.2023 1 XZXZ",
+            "date": "11.02.2023",
+            "department": 1,
+            "number": "1",
+            "field": "XZXZ",
+            "result": [
+              {
+                "isFinal": false,
+                "dateTime": "11.02.2023 10:13",
+                "debitMass": 1,
+                "density": 1,
+                "watterRate": 1
+              }
+            ]
+          },
+          {
+            "id": "15.02.2023 eee БАЖЕНОВСКАЯ",
+            "date": "15.02.2023",
+            "department": 1,
+            "number": "eee",
+            "field": "БАЖЕНОВСКАЯ",
+            "duration": 1,
+            "result": [
+              {
+                "isFinal": true,
+                "dateTime": "15.02.2023 12:03",
+                "debitMass": 1,
+                "density": 1,
+                "watterRate": 1
+              }
+            ]
           }
         ]
       },

@@ -6,6 +6,7 @@ import {
   getDataBase,
   addMonth,
 } from "../../dataBase/DataBase";
+import { checkPBUser } from "../../dataBase/pocketbase";
 
 type ResponseType =
   | Array<any>
@@ -15,15 +16,19 @@ type ResponseType =
 
 let DataBase = getDataBase();
 
-export default function handler(
+export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<ResponseType>
 ) {
+  let userConfirmation;
+  if (req.cookies.secret) {
+    userConfirmation = await checkPBUser(req.cookies.secret);
+  }
   if (req.method === "GET") {
     res.status(200).json(getDataBase());
     res.status(500).json({ error: "Status 500" });
   } else if (req.method === "POST") {
-    if (checkUser(req.cookies.secret)) {
+    if (userConfirmation) {
       const dataBaseResponse = addRecord(
         req.body.startDay,
         req.body.startMonth,
@@ -55,10 +60,16 @@ export default function handler(
         message: `Not allowed`,
       });
     }
-  } else if (req.method === "DELETE" && checkUser(req.cookies.secret)) {
-    deleteRecord(req.body.id, req.body.year, req.body.month, req.body.dateTime);
+  } else if (req.method === "DELETE" && userConfirmation) {
+    if (req.cookies.secret)
+      deleteRecord(
+        req.body.id,
+        req.body.year,
+        req.body.month,
+        req.body.dateTime
+      );
     res.status(200).json({ message: "Deleted" });
-  } else if (req.method === "PUT" && checkUser(req.cookies.secret)) {
+  } else if (req.method === "PUT" && userConfirmation) {
     addMonth(
       req.body.year,
       req.body.month,
