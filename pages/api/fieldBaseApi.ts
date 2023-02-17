@@ -9,7 +9,7 @@ export default async function handler(
   if (req.method === "GET") {
     const fields = await getPBfields();
     // console.log("Get Fields", fields);
-    res.status(200).json(fields.field1);
+    res.status(200).json(fields);
   }
   if (req.method === "POST") {
     const confirmation = addField(req.body.field);

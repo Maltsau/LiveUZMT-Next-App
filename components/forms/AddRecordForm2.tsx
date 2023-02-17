@@ -13,13 +13,16 @@ import AddMonthModal from "../modalWindows/AddMonthModal";
 
 import {
   InputSimple,
-  InputVanishing,
   InputSubmit,
   SelectStyled,
   ErrorDiv,
   ErrorParagraph,
 } from "../menuComponents/Inputs";
 import { UnborderedContainer } from "../menuComponents/AdditionalComponents";
+
+const FormStyled = styled.form`
+  //   font-size: 3vmin;
+`;
 
 const TitleContainer = styled.div`
   font-size: 1.2rem;
@@ -279,7 +282,7 @@ export default function AddRecordForm2({
 
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <FormStyled onSubmit={handleSubmit(onSubmit)}>
         <TitleContainer>
           <p>Дата начала исследований</p>
         </TitleContainer>
@@ -620,7 +623,7 @@ export default function AddRecordForm2({
           <AddExcellButton></AddExcellButton>
         </FlexContainer>
         <InputSubmit type={"submit"} value={"Добавить"}></InputSubmit>
-      </form>
+      </FormStyled>
       <AddMonthModal
         onSubmit={() => {
           setIsNewMonthBlockVisible(true);

@@ -82,15 +82,16 @@
             ]
           },
           {
-            "id": "11.02.2023 1 XZXZ",
-            "date": "11.02.2023",
+            "id": "17.02.2023 ы АНДРЕЕВСКАЯ",
+            "date": "17.02.2023",
             "department": 1,
-            "number": "1",
-            "field": "XZXZ",
+            "number": "ы",
+            "field": "АНДРЕЕВСКАЯ",
+            "duration": 1,
             "result": [
               {
-                "isFinal": false,
-                "dateTime": "11.02.2023 10:13",
+                "isFinal": true,
+                "dateTime": "17.02.2023 18:31",
                 "debitMass": 1,
                 "density": 1,
                 "watterRate": 1
@@ -98,16 +99,48 @@
             ]
           },
           {
-            "id": "15.02.2023 eee БАЖЕНОВСКАЯ",
-            "date": "15.02.2023",
+            "id": "17.02.2023 1 АРТУКОВСКАЯ",
+            "date": "17.02.2023",
             "department": 1,
-            "number": "eee",
-            "field": "БАЖЕНОВСКАЯ",
+            "number": "1",
+            "field": "АРТУКОВСКАЯ",
             "duration": 1,
             "result": [
               {
                 "isFinal": true,
-                "dateTime": "15.02.2023 12:03",
+                "dateTime": "17.02.2023 18:32",
+                "debitMass": 1,
+                "density": 1,
+                "watterRate": 1
+              }
+            ]
+          },
+          {
+            "id": "17.02.2023 1 ВЫФВСЧЯСЯЧ",
+            "date": "17.02.2023",
+            "department": 1,
+            "number": "1",
+            "field": "ВЫФВСЧЯСЯЧ",
+            "result": [
+              {
+                "isFinal": false,
+                "dateTime": "17.02.2023 18:32",
+                "debitMass": 1,
+                "density": 1,
+                "watterRate": 1
+              }
+            ]
+          },
+          {
+            "id": "17.02.2023 1 2222",
+            "date": "17.02.2023",
+            "department": 1,
+            "number": "1",
+            "field": "2222",
+            "result": [
+              {
+                "isFinal": false,
+                "dateTime": "17.02.2023 18:35",
                 "debitMass": 1,
                 "density": 1,
                 "watterRate": 1
@@ -419,6 +452,30 @@
         "wishfullAverageLength": 19,
         "planOps": 23,
         "ops": []
+      },
+      {
+        "month": "март",
+        "wishfullAverageLength": "14",
+        "planOps": "23",
+        "ops": [
+          {
+            "id": "17.03.2020 22 АНИСИМОВСКАЯ",
+            "date": "17.03.2020",
+            "department": 1,
+            "number": "22",
+            "field": "АНИСИМОВСКАЯ",
+            "duration": 1,
+            "result": [
+              {
+                "isFinal": true,
+                "dateTime": "8.03.2020 11:34",
+                "debitMass": 1,
+                "density": 1,
+                "watterRate": 1
+              }
+            ]
+          }
+        ]
       }
     ]
   },

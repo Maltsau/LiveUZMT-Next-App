@@ -92,25 +92,46 @@ export async function checkPBUser(secret: string) {
 //   //   await pb.collection("fieldBase").create(fieldsJSON);
 //}
 
+// function getLDBFieldBase() {
+//   return getFields();
+// }
+
+// export async function setAllFieldBase() {
+//   const LDBFields = getLDBFieldBase();
+//   for (let item of LDBFields) {
+//     const data = { field: item };
+//     console.log("type", typeof item);
+//     const record = await pb.collection("oilFieldBase").create(data);
+//   }
+// }
+
 export async function getPBfields() {
   await getAuthData();
-  const fields = await pb.collection("fieldBase").getOne("czbx8e0cqinc2ss");
+  // const fields = await pb.collection("fieldBase").getOne("czbx8e0cqinc2ss");
+  const oilFields = await pb.collection("oilFieldBase").getFullList(200, {
+    sort: "-created",
+  });
+  const fields = oilFields.map((doc) => doc.field).reverse();
+  // console.log(
+  //   "OilFields",
+  //   oilFields.map((doc) => doc.field)
+  // );
   return fields;
 }
 
 export async function addPBField(field: string) {
   const fields = await getPBfields();
-  const confirmation = fields.field1.find(
-    (fieldItem: string) => fieldItem === field
-  );
+  const confirmation = fields.find((fieldItem) => fieldItem === field);
   if (!confirmation) {
     console.log("does not exist");
-    var afterFields = fields.field1.push.field;
-    const toAdd = await pb
-      .collection("fieldBase")
-      .update("czbx8e0cqinc2ss", afterFields);
-    console.log("last", afterFields[afterFields.length - 1]);
-    console.log("toAdd", toAdd);
+    const data = { field };
+    const record = await pb.collection("oilFieldBase").create(data);
+    // var afterFields = fields.field1.push.field;
+    // const toAdd = await pb
+    //   .collection("fieldBase")
+    //   .update("czbx8e0cqinc2ss", afterFields);
+    // console.log("last", afterFields[afterFields.length - 1]);
+    // console.log("toAdd", toAdd);
   } else {
     console.log("Field exists");
   }
