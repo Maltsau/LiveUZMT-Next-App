@@ -93,6 +93,7 @@ interface VisibilityState {
 export default function MonthTable() {
   const user = useUserStore();
   const dataBase = useDataBaseStore();
+  console.log("PB", dataBase);
   const [deleteConfirmationState, setDeleteConfirmationState] =
     useState<DeleteStateType>({ id: "", year: "", month: "" });
   const [isSuccessDialogVisible, setIsSuccessDialogVisible] =
@@ -173,6 +174,7 @@ export default function MonthTable() {
   const buttons = currentMonthOps?.map((element: any, index: number) => {
     return (
       <OperationButton
+        department={element.department}
         isEditMode={isEditMode}
         operation={element}
         onDeleteOperation={() => {
@@ -183,7 +185,9 @@ export default function MonthTable() {
         }}
         isDeleteble={user?.user.role === "ADMIN" && isEditMode}
         onClick={() => {
-          setOperation(element.id);
+          setOperation(
+            `${element.startDate.toUpperCase()} ${element.number.toUpperCase()} ${element.field.toUpperCase()}`
+          );
         }}
         onSecondClick={() => {
           setOperation("");
@@ -196,8 +200,11 @@ export default function MonthTable() {
             .includes(true)
         }
         key={element.id}
-        isHighlighted={element.id === operation}
-        text={`${index + 1}.  ${element.date}  ${element.number}  ${
+        isHighlighted={
+          `${element.startDate.toUpperCase()} ${element.number.toUpperCase()} ${element.field.toUpperCase()}` ===
+          operation
+        }
+        text={`${index + 1}.  ${element.startDate}  ${element.number}  ${
           element.field
         } `}
         duration={element.duration}
@@ -257,7 +264,7 @@ export default function MonthTable() {
             : "При изменении записи произошла ошибка"
         }
       ></ErrorDialog>
-      <OperationContainer isVisible={mode === "opeartions"} ref={parent}>
+      <OperationContainer isVisible={mode === "opeartions"}>
         {buttons}
       </OperationContainer>
       <StatisticsContainer isVisible={mode === "statistics"}>

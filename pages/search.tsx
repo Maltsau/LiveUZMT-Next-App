@@ -9,6 +9,7 @@ import { useDataBase } from "../hooks/useDataBase";
 import { useEditModeContext } from "./context/EditModeContext";
 import { useDeleteRecord } from "../hooks/useDeleteRecord";
 import { useUserStore } from "../stores/useUserStore";
+import { useDataBaseStore } from "../stores/useDataBaseStore";
 
 import OperationButton from "../components/buttons/OperationButton";
 import LoaderModal from "../components/modalWindows/LoaderModal";
@@ -68,6 +69,7 @@ export default function SearchPage() {
   const { isEditMode } = useEditModeContext();
 
   const { isLoading, data, isError, error } = useDataBase({});
+  console.log("dataBase", data);
   const { mutate: deleteOperation } = useDeleteRecord({
     onSuccess: () => {
       setIsSuccessDialogVisible(true);
@@ -81,17 +83,17 @@ export default function SearchPage() {
   const [deleteConfirmationState, setDeleteConfirmationState] =
     useState<DeleteStateType>({ id: "", year: "", month: "" });
 
-  if (isLoading) return <LoaderModal text="Fetching data..." />;
+  // if (isLoading) return <LoaderModal text="Fetching data..." />;
 
-  if (isError)
-    return (
-      <ErrorModal
-        isVisible={true}
-        onClose={() => {
-          setIserrorVisible(false);
-        }}
-      ></ErrorModal>
-    );
+  // if (isError)
+  //   return (
+  //     <ErrorModal
+  //       isVisible={true}
+  //       onClose={() => {
+  //         setIserrorVisible(false);
+  //       }}
+  //     ></ErrorModal>
+  //   );
 
   const searchBase = data?.flatMap((yearItem: any) => {
     return yearItem.months?.flatMap((monthItem: any) => {
@@ -99,23 +101,24 @@ export default function SearchPage() {
         return {
           year: Number(yearItem.year),
           month: monthItem.month,
-          date: opsItem.date,
+          date: opsItem.startDate,
           index: (
-            opsItem.date +
+            opsItem.startDate +
             " " +
             opsItem.number +
             " " +
             opsItem.field
-          ).toLowerCase(),
+          ).toUpperCase(),
         };
       });
     });
   });
+  console.log("SearchBase", searchBase);
 
   const result = searchBase
     ?.filter(
       (item: any) =>
-        item?.index.includes(search.toLowerCase()) && search.length > 0
+        item?.index.includes(search.toUpperCase()) && search.length > 0
     )
     .map((operation: any) => {
       return {
@@ -125,7 +128,7 @@ export default function SearchPage() {
         index: operation.index,
       };
     });
-
+  console.log("result", result);
   const outputArray = result?.flatMap((resultItem: any) => {
     return data
       ?.filter((yearItem: any) => {
@@ -142,10 +145,13 @@ export default function SearchPage() {
       })
       ?.find((opsItem: any) => {
         console.log("index", resultItem.index);
-        return opsItem.id?.toLowerCase() === resultItem.index;
+        return (
+          `${opsItem.startDate.toUpperCase()} ${opsItem.number.toUpperCase()} ${opsItem.field.toUpperCase()}` ===
+          resultItem.index.toUpperCase()
+        );
       });
   });
-
+  console.log("search output", outputArray);
   return (
     <WrapperAllContent>
       <InputStyled
@@ -157,36 +163,61 @@ export default function SearchPage() {
       ></InputStyled>
       <ResultContainer ref={parent}>
         {outputArray?.map((item: any, index: number) => {
+          console.log("items", item);
           return (
             <OperationButton
               key={Math.random()}
               isEditMode={isEditMode}
+              department={item.department}
+              duration={item.duration}
               operation={item}
               onDeleteOperation={() => {
-                console.log(MONTH_MAP.get(Number(item.id.split(".")[1])));
+                // console.log(MONTH_MAP.get(Number(item.id.split(".")[1])));
                 setDeleteConfirmationState({
-                  id: item.id,
-                  year: Number(item.id.split(".")[2].slice(0, 4)),
-                  month: MONTH_MAP.get(Number(item.id.split(".")[1]) - 1),
+                  id: `${item.startDate.toUpperCase()} ${item.number.toUpperCase()} ${item.field.toUpperCase()}`,
+                  year: Number(
+                    `${item.startDate.toUpperCase()} ${item.number.toUpperCase()} ${item.field.toUpperCase()}`
+                      .split(".")[2]
+                      .slice(0, 4)
+                  ),
+                  month: MONTH_MAP.get(
+                    Number(
+                      `${item.startDate.toUpperCase()} ${item.number.toUpperCase()} ${item.field.toUpperCase()}`.split(
+                        "."
+                      )[1]
+                    ) - 1
+                  ),
                 });
               }}
               onDeleteRecord={(dateTime) => {
                 setDeleteConfirmationState({
-                  id: item.id,
+                  id: `${item.startDate.toUpperCase()} ${item.number.toUpperCase()} ${item.field.toUpperCase()}`,
                   year: Number(item.id.split(".")[2].slice(0, 4)),
-                  month: MONTH_MAP.get(Number(item.id.split(".")[1]) - 1),
+                  month: MONTH_MAP.get(
+                    Number(
+                      `${item.startDate.toUpperCase()} ${item.number.toUpperCase()} ${item.field.toUpperCase()}`.split(
+                        "."
+                      )[1]
+                    ) - 1
+                  ),
                   dateTime,
                 });
               }}
               isDeleteble={user?.user.role === "ADMIN" && isEditMode}
               onClick={() => {
-                setOperation(item.id);
+                setOperation(
+                  `${item.startDate.toUpperCase()} ${item.number.toUpperCase()} ${item.field.toUpperCase()}`
+                );
                 console.log("sets", operation);
               }}
               onSecondClick={() => {
                 setOperation("");
               }}
-              isHighlighted={item?.id === operation}
+              isHighlighted={
+                `${item.startDate.toUpperCase()} ${
+                  item.number
+                } ${item.field.toUpperCase()}` === operation
+              }
               isCurrent={
                 !item?.result
                   .map((res: any) => {
@@ -194,7 +225,7 @@ export default function SearchPage() {
                   })
                   .includes(true)
               }
-              text={`${index + 1}.  ${item?.date}  ${item?.number}  ${
+              text={`${index + 1}.  ${item?.startDate}  ${item?.number}  ${
                 item?.field
               } `}
             ></OperationButton>

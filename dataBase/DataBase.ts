@@ -43,7 +43,6 @@ export function addRecord(
     const monthNumber = [...MONTH_MAP.keys()].find(
       (key) => MONTH_MAP.get(key) === monthString
     );
-    console.log(monthString, monthNumber);
     if (monthNumber! > 9) {
       return String(monthNumber! + 1);
     } else {

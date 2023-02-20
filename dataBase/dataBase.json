@@ -31,40 +31,6 @@
             ]
           },
           {
-            "id": "7.02.2023 23 АНТОНОВСКАЯ",
-            "date": "7.02.2023",
-            "department": 2,
-            "number": "23",
-            "field": "АНТОНОВСКАЯ",
-            "duration": 1,
-            "result": [
-              {
-                "isFinal": true,
-                "dateTime": "7.02.2023 20:53",
-                "debitMass": 1,
-                "density": 1,
-                "watterRate": 1
-              }
-            ]
-          },
-          {
-            "id": "7.02.2023 111s БАЖЕНОВСКАЯ",
-            "date": "7.02.2023",
-            "department": 1,
-            "number": "111s",
-            "field": "БАЖЕНОВСКАЯ",
-            "duration": 1,
-            "result": [
-              {
-                "isFinal": true,
-                "dateTime": "7.02.2023 20:53",
-                "debitMass": 1,
-                "density": 1,
-                "watterRate": 1
-              }
-            ]
-          },
-          {
             "id": "10.02.2023 s Ю.-ЧЕРНИНСКАЯ",
             "date": "10.02.2023",
             "department": 1,
@@ -82,16 +48,16 @@
             ]
           },
           {
-            "id": "17.02.2023 ы АНДРЕЕВСКАЯ",
+            "id": "17.02.2023 1 АЗЕРЕЦКАЯ",
             "date": "17.02.2023",
             "department": 1,
-            "number": "ы",
-            "field": "АНДРЕЕВСКАЯ",
+            "number": "1",
+            "field": "АЗЕРЕЦКАЯ",
             "duration": 1,
             "result": [
               {
                 "isFinal": true,
-                "dateTime": "17.02.2023 18:31",
+                "dateTime": "17.02.2023 20:32",
                 "debitMass": 1,
                 "density": 1,
                 "watterRate": 1
@@ -99,8 +65,41 @@
             ]
           },
           {
-            "id": "17.02.2023 1 АРТУКОВСКАЯ",
+            "id": "17.02.2023 1 БАРАТИНСКАЯ",
             "date": "17.02.2023",
+            "department": 2,
+            "number": "1",
+            "field": "БАРАТИНСКАЯ",
+            "duration": 1,
+            "result": [
+              {
+                "isFinal": true,
+                "dateTime": "17.02.2023 20:33",
+                "debitMass": 1,
+                "density": 1,
+                "watterRate": 1
+              }
+            ]
+          },
+          {
+            "id": "17.02.2023 1 В.-КАЛИНИНСКАЯ",
+            "date": "17.02.2023",
+            "department": 2,
+            "number": "1",
+            "field": "В.-КАЛИНИНСКАЯ",
+            "result": [
+              {
+                "isFinal": false,
+                "dateTime": "17.02.2023 20:33",
+                "debitMass": 1,
+                "density": 1,
+                "watterRate": 1
+              }
+            ]
+          },
+          {
+            "id": "18.02.2023 1 АРТУКОВСКАЯ",
+            "date": "18.02.2023",
             "department": 1,
             "number": "1",
             "field": "АРТУКОВСКАЯ",
@@ -108,7 +107,7 @@
             "result": [
               {
                 "isFinal": true,
-                "dateTime": "17.02.2023 18:32",
+                "dateTime": "18.02.2023 08:47",
                 "debitMass": 1,
                 "density": 1,
                 "watterRate": 1
@@ -116,15 +115,16 @@
             ]
           },
           {
-            "id": "17.02.2023 1 ВЫФВСЧЯСЯЧ",
-            "date": "17.02.2023",
+            "id": "18.02.2023 1 DSDSA",
+            "date": "18.02.2023",
             "department": 1,
             "number": "1",
-            "field": "ВЫФВСЧЯСЯЧ",
+            "field": "DSDSA",
+            "duration": 1,
             "result": [
               {
-                "isFinal": false,
-                "dateTime": "17.02.2023 18:32",
+                "isFinal": true,
+                "dateTime": "18.02.2023 09:00",
                 "debitMass": 1,
                 "density": 1,
                 "watterRate": 1
@@ -132,15 +132,16 @@
             ]
           },
           {
-            "id": "17.02.2023 1 2222",
-            "date": "17.02.2023",
+            "id": "20.02.2023 1 АЗЕРЕЦКАЯ",
+            "date": "20.02.2023",
             "department": 1,
             "number": "1",
-            "field": "2222",
+            "field": "АЗЕРЕЦКАЯ",
+            "duration": 1,
             "result": [
               {
-                "isFinal": false,
-                "dateTime": "17.02.2023 18:35",
+                "isFinal": true,
+                "dateTime": "20.02.2023 16:26",
                 "debitMass": 1,
                 "density": 1,
                 "watterRate": 1
@@ -151,8 +152,8 @@
       },
       {
         "month": "март",
-        "wishfullAverageLength": 19,
-        "planOps": 25,
+        "wishfullAverageLength": 22,
+        "planOps": 14,
         "ops": []
       },
       {

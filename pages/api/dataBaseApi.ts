@@ -6,7 +6,12 @@ import {
   getDataBase,
   addMonth,
 } from "../../dataBase/DataBase";
-import { checkPBUser } from "../../dataBase/pocketbase";
+import {
+  addPBMonth,
+  checkPBUser,
+  getPBMain,
+  addPBRecord,
+} from "../../dataBase/pocketbase";
 
 type ResponseType =
   | Array<any>
@@ -25,7 +30,9 @@ export default async function handler(
     userConfirmation = await checkPBUser(req.cookies.secret);
   }
   if (req.method === "GET") {
-    res.status(200).json(getDataBase());
+    const PBMain = await getPBMain();
+    console.log("PB", PBMain);
+    res.status(200).json(PBMain);
     res.status(500).json({ error: "Status 500" });
   } else if (req.method === "POST") {
     if (userConfirmation) {
@@ -49,7 +56,27 @@ export default async function handler(
         req.body.planOps,
         req.body.wishfullAverageLength
       );
-      if (dataBaseResponse) {
+      const dataBasePBResponse = await addPBRecord({
+        startDay: req.body.startDay,
+        startMonth: req.body.startMonth,
+        startYear: req.body.startYear,
+        day: req.body.day,
+        month: req.body.month,
+        year: req.body.year,
+        hours: req.body.hours,
+        minutes: req.body.minutes,
+        number: req.body.number,
+        field: req.body.field,
+        department: req.body.department,
+        debitMass: req.body.debitMass,
+        density: req.body.density,
+        watterRate: req.body.watterRate,
+        isFinal: req.body.isFinal,
+        duration: req.body.duration,
+        planOps: req.body.planOps,
+        wishfullAverageLength: req.body.wishfullAverageLength,
+      });
+      if (dataBasePBResponse) {
         console.log("if does not", req.body);
         res.status(201).json({ message: "Month does not exist" });
       } else {
@@ -75,6 +102,12 @@ export default async function handler(
       req.body.month,
       req.body.planOps,
       req.body.wishfullAverageLength
+    );
+    await addPBMonth(
+      req.body.month,
+      req.body.wishfullAverageLength,
+      req.body.planOps,
+      req.body.year
     );
     res.status(200).json({ message: "Month added" });
   }

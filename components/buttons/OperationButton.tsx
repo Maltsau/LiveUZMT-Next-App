@@ -11,19 +11,38 @@ const Container = styled.div`
   padding: 5px;
 `;
 
+const getButtonColor = ({
+  isCurrent,
+  department,
+}: {
+  isCurrent: boolean;
+  department: number;
+}) => {
+  if (isCurrent) {
+    return "red";
+  } else if (department === 1) {
+    return "#72A0C1";
+  } else {
+    return "#008E97";
+  }
+};
+
 const UpperTrapezoid = styled.div<{
   isCurrent: boolean;
+  department: number;
 }>`
   max-height: 0px;
-  border-bottom: 20px solid ${({ isCurrent }) =>
-    isCurrent ? "red" : "#787e80"}};
+  border-bottom: 20px solid ${({ isCurrent, department }) =>
+    getButtonColor({ isCurrent, department })}};
   border-right: 10px solid transparent;
 `;
 
 const LowerTrapezoid = styled.div<{
   isCurrent: boolean;
+  department: number;
 }>`
-  border-top: 20px solid ${({ isCurrent }) => (isCurrent ? "red" : "#787e80")}};
+  border-top: 20px solid ${({ isCurrent, department }) =>
+    getButtonColor({ isCurrent, department })}};
   border-right: 10px solid transparent;
 `;
 
@@ -112,6 +131,7 @@ export default function OperationButton({
   isHighlighted,
   isDeleteble,
   isCurrent,
+  department,
 }: {
   operation: SingleOpType;
   isEditMode: boolean;
@@ -124,13 +144,14 @@ export default function OperationButton({
   isHighlighted: boolean;
   isDeleteble: boolean;
   isCurrent: boolean;
+  department: number;
 }) {
   const user = useUserStore();
   const [parent] = useAutoAnimate<HTMLTableSectionElement>();
   if (isHighlighted) {
     return (
       <Container onClick={onSecondClick}>
-        <UpperTrapezoid isCurrent={isCurrent}>
+        <UpperTrapezoid department={department} isCurrent={isCurrent}>
           <ButtonStyledActive isCurrent={isCurrent}>{text}</ButtonStyledActive>
         </UpperTrapezoid>
         <InnerContainer>
@@ -200,13 +221,13 @@ export default function OperationButton({
             </tbody>
           </Table>
         </InnerContainer>
-        <LowerTrapezoid isCurrent={isCurrent} />
+        <LowerTrapezoid department={department} isCurrent={isCurrent} />
       </Container>
     );
   } else {
     return (
       <Container onClick={onClick}>
-        <UpperTrapezoid isCurrent={isCurrent}>
+        <UpperTrapezoid department={department} isCurrent={isCurrent}>
           <ButtonStyled isCurrent={isCurrent}>
             <span>{text}</span>
             <DurationContainer>
@@ -229,7 +250,7 @@ export default function OperationButton({
             </DurationContainer>
           </ButtonStyled>
         </UpperTrapezoid>
-        <LowerTrapezoid isCurrent={isCurrent} />
+        <LowerTrapezoid department={department} isCurrent={isCurrent} />
       </Container>
     );
   }
