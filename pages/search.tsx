@@ -69,7 +69,7 @@ export default function SearchPage() {
   const { isEditMode } = useEditModeContext();
 
   const { isLoading, data, isError, error } = useDataBase({});
-  console.log("dataBase", data);
+
   const { mutate: deleteOperation } = useDeleteRecord({
     onSuccess: () => {
       setIsSuccessDialogVisible(true);
@@ -113,7 +113,6 @@ export default function SearchPage() {
       });
     });
   });
-  console.log("SearchBase", searchBase);
 
   const result = searchBase
     ?.filter(
@@ -128,7 +127,7 @@ export default function SearchPage() {
         index: operation.index,
       };
     });
-  console.log("result", result);
+
   const outputArray = result?.flatMap((resultItem: any) => {
     return data
       ?.filter((yearItem: any) => {
@@ -144,14 +143,13 @@ export default function SearchPage() {
         return monthItem.ops;
       })
       ?.find((opsItem: any) => {
-        console.log("index", resultItem.index);
         return (
           `${opsItem.startDate.toUpperCase()} ${opsItem.number.toUpperCase()} ${opsItem.field.toUpperCase()}` ===
           resultItem.index.toUpperCase()
         );
       });
   });
-  console.log("search output", outputArray);
+
   return (
     <WrapperAllContent>
       <InputStyled
@@ -163,7 +161,6 @@ export default function SearchPage() {
       ></InputStyled>
       <ResultContainer ref={parent}>
         {outputArray?.map((item: any, index: number) => {
-          console.log("items", item);
           return (
             <OperationButton
               key={Math.random()}
@@ -172,32 +169,37 @@ export default function SearchPage() {
               duration={item.duration}
               operation={item}
               onDeleteOperation={() => {
-                // console.log(MONTH_MAP.get(Number(item.id.split(".")[1])));
                 setDeleteConfirmationState({
-                  id: `${item.startDate.toUpperCase()} ${item.number.toUpperCase()} ${item.field.toUpperCase()}`,
+                  id: `${item.startDate.toUpperCase()} ${
+                    item.number
+                  } ${item.field.toUpperCase()}`,
                   year: Number(
-                    `${item.startDate.toUpperCase()} ${item.number.toUpperCase()} ${item.field.toUpperCase()}`
+                    `${item.startDate.toUpperCase()} ${
+                      item.number
+                    } ${item.field.toUpperCase()}`
                       .split(".")[2]
                       .slice(0, 4)
                   ),
                   month: MONTH_MAP.get(
                     Number(
-                      `${item.startDate.toUpperCase()} ${item.number.toUpperCase()} ${item.field.toUpperCase()}`.split(
-                        "."
-                      )[1]
+                      `${item.startDate.toUpperCase()} ${
+                        item.number
+                      } ${item.field.toUpperCase()}`.split(".")[1]
                     ) - 1
                   ),
                 });
               }}
               onDeleteRecord={(dateTime) => {
                 setDeleteConfirmationState({
-                  id: `${item.startDate.toUpperCase()} ${item.number.toUpperCase()} ${item.field.toUpperCase()}`,
+                  id: `${item.startDate.toUpperCase()} ${
+                    item.number
+                  } ${item.field.toUpperCase()}`,
                   year: Number(item.id.split(".")[2].slice(0, 4)),
                   month: MONTH_MAP.get(
                     Number(
-                      `${item.startDate.toUpperCase()} ${item.number.toUpperCase()} ${item.field.toUpperCase()}`.split(
-                        "."
-                      )[1]
+                      `${item.startDate.toUpperCase()} ${
+                        item.number
+                      } ${item.field.toUpperCase()}`.split(".")[1]
                     ) - 1
                   ),
                   dateTime,
@@ -206,9 +208,10 @@ export default function SearchPage() {
               isDeleteble={user?.user.role === "ADMIN" && isEditMode}
               onClick={() => {
                 setOperation(
-                  `${item.startDate.toUpperCase()} ${item.number.toUpperCase()} ${item.field.toUpperCase()}`
+                  `${item.startDate.toUpperCase()} ${
+                    item.number
+                  } ${item.field.toUpperCase()}`
                 );
-                console.log("sets", operation);
               }}
               onSecondClick={() => {
                 setOperation("");

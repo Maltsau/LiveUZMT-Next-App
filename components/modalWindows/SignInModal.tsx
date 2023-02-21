@@ -50,7 +50,6 @@ export default function SignInModal({
   const handleSubmit = (e: any) => {
     e.preventDefault();
     onFormSubmit(login, password);
-    console.log("sign in", login, password);
   };
 
   return (

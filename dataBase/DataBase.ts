@@ -211,7 +211,7 @@ export function deleteRecord(
   const requiredMonth = db
     .data!.find((yearItem) => yearItem.year === year)
     ?.months.find((monthItem) => monthItem.month === month)?.ops;
-  console.log("Data Base requiredMonth", requiredMonth);
+  // console.log("Data Base requiredMonth", requiredMonth);
   if (dateTime) {
     const requiredOperation = requiredMonth?.find(
       (operationItem) => operationItem.id === id
@@ -219,12 +219,12 @@ export function deleteRecord(
     const requiredOperationIndex = requiredMonth?.findIndex(
       (operationItem) => operationItem.id === id
     );
-    console.log("Data Base requiredOperation", requiredOperation);
+    // console.log("Data Base requiredOperation", requiredOperation);
     const requiredResultIndex = requiredOperation?.findIndex(
       (resultItem) => resultItem.dateTime === dateTime
     );
-    console.log("Data Base requiredResultIndex", requiredResultIndex);
-    console.log(requiredOperation![requiredResultIndex!]);
+    // console.log("Data Base requiredResultIndex", requiredResultIndex);
+    // console.log(requiredOperation![requiredResultIndex!]);
     requiredOperation?.splice(requiredResultIndex!, 1);
     if (!requiredOperation?.length) {
       requiredMonth?.splice(requiredOperationIndex!, 1);
@@ -233,7 +233,7 @@ export function deleteRecord(
     const requiredOperationIndex = requiredMonth?.findIndex(
       (operationItem) => operationItem.id === id
     );
-    console.log("DataBase", requiredMonth, requiredOperationIndex);
+    // console.log("DataBase", requiredMonth, requiredOperationIndex);
     requiredMonth?.splice(requiredOperationIndex!, 1);
   }
   db.write();

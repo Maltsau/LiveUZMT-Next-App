@@ -137,7 +137,7 @@ export default function OperationButton({
   isEditMode: boolean;
   onClick?: any;
   onSecondClick?: any;
-  onDeleteOperation?: any;
+  onDeleteOperation: any;
   onDeleteRecord: (dateTime: string) => void;
   text: string;
   duration?: string;
@@ -175,9 +175,7 @@ export default function OperationButton({
             <tbody ref={parent}>
               {operation.result.map((result: any) => {
                 return (
-                  <TableRow
-                    key={result.dateTime + result.number + result.field}
-                  >
+                  <TableRow key={result.index}>
                     <Cell>{result.dateTime}</Cell>
                     <Cell>{result.debitMass}</Cell>
                     <Cell>{result.density}</Cell>

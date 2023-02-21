@@ -51,7 +51,6 @@ export default function Layout({ children }: { children: ReactNode }) {
     {
       onSuccess: (secretResponse) => {
         if (secretResponse?.role) {
-          console.log("secretResponse", secretResponse);
           user?.setUser(
             secretResponse.userName,
             secretResponse.role,

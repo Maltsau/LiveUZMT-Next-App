@@ -93,7 +93,7 @@ interface VisibilityState {
 export default function MonthTable() {
   const user = useUserStore();
   const dataBase = useDataBaseStore();
-  console.log("PB", dataBase);
+  console.log("PB", dataBase.dataBase);
   const [deleteConfirmationState, setDeleteConfirmationState] =
     useState<DeleteStateType>({ id: "", year: "", month: "" });
   const [isSuccessDialogVisible, setIsSuccessDialogVisible] =
@@ -112,7 +112,6 @@ export default function MonthTable() {
   });
   const [mode, setMode] = useState("opeartions");
   const [parent] = useAutoAnimate<HTMLDivElement>();
-  console.log("MonthTable", dataBase.dataBase);
   const currentMonth =
     dataBase.dataBase
       .find((yearItem) => yearItem.year === year)
@@ -178,7 +177,16 @@ export default function MonthTable() {
         isEditMode={isEditMode}
         operation={element}
         onDeleteOperation={() => {
-          setDeleteConfirmationState({ id: element.id, year, month });
+          console.log({
+            id: `${element.startDate} ${element.number} ${element.field}`,
+            year,
+            month,
+          });
+          setDeleteConfirmationState({
+            id: `${element.startDate} ${element.number} ${element.field}`,
+            year,
+            month,
+          });
         }}
         onDeleteRecord={(dateTime) => {
           setDeleteConfirmationState({ id: element.id, year, month, dateTime });
@@ -186,7 +194,9 @@ export default function MonthTable() {
         isDeleteble={user?.user.role === "ADMIN" && isEditMode}
         onClick={() => {
           setOperation(
-            `${element.startDate.toUpperCase()} ${element.number.toUpperCase()} ${element.field.toUpperCase()}`
+            `${element.startDate.toUpperCase()} ${
+              element.number
+            } ${element.field.toUpperCase()}`
           );
         }}
         onSecondClick={() => {
@@ -201,8 +211,9 @@ export default function MonthTable() {
         }
         key={element.id}
         isHighlighted={
-          `${element.startDate.toUpperCase()} ${element.number.toUpperCase()} ${element.field.toUpperCase()}` ===
-          operation
+          `${element.startDate.toUpperCase()} ${
+            element.number
+          } ${element.field.toUpperCase()}` === operation
         }
         text={`${index + 1}.  ${element.startDate}  ${element.number}  ${
           element.field
@@ -264,7 +275,7 @@ export default function MonthTable() {
             : "При изменении записи произошла ошибка"
         }
       ></ErrorDialog>
-      <OperationContainer isVisible={mode === "opeartions"}>
+      <OperationContainer isVisible={mode === "opeartions"} ref={parent}>
         {buttons}
       </OperationContainer>
       <StatisticsContainer isVisible={mode === "statistics"}>

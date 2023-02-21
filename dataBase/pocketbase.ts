@@ -82,20 +82,17 @@ export async function addPBSecret({
     label,
   };
   const record = await pb.collection("secretBase").create(data);
-  // console.log("Added", record);
 }
 
 export async function deletePBSecret(secret: string) {
   const PBsecrets = await getCookies();
   const PBsecret = PBsecrets.find((doc) => doc.secret === secret);
   if (PBsecret) await pb.collection("secretBase").delete(PBsecret.id);
-  // console.log("Deleted", PBsecret);
 }
 
 export async function checkPBUser(secret: string) {
   const PBsecrets = await getCookies();
   const authorisedUser = PBsecrets.find((doc) => doc.secret === secret);
-  // console.log("Check", authorisedUser);
   return authorisedUser;
 }
 
@@ -133,12 +130,10 @@ export async function addPBField(field: string) {
   const fields = await getPBfields();
   const confirmation = fields.find((fieldItem) => fieldItem === field);
   if (!confirmation) {
-    console.log("does not exist");
     const data = { field };
     const record = await pb.collection("oilFieldBase").create(data);
     return record;
   } else {
-    console.log("Field exists");
     return false;
   }
 }
@@ -187,7 +182,10 @@ export async function getPBMain() {
       yearItem.months.forEach((monthItem) => {
         if (
           monthItem.month ===
-          MONTH_MAP.get(Number(opsItem.startDate.split(".")[1].slice(-1) - 1))
+            MONTH_MAP.get(
+              Number(opsItem.startDate.split(".")[1].slice(-1) - 1)
+            ) &&
+          monthItem.year === Number(opsItem.startDate.split(".")[2])
         ) {
           monthItem.ops.push({
             startDate: opsItem.startDate,
@@ -206,11 +204,6 @@ export async function getPBMain() {
     dbObject.forEach((yearItem) => {
       yearItem.months.forEach((monthItem) => {
         monthItem.ops.forEach((opsItem: any) => {
-          console.log(
-            "Compare",
-            `${opsItem.startDate} ${opsItem.number} ${opsItem.field}`,
-            resultItem.index
-          );
           if (
             `${opsItem.startDate} ${opsItem.number} ${opsItem.field}` ===
             resultItem.index
@@ -330,13 +323,13 @@ export async function addPBRecord({
     debitMass,
     density,
     watterRate,
-    index: `${getProperTime(day.toString())}.${getMonthNumber(
-      month
-    )}.${year} ${number} ${field}`,
+    index: `${getProperTime(startDay.toString())}.${getMonthNumber(
+      startMonth
+    )}.${startYear} ${number} ${field}`,
   };
 
   const monthPresence = months.find((monthItem) => {
-    return monthItem.year === year && monthItem.month === month;
+    return monthItem.year === Number(year) && monthItem.month === month;
   });
   //есть ли месяцГод
   if (monthPresence) {
@@ -352,7 +345,13 @@ export async function addPBRecord({
       );
     });
     if (operationPresence) {
-      //создаем результат
+      if (duration) {
+        //если заполнено поле продолжительность, то обновляем найденную операцию
+        await pb
+          .collection("opsBase")
+          .update(operationPresence.id, newOperation);
+      }
+      //операция есть, создаем результат
       await pb.collection("resultBase").create(newResult);
     } else {
       //нет операции, создаем операцию
@@ -375,6 +374,77 @@ export async function addPBRecord({
       //поля не заполнены, возвращаем monthDoesNotExist
       const monthDoesNotExist = true;
       return monthDoesNotExist;
+    }
+  }
+}
+
+export async function DeletePBRecord({
+  id,
+  year,
+  month,
+  dateTime,
+}: {
+  id: string;
+  year: number;
+  month: string;
+  dateTime?: string;
+}) {
+  const { months, ops, results } = await readDB();
+  //если запрос на удаление результата
+  if (dateTime) {
+    //находим результат по датеВремени
+    const resultPresence = results.find((resultItem) => {
+      return resultItem.dateTime === dateTime;
+    });
+    if (resultPresence) {
+      //результат найден, удаляем результат
+      await pb.collection("resultBase").delete(resultPresence.id);
+    }
+    //снова вытягиваем базу
+    const dataBase = await readDB();
+    //проверяем есть ли еще операции с таким айди, то есть дата начала, номерб и месторождение
+    const operationPresenceByResult = dataBase.results.find((resultItem) => {
+      resultItem.index === id;
+    });
+    if (!operationPresenceByResult) {
+      //если не находим, ищем операцию, которая не имеет результатов, связанных с ней, по айди
+      const emptyOperation = dataBase.ops.find((operationItem) => {
+        return (
+          `${operationItem.startDate} ${operationItem.numberr} ${operationItem.field}` ===
+          id
+        );
+      });
+      if (emptyOperation) {
+        //если находим пустую операцию, удаляем
+        await pb.collection("opsBase").delete(emptyOperation.id);
+      }
+    }
+  }
+  //если запрос на удаление всей операции
+  else {
+    //находим операцию
+    console.log(
+      "is operation found",
+      ops.map((operation) => {
+        return `${operation.startDate} ${operation.number} ${operation.field}`;
+      })
+    );
+    const operationPresenceById = ops.find((operationItem) => {
+      return (
+        `${operationItem.startDate} ${operationItem.number} ${operationItem.field}` ===
+        id
+      );
+    });
+    if (operationPresenceById) {
+      //если находим, удаляем операцию
+      console.log("operation found", operationPresenceById);
+      await pb.collection("opsBase").delete(operationPresenceById.id);
+    }
+    const resultPresenceByIndex = results.filter((resultItem) => {
+      return resultItem.index === id;
+    });
+    for (let item of resultPresenceByIndex) {
+      await pb.collection("resultBase").delete(item.id);
     }
   }
 }

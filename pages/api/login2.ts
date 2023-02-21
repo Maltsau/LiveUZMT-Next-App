@@ -33,8 +33,6 @@ export default async function handler(
 ) {
   if (req.method === "POST") {
     const PBusers: any = await getUserPB();
-    // const usersFireBase: DocumentData = await getUserFireBase();
-    // console.log("Login", usersFireBase);
     const newUser: NewUserType = req.body;
     const authorisedUser = PBusers?.find(
       (userObj: any) =>

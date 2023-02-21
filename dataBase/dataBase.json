@@ -10,145 +10,9 @@
       },
       {
         "month": "февраль",
-        "wishfullAverageLength": "23",
-        "planOps": "11",
-        "ops": [
-          {
-            "id": "7.02.2023 11 КУСТИНСКАЯ",
-            "date": "7.02.2023",
-            "department": 2,
-            "number": "11",
-            "field": "КУСТИНСКАЯ",
-            "duration": 1,
-            "result": [
-              {
-                "isFinal": true,
-                "dateTime": "7.02.2023 20:53",
-                "debitMass": 1,
-                "density": 1,
-                "watterRate": 1
-              }
-            ]
-          },
-          {
-            "id": "10.02.2023 s Ю.-ЧЕРНИНСКАЯ",
-            "date": "10.02.2023",
-            "department": 1,
-            "number": "s",
-            "field": "Ю.-ЧЕРНИНСКАЯ",
-            "duration": 1,
-            "result": [
-              {
-                "isFinal": true,
-                "dateTime": "10.02.2023 19:20",
-                "debitMass": 1,
-                "density": 1,
-                "watterRate": 1
-              }
-            ]
-          },
-          {
-            "id": "17.02.2023 1 АЗЕРЕЦКАЯ",
-            "date": "17.02.2023",
-            "department": 1,
-            "number": "1",
-            "field": "АЗЕРЕЦКАЯ",
-            "duration": 1,
-            "result": [
-              {
-                "isFinal": true,
-                "dateTime": "17.02.2023 20:32",
-                "debitMass": 1,
-                "density": 1,
-                "watterRate": 1
-              }
-            ]
-          },
-          {
-            "id": "17.02.2023 1 БАРАТИНСКАЯ",
-            "date": "17.02.2023",
-            "department": 2,
-            "number": "1",
-            "field": "БАРАТИНСКАЯ",
-            "duration": 1,
-            "result": [
-              {
-                "isFinal": true,
-                "dateTime": "17.02.2023 20:33",
-                "debitMass": 1,
-                "density": 1,
-                "watterRate": 1
-              }
-            ]
-          },
-          {
-            "id": "17.02.2023 1 В.-КАЛИНИНСКАЯ",
-            "date": "17.02.2023",
-            "department": 2,
-            "number": "1",
-            "field": "В.-КАЛИНИНСКАЯ",
-            "result": [
-              {
-                "isFinal": false,
-                "dateTime": "17.02.2023 20:33",
-                "debitMass": 1,
-                "density": 1,
-                "watterRate": 1
-              }
-            ]
-          },
-          {
-            "id": "18.02.2023 1 АРТУКОВСКАЯ",
-            "date": "18.02.2023",
-            "department": 1,
-            "number": "1",
-            "field": "АРТУКОВСКАЯ",
-            "duration": 1,
-            "result": [
-              {
-                "isFinal": true,
-                "dateTime": "18.02.2023 08:47",
-                "debitMass": 1,
-                "density": 1,
-                "watterRate": 1
-              }
-            ]
-          },
-          {
-            "id": "18.02.2023 1 DSDSA",
-            "date": "18.02.2023",
-            "department": 1,
-            "number": "1",
-            "field": "DSDSA",
-            "duration": 1,
-            "result": [
-              {
-                "isFinal": true,
-                "dateTime": "18.02.2023 09:00",
-                "debitMass": 1,
-                "density": 1,
-                "watterRate": 1
-              }
-            ]
-          },
-          {
-            "id": "20.02.2023 1 АЗЕРЕЦКАЯ",
-            "date": "20.02.2023",
-            "department": 1,
-            "number": "1",
-            "field": "АЗЕРЕЦКАЯ",
-            "duration": 1,
-            "result": [
-              {
-                "isFinal": true,
-                "dateTime": "20.02.2023 16:26",
-                "debitMass": 1,
-                "density": 1,
-                "watterRate": 1
-              }
-            ]
-          }
-        ]
+        "wishfullAverageLength": "20",
+        "planOps": "30",
+        "ops": []
       },
       {
         "month": "март",
@@ -160,7 +24,31 @@
         "month": "апрель",
         "wishfullAverageLength": 19,
         "planOps": 23,
-        "ops": []
+        "ops": [
+          {
+            "id": "20.04.2023 уккк З.-ВАЛАВСКАЯ",
+            "date": "20.04.2023",
+            "department": 2,
+            "number": "уккк",
+            "field": "З.-ВАЛАВСКАЯ",
+            "result": [
+              {
+                "isFinal": false,
+                "dateTime": "20.04.2023 17:40",
+                "debitMass": 233,
+                "density": 1,
+                "watterRate": 34
+              },
+              {
+                "isFinal": false,
+                "dateTime": "20.04.2023 17:40",
+                "debitMass": 233,
+                "density": 1,
+                "watterRate": 34
+              }
+            ]
+          }
+        ]
       },
       {
         "month": "май",

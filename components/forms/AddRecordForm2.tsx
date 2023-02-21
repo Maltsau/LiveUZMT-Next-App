@@ -169,10 +169,7 @@ export default function AddRecordForm2({
     },
     {
       onSuccess: (res) => {
-        console.log("onSuccess", res.message);
-        console.log("onSuccess", res.message === "Month does not exist");
         if (res.message === "Month does not exist") {
-          console.log(res.message);
           setAddMonthModalVisible(true);
           setIsNewMonthBlockAlarmed(true);
         } else {
@@ -224,7 +221,6 @@ export default function AddRecordForm2({
 
   const onSubmit: SubmitHandler<Inputs> = (data, e) => {
     e?.preventDefault();
-    console.log("data", data);
     addRecord(data);
     if (!fieldBase?.includes(data.field)) {
       addField({ field: data.field.toUpperCase() });

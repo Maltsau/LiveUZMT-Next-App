@@ -11,6 +11,7 @@ import {
   checkPBUser,
   getPBMain,
   addPBRecord,
+  DeletePBRecord,
 } from "../../dataBase/pocketbase";
 
 type ResponseType =
@@ -19,7 +20,7 @@ type ResponseType =
   | null
   | { error?: string };
 
-let DataBase = getDataBase();
+// let DataBase = getDataBase();
 
 export default async function handler(
   req: NextApiRequest,
@@ -31,31 +32,31 @@ export default async function handler(
   }
   if (req.method === "GET") {
     const PBMain = await getPBMain();
-    console.log("PB", PBMain);
+
     res.status(200).json(PBMain);
     res.status(500).json({ error: "Status 500" });
   } else if (req.method === "POST") {
     if (userConfirmation) {
-      const dataBaseResponse = addRecord(
-        req.body.startDay,
-        req.body.startMonth,
-        Number(req.body.startYear),
-        req.body.day,
-        req.body.month,
-        req.body.year,
-        req.body.hours,
-        req.body.minutes,
-        req.body.number,
-        req.body.field,
-        req.body.department,
-        req.body.debitMass,
-        req.body.density,
-        req.body.watterRate,
-        req.body.isFinal,
-        req.body.duration,
-        req.body.planOps,
-        req.body.wishfullAverageLength
-      );
+      // const dataBaseResponse = addRecord(
+      //   req.body.startDay,
+      //   req.body.startMonth,
+      //   Number(req.body.startYear),
+      //   req.body.day,
+      //   req.body.month,
+      //   req.body.year,
+      //   req.body.hours,
+      //   req.body.minutes,
+      //   req.body.number,
+      //   req.body.field,
+      //   req.body.department,
+      //   req.body.debitMass,
+      //   req.body.density,
+      //   req.body.watterRate,
+      //   req.body.isFinal,
+      //   req.body.duration,
+      //   req.body.planOps,
+      //   req.body.wishfullAverageLength
+      // );
       const dataBasePBResponse = await addPBRecord({
         startDay: req.body.startDay,
         startMonth: req.body.startMonth,
@@ -77,7 +78,6 @@ export default async function handler(
         wishfullAverageLength: req.body.wishfullAverageLength,
       });
       if (dataBasePBResponse) {
-        console.log("if does not", req.body);
         res.status(201).json({ message: "Month does not exist" });
       } else {
         res.status(200).json({ message: "Record added" });
@@ -95,14 +95,20 @@ export default async function handler(
         req.body.month,
         req.body.dateTime
       );
+    await DeletePBRecord({
+      id: req.body.id,
+      year: req.body.year,
+      month: req.body.month,
+      dateTime: req.body.dateTime,
+    });
     res.status(200).json({ message: "Deleted" });
   } else if (req.method === "PUT" && userConfirmation) {
-    addMonth(
-      req.body.year,
-      req.body.month,
-      req.body.planOps,
-      req.body.wishfullAverageLength
-    );
+    // addMonth(
+    //   req.body.year,
+    //   req.body.month,
+    //   req.body.planOps,
+    //   req.body.wishfullAverageLength
+    // );
     await addPBMonth(
       req.body.month,
       req.body.wishfullAverageLength,

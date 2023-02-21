@@ -81,7 +81,6 @@ export default function AddMonthForm({
 
   const onSubmit: SubmitHandler<Inputs> = (data, e) => {
     e?.preventDefault();
-    console.log(data);
     addMonth({
       year: Number(data.year),
       month: data.month,

@@ -43,23 +43,11 @@ export default async function handler(
       authorisedUser = await checkPBUser(req.cookies.secret);
     }
     if (authorisedUser) {
-      // console.log("Check or not", authorisedUser);
       return res.status(200).json({
         userName: authorisedUser.userName,
         role: authorisedUser.role,
         label: authorisedUser.label,
       });
     } else return res.status(401).json({ message: "Not logged in" });
-
-    // if (!checkUser(req.cookies.secret)) {
-    //   return res.status(401).json({ message: "Not logged in" });
-    // } else {
-    //   console.log("Check or not", checkUser(req.cookies.secret));
-    //   return res.status(200).json({
-    //     userName: checkUser(req.cookies.secret)?.userName,
-    //     role: checkUser(req.cookies.secret)?.role,
-    //     label: checkUser(req.cookies.secret)?.label,
-    //   });
-    // }
   }
 }
