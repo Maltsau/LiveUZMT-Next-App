@@ -394,7 +394,7 @@ export async function DeletePBRecord({
   if (dateTime) {
     //находим результат по датеВремени
     const resultPresence = results.find((resultItem) => {
-      return resultItem.dateTime === dateTime;
+      return resultItem.dateTime === dateTime && resultItem.index === id;
     });
     if (resultPresence) {
       console.log("resultPresence", resultPresence);
@@ -403,7 +403,7 @@ export async function DeletePBRecord({
     }
     //снова вытягиваем базу
     const dataBase = await readDB();
-    console.log("base again", dataBase);
+    // console.log("base again", dataBase);
     //проверяем есть ли еще операции с таким айди, то есть дата начала, номерб и месторождение
     const operationPresenceByResult = dataBase.results.find((resultItem) => {
       console.log(
