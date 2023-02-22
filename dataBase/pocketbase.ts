@@ -305,7 +305,12 @@ export async function addPBRecord({
     }
   };
   const { months, ops, results } = await readDB();
-  const newMonth = { month, wishfullAverageLength, planOps, year };
+  const newMonth = {
+    month: startMonth,
+    wishfullAverageLength,
+    planOps,
+    year: startYear,
+  };
   const newOperation = {
     startDate: `${getProperTime(startDay.toString())}.${getMonthNumber(
       startMonth
@@ -329,7 +334,17 @@ export async function addPBRecord({
   };
 
   const monthPresence = months.find((monthItem) => {
-    return monthItem.year === Number(year) && monthItem.month === month;
+    console.log(
+      "yearMonth search",
+      monthItem.year,
+      Number(startYear),
+      monthItem.month,
+      startMonth,
+      monthItem.year === Number(startYear) && monthItem.month === startMonth
+    );
+    return (
+      monthItem.year === Number(startYear) && monthItem.month === startMonth
+    );
   });
   //есть ли месяцГод
   if (monthPresence) {
@@ -362,8 +377,10 @@ export async function addPBRecord({
   }
   //нет месяцаГода
   else {
+    console.log("month does not exist", monthPresence);
     //заполнены ли поля planOps & wishfullAverageLength
     if (planOps && wishfullAverageLength) {
+      console.log("new month", newMonth);
       //поля заполнены, создаем месяц
       await pb.collection("monthsBase").create(newMonth);
       //создаем операцию
@@ -397,7 +414,7 @@ export async function DeletePBRecord({
       return resultItem.dateTime === dateTime && resultItem.index === id;
     });
     if (resultPresence) {
-      console.log("resultPresence", resultPresence);
+      // console.log("resultPresence", resultPresence);
       //результат найден, удаляем результат
       await pb.collection("resultBase").delete(resultPresence.id);
     }
@@ -406,12 +423,12 @@ export async function DeletePBRecord({
     // console.log("base again", dataBase);
     //проверяем есть ли еще операции с таким айди, то есть дата начала, номерб и месторождение
     const operationPresenceByResult = dataBase.results.find((resultItem) => {
-      console.log(
-        "searching empty",
-        resultItem.index,
-        id,
-        resultItem.index === id
-      );
+      // console.log(
+      //   "searching empty",
+      //   resultItem.index,
+      //   id,
+      //   resultItem.index === id
+      // );
       return resultItem.index === id;
     });
     console.log("operationPresenceByResult", operationPresenceByResult);
@@ -432,12 +449,12 @@ export async function DeletePBRecord({
   //если запрос на удаление всей операции
   else {
     //находим операцию
-    console.log(
-      "is operation found",
-      ops.map((operation) => {
-        return `${operation.startDate} ${operation.number} ${operation.field}`;
-      })
-    );
+    // console.log(
+    //   "is operation found",
+    //   ops.map((operation) => {
+    //     return `${operation.startDate} ${operation.number} ${operation.field}`;
+    //   })
+    // );
     const operationPresenceById = ops.find((operationItem) => {
       return (
         `${operationItem.startDate} ${operationItem.number} ${operationItem.field}` ===
@@ -446,7 +463,7 @@ export async function DeletePBRecord({
     });
     if (operationPresenceById) {
       //если находим, удаляем операцию
-      console.log("operation found", operationPresenceById);
+      // console.log("operation found", operationPresenceById);
       await pb.collection("opsBase").delete(operationPresenceById.id);
     }
     const resultPresenceByIndex = results.filter((resultItem) => {
