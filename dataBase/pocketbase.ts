@@ -397,20 +397,29 @@ export async function DeletePBRecord({
       return resultItem.dateTime === dateTime;
     });
     if (resultPresence) {
+      console.log("resultPresence", resultPresence);
       //результат найден, удаляем результат
       await pb.collection("resultBase").delete(resultPresence.id);
     }
     //снова вытягиваем базу
     const dataBase = await readDB();
+    console.log("base again", dataBase);
     //проверяем есть ли еще операции с таким айди, то есть дата начала, номерб и месторождение
     const operationPresenceByResult = dataBase.results.find((resultItem) => {
-      resultItem.index === id;
+      console.log(
+        "searching empty",
+        resultItem.index,
+        id,
+        resultItem.index === id
+      );
+      return resultItem.index === id;
     });
+    console.log("operationPresenceByResult", operationPresenceByResult);
     if (!operationPresenceByResult) {
       //если не находим, ищем операцию, которая не имеет результатов, связанных с ней, по айди
       const emptyOperation = dataBase.ops.find((operationItem) => {
         return (
-          `${operationItem.startDate} ${operationItem.numberr} ${operationItem.field}` ===
+          `${operationItem.startDate} ${operationItem.number} ${operationItem.field}` ===
           id
         );
       });

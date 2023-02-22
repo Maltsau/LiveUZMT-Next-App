@@ -189,7 +189,12 @@ export default function MonthTable() {
           });
         }}
         onDeleteRecord={(dateTime) => {
-          setDeleteConfirmationState({ id: element.id, year, month, dateTime });
+          setDeleteConfirmationState({
+            id: `${element.startDate} ${element.number} ${element.field}`,
+            year,
+            month,
+            dateTime,
+          });
         }}
         isDeleteble={user?.user.role === "ADMIN" && isEditMode}
         onClick={() => {
@@ -209,7 +214,7 @@ export default function MonthTable() {
             })
             .includes(true)
         }
-        key={element.id}
+        key={`${element.startDate} ${element.number} ${element.field} ${element.dateTime}`}
         isHighlighted={
           `${element.startDate.toUpperCase()} ${
             element.number

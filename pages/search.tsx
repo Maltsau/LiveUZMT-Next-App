@@ -149,7 +149,7 @@ export default function SearchPage() {
         );
       });
   });
-
+  console.log("outputArray", outputArray);
   return (
     <WrapperAllContent>
       <InputStyled
@@ -194,7 +194,7 @@ export default function SearchPage() {
                   id: `${item.startDate.toUpperCase()} ${
                     item.number
                   } ${item.field.toUpperCase()}`,
-                  year: Number(item.id.split(".")[2].slice(0, 4)),
+                  year: Number(item.startDate.split(".")[2].slice(0, 4)),
                   month: MONTH_MAP.get(
                     Number(
                       `${item.startDate.toUpperCase()} ${

@@ -175,7 +175,7 @@ export default function OperationButton({
             <tbody ref={parent}>
               {operation.result.map((result: any) => {
                 return (
-                  <TableRow key={result.index}>
+                  <TableRow key={result.dateTime}>
                     <Cell>{result.dateTime}</Cell>
                     <Cell>{result.debitMass}</Cell>
                     <Cell>{result.density}</Cell>
