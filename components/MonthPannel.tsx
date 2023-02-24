@@ -4,6 +4,7 @@ import { useMainStore } from "../stores/useMainStore";
 import { useDataBaseStore } from "../stores/useDataBaseStore";
 
 import CustomLink from "./buttons/CustomLink";
+import FolderLabel from "./buttons/FolderLabel";
 import {
   Rectangle,
   SmallRectangle,
@@ -58,7 +59,7 @@ export default function MonthPannel() {
         <SmallRectangle />
         {arr.map((monthItem) => {
           return (
-            <CustomLink
+            <FolderLabel
               onClick={() => {
                 setMonth(monthItem);
               }}

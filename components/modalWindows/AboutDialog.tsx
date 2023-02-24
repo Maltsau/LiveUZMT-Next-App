@@ -12,6 +12,7 @@ import {
 
 import { useUserStore } from "../../stores/useUserStore";
 import { useState } from "react";
+import FolderLabel from "../buttons/FolderLabel";
 
 const Container = styled.div<{
   isVisible: boolean;
@@ -48,7 +49,7 @@ export default function AboutDialog({ isVisible, onClose }: AboutDialogProps) {
         <SmallRectangle />
         {buttonArray.map((option) => {
           return (
-            <CustomLink
+            <FolderLabel
               key={option}
               text={option}
               isHighlighted={option === mode}
@@ -56,7 +57,7 @@ export default function AboutDialog({ isVisible, onClose }: AboutDialogProps) {
                 e.stopPropagation();
                 setMode(option);
               }}
-            ></CustomLink>
+            ></FolderLabel>
           );
         })}
         <Rectangle />

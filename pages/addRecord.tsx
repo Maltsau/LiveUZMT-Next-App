@@ -17,6 +17,7 @@ import {
   VanishingContainer,
 } from "../components/menuComponents/AdditionalComponents";
 import AddRecordForm2 from "../components/forms/AddRecordForm2";
+import FolderLabel from "../components/buttons/FolderLabel";
 
 const SpanStyled = styled.span<{ minHeight?: number }>`
   margin: 0 5px;
@@ -137,16 +138,16 @@ export default function AddRecordPage() {
     <>
       <PannelContainer isAdmin={user?.user.role === "ADMIN"}>
         <SmallRectangle />
-        <CustomLink
+        <FolderLabel
           text="Инженер"
           isHighlighted={!adminPannel}
           onClick={() => setAdminPannel(false)}
-        ></CustomLink>
-        <CustomLink
+        ></FolderLabel>
+        <FolderLabel
           text="Начальник"
           isHighlighted={adminPannel}
           onClick={() => setAdminPannel(true)}
-        ></CustomLink>
+        ></FolderLabel>
         <Rectangle />
       </PannelContainer>
       <AddFormContentWrapper isAdmin={user?.user.role === "ADMIN"}>

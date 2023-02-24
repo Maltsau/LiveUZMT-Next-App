@@ -233,20 +233,20 @@ export default function MonthTable() {
     <Wraper>
       <PannelContainer isAdmin={true}>
         <SmallRectangle />
-        <CustomLink
+        <FolderLabel
           text={"Oперации"}
           isHighlighted={mode === "opeartions"}
           onClick={() => {
             setMode("opeartions");
           }}
-        ></CustomLink>
-        <CustomLink
+        ></FolderLabel>
+        <FolderLabel
           text={"Статистика"}
           isHighlighted={mode === "statistics"}
           onClick={() => {
             setMode("statistics");
           }}
-        ></CustomLink>
+        ></FolderLabel>
         <Rectangle />
       </PannelContainer>
       <DeleteConfirmationDialog
@@ -283,18 +283,6 @@ export default function MonthTable() {
       ></ErrorDialog>
       <OperationContainer isVisible={mode === "opeartions"} ref={parent}>
         {buttons}
-        <FolderLabelContainer>
-          <FolderLabel
-            isHighlighted={true}
-            text={2001}
-            onClick={() => {}}
-          ></FolderLabel>
-          <FolderLabel
-            isHighlighted={false}
-            text={2002}
-            onClick={() => {}}
-          ></FolderLabel>
-        </FolderLabelContainer>
       </OperationContainer>
       <StatisticsContainer isVisible={mode === "statistics"}>
         <Table>

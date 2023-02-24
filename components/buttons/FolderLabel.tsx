@@ -4,7 +4,7 @@ const Container = styled.div`
   width: 16.6%;
   box-sizing: border-box;
   @media (min-width: 460px) {
-    width: 70px;
+    width: 80px;
     height: 30px;
   }
 `;
@@ -63,10 +63,11 @@ const TextLabel = styled.div<{
 }>`
   position: relative;
   color: ${({ isHighlighted }) => (isHighlighted ? "#3c3e3f" : "#f3f5f6")};
-  top: 0.5vw;
-  font-size: 4vw;
+  top: 1vw;
+  font-size: 2.5vw;
+  //   font-stretch: ultra-condensed;
   @media (min-width: 460px) {
-    font-size: 16px;
+    font-size: 12px;
   }
 `;
 
@@ -77,7 +78,7 @@ export default function FolderLabel({
 }: {
   isHighlighted: boolean;
   text: string | number;
-  onClick: () => void;
+  onClick: (e: React.SyntheticEvent) => void;
 }) {
   return (
     <Container onClick={onClick}>
