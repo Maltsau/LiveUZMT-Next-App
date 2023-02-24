@@ -322,7 +322,7 @@ export default function AddRecordForm({
   for (let i = watchInputs.startYear; i < now.getFullYear() + 10; i++) {
     yearIterator.push(i);
   }
-
+  console.log("errors", errors);
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>

@@ -1,11 +1,11 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { checkUser } from "./cookie";
-import {
-  addRecord,
-  deleteRecord,
-  getDataBase,
-  addMonth,
-} from "../../dataBase/DataBase";
+// import {
+//   addRecord,
+//   deleteRecord,
+//   getDataBase,
+//   addMonth,
+// } from "../../dataBase/DataBase";
 import {
   addPBMonth,
   checkPBUser,
@@ -77,6 +77,7 @@ export default async function handler(
         planOps: req.body.planOps,
         wishfullAverageLength: req.body.wishfullAverageLength,
       });
+      console.log("PBresponse", dataBasePBResponse);
       if (dataBasePBResponse) {
         res.status(201).json({ message: "Month does not exist" });
       } else {
@@ -89,18 +90,18 @@ export default async function handler(
     }
   } else if (req.method === "DELETE" && userConfirmation) {
     if (req.cookies.secret)
-      deleteRecord(
-        req.body.id,
-        req.body.year,
-        req.body.month,
-        req.body.dateTime
-      );
-    await DeletePBRecord({
-      id: req.body.id,
-      year: req.body.year,
-      month: req.body.month,
-      dateTime: req.body.dateTime,
-    });
+      // deleteRecord(
+      //   req.body.id,
+      //   req.body.year,
+      //   req.body.month,
+      //   req.body.dateTime
+      // );
+      await DeletePBRecord({
+        id: req.body.id,
+        year: req.body.year,
+        month: req.body.month,
+        dateTime: req.body.dateTime,
+      });
     res.status(200).json({ message: "Deleted" });
   } else if (req.method === "PUT" && userConfirmation) {
     // addMonth(

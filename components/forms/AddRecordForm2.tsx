@@ -53,6 +53,7 @@ const ParagraphStyled = styled.p<{ minHeight?: number }>`
 const FlexContainer = styled.div`
   display: flex;
   padding: 0px;
+  align-items: center;
 `;
 
 const CheckboxStyled = styled.input`
@@ -118,7 +119,7 @@ export default function AddRecordForm2({
   const {
     data: addResponse,
     mutate: addRecord,
-    mutateAsync: addRecordAsync,
+    error,
   } = useMutation(
     "ADD_RECORD",
     async ({
@@ -174,12 +175,13 @@ export default function AddRecordForm2({
           setIsNewMonthBlockAlarmed(true);
         } else {
           queryClient.invalidateQueries("REQUEST_DATA_BASE");
-          setIsNewMonthBlockVisible(false);
+          // setIsNewMonthBlockVisible(false);
           reset();
           onSuccess();
         }
       },
       onError: () => {
+        console.log(error);
         onError();
       },
     }
@@ -275,7 +277,7 @@ export default function AddRecordForm2({
   for (let i = watchInputs.startYear; i < now.getFullYear() + 10; i++) {
     yearIterator.push(i);
   }
-
+  console.log("errors", errors);
   return (
     <>
       <FormStyled onSubmit={handleSubmit(onSubmit)}>

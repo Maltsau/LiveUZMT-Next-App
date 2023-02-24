@@ -9,6 +9,7 @@ import {
 
 import { DataBaseType } from "../types/types";
 import { useDataBaseStore } from "../stores/useDataBaseStore";
+import FolderLabel from "./buttons/FolderLabel";
 
 const Container = styled.div`
   display: flex;
@@ -50,14 +51,14 @@ export default function YearPannel() {
         <SmallRectangle />
         {arr?.map((yearItem: any) => {
           return (
-            <CustomLink
+            <FolderLabel
               text={yearItem}
               isHighlighted={yearItem === year}
               key={yearItem}
               onClick={() => {
                 setYear(yearItem);
               }}
-            ></CustomLink>
+            ></FolderLabel>
           );
         })}
         <Rectangle />

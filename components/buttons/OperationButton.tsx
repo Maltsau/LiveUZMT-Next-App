@@ -50,11 +50,18 @@ const ButtonStyled = styled.span<{
   isCurrent: boolean;
 }>`
   display: flex;
+  font-size: 2.9vw;
   position: relative;
   background-color: transparent;
   top: 10px;
   padding-left: 5px;
   color: white;
+  @media (min-width: 600px) {
+    font-size: 16px;
+  }
+  @media (max-width: 467px) {
+    font-size: 13px;
+  }
 `;
 
 const ButtonStyledActive = styled.div<{
@@ -88,6 +95,10 @@ const DeleteButton = styled.span<{
 const Table = styled.table`
   width: 100%;
   border-collapse: collapse;
+  font-size: 2.5vw;
+  @media (min-width: 600px) {
+    font-size: 16px;
+  }
 `;
 const TableRow = styled.tr`
   height: 20px;
@@ -95,7 +106,7 @@ const TableRow = styled.tr`
 
 const Cell = styled.td`
   text-align: center;
-  padding: 10px;
+  padding: 1vw;
   border: solid black 1px;
 `;
 
@@ -137,7 +148,7 @@ export default function OperationButton({
   isEditMode: boolean;
   onClick?: any;
   onSecondClick?: any;
-  onDeleteOperation: any;
+  onDeleteOperation: () => void;
   onDeleteRecord: (dateTime: string) => void;
   text: string;
   duration?: string;

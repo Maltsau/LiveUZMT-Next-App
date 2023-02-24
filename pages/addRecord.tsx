@@ -149,23 +149,14 @@ export default function AddRecordPage() {
         ></CustomLink>
         <Rectangle />
       </PannelContainer>
-
       <AddFormContentWrapper isAdmin={user?.user.role === "ADMIN"}>
         <VanishingContainer isVisible={!adminPannel}>
-          {/* <AddRecordForm
-            onSuccess={() => {
-              setIsSuccessDialogVisible(true);
-            }}
-            onError={() => {
-              setIsSuccessDialogVisible(true);
-            }}
-          /> */}
           <AddRecordForm2
             onSuccess={() => {
               setIsSuccessDialogVisible(true);
             }}
             onError={() => {
-              setIsSuccessDialogVisible(true);
+              setErrorDialogVisible(true);
             }}
           />
         </VanishingContainer>

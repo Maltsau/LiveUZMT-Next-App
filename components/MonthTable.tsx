@@ -23,12 +23,13 @@ import CustomLink from "./buttons/CustomLink";
 import DeleteConfirmationDialog from "./modalWindows/DeleteConfirmationDialog";
 import SuccessDialog from "./modalWindows/SuccessDialog";
 import ErrorDialog from "./modalWindows/ErrorDialog";
+import FolderLabel from "./buttons/FolderLabel";
 
 const Wraper = styled.div`
   margin: 1px;
 `;
 
-const Container = styled.div`
+const FolderLabelContainer = styled.div`
   display: flex;
   width: 100%;
 `;
@@ -282,6 +283,18 @@ export default function MonthTable() {
       ></ErrorDialog>
       <OperationContainer isVisible={mode === "opeartions"} ref={parent}>
         {buttons}
+        <FolderLabelContainer>
+          <FolderLabel
+            isHighlighted={true}
+            text={2001}
+            onClick={() => {}}
+          ></FolderLabel>
+          <FolderLabel
+            isHighlighted={false}
+            text={2002}
+            onClick={() => {}}
+          ></FolderLabel>
+        </FolderLabelContainer>
       </OperationContainer>
       <StatisticsContainer isVisible={mode === "statistics"}>
         <Table>

@@ -1,15 +1,23 @@
 import styled, { StyledComponent } from "styled-components";
 
 export const Rectangle = styled.div`
-  height: 30px;
+  height: 6vw;
   border-bottom: solid #3c3e3f 2px;
   width: 100%;
+  margin-left: -1px;
+  @media (min-width: 460px) {
+    height: 30px;
+  }
 `;
 
 export const SmallRectangle = styled.div`
-  height: 30px;
+  height: 6vw;
   border-bottom: solid #3c3e3f 2px;
-  width: 30px;
+  width: 2%;
+  margin-right: -1px;
+  @media (min-width: 460px) {
+    height: 30px;
+  }
 `;
 
 export const PannelContainer = styled.div<{
